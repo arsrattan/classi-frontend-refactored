@@ -87,7 +87,7 @@ const FeedScreen = ({navigation}) => (
     {/* Posts on your feed */}
     <View>
       <Text style={styles.heading}>Your Feed</Text>
-      {postData.map(post => {
+      {postData.map((post) => {
         return (
           <View>
             <FeedPost showComment={true} post={post} navigation={navigation} />

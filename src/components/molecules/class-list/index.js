@@ -104,7 +104,7 @@ const ClassList = ({navigation, classBy}) => {
             </View>
           );
         }}
-        keyExtractor={item => {
+        keyExtractor={(item) => {
           item.id;
         }}
       />

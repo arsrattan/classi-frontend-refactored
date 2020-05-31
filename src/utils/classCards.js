@@ -12,7 +12,7 @@ const createClassCards = (classList, navigation) => (
       renderItem={({item}) => (
         <ClassCard navigation={navigation} item={item} showLive={true} />
       )}
-      keyExtractor={item => {
+      keyExtractor={(item) => {
         item.id;
       }}
     />

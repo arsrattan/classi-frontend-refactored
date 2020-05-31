@@ -9,10 +9,10 @@ import {
 import {fontFamily, seeImg, loveImg} from '_assets';
 import {classesOverviewData} from '_utils';
 
-const ImageTile = props => {
+const ImageTile = (props) => {
   return (
     <View style={{paddingHorizontal: 16}}>
-      {classesOverviewData.map(item => {
+      {classesOverviewData.map((item) => {
         return (
           <TouchableOpacity
             onPress={() => {

@@ -27,7 +27,7 @@ const CreateClassScreen = ({navigation}) => {
   const duration = ['<15 Min', '15-30 Min', '>30 Min'];
 
   const handleUploadImage = () => {
-    ImagePicker.showImagePicker(response => {
+    ImagePicker.showImagePicker((response) => {
       if (response.uri) {
         setUri(response.uri);
       }
