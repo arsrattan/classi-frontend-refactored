@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, StatusBar, ScrollView, Image, FlatList } from 'react-native';
 import Styles from './styles';
 import { HomeHeader } from '_molecules'
-import { ClassCard, ImageTile } from '_atoms';
+import { ImageTile } from '_atoms';
 import { cameraImg, arrowImg } from '_assets';
-import { classesMockData } from '_utils';
+import { classesMockData, createClassCards } from '_utils';
 
 const HomeScreen = ({ navigation }) => (
   <View style={Styles.container}>
@@ -13,40 +13,14 @@ const HomeScreen = ({ navigation }) => (
       <View style={{ flex: 1, paddingTop: 20, backgroundColor: '#1E2432' }}>
         <HomeHeader props={ navigation } />
         <Text style={Styles.nextLiveText}>Your Next Live Classes</Text>
-        <View style={{ flex: 1, paddingVertical: 20 }}>
-          <FlatList
-            contentContainerStyle={{}}
-            showsHorizontalScrollIndicator={false}
-            data={classesMockData}
-            horizontal={true}
-            renderItem={({ item }) => (
-              <ClassCard navigation item showLive={true} />
-            )}
-            keyExtractor={(item) => {
-              item.id
-            }}
-          />
-        </View>
+        {createClassCards(classesMockData, navigation)}
       </View>
       <View style={{ flex: 1, backgroundColor: '#F4F5F6' }}>
         <View style={Styles.classHappeningHeader}>
           <Image source={cameraImg} />
           <Text style={Styles.happingNowText}>Classes Happening Now</Text>
         </View>
-        <View style={{ flex: 1, paddingVertical: 20 }}>
-          <FlatList
-            contentContainerStyle={{}}
-            showsHorizontalScrollIndicator={false}
-            data={classesMockData}
-            horizontal={true}
-            renderItem={({ item }) => (
-              <ClassCard navigation item showLive={true} />
-            )}
-            keyExtractor={(item) => {
-              item.id
-            }}
-          />
-        </View>
+        {createClassCards(classesMockData, navigation)}
       </View>
       <View style={{ flex: 1, paddingTop: 20, backgroundColor: '#F4F5F6' }}>
         <Text style={Styles.recommandedText}>Recommended Classes</Text>

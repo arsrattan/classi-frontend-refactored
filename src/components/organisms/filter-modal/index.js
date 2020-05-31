@@ -15,7 +15,7 @@ import RadioForm, {
 import { fontFamily, crossImg } from '_assets';
 import { FilterChip } from '_molecules';
 
-const FilterModal = (props) => {
+const FilterModal = ({ setVisible }) => {
   const [press, setPress] = useState(false)
   const [selected, setSelected] = useState(2)
   const difficulty = ['Beginner', 'Intermidiate', 'Advance']
@@ -67,7 +67,7 @@ const FilterModal = (props) => {
         </Text>
         <TouchableOpacity
           onPress={() => {
-            props.setVisible(false)
+            setVisible(false)
           }}
           style={{ position: 'absolute', left: 16, top: 32 }}
         >
@@ -191,7 +191,7 @@ const FilterModal = (props) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              props.setVisible(false)
+              setVisible(false)
             }}
             style={{
               width: 141,

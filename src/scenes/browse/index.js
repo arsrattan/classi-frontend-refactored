@@ -7,17 +7,16 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
-  Dimensions,
   Platform,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './styles';
-import { Card } from '_atoms';
 import { Header, ClassList } from '_molecules';
 import { FilterModal } from '_organisms';
 import { strengthImg, girlImg, mediatorImg, yogaImg, cardioImg, searchImg, filterImg } from '_assets';
+import { classesMockData, createClassCards } from '_utils';
 
-const BrowseScreen = (props) => {
+const BrowseScreen = ({ navigation }) => {
   const [pressFr, setPressFr] = useState(false)
   const [pressSr, setPressSr] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -67,9 +66,9 @@ const BrowseScreen = (props) => {
         paddingHorizontal: 16,
       }}
     >
-      <Header {...props} />
+      <Header navigation={navigation} />
       <Modal deviceWidth={Platform.OS === 'ios'} isVisible={visible}>
-        <FilterModal setVisible={setVisible} {...props} />
+        <FilterModal setVisible={setVisible} navigation={navigation} />
       </Modal>
       <Text style={styles.findClassText}>Find a Class</Text>
       <View
@@ -90,7 +89,6 @@ const BrowseScreen = (props) => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            // props.navigation.navigate('FilterModal')
             setVisible(true)
           }}
           style={styles.filterBtn}
@@ -172,9 +170,9 @@ const BrowseScreen = (props) => {
         }}
       />
       <Text style={styles.popularClassText}>Popular Classes</Text>
-      <Card popular={true} showLive={false} {...props} />
+      {createClassCards(classesMockData, navigation)}
       <Text style={styles.allClassText}>All Classes</Text>
-      <ClassList {...props} />
+      {createClassCards(classesMockData, navigation)}
     </ScrollView>
   )
 }
