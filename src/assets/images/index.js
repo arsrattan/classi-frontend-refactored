@@ -14,7 +14,15 @@ export const girlImg = require('./Girl.png');
 export const meditatorImg = require('./Meditator.png');
 export const yogaImg = require('./Yoga.png');
 export const browseImg = require('./Browse.png');
-export const crossImg = require('./Cross.png');
 export const addImg = require('./Add.png');
 export const liveImg = require('./Live.png');
 export const calendarImg = require('./Calendar.png');
+export const feedIconImg = require('./FeedIcon.png');
+export const notifDarkBttnImg = require('./NotifDark.png');
+export const createPostBttnImg = require('./CreatePost.png');
+export const celebrateEmojiImg = require('./CelebrateEmoji.png');
+export const recorderEmojiImg = require('./RecorderEmoji.png');
+export const likeBttnImg = require('./LikeButton.png');
+export const commentBttnImg = require('./CommentButton.png');
+export const shareBttnImg = require('./ShareButton.png');
+
