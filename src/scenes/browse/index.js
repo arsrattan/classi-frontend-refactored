@@ -11,13 +11,13 @@ import {
   Platform,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import styles from './styles'
-import { Header, Card } from '_atoms';
-import { AllClasses } from '_molecules';
+import styles from './styles';
+import { Card } from '_atoms';
+import { Header, ClassList } from '_molecules';
 import { FilterModal } from '_organisms';
 import { strengthImg, girlImg, mediatorImg, yogaImg, cardioImg, searchImg, filterImg } from '_assets';
 
-const BrowseView = (props) => {
+const BrowseScreen = (props) => {
   const [pressFr, setPressFr] = useState(false)
   const [pressSr, setPressSr] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -81,7 +81,7 @@ const BrowseView = (props) => {
         }}
       >
         <View style={styles.searchContainer}>
-          <Image height={18} width={18} source={ic_search} />
+          <Image height={18} width={18} source={searchImg} />
           <TextInput
             placeholderTextColor='#B0B7C4'
             style={{ paddingLeft: 11 }}
@@ -95,7 +95,7 @@ const BrowseView = (props) => {
           }}
           style={styles.filterBtn}
         >
-          <Image source={ic_filter} />
+          <Image source={filterImg} />
         </TouchableOpacity>
       </View>
       <FlatList
@@ -174,9 +174,9 @@ const BrowseView = (props) => {
       <Text style={styles.popularClassText}>Popular Classes</Text>
       <Card popular={true} showLive={false} {...props} />
       <Text style={styles.allClassText}>All Classes</Text>
-      <AllClasses {...props} />
+      <ClassList {...props} />
     </ScrollView>
   )
 }
 
-export default BrowseView;
+export default BrowseScreen;

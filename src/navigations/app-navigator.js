@@ -1,8 +1,8 @@
 import React from 'react';
-import { Image } from 'react-native'
+import { Image, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeScreen, BrowseScreen, LiveScreen, FeedScreen, MessagesScreen } from '_scenes';
-import { homeImg } from '_assets';
+import { homeImg, browseImg, addImg } from '_assets';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,8 +22,26 @@ const AppNavigator = () => (
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => <Image source={homeImg} />,
         }}/>
-        <Tab.Screen name="Browse" component={BrowseScreen} />
-        <Tab.Screen name="Live" component={LiveScreen} />
+        <Tab.Screen name='Browse' component={BrowseScreen} options={{
+          tabBarLabel: 'Browse',
+          tabBarIcon: ({ color }) => <Image source={browseImg} />,
+        }}/>
+        <Tab.Screen name='Live' component={LiveScreen} options={{
+          tabBarLabel: '',
+          tabBarIcon: ({ color }) => (
+            <View
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                shadowColor: 'red',
+                shadowOpacity: 0.2,
+                shadowOffset: { height: 8, width: 0 },
+              }}
+            >
+              <Image source={addImg} />
+            </View>
+          ),
+        }}/>
         <Tab.Screen name="Feed" component={FeedScreen} />
         <Tab.Screen name="Messages" component={MessagesScreen} />
     </Tab.Navigator>
