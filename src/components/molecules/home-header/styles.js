@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { fontFamily } from '_assets';
+import {StyleSheet} from 'react-native';
+import {fontFamily} from '_assets';
 
 const styles = StyleSheet.create({
   avatar: {
@@ -118,5 +118,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: fontFamily.book,
   },
-})
-export default styles
+});
+export default styles;

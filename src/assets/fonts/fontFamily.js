@@ -1,5 +1,5 @@
 const fontFamily = {
-    book: 'CircularStd-Book',
-}
+  book: 'CircularStd-Book',
+};
 
 export default fontFamily;

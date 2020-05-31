@@ -1,22 +1,21 @@
-import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import { fontFamily } from '_assets';
+import React from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {fontFamily} from '_assets';
 
-const FilterChip = ({ data, press, setPress }) => {
+const FilterChip = ({data, press, setPress}) => {
   return (
     <View
       style={{
         flexDirection: 'row',
         flexWrap: 'wrap',
         marginTop: 10,
-      }}
-    >
+      }}>
       {data.map((item, index) => {
         return (
           <TouchableOpacity
             key={index}
             onPress={() => {
-             setPress(!press)
+              setPress(!press);
             }}
             style={{
               alignItems: 'center',
@@ -27,8 +26,7 @@ const FilterChip = ({ data, press, setPress }) => {
               paddingVertical: 10,
               backgroundColor: press && !index ? '#F86A6A' : '#F5F5F5',
               borderRadius: 18,
-            }}
-          >
+            }}>
             <Text
               style={{
                 fontFamily: fontFamily.book,
@@ -37,15 +35,13 @@ const FilterChip = ({ data, press, setPress }) => {
                 letterSpacing: 0.5,
                 textTransform: 'capitalize',
                 color: press && !index ? '#fff' : '#102A43',
-              }}
-            >
+              }}>
               {item}
             </Text>
           </TouchableOpacity>
-        )
+        );
       })}
-      
     </View>
-  )
-}
-export default FilterChip
+  );
+};
+export default FilterChip;

@@ -1,4 +1,4 @@
-export const avatarImg = require('./Vector.png');
+export const avatarImg = require('./Avatar.png');
 export const notificationImg = require('./Notification.png');
 export const menuImg = require('./Menu.png');
 export const unregisterImg = require('./Unregister.png');
@@ -26,3 +26,16 @@ export const likeBttnImg = require('./LikeButton.png');
 export const commentBttnImg = require('./CommentButton.png');
 export const shareBttnImg = require('./ShareButton.png');
 
+export const arrowBackImg = require('./ArrowBack.png');
+export const shareImgLight = require('./ShareLight.png');
+export const clockImg = require('./Clock.png');
+export const copyImg = require('./Copy.png');
+export const checkMarkImg = require('./CheckMark.png');
+export const registeredImg = require('./Registered.png');
+export const finishImg = require('./Finish.png');
+export const loveImgOrange = require('./LoveOrange.png');
+export const privateImg = require('./Private.png');
+export const avatarCircleImg = require('./AvatarCircle.png');
+export const helpImg = require('./Help.png');
+export const uploadImg = require('./Upload.png');
+export const scheduledImg = require('./Scheduled.png');

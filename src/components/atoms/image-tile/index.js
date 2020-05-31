@@ -1,30 +1,29 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react';
 import {
   View,
   Text,
   Image,
   ImageBackground,
   TouchableOpacity,
-} from 'react-native'
-import { fontFamily, seeImg, loveImg } from '_assets';
-import { classesOverviewData } from '_utils';
+} from 'react-native';
+import {fontFamily, seeImg, loveImg} from '_assets';
+import {classesOverviewData} from '_utils';
 
-const ImageTile = (props) => {
+const ImageTile = props => {
   return (
-    <View style={{ paddingHorizontal: 16 }}>
-      {classesOverviewData.map((item) => {
+    <View style={{paddingHorizontal: 16}}>
+      {classesOverviewData.map(item => {
         return (
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('Class', {
                 classDetails: item,
                 isWatching: true,
-              })
-            }}
-          >
+              });
+            }}>
             <ImageBackground
-              imageStyle={{ borderRadius: 10 }}
-              resizeMode='cover'
+              imageStyle={{borderRadius: 10}}
+              resizeMode="cover"
               source={{
                 uri: item.url,
               }}
@@ -32,8 +31,7 @@ const ImageTile = (props) => {
                 height: 216,
                 width: '100%',
                 marginTop: 16,
-              }}
-            >
+              }}>
               <View
                 style={{
                   position: 'absolute',
@@ -41,8 +39,7 @@ const ImageTile = (props) => {
                   width: '40%',
                   height: '40%',
                   marginLeft: 16,
-                }}
-              >
+                }}>
                 <Text
                   style={{
                     fontWeight: '500',
@@ -51,8 +48,7 @@ const ImageTile = (props) => {
                     letterSpacing: -0.3,
                     color: '#fff',
                     fontFamily: fontFamily.book,
-                  }}
-                >
+                  }}>
                   {item.className}
                 </Text>
                 <Text
@@ -63,8 +59,7 @@ const ImageTile = (props) => {
                     color: '#fff',
                     paddingTop: 8,
                     fontFamily: fontFamily.book,
-                  }}
-                >
+                  }}>
                   {`By ${item.classBy}`}
                 </Text>
                 <View
@@ -72,8 +67,7 @@ const ImageTile = (props) => {
                     flexDirection: 'row',
                     marginTop: 8,
                     alignItems: 'center',
-                  }}
-                >
+                  }}>
                   <Image source={seeImg} width={20} height={20} />
                   <Text
                     style={{
@@ -82,11 +76,10 @@ const ImageTile = (props) => {
                       lineHeight: 16,
                       paddingLeft: 8,
                       fontFamily: fontFamily.book,
-                    }}
-                  >
+                    }}>
                     2459
                   </Text>
-                  <Image source={loveImg} style={{ marginLeft: 18 }} />
+                  <Image source={loveImg} style={{marginLeft: 18}} />
                   <Text
                     style={{
                       textAlign: 'center',
@@ -95,18 +88,17 @@ const ImageTile = (props) => {
                       lineHeight: 16,
                       paddingLeft: 5,
                       fontFamily: fontFamily.book,
-                    }}
-                  >
+                    }}>
                     2459
                   </Text>
                 </View>
               </View>
             </ImageBackground>
           </TouchableOpacity>
-        )
+        );
       })}
     </View>
-  )
-}
+  );
+};
 
-export default ImageTile
+export default ImageTile;

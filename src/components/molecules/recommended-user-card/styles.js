@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { fontFamily } from '_assets';
+import {StyleSheet} from 'react-native';
+import {fontFamily} from '_assets';
 
 const styles = StyleSheet.create({
   feedCard: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-  }
+  },
 });
 
 export default styles;

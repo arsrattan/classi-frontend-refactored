@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { fontFamily } from '_assets';
+import {fontFamily} from '_assets';
 
 const styles = StyleSheet.create({
   cardContainer: {
