@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native'
-import { fontFamily } from '_assets';
+import {StyleSheet} from 'react-native';
+import {fontFamily} from '_assets';
 
 const styles = StyleSheet.create({
   findClassText: {
@@ -62,6 +62,6 @@ const styles = StyleSheet.create({
     letterSpacing: -0.3,
     fontFamily: fontFamily.book,
   },
-})
+});
 
-export default styles
+export default styles;

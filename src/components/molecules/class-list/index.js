@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react';
 import {
   View,
   Text,
@@ -9,23 +9,22 @@ import {
   Dimensions,
 } from 'react-native';
 import styles from './styles';
-import { fontFamily } from '_assets';
-import { classesMockData } from '_utils';
+import {fontFamily} from '_assets';
+import {classesMockData} from '_utils';
 
-
-const ClassList = ({ navigation, classBy }) => {
-  const screenWidth = Dimensions.get('window').width
+const ClassList = ({navigation, classBy}) => {
+  const screenWidth = Dimensions.get('window').width;
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <FlatList
         numColumns={2}
         data={classesMockData}
-        renderItem={({ item }) => {
+        renderItem={({item}) => {
           return (
-            <View style={{ flex: 1, paddingTop: 16 }}>
+            <View style={{flex: 1, paddingTop: 16}}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Class', { classDetails: item })
+                  navigation.navigate('Class', {classDetails: item});
                 }}
                 style={[
                   styles.cardContainer,
@@ -35,18 +34,17 @@ const ClassList = ({ navigation, classBy }) => {
                     height: 260,
                     marginHorizontal: 0,
                   },
-                ]}
-              >
-                <View style={[styles.cardHeader, { height: '20%' }]}>
+                ]}>
+                <View style={[styles.cardHeader, {height: '20%'}]}>
                   <Image
-                    style={{ borderRadius: 15 }}
+                    style={{borderRadius: 15}}
                     source={{
                       uri: item.url,
                       width: 30,
                       height: 31,
                     }}
                   />
-                  <View style={{ paddingLeft: 10 }}>
+                  <View style={{paddingLeft: 10}}>
                     <Text style={styles.classBy}>
                       {classBy ? classBy : item.classBy}
                     </Text>
@@ -54,14 +52,13 @@ const ClassList = ({ navigation, classBy }) => {
                   </View>
                 </View>
 
-                <View style={{ height: '40%' }}>
+                <View style={{height: '40%'}}>
                   <ImageBackground
                     source={{
                       uri: item.url,
                     }}
-                    style={{ width: '100%', height: '100%' }}
-                    resizeMode={'cover'}
-                  >
+                    style={{width: '100%', height: '100%'}}
+                    resizeMode={'cover'}>
                     <View style={styles.durationContainer}>
                       <Text style={styles.durationText}>30 mint</Text>
                     </View>
@@ -71,7 +68,7 @@ const ClassList = ({ navigation, classBy }) => {
                     </View>
                   </ImageBackground>
                 </View>
-                <View style={{ paddingTop: 10, paddingLeft: 12 }}>
+                <View style={{paddingTop: 10, paddingLeft: 12}}>
                   <Text
                     style={{
                       fontSize: 17,
@@ -79,8 +76,7 @@ const ClassList = ({ navigation, classBy }) => {
                       lineHeight: 22,
                       letterSpacing: -0.3,
                       fontFamily: fontFamily.book,
-                    }}
-                  >
+                    }}>
                     {item.className}
                   </Text>
                   <Text
@@ -90,8 +86,7 @@ const ClassList = ({ navigation, classBy }) => {
                       color: '#334E68',
                       paddingTop: 8,
                       fontFamily: fontFamily.book,
-                    }}
-                  >
+                    }}>
                     {item.dateAndTime}
                   </Text>
                   <Text
@@ -101,20 +96,19 @@ const ClassList = ({ navigation, classBy }) => {
                       color: '#334E68',
                       paddingTop: 8,
                       fontFamily: fontFamily.book,
-                    }}
-                  >
+                    }}>
                     {item.registered}
                   </Text>
                 </View>
               </TouchableOpacity>
             </View>
-          )
+          );
         }}
         keyExtractor={(item) => {
-          item.id
+          item.id;
         }}
       />
     </View>
-  )
-}
+  );
+};
 export default ClassList;

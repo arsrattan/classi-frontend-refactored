@@ -9,31 +9,29 @@ import {
   ScrollView,
 } from 'react-native';
 import styles from './styles';
-import { Card } from '_assets';
-import { crossImg, finishImg, loveImgOrange, shareImgDark } from '_assets';
-import { createClassCards } from '_utils';
-import { classesMockData } from '_utils';
+import {Card} from '_assets';
+import {crossImg, finishImg, loveImgOrange, shareImgDark} from '_assets';
+import {createClassCards} from '_utils';
+import {classesMockData} from '_utils';
 
-const CompletedScreen = ({ navigation, route }) => {
-  const { classBy } = route.params
+const CompletedScreen = ({navigation, route}) => {
+  const {classBy} = route.params;
   return (
     <ScrollView style={styles.mainContainer}>
       {StatusBar.setBarStyle('dark-content', true)}
       <View style={styles.congoContainer}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Home')
+            navigation.navigate('Home');
           }}
-          style={styles.crossButton}
-        >
+          style={styles.crossButton}>
           <Image source={crossImg} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Home')
+            navigation.navigate('Home');
           }}
-          style={styles.shareButton}
-        >
+          style={styles.shareButton}>
           <Image source={shareImgDark} />
         </TouchableOpacity>
 
@@ -50,26 +48,25 @@ const CompletedScreen = ({ navigation, route }) => {
             lineHeight: 15,
             letterSpacing: -0.3,
             color: '#334E68',
-          }}
-        >
+          }}>
           {' '}
           Easy & Healthy Morning Omlettes
         </Text>
         <TouchableOpacity style={styles.saveVideoButton}>
-          <Image source={loveImgOrange} style={{ marginRight: 5 }} />
+          <Image source={loveImgOrange} style={{marginRight: 5}} />
           <Text style={styles.saveVideoText}>Saved Video Class</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.viewDivider} />
-      <View style={{ backgroundColor: '#fff', padding: 16 }}>
+      <View style={{backgroundColor: '#fff', padding: 16}}>
         <Text style={styles.shareFriendText}>
           Share this class with your followers!
         </Text>
         <View style={styles.optionalView}>
           <TextInput
             multiline={true}
-            style={{ padding: 12, fontSize: 15 }}
-            value='Great class! I love it'
+            style={{padding: 12, fontSize: 15}}
+            value="Great class! I love it"
           />
         </View>
         <TouchableOpacity style={styles.postButton}>
@@ -77,12 +74,12 @@ const CompletedScreen = ({ navigation, route }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.viewDivider} />
-      <View style={{ padding: 16 }}>
+      <View style={{padding: 16}}>
         <Text style={styles.upcomingText}>Upcoming Class from Tafia</Text>
         {createClassCards(classesMockData, navigation)}
       </View>
     </ScrollView>
-  )
+  );
 };
 
 export default CompletedScreen;

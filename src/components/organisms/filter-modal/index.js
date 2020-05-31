@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, {Component, useState} from 'react';
 import {
   View,
   Text,
@@ -12,27 +12,27 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
-import { fontFamily, crossImg } from '_assets';
-import { FilterChip } from '_molecules';
+import {fontFamily, crossImg} from '_assets';
+import {FilterChip} from '_molecules';
 
-const FilterModal = ({ setVisible }) => {
-  const [press, setPress] = useState(false)
-  const [selected, setSelected] = useState(2)
-  const difficulty = ['Beginner', 'Intermidiate', 'Advance']
-  const duration = ['<15 Min', '15-30 Min', '>30 Min']
+const FilterModal = ({setVisible}) => {
+  const [press, setPress] = useState(false);
+  const [selected, setSelected] = useState(2);
+  const difficulty = ['Beginner', 'Intermidiate', 'Advance'];
+  const duration = ['<15 Min', '15-30 Min', '>30 Min'];
   const day = [
     'Today',
     'Tommorrow',
     'This Week',
     'This Month',
     'or cutome date',
-  ]
+  ];
   var radio_props = [
-    { label: 'Newest: Lowest First', value: 0 },
-    { label: 'Newest: Highest First', value: 1 },
-    { label: 'User Registered: Low First', value: 2 },
-    { label: 'User Registered: High First', value: 3 },
-  ]
+    {label: 'Newest: Lowest First', value: 0},
+    {label: 'Newest: Highest First', value: 1},
+    {label: 'User Registered: Low First', value: 2},
+    {label: 'User Registered: High First', value: 3},
+  ];
   return (
     <View
       style={{
@@ -40,16 +40,14 @@ const FilterModal = ({ setVisible }) => {
         backgroundColor: 'rgba(0,0,0,0.7)',
         // justifyContent: 'flex-end',
         paddingTop: 100,
-      }}
-    >
+      }}>
       <ScrollView
         style={{
           backgroundColor: '#FFFFFF',
           paddingHorizontal: 16,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
-        }}
-      >
+        }}>
         <Text
           style={{
             alignSelf: 'center',
@@ -61,16 +59,14 @@ const FilterModal = ({ setVisible }) => {
             textAlign: 'center',
             fontFamily: fontFamily.book,
             color: '#334E68',
-          }}
-        >
+          }}>
           Filter Classes
         </Text>
         <TouchableOpacity
           onPress={() => {
-            setVisible(false)
+            setVisible(false);
           }}
-          style={{ position: 'absolute', left: 16, top: 32 }}
-        >
+          style={{position: 'absolute', left: 16, top: 32}}>
           <Image source={crossImg} />
         </TouchableOpacity>
         <Text
@@ -82,8 +78,7 @@ const FilterModal = ({ setVisible }) => {
             fontFamily: fontFamily.book,
             color: '#102A43',
             letterSpacing: -0.3,
-          }}
-        >
+          }}>
           Day
         </Text>
         <FilterChip data={day} press={press} setPress={setPress} />
@@ -96,8 +91,7 @@ const FilterModal = ({ setVisible }) => {
             fontFamily: fontFamily.book,
             color: '#102A43',
             letterSpacing: -0.3,
-          }}
-        >
+          }}>
           Length
         </Text>
         <FilterChip data={duration} press={press} setPress={setPress} />
@@ -110,8 +104,7 @@ const FilterModal = ({ setVisible }) => {
             fontFamily: fontFamily.book,
             color: '#102A43',
             letterSpacing: -0.3,
-          }}
-        >
+          }}>
           Difficulty
         </Text>
         <FilterChip data={difficulty} press={press} setPress={setPress} />
@@ -124,11 +117,10 @@ const FilterModal = ({ setVisible }) => {
             fontFamily: fontFamily.book,
             color: '#102A43',
             letterSpacing: -0.3,
-          }}
-        >
+          }}>
           Sort By
         </Text>
-        <RadioForm style={{ paddingTop: 12 }} animation={true}>
+        <RadioForm style={{paddingTop: 12}} animation={true}>
           {/* To create radio buttons, loop through your array of options */}
           {radio_props.map((item, i) => (
             <RadioButton key={i}>
@@ -138,7 +130,7 @@ const FilterModal = ({ setVisible }) => {
                 index={i}
                 isSelected={selected === i}
                 onPress={(value) => {
-                  setSelected(value)
+                  setSelected(value);
                 }}
                 borderWidth={1}
                 buttonInnerColor={'#fff'}
@@ -156,7 +148,7 @@ const FilterModal = ({ setVisible }) => {
                 index={i}
                 labelHorizontal={true}
                 onPress={(value) => {
-                  setSelected(value)
+                  setSelected(value);
                 }}
                 labelStyle={{
                   lineHeight: 19,
@@ -174,8 +166,7 @@ const FilterModal = ({ setVisible }) => {
             justifyContent: 'space-around',
             alignItems: 'center',
             paddingTop: 34,
-          }}
-        >
+          }}>
           <TouchableOpacity>
             <Text
               style={{
@@ -184,14 +175,13 @@ const FilterModal = ({ setVisible }) => {
                 fontWeight: 'bold',
                 color: '#334E68',
                 letterSpacing: -0.3,
-              }}
-            >
+              }}>
               Clear All
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setVisible(false)
+              setVisible(false);
             }}
             style={{
               width: 141,
@@ -200,8 +190,7 @@ const FilterModal = ({ setVisible }) => {
               borderRadius: 10,
               alignItems: 'center',
               justifyContent: 'center',
-            }}
-          >
+            }}>
             <Text
               style={{
                 fontSize: 15,
@@ -209,14 +198,13 @@ const FilterModal = ({ setVisible }) => {
                 fontWeight: '500',
                 color: '#fff',
                 letterSpacing: -0.3,
-              }}
-            >
+              }}>
               Apply Filter
             </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
-  )
-}
-export default FilterModal
+  );
+};
+export default FilterModal;

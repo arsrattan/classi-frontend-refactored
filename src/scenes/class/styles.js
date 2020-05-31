@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: fontFamily.book,
   },
-  viewDivider: { height: 15, backgroundColor: '#f9f9f9', marginTop: 20 },
+  viewDivider: {height: 15, backgroundColor: '#f9f9f9', marginTop: 20},
   boldText: {
     fontSize: 15,
     lineHeight: 15,

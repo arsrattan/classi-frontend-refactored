@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native'
-import { fontFamily } from '_assets';
+import {StyleSheet} from 'react-native';
+import {fontFamily} from '_assets';
 
 const styles = StyleSheet.create({
   headerView: {
@@ -10,5 +10,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
   },
-})
-export default styles
+});
+export default styles;

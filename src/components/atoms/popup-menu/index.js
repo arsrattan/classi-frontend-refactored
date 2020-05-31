@@ -1,14 +1,14 @@
-import * as React from 'react'
-import { View, Text, Alert, TouchableOpacity, Image } from 'react-native'
-import { Tooltip } from 'react-native-elements'
-import { fontFamily, menuImg, unregisterImg, shareImgDark } from '_assets'
+import * as React from 'react';
+import {View, Text, Alert, TouchableOpacity, Image} from 'react-native';
+import {Tooltip} from 'react-native-elements';
+import {fontFamily, menuImg, unregisterImg, shareImgDark} from '_assets';
 
 const PopoverMenu = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center' }}>
+    <View style={{flex: 1, alignItems: 'center'}}>
       <Tooltip
-        pointerColor='#fff'
-        overlayColor='rgba(52, 52, 52, 0.8)'
+        pointerColor="#fff"
+        overlayColor="rgba(52, 52, 52, 0.8)"
         toggleOnPress={true}
         containerStyle={{
           width: 180,
@@ -23,14 +23,12 @@ const PopoverMenu = () => {
               paddingLeft: 18,
               paddingVertical: 18,
               justifyContent: 'space-between',
-            }}
-          >
+            }}>
             <TouchableOpacity
               onPress={() => {
-                Alert.alert('Shared')
+                Alert.alert('Shared');
               }}
-              style={{ flexDirection: 'row', alignItems: 'center' }}
-            >
+              style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image source={shareImgDark} />
               <Text
                 style={{
@@ -40,17 +38,15 @@ const PopoverMenu = () => {
                   color: '#334E68',
                   paddingLeft: 13,
                   fontFamily: fontFamily.book,
-                }}
-              >
+                }}>
                 Share Class
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                Alert.alert('Unregistered')
+                Alert.alert('Unregistered');
               }}
-              style={{ flexDirection: 'row', alignItems: 'center' }}
-            >
+              style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image source={unregisterImg} />
               <Text
                 style={{
@@ -60,17 +56,15 @@ const PopoverMenu = () => {
                   color: '#D93900',
                   paddingLeft: 13,
                   fontFamily: fontFamily.book,
-                }}
-              >
+                }}>
                 Unregister Class
               </Text>
             </TouchableOpacity>
           </View>
-        }
-      >
+        }>
         <Image source={menuImg} />
       </Tooltip>
     </View>
-  )
-}
-export default PopoverMenu
+  );
+};
+export default PopoverMenu;

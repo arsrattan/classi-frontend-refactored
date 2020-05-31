@@ -1,18 +1,13 @@
 import React from 'react';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Tile } from '_atoms';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {Tile} from '_atoms';
 
 const Tab = createMaterialTopTabNavigator();
 
 const ClassNavigator = () => {
+  const AboutTile = () => <Tile text={'AboutTile'} />;
 
-  const AboutTile = () => (
-    <Tile text={'AboutTile'} />
-  )
-
-  const EquipmentTile = () => (
-    <Tile text={'EquipmentTile'} />
-  )
+  const EquipmentTile = () => <Tile text={'EquipmentTile'} />;
 
   return (
     <Tab.Navigator

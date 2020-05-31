@@ -2,13 +2,13 @@ import {StyleSheet} from 'react-native';
 import fontFamily from '../../assets/fonts/fontFamily';
 
 const styles = StyleSheet.create({
-  mainContainer: { flex: 1, backgroundColor: '#fff' },
+  mainContainer: {flex: 1, backgroundColor: '#fff'},
   congoContainer: {
     paddingTop: 100,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  crossButton: { position: 'absolute', left: 20, top: 64 },
+  crossButton: {position: 'absolute', left: 20, top: 64},
   congoText: {
     paddingTop: 32,
     fontSize: 23,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: fontFamily.book,
   },
-  viewDivider: { height: 15, backgroundColor: '#f9f9f9', marginTop: 10 },
-})
+  viewDivider: {height: 15, backgroundColor: '#f9f9f9', marginTop: 10},
+});
 
 export default styles;

@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { fontFamily } from '_assets';
+import {StyleSheet} from 'react-native';
+import {fontFamily} from '_assets';
 
 const styles = StyleSheet.create({
   createClassContainer: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  crossButton: { position: 'absolute', left: 20, top: 64 },
+  crossButton: {position: 'absolute', left: 20, top: 64},
   congoText: {
     paddingTop: 86,
     fontSize: 23,
