@@ -132,7 +132,7 @@ const BrowseScreen = ({navigation}) => {
             </TouchableOpacity>
           );
         }}
-        keyExtractor={(item) => {
+        keyExtractor={item => {
           item.id;
         }}
       />
@@ -166,7 +166,7 @@ const BrowseScreen = ({navigation}) => {
             </TouchableOpacity>
           );
         }}
-        keyExtractor={(item) => {
+        keyExtractor={item => {
           item.id;
         }}
       />

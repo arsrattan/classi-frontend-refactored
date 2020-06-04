@@ -1,5 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+
 import AppNavigator from './app-navigator';
 import {
   ClassScreen,
@@ -7,6 +8,8 @@ import {
   CompletedScreen,
   CreateClassScreen,
   PublishedClassScreen,
+  AllCommentsScreen,
+  NotificationsScreen,
 } from '_scenes';
 
 const Stack = createStackNavigator();
@@ -21,6 +24,8 @@ const Navigator = () => (
     <Stack.Screen name="Completed" component={CompletedScreen} />
     <Stack.Screen name="CreateClass" component={CreateClassScreen} />
     <Stack.Screen name="PublishedClass" component={PublishedClassScreen} />
+    <Stack.Screen name="AllComments" component={AllCommentsScreen} />
+    <Stack.Screen name="Notifications" component={NotificationsScreen} />
   </Stack.Navigator>
 );
 

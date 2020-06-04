@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
 
-const styles = StyleSheet.create({
+const SharedStyles = StyleSheet.create({
   feedHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',

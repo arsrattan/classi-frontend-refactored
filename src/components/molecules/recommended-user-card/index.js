@@ -55,7 +55,7 @@ const RecommendedUsers = () => {
             </TouchableOpacity>
           );
         }}
-        keyExtractor={(item) => {
+        keyExtractor={item => {
           return item.id;
         }}
       />

@@ -193,7 +193,6 @@ const FeedPost = ({showComment, post, navigation}) => (
           <Text style={styles.seeMore}>See more comments</Text>
         </TouchableOpacity>
         <View style={styles.seeMoreBorder} />
-        {<View style={styles.viewDivider} />}
       </View>
     )}
   </View>

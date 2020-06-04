@@ -1,7 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
+//import {Icons} from '../../styleTest';
 
 const Styles = StyleSheet.create({
+  /*iconSize: {
+    ...Icons.small,
+  },*/
   container: {
     flex: 1,
     backgroundColor: '#fff',

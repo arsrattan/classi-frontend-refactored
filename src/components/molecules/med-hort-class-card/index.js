@@ -4,7 +4,7 @@ import {fontFamily} from '_assets';
 
 // Need to figure out what data is passed in here
 
-const MedHortClassCard = (props) => (
+const MedHortClassCard = props => (
   <TouchableOpacity
     style={{
       backgroundColor: '#FAFAFC',

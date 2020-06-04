@@ -129,7 +129,7 @@ const FilterModal = ({setVisible}) => {
                 obj={item}
                 index={i}
                 isSelected={selected === i}
-                onPress={(value) => {
+                onPress={value => {
                   setSelected(value);
                 }}
                 borderWidth={1}
@@ -147,7 +147,7 @@ const FilterModal = ({setVisible}) => {
                 obj={item}
                 index={i}
                 labelHorizontal={true}
-                onPress={(value) => {
+                onPress={value => {
                   setSelected(value);
                 }}
                 labelStyle={{

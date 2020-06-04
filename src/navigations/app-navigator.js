@@ -2,6 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {Image, View} from 'react-native';
 import {addImg, browseImg, feedIconImg, homeImg} from '_assets';
+
 import {
   BrowseScreen,
   FeedScreen,
