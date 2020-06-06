@@ -7,7 +7,7 @@ import {FollowButton, ProfileImg} from '_atoms';
 
 const RecommendedUsers = () => {
   return (
-    <View style={{flex: 1, height: 240}}>
+    <View style={styles.followCardContainer}>
       <FlatList
         contentContainerStyle={{alignSelf: 'flex-end'}}
         data={recommendedUsersData}
@@ -15,47 +15,25 @@ const RecommendedUsers = () => {
         showsHorizontalScrollIndicator={false}
         renderItem={({item}) => {
           return (
-            <TouchableOpacity
-              style={[
-                styles.feedCard,
-                {
-                  height: item.upcoming === true ? 211 : 187,
-                },
-              ]}>
+            <TouchableOpacity style={[styles.feedCard]}>
               <ProfileImg size="medium" styles={styles.feedCardImage} />
-              {/*<Image
-                style={styles.feedCardImage}
-                source={{ uri: 'https://placebeard.it/640x360' }}
-              />*/}
               <Text style={styles.instructorName}>{item.instructor}</Text>
               <Text style={styles.tagAndText}>{item.tag}</Text>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={[styles.boldCount, {paddingTop: 4}]}>
-                  {item.followers}
-                </Text>
+              <View style={styles.rowContainer}>
+                <Text style={[styles.boldCount]}>{item.followers}</Text>
                 <Text style={styles.tagAndText}>{` of Followers`}</Text>
               </View>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={[styles.boldCount, {paddingTop: 4}]}>
-                  {item.numOfClass}
-                </Text>
+              <View style={styles.rowContainer}>
+                <Text style={[styles.boldCount]}>{item.numOfClass}</Text>
                 <Text style={styles.tagAndText}>{` of Classes`}</Text>
               </View>
-              <FollowButton />
-              {/* Conditional formating for card bottom upcoimg class */}
-              {item.upcoming === true && (
-                <View style={styles.upcomingClassContainer}>
-                  <Text style={styles.boldCount}>3</Text>
-                  <Text style={[styles.tagAndText, {paddingTop: 0}]}>
-                    {' '}
-                    {` upcoming classes`}
-                  </Text>
-                </View>
-              )}
+              <View style={styles.followButtonContainer}>
+                <FollowButton />
+              </View>
             </TouchableOpacity>
           );
         }}
-        keyExtractor={item => {
+        keyExtractor={(item) => {
           return item.id;
         }}
       />

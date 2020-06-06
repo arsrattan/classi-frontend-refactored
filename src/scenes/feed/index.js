@@ -17,7 +17,7 @@ import {
 } from '_assets';
 import {postData} from '_utils';
 import {Avatar} from '_atoms';
-import {RecommendedUsers} from '_molecules';
+import {RecommendedUsers, Header} from '_molecules';
 import {FeedPost} from '_organisms';
 
 const FeedScreen = ({navigation}) => (
@@ -25,36 +25,16 @@ const FeedScreen = ({navigation}) => (
     style={{
       flex: 1,
       backgroundColor: '#F4F5F6',
-      paddingTop: Platform.OS === 'ios' ? 30 : 0,
     }}>
     {StatusBar.setBarStyle('dark-content', true)}
 
-    {/* Header for feeds screen, include "write blog" post */}
-    <View style={styles.feedHeader}>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Profile');
-        }}>
-        <Avatar />
-      </TouchableOpacity>
-      <View
-        style={{
-          flexDirection: 'row',
-          width: '20%',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-        <TouchableOpacity>
-          <Image source={writePostBttnImg} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Notifications');
-          }}>
-          <Image source={notifDarkBttnImg} />
-        </TouchableOpacity>
-      </View>
-    </View>
+    <Header
+      navigation={navigation}
+      headerStyle="light"
+      text=""
+      accentText=""
+      writePost={true}
+    />
 
     {/* Workout stats section */}
     <View style={styles.statsContainer}>
@@ -90,7 +70,7 @@ const FeedScreen = ({navigation}) => (
       {postData.map((post) => {
         return (
           <View>
-            <FeedPost showComment={true} post={post} navigation={navigation} />
+            <FeedPost allComments={false} post={post} navigation={navigation} />
           </View>
         );
       })}

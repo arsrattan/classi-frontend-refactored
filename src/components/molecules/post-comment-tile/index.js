@@ -1,19 +1,13 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
 import styles from './styles';
-import {fontFamily} from '_assets';
 import {ProfileImg} from '_atoms';
 
 const PostCommentTile = () => (
-  <View
-    style={{
-      flexDirection: 'row',
-      paddingHorizontal: 16,
-      // paddingTop: 20,
-    }}>
+  <View style={styles.commentContainer}>
     <ProfileImg size="small" />
     <View style={styles.commentTile}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View style={styles.commentTextContainer}>
         <Text style={styles.userName}>Shawn Carter</Text>
         <Text style={styles.commentDateAndTime}>wed, apr 26</Text>
         <Text style={styles.commentDateAndTime}>6.30pm</Text>

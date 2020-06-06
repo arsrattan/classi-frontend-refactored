@@ -1,19 +1,14 @@
-import React, {Component, useState} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  TextInput,
-} from 'react-native';
+import React, {useState} from 'react';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
-import {fontFamily, crossImg} from '_assets';
+import {crossImg} from '_assets';
+import {Divider} from '_atoms';
 import {FilterChip} from '_molecules';
+import styles from './styles';
 
 const FilterModal = ({setVisible}) => {
   const [press, setPress] = useState(false);
@@ -34,93 +29,27 @@ const FilterModal = ({setVisible}) => {
     {label: 'User Registered: High First', value: 3},
   ];
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.7)',
-        // justifyContent: 'flex-end',
-        paddingTop: 100,
-      }}>
-      <ScrollView
-        style={{
-          backgroundColor: '#FFFFFF',
-          paddingHorizontal: 16,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-        }}>
-        <Text
-          style={{
-            alignSelf: 'center',
-            paddingTop: 32,
-            fontWeight: '500',
-            fontSize: 27,
-            lineHeight: 34,
-            letterSpacing: -0.3,
-            textAlign: 'center',
-            fontFamily: fontFamily.book,
-            color: '#334E68',
-          }}>
-          Filter Classes
-        </Text>
+    <View style={styles.modalScreenContainer}>
+      <ScrollView style={styles.modalContainer}>
+        <Text style={styles.modalHeaderText}>Filter Classes</Text>
         <TouchableOpacity
           onPress={() => {
             setVisible(false);
           }}
-          style={{position: 'absolute', left: 16, top: 32}}>
-          <Image source={crossImg} />
+          style={styles.closeIcon}>
+          <Image source={crossImg} style={styles.iconNormal} />
         </TouchableOpacity>
-        <Text
-          style={{
-            paddingTop: 24,
-            fontWeight: '500',
-            fontSize: 17,
-            lineHeight: 22,
-            fontFamily: fontFamily.book,
-            color: '#102A43',
-            letterSpacing: -0.3,
-          }}>
-          Day
-        </Text>
+        <Text style={styles.sectionHeaderText}>Date</Text>
         <FilterChip data={day} press={press} setPress={setPress} />
-        <Text
-          style={{
-            paddingTop: 24,
-            fontWeight: '500',
-            fontSize: 17,
-            lineHeight: 22,
-            fontFamily: fontFamily.book,
-            color: '#102A43',
-            letterSpacing: -0.3,
-          }}>
-          Length
-        </Text>
+        <Divider />
+        <Text style={styles.sectionHeaderText}>Length</Text>
         <FilterChip data={duration} press={press} setPress={setPress} />
-        <Text
-          style={{
-            paddingTop: 24,
-            fontWeight: '500',
-            fontSize: 17,
-            lineHeight: 22,
-            fontFamily: fontFamily.book,
-            color: '#102A43',
-            letterSpacing: -0.3,
-          }}>
-          Difficulty
-        </Text>
+        <Divider />
+        <Text style={styles.sectionHeaderText}>Difficulty</Text>
         <FilterChip data={difficulty} press={press} setPress={setPress} />
-        <Text
-          style={{
-            paddingTop: 24,
-            fontWeight: '500',
-            fontSize: 17,
-            lineHeight: 22,
-            fontFamily: fontFamily.book,
-            color: '#102A43',
-            letterSpacing: -0.3,
-          }}>
-          Sort By
-        </Text>
-        <RadioForm style={{paddingTop: 12}} animation={true}>
+        <Divider />
+        <Text style={styles.sectionHeaderText}>Sort By</Text>
+        <RadioForm animation={true}>
           {/* To create radio buttons, loop through your array of options */}
           {radio_props.map((item, i) => (
             <RadioButton key={i}>
@@ -129,7 +58,7 @@ const FilterModal = ({setVisible}) => {
                 obj={item}
                 index={i}
                 isSelected={selected === i}
-                onPress={value => {
+                onPress={(value) => {
                   setSelected(value);
                 }}
                 borderWidth={1}
@@ -137,70 +66,34 @@ const FilterModal = ({setVisible}) => {
                 buttonOuterColor={'rgba(161, 174, 183, 0.1)'}
                 buttonSize={12}
                 buttonOuterSize={24}
-                buttonWrapStyle={{
-                  marginLeft: 10,
-                  backgroundColor: selected == i ? '#F86A6A' : '#FAFAFC',
-                  borderRadius: 40,
-                }}
+                buttonWrapStyle={
+                  selected === i
+                    ? styles.radioButtonSelected
+                    : styles.radioButtonUnselected
+                }
               />
               <RadioButtonLabel
                 obj={item}
                 index={i}
                 labelHorizontal={true}
-                onPress={value => {
+                onPress={(value) => {
                   setSelected(value);
                 }}
-                labelStyle={{
-                  lineHeight: 19,
-                  fontSize: 15,
-                  color: '#334E68',
-                  fontFamily: fontFamily.book,
-                }}
+                labelStyle={styles.p1d2}
               />
             </RadioButton>
           ))}
         </RadioForm>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            paddingTop: 34,
-          }}>
+        <View style={styles.filterButtonContainer}>
           <TouchableOpacity>
-            <Text
-              style={{
-                fontSize: 15,
-                lineHeight: 19,
-                fontWeight: 'bold',
-                color: '#334E68',
-                letterSpacing: -0.3,
-              }}>
-              Clear All
-            </Text>
+            <Text style={styles.p1d1}>Clear All</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               setVisible(false);
             }}
-            style={{
-              width: 141,
-              height: 43,
-              backgroundColor: '#F86A6A',
-              borderRadius: 10,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 15,
-                lineHeight: 19,
-                fontWeight: '500',
-                color: '#fff',
-                letterSpacing: -0.3,
-              }}>
-              Apply Filter
-            </Text>
+            style={styles.filterButton}>
+            <Text style={styles.filterButtonText}>Apply Filter</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

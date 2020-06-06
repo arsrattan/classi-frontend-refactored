@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
-//import {Icons} from '../../styleTest';
+import {Icons, Spacing} from '_styles';
 
 const Styles = StyleSheet.create({
-  /*iconSize: {
-    ...Icons.small,
-  },*/
+  icon: {
+    ...Icons.normal,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -44,17 +44,15 @@ const Styles = StyleSheet.create({
     letterSpacing: -0.3,
     color: '#102A43',
     fontSize: 19,
-    paddingTop: 8,
     fontFamily: fontFamily.book,
   },
   allClassesText: {
+    alignSelf: 'center',
     fontWeight: '500',
     lineHeight: 24,
     letterSpacing: -0.3,
     color: '#F86A6A',
     fontSize: 19,
-    paddingTop: 8,
-    paddingRight: 30,
     fontFamily: fontFamily.book,
   },
   classHappeningHeader: {

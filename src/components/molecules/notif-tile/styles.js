@@ -1,31 +1,31 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
+import {Typography, Spacing, Colors} from '_styles';
 
 const styles = StyleSheet.create({
+  notifContainer: {
+    flexDirection: 'row',
+  },
   notifContentContainer: {
     flex: 1,
     flexDirection: 'column',
-    paddingLeft: 12,
-    paddingTop: 2,
+    paddingLeft: Spacing.small,
+    paddingTop: Spacing.hairline,
   },
   userNameText: {
-    color: '#102A43',
-    fontSize: 15,
-    lineHeight: 19,
-    fontFamily: fontFamily.book,
-    paddingRight: 5,
+    ...Typography.p1,
+    color: Colors.aquarius,
+    paddingRight: Spacing.smaller,
   },
   dateText: {
-    paddingTop: 8,
-    color: 'rgba(51, 78, 104, 0.8)',
-    fontSize: 13,
-    lineHeight: 16,
-    fontFamily: fontFamily.book,
+    paddingTop: Spacing.smaller,
+    color: Colors.aries,
+    ...Typography.p2,
   },
   dividerView: {
     borderWidth: 1,
-    borderColor: 'rgba(161, 174, 183, 0.1)',
-    marginVertical: 16,
+    borderColor: Colors.grey,
+    marginVertical: Spacing.base,
   },
 });
 

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -8,10 +8,11 @@ import {
 } from 'react-native';
 import {fontFamily, seeImg, loveImg} from '_assets';
 import {classesOverviewData} from '_utils';
+import styles from './styles';
 
 const ImageTile = (props) => {
   return (
-    <View style={{paddingHorizontal: 16}}>
+    <View style={styles.tileContainer}>
       {classesOverviewData.map((item) => {
         return (
           <TouchableOpacity
@@ -27,70 +28,19 @@ const ImageTile = (props) => {
               source={{
                 uri: item.url,
               }}
-              style={{
-                height: 216,
-                width: '100%',
-                marginTop: 16,
-              }}>
-              <View
-                style={{
-                  position: 'absolute',
-                  bottom: 10,
-                  width: '40%',
-                  height: '40%',
-                  marginLeft: 16,
-                }}>
-                <Text
-                  style={{
-                    fontWeight: '500',
-                    fontSize: 17,
-                    lineHeight: 22,
-                    letterSpacing: -0.3,
-                    color: '#fff',
-                    fontFamily: fontFamily.book,
-                  }}>
-                  {item.className}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 13,
-                    lineHeight: 16,
-                    letterSpacing: 0.5,
-                    color: '#fff',
-                    paddingTop: 8,
-                    fontFamily: fontFamily.book,
-                  }}>
+              style={styles.imageStyle}>
+              <View style={styles.textContainer}>
+                <Text style={styles.classNameText}>{item.className}</Text>
+                <Text style={styles.additionalClassDetailsText}>
                   {`By ${item.classBy}`}
                 </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginTop: 8,
-                    alignItems: 'center',
-                  }}>
-                  <Image source={seeImg} width={20} height={20} />
-                  <Text
-                    style={{
-                      color: '#fff',
-                      fontSize: 13,
-                      lineHeight: 16,
-                      paddingLeft: 8,
-                      fontFamily: fontFamily.book,
-                    }}>
-                    2459
-                  </Text>
-                  <Image source={loveImg} style={{marginLeft: 18}} />
-                  <Text
-                    style={{
-                      textAlign: 'center',
-                      color: '#fff',
-                      fontSize: 13,
-                      lineHeight: 16,
-                      paddingLeft: 5,
-                      fontFamily: fontFamily.book,
-                    }}>
-                    2459
-                  </Text>
+                <View style={styles.iconContainer}>
+                  <View style={styles.iconGroup}>
+                    <Image source={seeImg} style={styles.icon} />
+                    <Text style={styles.additionalClassDetailsText}>2459</Text>
+                  </View>
+                  <Image source={loveImg} style={styles.icon} />
+                  <Text style={styles.additionalClassDetailsText}>2459</Text>
                 </View>
               </View>
             </ImageBackground>

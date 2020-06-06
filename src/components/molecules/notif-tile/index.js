@@ -1,9 +1,7 @@
 import React from 'react';
-import {View, Image, Text, TouchableOpacity} from 'react-native';
+import {Text, View} from 'react-native';
+import {FollowButton, ProfileImg} from '_atoms';
 import styles from './styles';
-import {fontFamily} from '_assets';
-import {FollowButton} from '_atoms';
-import {ProfileImg} from '_atoms';
 
 const NotifTile = ({user, action, date, isFollow}) => {
   let followBttn;
@@ -12,7 +10,7 @@ const NotifTile = ({user, action, date, isFollow}) => {
   }
   return (
     <View>
-      <View style={{flexDirection: 'row'}}>
+      <View style={styles.notifContainer}>
         <ProfileImg size="small" />
         <View style={styles.notifContentContainer}>
           <Text style={styles.userNameText}>

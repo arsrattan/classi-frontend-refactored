@@ -1,104 +1,81 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
+import {Typography, Colors, Spacing} from '_styles';
+import {colors} from 'react-native-elements';
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    backgroundColor: '#fff',
-    width: 210,
-    height: 283,
-    borderRadius: 10,
-    marginHorizontal: 5,
-    // marginLeft: 20,
+  p1dark1: {
+    ...Typography.p1,
+    ...Colors.dark1,
+  },
+  p2dark2: {
+    ...Typography.p2,
+    ...Colors.dark2,
+  },
+  p2light1: {
+    ...Typography.p2,
+    ...Colors.light1,
   },
   cardHeader: {
     flexDirection: 'row',
-    height: '25%',
-    paddingLeft: 16,
-    top: 10,
-  },
-  durationContainer: {
-    marginLeft: 10,
-    width: 43,
-    height: 22,
-    backgroundColor: '#1E2432',
-    borderRadius: 15,
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingLeft: 12,
+    paddingVertical: 12,
   },
-  durationText: {
-    fontWeight: '500',
-    fontSize: 10,
-    lineHeight: 13,
-    color: '#fff',
-    fontFamily: fontFamily.book,
+  cardContainer: {
+    backgroundColor: '#fff',
+    width: 210,
+    height: 250,
+    borderRadius: 10,
+    marginLeft: 11,
   },
-  liveContainer: {
-    width: 46,
-    height: 20,
-    backgroundColor: '#FF0E83',
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
+  instructorTextContainer: {
+    paddingLeft: 10,
+  },
+  imageContainer: {
+    height: '40%',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  tagContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 10,
+    paddingHorizontal: 12,
   },
   dateTag: {
     width: 35,
     height: 48,
     backgroundColor: '#fff',
     position: 'absolute',
-    bottom: 0,
-    left: 20,
+    bottom: -5,
+    left: 12,
     borderRadius: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  classBy: {
-    fontSize: 15,
-    lineHeight: 19,
-    color: '#102A43',
-    fontFamily: fontFamily.book,
-  },
-  post: {
-    fontSize: 11,
-    lineHeight: 14,
-    color: '#102A43',
-    paddingTop: 5,
-    fontFamily: fontFamily.book,
-  },
   date: {
-    fontSize: 17,
-    fontWeight: 'bold',
-    lineHeight: 22,
-    color: '#334E68',
-    fontFamily: fontFamily.book,
+    ...Typography.h3,
+    color: colors.aries,
   },
   month: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    lineHeight: 14,
-    color: '#F86A6A',
-    fontFamily: fontFamily.book,
+    ...Typography.p2,
+    color: Colors.andromeda,
   },
-  className: {
-    fontSize: 17,
-    fontWeight: '500',
-    lineHeight: 22,
-    letterSpacing: -0.3,
-    fontFamily: fontFamily.book,
-    color: '#102A43',
+  classDetailContainer: {
+    paddingLeft: Spacing.small,
+  },
+  classNameText: {
+    paddingVertical: Spacing.smaller,
+    ...Typography.h3,
+    color: Colors.aquarius,
   },
   dateAndTime: {
-    fontSize: 12,
-    lineHeight: 15,
-    color: '#334E68',
-    paddingTop: 8,
-    fontFamily: fontFamily.book,
-  },
-  liveText: {
-    fontWeight: '900',
-    fontSize: 10,
-    lineHeight: 13,
-    color: '#fff',
-    fontFamily: fontFamily.book,
+    ...Typography.p2,
+    color: Colors.aries,
+    paddingBottom: Spacing.tiny,
   },
 });
 

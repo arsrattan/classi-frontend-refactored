@@ -5,3 +5,6 @@ export {default as ImageTile} from './image-tile';
 export {default as PopupMenu} from './popup-menu';
 export {default as ProfileImg} from './profile-img';
 export {default as Tile} from './tile';
+export {default as Tag} from './tag';
+export {default as Divider} from './divider';
+export {default as InputBox} from './input-box';

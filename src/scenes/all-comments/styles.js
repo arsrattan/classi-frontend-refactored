@@ -1,7 +1,14 @@
 import {StyleSheet, Platform} from 'react-native';
 import {fontFamily} from '_assets';
+import {Spacing, Typography, Colors, Icons} from '_styles';
 
 const styles = StyleSheet.create({
+  iconNormal: {
+    ...Icons.normal,
+  },
+  iconLarger: {
+    ...Icons.larger,
+  },
   keyboardShift: {
     height: '100%',
     left: 0,
@@ -11,70 +18,34 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#F4F5F6',
+    backgroundColor: Colors.grey,
     paddingTop: Platform.OS === 'ios' ? 30 : 0,
   },
   allCommentsHeader: {
-    paddingTop: 34,
-    backgroundColor: '#F4F5F6',
-    paddingBottom: 15,
+    paddingTop: Spacing.largest,
+    backgroundColor: Colors.grey,
+    paddingBottom: Spacing.base,
     borderBottomWidth: 3,
     borderBottomColor: 'rgba(161, 174, 183, 0.1);',
   },
+  backButtonStyle: {
+    position: 'absolute',
+    top: Spacing.largest,
+    left: Spacing.base,
+  },
   commentsHeading: {
     alignSelf: 'center',
-    fontWeight: 'bold',
-    color: '#334E68',
-    lineHeight: 19,
-    fontSize: 15,
-    letterSpacing: -0.3,
-    fontFamily: fontFamily.book,
-  },
-  replyTile: {
-    flexDirection: 'row',
-    paddingLeft: 76,
-    paddingTop: 8,
-    alignItems: 'center',
-  },
-  replyText: {
-    fontSize: 13,
-    lineHeight: 16,
-    fontFamily: fontFamily.book,
-    color: '#334E68',
-  },
-  timeAgo: {
-    paddingLeft: 24,
-    fontSize: 13,
-    lineHeight: 16,
-    fontFamily: fontFamily.book,
-    color: 'rgba(51, 78, 104, 0.8)',
-  },
-  viewDivider: {
-    height: 15,
-    backgroundColor: '#F4F5F6',
-    marginBottom: 20,
+    color: Colors.aries,
+    ...Typography.h3,
   },
   commentContainerView: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    paddingHorizontal: 16,
-    backgroundColor: '#FFFFFF',
-    marginTop: '4%',
-    paddingTop: '4%',
+    backgroundColor: Colors.white,
+    marginTop: Spacing.base,
+    paddingTop: Spacing.base,
     paddingBottom: '10%',
   },
-  writeCommentView: {
-    height: 47,
-    width: 280,
-    backgroundColor: '#FAFAFC',
-    borderWidth: 1,
-    borderColor: 'rgba(161, 174, 183, 0.1)',
-    borderRadius: 20,
-    justifyContent: 'center',
-    paddingLeft: 12,
-  },
   postContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.white,
     height: '78%',
   },
 });

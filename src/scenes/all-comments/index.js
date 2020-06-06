@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import {sendCommentImg, arrowBackDarkImg} from '_assets';
+import {InputBox} from '_atoms';
 import {FeedPost} from '_organisms';
 
 const AllCommentsScreen = ({navigation, route}) => {
@@ -23,26 +24,21 @@ const AllCommentsScreen = ({navigation, route}) => {
       <StatusBar barStyle={'dark-content'} />
       <View style={styles.allCommentsHeader}>
         <TouchableOpacity
-          style={{position: 'absolute', top: 33, left: 16}}
+          style={styles.backButtonStyle}
           onPress={() => {
             navigation.goBack();
           }}>
-          <Image source={arrowBackDarkImg} />
+          <Image source={arrowBackDarkImg} style={styles.iconNormal} />
         </TouchableOpacity>
         <Text style={styles.commentsHeading}>Comments(3)</Text>
       </View>
       <View style={styles.postContainer}>
         <ScrollView>
-          <FeedPost post={post} showComment={true} />
+          <FeedPost post={post} allComments={true} />
         </ScrollView>
       </View>
       <View style={styles.commentContainerView}>
-        <View style={styles.writeCommentView}>
-          <TextInput placeholder="Write a comments" />
-        </View>
-        <TouchableOpacity>
-          <Image source={sendCommentImg} />
-        </TouchableOpacity>
+        <InputBox placeholderText={'Write a comment'} icon={sendCommentImg} />
       </View>
     </KeyboardAvoidingView>
   );

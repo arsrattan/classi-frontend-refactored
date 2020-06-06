@@ -1,15 +1,11 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {fontFamily} from '_assets';
+import styles from './styles';
+import {Colors} from '_styles';
 
 const FilterChip = ({data, press, setPress}) => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginTop: 10,
-      }}>
+    <View style={styles.tagContainer}>
       {data.map((item, index) => {
         return (
           <TouchableOpacity
@@ -17,27 +13,14 @@ const FilterChip = ({data, press, setPress}) => {
             onPress={() => {
               setPress(!press);
             }}
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: 36,
-              margin: 8,
-              paddingHorizontal: 16,
-              paddingVertical: 10,
-              backgroundColor: press && !index ? '#F86A6A' : '#F5F5F5',
-              borderRadius: 18,
-            }}>
-            <Text
-              style={{
-                fontFamily: fontFamily.book,
-                fontSize: 13,
-                lineHeight: 16,
-                letterSpacing: 0.5,
-                textTransform: 'capitalize',
-                color: press && !index ? '#fff' : '#102A43',
-              }}>
-              {item}
-            </Text>
+            style={[
+              styles.buttonStyle,
+              {
+                backgroundColor:
+                  press && !index ? Colors.andromeda : Colors.grey,
+              },
+            ]}>
+            <Text style={styles.tagText}>{item}</Text>
           </TouchableOpacity>
         );
       })}

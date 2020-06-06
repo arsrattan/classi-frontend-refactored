@@ -1,38 +1,37 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
+import {Spacing, Typography, Colors} from '_styles';
 
 const styles = StyleSheet.create({
+  commentContainer: {
+    flexDirection: 'row',
+  },
   commentTile: {
-    backgroundColor: '#F0F1F3',
+    backgroundColor: Colors.grey,
     borderRadius: 10,
     width: '85%',
-    marginLeft: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
+    paddingHorizontal: Spacing.small,
+    paddingVertical: Spacing.smaller,
+    marginLeft: Spacing.smaller,
+  },
+  commentTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   userName: {
-    fontSize: 15,
-    lineHeight: 19,
-    fontWeight: 'normal',
-    color: '#102A43',
-    fontFamily: fontFamily.book,
+    ...Typography.p1,
+    color: Colors.aquarius,
   },
   commentText: {
-    fontSize: 13,
-    lineHeight: 15,
-    fontWeight: 'normal',
-    color: '#334E68',
-    paddingTop: 7,
-    fontFamily: fontFamily.book,
+    ...Typography.p2,
+    color: Colors.aries,
   },
   commentDateAndTime: {
-    paddingLeft: 10,
-    fontSize: 11,
-    lineHeight: 14,
+    ...Typography.p2,
     letterSpacing: 1,
-    color: '#334e68',
     textTransform: 'uppercase',
-    fontFamily: fontFamily.book,
+    color: Colors.aries,
+    marginLeft: Spacing.small,
   },
 });
 

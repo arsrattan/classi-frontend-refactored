@@ -1,14 +1,19 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
+import {Typography, Spacing, Colors, Icons} from '_styles';
 
 const styles = StyleSheet.create({
-  findClassText: {
-    fontWeight: '500',
-    fontSize: 27,
-    lineHeight: 37,
-    letterSpacing: -0.3,
-    color: '#102A43',
-    fontFamily: fontFamily.book,
+  iconNormal: {
+    ...Icons.normal,
+  },
+  browseContainer: {
+    flex: 1,
+    backgroundColor: Colors.grey,
+    paddingHorizontal: Spacing.base,
+  },
+  browseHeaderText: {
+    ...Typography.h1,
+    color: Colors.aries,
   },
   searchContainer: {
     width: 270,

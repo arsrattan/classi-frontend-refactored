@@ -1,68 +1,38 @@
 import * as React from 'react';
 import {View, Text, Alert, TouchableOpacity, Image} from 'react-native';
 import {Tooltip} from 'react-native-elements';
-import {fontFamily, menuImg, unregisterImg, shareImgDark} from '_assets';
+import {menuImg, unregisterImg, shareImgDark} from '_assets';
+import styles from './styles';
 
 const PopoverMenu = () => {
   return (
-    <View style={{flex: 1, alignItems: 'center'}}>
+    <View style={styles.popupContainer}>
       <Tooltip
         pointerColor="#fff"
         overlayColor="rgba(52, 52, 52, 0.8)"
         toggleOnPress={true}
-        containerStyle={{
-          width: 180,
-          height: 113,
-          backgroundColor: '#fff',
-          borderRadius: 10,
-        }}
+        containerStyle={styles.tooltipStyle}
         popover={
-          <View
-            style={{
-              flex: 1,
-              paddingLeft: 18,
-              paddingVertical: 18,
-              justifyContent: 'space-between',
-            }}>
+          <View style={styles.optionsContainer}>
             <TouchableOpacity
               onPress={() => {
                 Alert.alert('Shared');
               }}
-              style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={shareImgDark} />
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  lineHeight: 19,
-                  color: '#334E68',
-                  paddingLeft: 13,
-                  fontFamily: fontFamily.book,
-                }}>
-                Share Class
-              </Text>
+              style={styles.optionTile}>
+              <Image source={shareImgDark} style={styles.icon} />
+              <Text style={styles.p1dark1}>Share Class</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
                 Alert.alert('Unregistered');
               }}
-              style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={unregisterImg} />
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  lineHeight: 19,
-                  color: '#D93900',
-                  paddingLeft: 13,
-                  fontFamily: fontFamily.book,
-                }}>
-                Unregister Class
-              </Text>
+              style={styles.optionTile}>
+              <Image source={unregisterImg} style={styles.icon} />
+              <Text style={styles.p1accent1}>Unregister Class</Text>
             </TouchableOpacity>
           </View>
         }>
-        <Image source={menuImg} />
+        <Image source={menuImg} style={styles.icon} />
       </Tooltip>
     </View>
   );

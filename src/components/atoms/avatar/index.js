@@ -4,11 +4,7 @@ import styles from './styles';
 import {avatarImg} from '_assets';
 
 const Avatar = ({style}) => {
-  return (
-    <View style={[styles.avatar, style]}>
-      <Image source={avatarImg} width={20} height={20} />
-    </View>
-  );
+  return <Image source={avatarImg} style={styles.icon} />;
 };
 
 export default Avatar;

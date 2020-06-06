@@ -1,7 +1,8 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
+import {Spacing} from '_styles';
 
-const SharedStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   feedHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -14,7 +15,6 @@ const SharedStyles = StyleSheet.create({
     backgroundColor: '#1E2432',
     borderRadius: 10,
     flexDirection: 'row',
-    marginHorizontal: 16,
   },
   statDetailContainer: {
     borderRadius: 10,

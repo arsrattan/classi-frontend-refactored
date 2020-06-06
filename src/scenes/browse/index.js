@@ -6,11 +6,13 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  StatusBar,
   FlatList,
   Platform,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './styles';
+import {InputBox} from '_atoms';
 import {Header, ClassList} from '_molecules';
 import {FilterModal} from '_organisms';
 import {
@@ -33,17 +35,17 @@ const BrowseScreen = ({navigation}) => {
     {
       id: 0,
       filter: 'Strength Training',
-      icone: <Image source={strengthImg} />,
+      icone: <Image source={strengthImg} style={styles.iconNormal} />,
     },
     {
       id: 1,
-      filter: 'Cooking',
-      icone: <Image source={girlImg} />,
+      filter: 'HIIT',
+      icone: <Image source={girlImg} style={styles.iconNormal} />,
     },
     {
       id: 2,
       filter: 'Meditation',
-      icone: <Image source={mediatorImg} />,
+      icone: <Image source={mediatorImg} style={styles.iconNormal} />,
     },
   ];
 
@@ -51,33 +53,33 @@ const BrowseScreen = ({navigation}) => {
     {
       id: 3,
       filter: 'Full Body',
-      icone: <Image source={yogaImg} />,
+      icone: <Image source={yogaImg} style={styles.iconNormal} />,
     },
     {
       id: 4,
       filter: 'Cardio',
-      icone: <Image source={cardioImg} />,
+      icone: <Image source={cardioImg} style={styles.iconNormal} />,
     },
     {
       id: 5,
       filter: 'Yoga',
-      icone: <Image source={yogaImg} />,
+      icone: <Image source={yogaImg} style={styles.iconNormal} />,
     },
   ];
 
   return (
-    <ScrollView
-      style={{
-        flex: 1,
-        backgroundColor: '#F4F5F6',
-        paddingTop: 20,
-        paddingHorizontal: 16,
-      }}>
-      <Header navigation={navigation} />
+    <ScrollView style={styles.browseContainer}>
+      <Header
+        navigation={navigation}
+        headerStyle="light"
+        text=""
+        accentText=""
+        writePost={false}
+      />
       <Modal deviceWidth={Platform.OS === 'ios'} isVisible={visible}>
         <FilterModal setVisible={setVisible} navigation={navigation} />
       </Modal>
-      <Text style={styles.findClassText}>Find a Class</Text>
+      <Text style={styles.browseHeaderText}>Find a Class</Text>
       <View
         style={{
           flexDirection: 'row',
@@ -132,7 +134,7 @@ const BrowseScreen = ({navigation}) => {
             </TouchableOpacity>
           );
         }}
-        keyExtractor={item => {
+        keyExtractor={(item) => {
           item.id;
         }}
       />
@@ -166,7 +168,7 @@ const BrowseScreen = ({navigation}) => {
             </TouchableOpacity>
           );
         }}
-        keyExtractor={item => {
+        keyExtractor={(item) => {
           item.id;
         }}
       />
