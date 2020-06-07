@@ -5,6 +5,7 @@ export const livePink = '#FF0E83';
 export const white = '#FFFFFF';
 export const grey = '#F5F5F5';
 export const lightGrey = '#FAFAFC';
+export const lightBlue = '#35BCDF';
 
 export const dark1 = {
   color: aquarius,

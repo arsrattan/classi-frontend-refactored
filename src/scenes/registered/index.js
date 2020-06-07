@@ -1,61 +1,65 @@
 import React from 'react';
 import {
-  View,
-  Text,
-  StatusBar,
   Image,
+  ScrollView,
+  StatusBar,
+  Text,
   TextInput,
   TouchableOpacity,
-  ScrollView,
+  View,
 } from 'react-native';
-import styles from './styles';
 import {crossImg, registeredImg, shareImgLight} from '_assets';
+import {Button} from '_atoms';
+import {Icons, Spacing, Typography} from '_styles';
+import styles from './styles';
 
 const RegisteredScreen = ({navigation}) => {
   return (
     <ScrollView style={styles.mainContainer}>
       {StatusBar.setBarStyle('dark-content', true)}
-      <View style={styles.congoContainer}>
+      <View style={styles.textContainer}>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('Home');
           }}
           style={styles.crossButton}>
-          <Image source={crossImg} />
+          <Image source={crossImg} style={Icons.normal} />
         </TouchableOpacity>
 
-        <Image source={registeredImg} height={100} width={100} />
-        <Text style={styles.congoText}>Congratulations!</Text>
-        <Text style={styles.simpleText}>
-          You are registered for{' '}
-          <Text style={{fontWeight: 'bold'}}>‘Cooking for Dummies’</Text>. We
-          will add this class to your upcoming class.
-        </Text>
+        <Image source={registeredImg} style={Icons.halfScreen} />
+        <Text style={Typography.h1d1}>Congratulations!</Text>
+        <View style={styles.subtextContainer}>
+          <Text
+            style={[
+              Typography.p1d2,
+              {textAlign: 'center', paddingBottom: Spacing.large},
+            ]}>
+            You are registered for{' '}
+            <Text style={{fontWeight: 'bold'}}>‘Cooking for Dummies’</Text>. We
+            will add this class to your upcoming class.
+          </Text>
+          <Button
+            text="Invite your friends"
+            type="PrimaryRound"
+            icon={shareImgLight}
+          />
+        </View>
       </View>
-      <View style={styles.viewDivider} />
-      <View style={{backgroundColor: '#fff', padding: 16}}>
-        <Text style={styles.shareFriendText}>
+      <View style={styles.postContainer}>
+        <Text style={Typography.p1d2}>
           Share this class with your followers!
         </Text>
         <View style={styles.optionalView}>
           <TextInput
             multiline={true}
-            style={{padding: 12, fontSize: 15}}
+            style={styles.placeholderText}
             placeholder="Optional: add a caption "
           />
         </View>
-        <TouchableOpacity style={styles.postButton}>
-          <Text style={styles.postText}>Post</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonStyle}>
+          <Button text="Post" type="PrimarySquare" />
+        </View>
       </View>
-      <View style={styles.viewDivider} />
-      <TouchableOpacity style={styles.inviteButton}>
-        <Image
-          style={{marginRight: 10, marginBottom: 5}}
-          source={shareImgLight}
-        />
-        <Text style={styles.inviteText}>Invite your frineds</Text>
-      </TouchableOpacity>
     </ScrollView>
   );
 };

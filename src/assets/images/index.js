@@ -42,3 +42,6 @@ export const uploadImg = require('./Upload.png');
 export const scheduledImg = require('./Scheduled.png');
 export const crossImg = require('./Close.png');
 export const sendCommentImg = require('./SendComment.png');
+export const searchImg = require('./SearchIcon.png');
+export const filterImg = require('./FilterIcon.png');
+export const unlovedImg = require('./Unloved.png');

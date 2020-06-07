@@ -1,63 +1,51 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
-import {Spacing} from '_styles';
+import {Spacing, Typography, Colors} from '_styles';
 
 const styles = StyleSheet.create({
-  feedHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 34,
-    paddingHorizontal: 16,
+  screenContainer: {
+    flex: 1,
+    backgroundColor: Colors.grey,
+  },
+  headerAndStatsContainer: {
+    paddingHorizontal: Spacing.base,
   },
   statsContainer: {
-    marginTop: 18,
-    height: 113,
-    backgroundColor: '#1E2432',
+    height: 'auto',
+    backgroundColor: Colors.aquarius,
     borderRadius: 10,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: Spacing.small,
   },
   statDetailContainer: {
     borderRadius: 10,
-    width: '50%',
+    width: '45%',
     backgroundColor: '#1E2432',
     flexDirection: 'row',
-    paddingVertical: 16,
-    paddingLeft: 6,
-    paddingRight: 40,
   },
   iconContainer: {
     backgroundColor: '#fff',
-    height: 30,
-    width: 30,
+    height: 40,
+    width: 40,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  statTextContainer: {
+    width: '75%',
+  },
+  rightMargin: {
+    marginRight: Spacing.small,
+  },
   classCount: {
-    fontFamily: fontFamily.book,
-    fontSize: 30,
-    lineHeight: 38,
-    letterSpacing: -0.3,
-    color: '#FFFFFF',
+    ...Typography.h1,
+    color: Colors.white,
   },
-  classInfoText: {
-    fontFamily: fontFamily.book,
-    paddingTop: 5,
-    fontSize: 15,
-    lineHeight: 19,
-    letterSpacing: -0.3,
-    color: '#FFFFFF',
-  },
-  heading: {
-    paddingHorizontal: 16,
-    paddingTop: 25,
-    paddingBottom: 25,
-    color: '#102A43',
-    fontSize: 17,
-    lineHeight: 22,
-    letterSpacing: -0.3,
-    fontWeight: '500',
-    fontFamily: fontFamily.book,
+  headerMargin: {
+    marginLeft: Spacing.base,
+    marginTop: Spacing.base,
+    marginBottom: Spacing.small,
   },
 });
 

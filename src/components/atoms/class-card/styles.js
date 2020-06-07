@@ -1,7 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {fontFamily} from '_assets';
 import {Typography, Colors, Spacing} from '_styles';
-import {colors} from 'react-native-elements';
 
 const styles = StyleSheet.create({
   p1dark1: {
@@ -27,7 +25,7 @@ const styles = StyleSheet.create({
     width: 210,
     height: 250,
     borderRadius: 10,
-    marginLeft: 11,
+    marginRight: Spacing.small,
   },
   instructorTextContainer: {
     paddingLeft: 10,
@@ -58,7 +56,7 @@ const styles = StyleSheet.create({
   },
   date: {
     ...Typography.h3,
-    color: colors.aries,
+    color: Colors.aries,
   },
   month: {
     ...Typography.p2,

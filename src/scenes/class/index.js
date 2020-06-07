@@ -6,10 +6,20 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import styles from './styles';
-import {Avatar} from '_atoms';
+import {
+  Avatar,
+  FollowButton,
+  Tag,
+  ProfileImg,
+  Dot,
+  InputBox,
+  SquareButton,
+} from '_atoms';
+import {PostCommentTile} from '_molecules';
 import {
   arrowBackImg,
   shareImgLight,
@@ -17,206 +27,121 @@ import {
   clockImg,
   copyImg,
   checkMarkImg,
+  sendCommentImg,
 } from '_assets';
 import {ClassNavigator} from '_navigations';
+import {Colors, Typography} from '_styles';
 
 const ClassScreen = ({navigation, route}) => {
   const {classDetails, isWatching} = route.params;
   const {className, classBy, url} = classDetails;
 
   return (
-    <ScrollView bounces={false} style={{flex: 1, backgroundColor: '#fff'}}>
-      <ImageBackground
-        resizeMode="cover"
-        style={{height: 250, width: '100%'}}
-        source={{
-          uri: url,
-        }}>
-        <View style={styles.onImageContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Home');
-            }}>
-            <Image source={arrowBackImg} width={10} height={10} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={shareImgLight} width={10} height={10} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.tag}>
-          <Text style={styles.beginnerText}>Beginner</Text>
-        </View>
-      </ImageBackground>
-      <View style={{flex: 1, paddingVertical: 16, paddingHorizontal: 16}}>
-        <Text style={styles.classTitleText}>{className}</Text>
-        <Text style={[styles.instructorName, {paddingTop: 12}]}>
-          {`by ${classBy}`}
-        </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingTop: 17,
+    <ScrollView bounces={false} style={styles.container}>
+      <KeyboardAvoidingView behavior="position">
+        <ImageBackground
+          resizeMode="cover"
+          style={styles.classImage}
+          source={{
+            uri: url,
           }}>
-          <Image source={calendarImg} />
-          <Text style={styles.dateAndTime}>26 April 2020</Text>
-          <Image source={clockImg} style={{marginLeft: 19}} />
-          <Text style={styles.dateAndTime}>12:30</Text>
-          <View style={styles.liveIndicator} />
-          <Text style={styles.liveNowText}>Live Now</Text>
-        </View>
-      </View>
-      <View style={styles.registeredUserView}>
-        <Image
-          style={{borderRadius: 16}}
-          source={{
-            uri: 'https://placebeard.it/640x360',
-            height: 32,
-            width: 32,
-          }}
-        />
-        <Image
-          style={{
-            borderRadius: 16,
-            position: 'absolute',
-            top: 19,
-            left: 40,
-          }}
-          source={{
-            uri: 'https://placebeard.it/640x360',
-            height: 32,
-            width: 32,
-          }}
-        />
-        <Image
-          style={{
-            borderRadius: 16,
-            position: 'absolute',
-            top: 19,
-            left: 60,
-          }}
-          source={{
-            uri: 'http://placeimg.com/640/360/any',
-            height: 32,
-            width: 32,
-          }}
-        />
-        <View style={styles.registeredUserCountView}>
-          <Text style={styles.registeredCount}>12+</Text>
-        </View>
-        <Text style={styles.boldNumber}>234 </Text>
-        <Text
-          style={{
-            fontSize: 15,
-            color: '#334E68',
-          }}>
-          User Registered
-        </Text>
-      </View>
-      {isWatching ? (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Completed', {classBy: classBy});
-          }}
-          style={styles.registerButton}>
-          <Text style={styles.registerNowText}>Watch Now</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Registered');
-          }}
-          style={styles.registerButton}>
-          <Text style={styles.registerNowText}>Register Now</Text>
-        </TouchableOpacity>
-      )}
-      {isWatching && (
-        <TouchableOpacity style={styles.copyLinkButton}>
-          <Text style={styles.copyLinkText}>Copy link to watch in desktop</Text>
-          <Image source={copyImg} />
-        </TouchableOpacity>
-      )}
-      <View style={styles.viewDivider} />
-      <View style={{marginTop: 20}}>
-        <ClassNavigator />
-        <View style={styles.viewDivider} />
-        <View style={{height: 95, paddingHorizontal: 16, paddingTop: 13}}>
-          <Text style={styles.boldText}>Instructor</Text>
-          <View style={styles.instructorView}>
-            <Image
-              source={{
-                uri: 'https://placebeard.it/640x360',
-                width: 40,
-                height: 40,
-              }}
-              style={{borderRadius: 20}}
-            />
-            <View>
-              <Text style={[styles.instructorName, {paddingLeft: 6}]}>
-                Tafia Salsabila
-              </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  paddingLeft: 6,
-                  paddingTop: 2,
-                }}>
-                <Text style={styles.numOfClassessAndFollowers}>28 </Text>
-                <Text style={styles.normalText}>of classes </Text>
-                <Text style={styles.numOfClassessAndFollowers}>12K </Text>
-                <Text style={styles.normalText}>of Follower</Text>
-              </View>
-            </View>
-            <TouchableOpacity style={styles.followingButton}>
-              <Image source={checkMarkImg} style={{marginBottom: 5}} />
-              <Text style={styles.followingText}>Following</Text>
+          <View style={styles.onImageContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Home');
+              }}>
+              <Image source={arrowBackImg} style={styles.iconNormal} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image source={shareImgLight} style={styles.iconNormal} />
             </TouchableOpacity>
           </View>
-        </View>
-        <View style={styles.viewDivider} />
-        <View style={styles.commentsContainer}>
-          <Text style={styles.boldText}>Comments(1)</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              paddingHorizontal: 16,
-              paddingTop: 20,
-            }}>
-            <Avatar style={styles.avatar} />
-
-            <View style={styles.writeCommentView}>
-              <TextInput placeholder="Write a comments" />
+          <View style={styles.tagContainer}>
+            <Tag text={'Beginner'} color={Colors.lightBlue} />
+          </View>
+        </ImageBackground>
+        <View style={styles.classMetadataContainer}>
+          <Text style={styles.h1d1}>{className}</Text>
+          <Text style={[Typography.p1d2]}>{`by ${classBy}`}</Text>
+          <View style={styles.classTimeContainer}>
+            <View style={styles.classTime}>
+              <Image source={calendarImg} style={styles.iconSpace} />
+              <Text style={Typography.p1d2}>26 April 2020</Text>
+            </View>
+            <View style={styles.classTime}>
+              <Image source={clockImg} style={styles.iconSpace} />
+              <Text style={Typography.p1d2}>12:30</Text>
+            </View>
+            <View style={styles.classTime}>
+              <Dot color={Colors.livePink} size="large" />
+              <Text style={styles.liveNowText}>Live Now</Text>
             </View>
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              paddingHorizontal: 16,
-              paddingTop: 20,
-            }}>
-            <Image
-              source={{
-                uri: 'https://placebeard.it/640x360',
-                width: 40,
-                height: 40,
+          <View style={styles.registeredUserView}>
+            <ProfileImg size="small" />
+            <ProfileImg size="small" />
+            <ProfileImg size="small" />
+            <Text style={Typography.p1d2}>234 Users registered</Text>
+          </View>
+          {isWatching ? (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Completed', {classBy: classBy});
               }}
-              style={{borderRadius: 20}}
-            />
-
-            <View style={styles.commentTile}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={styles.userName}>Shawn Carter</Text>
-                <Text style={styles.commentDateAndTime}>wed, apr 26</Text>
-                <Text style={styles.commentDateAndTime}>6.30pm</Text>
-              </View>
-              <Text style={styles.commentText}>
-                Thank you for sharing your experiences. I want join that class
-                next week as well.
+              style={styles.registerButton}>
+              <Text style={styles.registerNowText}>Watch Now</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Registered');
+              }}
+              style={styles.registerButton}>
+              <Text style={styles.p1white}>Register Now</Text>
+            </TouchableOpacity>
+          )}
+          {isWatching && (
+            <TouchableOpacity style={styles.copyLinkButton}>
+              <Text style={styles.copyLinkText}>
+                Copy link to watch in desktop
               </Text>
+              <Image source={copyImg} />
+            </TouchableOpacity>
+          )}
+        </View>
+        <View style={styles.classDescriptionContainer}>
+          <ClassNavigator />
+        </View>
+        <View style={styles.sectionContainer}>
+          <Text style={Typography.h3d1}>Instructor</Text>
+          <View style={styles.instructorViewContainer}>
+            <View style={styles.containerFlexRow}>
+              <ProfileImg size="small" />
+              <View style={styles.instructorNameContainer}>
+                <Text style={[Typography.p1d2]}>Tafia Salsabila</Text>
+                <View style={styles.containerFlexRow}>
+                  <Text style={Typography.p2d2}>About me</Text>
+                  <Dot color={Colors.aquarius} size="base" />
+                  <Text style={Typography.p2d2}>12K followers</Text>
+                </View>
+              </View>
             </View>
+            <FollowButton />
           </View>
         </View>
-      </View>
+        <View style={styles.sectionContainer}>
+          <Text style={Typography.h3d1}>Comments (1)</Text>
+          <View style={styles.replyCommentContainer}>
+            <ProfileImg size="small" />
+            <View style={styles.padding} />
+            <InputBox placeholderText="Write a comment" />
+          </View>
+          <View style={styles.commentsContainer}>
+            <PostCommentTile />
+            <PostCommentTile />
+          </View>
+        </View>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 };

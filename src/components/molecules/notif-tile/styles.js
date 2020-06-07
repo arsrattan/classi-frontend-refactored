@@ -5,6 +5,7 @@ import {Typography, Spacing, Colors} from '_styles';
 const styles = StyleSheet.create({
   notifContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   notifContentContainer: {
     flex: 1,

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.small,
     paddingVertical: Spacing.smaller,
     marginLeft: Spacing.smaller,
+    marginBottom: Spacing.small,
   },
   commentTextContainer: {
     flexDirection: 'row',

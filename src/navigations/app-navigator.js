@@ -2,6 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {Image, View} from 'react-native';
 import {addImg, browseImg, feedIconImg, homeImg} from '_assets';
+import styles from './styles';
 
 import {
   BrowseScreen,
@@ -31,7 +32,7 @@ const AppNavigator = () => (
       component={HomeScreen}
       options={{
         tabBarLabel: 'Home',
-        tabBarIcon: ({color}) => <Image source={homeImg} />,
+        tabBarIcon: ({color}) => <Image source={homeImg} style={styles.iconNormal}/>,
       }}
     />
     <Tab.Screen
@@ -39,7 +40,7 @@ const AppNavigator = () => (
       component={BrowseScreen}
       options={{
         tabBarLabel: 'Browse',
-        tabBarIcon: ({color}) => <Image source={browseImg} />,
+        tabBarIcon: ({color}) => <Image source={browseImg} style={styles.iconNormal}/>,
       }}
     />
     <Tab.Screen
@@ -56,7 +57,7 @@ const AppNavigator = () => (
               shadowOpacity: 0.2,
               shadowOffset: {height: 8, width: 0},
             }}>
-            <Image source={addImg} />
+            <Image source={addImg} style={styles.iconNormal}/>
           </View>
         ),
       }}
@@ -66,7 +67,7 @@ const AppNavigator = () => (
       component={FeedScreen}
       options={{
         tabBarLabel: 'Feed',
-        tabBarIcon: ({color}) => <Image source={feedIconImg} />,
+        tabBarIcon: ({color}) => <Image source={feedIconImg} style={styles.iconNormal}/>,
       }}
     />
     <Tab.Screen name="Messages" component={MessagesScreen} />

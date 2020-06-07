@@ -42,7 +42,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     marginTop: Spacing.base,
     paddingTop: Spacing.base,
+    width: '100%',
     paddingBottom: '10%',
+    alignItems: 'center',
+  },
+  commentContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '70%',
   },
   postContainer: {
     backgroundColor: Colors.white,

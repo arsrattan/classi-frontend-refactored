@@ -7,6 +7,10 @@ const styles = StyleSheet.create({
     borderColor: Colors.grey,
     marginVertical: Spacing.base,
   },
+  dividerViewBase: {
+    borderWidth: 1,
+    marginVertical: Spacing.base,
+  },
 });
 
 export default styles;

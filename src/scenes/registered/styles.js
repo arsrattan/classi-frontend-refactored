@@ -1,83 +1,45 @@
 import {StyleSheet} from 'react-native';
-import fontFamily from '../../assets/fonts/fontFamily';
+import {Colors, Spacing} from '_styles';
 
 const styles = StyleSheet.create({
-  mainContainer: {flex: 1, backgroundColor: '#fff'},
-  congoContainer: {
-    paddingTop: 100,
+  mainContainer: {
+    flex: 1,
+    backgroundColor: Colors.grey,
+  },
+  textContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: '20%',
+    backgroundColor: Colors.white,
   },
-  crossButton: {position: 'absolute', left: 20, top: 64},
-  congoText: {
-    paddingTop: 32,
-    fontSize: 23,
-    fontWeight: 'bold',
-    lineHeight: 29,
-    color: '#102A43',
-    letterSpacing: -0.3,
-    fontFamily: fontFamily.book,
+  crossButton: {
+    position: 'absolute',
+    top: 60,
+    left: Spacing.base,
   },
-  simpleText: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    fontSize: 15,
-    lineHeight: 15,
-    letterSpacing: -0.3,
-    color: '#334E68',
-    fontFamily: fontFamily.book,
+  subtextContainer: {
+    paddingHorizontal: Spacing.base,
+    paddingTop: Spacing.base,
+    paddingBottom: Spacing.largest,
   },
-  shareFriendText: {
-    fontSize: 15,
-    letterSpacing: -0.3,
-    lineHeight: 15,
-    color: '#334E68',
-    fontWeight: 'bold',
-    fontFamily: fontFamily.book,
+  postContainer: {
+    backgroundColor: Colors.white,
+    marginTop: Spacing.base,
+    padding: Spacing.base,
   },
   optionalView: {
-    height: 76,
-    backgroundColor: '#FAFAFC',
-    borderColor: '#a1aeb7',
+    height: 90,
+    backgroundColor: Colors.grey,
     borderRadius: 10,
-    marginTop: 16,
+    marginVertical: Spacing.base,
   },
-  postButton: {
-    marginTop: 12,
-    height: 43,
-    width: 93,
-    backgroundColor: '#F86A6A',
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+  placeholderText: {
+    paddingTop: Spacing.small,
+    paddingHorizontal: Spacing.base,
   },
-  postText: {
-    fontSize: 15,
-    fontWeight: '500',
-    lineHeight: 19,
-    letterSpacing: -0.3,
-    color: '#fff',
-    fontFamily: fontFamily.book,
-  },
-  inviteButton: {
+  buttonStyle: {
     flexDirection: 'row',
-    marginVertical: 16,
-    marginHorizontal: 32,
-    height: 48,
-    backgroundColor: '#F86A6A',
-    borderRadius: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  inviteText: {
-    fontWeight: '500',
-    fontSize: 15,
-    lineHeight: 15,
-    letterSpacing: -0.3,
-    color: '#fff',
-    fontFamily: fontFamily.book,
-  },
-  viewDivider: {height: 15, backgroundColor: '#f9f9f9', marginTop: 10},
 });
 
 export default styles;

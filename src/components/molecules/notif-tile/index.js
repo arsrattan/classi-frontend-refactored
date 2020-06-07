@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {FollowButton, ProfileImg} from '_atoms';
+import {FollowButton, ProfileImg, Divider} from '_atoms';
 import styles from './styles';
 
 const NotifTile = ({user, action, date, isFollow}) => {
@@ -19,9 +19,9 @@ const NotifTile = ({user, action, date, isFollow}) => {
           </Text>
           <Text style={styles.dateText}>{date}</Text>
         </View>
-        {followBttn}
+        <View>{followBttn}</View>
       </View>
-      <View style={styles.dividerView} />
+      <Divider />
     </View>
   );
 };

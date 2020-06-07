@@ -25,6 +25,7 @@ import {
   filterImg,
 } from '_assets';
 import {classesMockData, createClassCards} from '_utils';
+import {Spacing} from '_styles';
 
 const BrowseScreen = ({navigation}) => {
   const [pressFr, setPressFr] = useState(false);
@@ -35,17 +36,17 @@ const BrowseScreen = ({navigation}) => {
     {
       id: 0,
       filter: 'Strength Training',
-      icone: <Image source={strengthImg} style={styles.iconNormal} />,
+      icon: <Image source={strengthImg} style={styles.iconNormal} />,
     },
     {
       id: 1,
       filter: 'HIIT',
-      icone: <Image source={girlImg} style={styles.iconNormal} />,
+      icon: <Image source={girlImg} style={styles.iconNormal} />,
     },
     {
       id: 2,
       filter: 'Meditation',
-      icone: <Image source={mediatorImg} style={styles.iconNormal} />,
+      icon: <Image source={mediatorImg} style={styles.iconNormal} />,
     },
   ];
 
@@ -53,130 +54,126 @@ const BrowseScreen = ({navigation}) => {
     {
       id: 3,
       filter: 'Full Body',
-      icone: <Image source={yogaImg} style={styles.iconNormal} />,
+      icon: <Image source={yogaImg} style={styles.iconNormal} />,
     },
     {
       id: 4,
       filter: 'Cardio',
-      icone: <Image source={cardioImg} style={styles.iconNormal} />,
+      icon: <Image source={cardioImg} style={styles.iconNormal} />,
     },
     {
       id: 5,
       filter: 'Yoga',
-      icone: <Image source={yogaImg} style={styles.iconNormal} />,
+      icon: <Image source={yogaImg} style={styles.iconNormal} />,
     },
   ];
 
   return (
-    <ScrollView style={styles.browseContainer}>
-      <Header
-        navigation={navigation}
-        headerStyle="light"
-        text=""
-        accentText=""
-        writePost={false}
-      />
-      <Modal deviceWidth={Platform.OS === 'ios'} isVisible={visible}>
-        <FilterModal setVisible={setVisible} navigation={navigation} />
-      </Modal>
-      <Text style={styles.browseHeaderText}>Find a Class</Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingTop: 16,
-          justifyContent: 'space-between',
-        }}>
-        <View style={styles.searchContainer}>
-          <Image height={18} width={18} source={searchImg} />
-          <TextInput
-            placeholderTextColor="#B0B7C4"
-            style={{paddingLeft: 11}}
-            placeholder="Search classes by name"
-          />
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            setVisible(true);
-          }}
-          style={styles.filterBtn}>
-          <Image source={filterImg} />
-        </TouchableOpacity>
+    <View style={styles.screenContainer}>
+      <View style={styles.headerPadding}>
+        <Header
+          navigation={navigation}
+          headerStyle="light"
+          text=""
+          accentText=""
+          writePost={false}
+        />
       </View>
-      <FlatList
-        style={{marginTop: 18}}
-        data={buttonFr}
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
-        renderItem={({item, index}) => {
-          return (
-            <TouchableOpacity
-              key={index}
-              onPress={() => {
-                setPressFr(!pressFr);
-              }}
-              style={[
-                styles.filterChip,
-                {
-                  backgroundColor: pressFr && !index ? '#F86A6A' : '#fff',
-                },
-              ]}>
-              <View style={{marginRight: 10}}>{item.icone}</View>
-              <Text
+      <ScrollView style={styles.browseContainer}>
+        <Modal deviceWidth={Platform.OS === 'ios'} isVisible={visible}>
+          <FilterModal setVisible={setVisible} navigation={navigation} />
+        </Modal>
+        <Text style={styles.browseHeaderText}>Find a Class</Text>
+        <View style={[styles.searchAndFilterContainer, styles.rightPadding]}>
+          <InputBox
+            placeholderText={'Search classes by name'}
+            icon={searchImg}
+          />
+          <TouchableOpacity
+            onPress={() => {
+              setVisible(true);
+            }}
+            style={styles.filterBtn}>
+            <Image source={filterImg} style={styles.iconNormal} />
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          style={{marginTop: 18}}
+          data={buttonFr}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          renderItem={({item, index}) => {
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  setPressFr(!pressFr);
+                }}
                 style={[
-                  styles.filterChipText,
+                  styles.filterChip,
                   {
-                    color: pressFr && !index ? '#fff' : '#102A43',
+                    backgroundColor: pressFr && !index ? '#F86A6A' : '#fff',
                   },
                 ]}>
-                {item.filter}
-              </Text>
-            </TouchableOpacity>
-          );
-        }}
-        keyExtractor={(item) => {
-          item.id;
-        }}
-      />
-      <FlatList
-        data={buttonSr}
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
-        renderItem={({item, index}) => {
-          return (
-            <TouchableOpacity
-              key={index}
-              onPress={() => {
-                setPressSr(!pressSr);
-              }}
-              style={[
-                styles.filterChip,
-                {
-                  backgroundColor: pressSr && !index ? '#F86A6A' : '#fff',
-                },
-              ]}>
-              <View style={{marginRight: 10}}>{item.icone}</View>
-              <Text
+                <View style={{marginRight: 10}}>{item.icon}</View>
+                <Text
+                  style={[
+                    styles.filterChipText,
+                    {
+                      color: pressFr && !index ? '#fff' : '#102A43',
+                    },
+                  ]}>
+                  {item.filter}
+                </Text>
+              </TouchableOpacity>
+            );
+          }}
+          keyExtractor={(item) => {
+            item.id;
+          }}
+        />
+        <FlatList
+          data={buttonSr}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          renderItem={({item, index}) => {
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  setPressSr(!pressSr);
+                }}
                 style={[
-                  styles.filterChipText,
+                  styles.filterChip,
                   {
-                    color: pressSr && !index ? '#fff' : '#102A43',
+                    backgroundColor: pressSr && !index ? '#F86A6A' : '#fff',
                   },
                 ]}>
-                {item.filter}
-              </Text>
-            </TouchableOpacity>
-          );
-        }}
-        keyExtractor={(item) => {
-          item.id;
-        }}
-      />
-      <Text style={styles.popularClassText}>Popular Classes</Text>
-      {createClassCards(classesMockData, navigation)}
-      <Text style={styles.allClassText}>All Classes</Text>
-      {createClassCards(classesMockData, navigation)}
-    </ScrollView>
+                <View style={{marginRight: 10}}>{item.icon}</View>
+                <Text
+                  style={[
+                    styles.filterChipText,
+                    {
+                      color: pressSr && !index ? '#fff' : '#102A43',
+                    },
+                  ]}>
+                  {item.filter}
+                </Text>
+              </TouchableOpacity>
+            );
+          }}
+          keyExtractor={(item) => {
+            item.id;
+          }}
+        />
+        <Text style={[styles.h3d2, {paddingTop: Spacing.small}]}>
+          Popular Classes
+        </Text>
+        {createClassCards(classesMockData, navigation)}
+        <Text style={styles.h3d2}>All Classes</Text>
+        {createClassCards(classesMockData, navigation)}
+      </ScrollView>
+    </View>
   );
 };
 

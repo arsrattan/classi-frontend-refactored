@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
 import {Typography, Colors, Spacing} from '_styles';
-import {small} from '_styles';
 
 const styles = StyleSheet.create({
   followBtn: {
+    paddingVertical: Spacing.smallest,
     paddingHorizontal: Spacing.base,
     borderColor: Colors.andromeda,
     borderWidth: 1,

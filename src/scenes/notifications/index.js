@@ -11,6 +11,7 @@ import styles from './styles';
 import {crossImg, menuImg} from '_assets';
 import {fontFamily} from '_assets';
 import {NotifTile} from '_molecules';
+import {Icons, Spacing, Typography} from '_styles';
 
 const NotificationsScreen = ({navigation}) => {
   return (
@@ -21,11 +22,11 @@ const NotificationsScreen = ({navigation}) => {
           onPress={() => {
             navigation.goBack();
           }}>
-          <Image source={crossImg} />
+          <Image source={crossImg} style={Icons.normal} />
         </TouchableOpacity>
-        <Text style={styles.notifHeaderText}>Notifications</Text>
+        <Text style={Typography.h2d1}>Notifications</Text>
         <TouchableOpacity>
-          <Image source={menuImg} />
+          <Image source={menuImg} style={Icons.normal} />
         </TouchableOpacity>
       </View>
       <NotifTile

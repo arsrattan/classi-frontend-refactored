@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import {sendCommentImg, arrowBackDarkImg} from '_assets';
-import {InputBox} from '_atoms';
+import {InputBox, SquareButton} from '_atoms';
 import {FeedPost} from '_organisms';
 
 const AllCommentsScreen = ({navigation, route}) => {
@@ -38,7 +38,10 @@ const AllCommentsScreen = ({navigation, route}) => {
         </ScrollView>
       </View>
       <View style={styles.commentContainerView}>
-        <InputBox placeholderText={'Write a comment'} icon={sendCommentImg} />
+        <View style={styles.commentContainer}>
+          <InputBox placeholderText={'Write a comment'} />
+          <SquareButton icon={sendCommentImg} />
+        </View>
       </View>
     </KeyboardAvoidingView>
   );

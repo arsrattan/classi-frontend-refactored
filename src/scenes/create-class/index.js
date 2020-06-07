@@ -1,24 +1,25 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
   Image,
+  ScrollView,
+  Text,
   TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import styles from './styles';
+import {Dropdown} from 'react-native-material-dropdown';
 import {
-  fontFamily,
+  avatarCircleImg,
   crossImg,
   helpImg,
-  avatarCircleImg,
   privateImg,
   uploadImg,
-  arrowImg,
 } from '_assets';
+import {Divider} from '_atoms';
 import {FilterChip} from '_molecules';
+import {Colors, Icons, Spacing, Typography} from '_styles';
+import styles from './styles';
 
 const CreateClassScreen = ({navigation}) => {
   const [uri, setUri] = useState('');
@@ -27,7 +28,7 @@ const CreateClassScreen = ({navigation}) => {
   const duration = ['<15 Min', '15-30 Min', '>30 Min'];
 
   const handleUploadImage = () => {
-    ImagePicker.showImagePicker(response => {
+    ImagePicker.showImagePicker((response) => {
       if (response.uri) {
         setUri(response.uri);
       }
@@ -37,15 +38,17 @@ const CreateClassScreen = ({navigation}) => {
 
   return (
     <ScrollView style={styles.createClassContainer}>
-      <Text style={styles.createClass}>Create Class</Text>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Browse');
-        }}
-        style={{position: 'absolute', left: 0, top: 64}}>
-        <Image source={crossImg} />
-      </TouchableOpacity>
-      <Text style={styles.selectCover}>Select your cover photo</Text>
+      <View style={styles.createHeader}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Browse');
+          }}
+          style={styles.closeButton}>
+          <Image source={crossImg} style={Icons.normal} />
+        </TouchableOpacity>
+        <Text style={Typography.h2d1}>Create Class</Text>
+      </View>
+      <Text style={Typography.p1d2}>Select your cover photo</Text>
       <View>
         <TouchableOpacity
           onPress={handleUploadImage}
@@ -62,89 +65,72 @@ const CreateClassScreen = ({navigation}) => {
               style={{width: '100%', height: '100%'}}
             />
           ) : (
-            <Image source={uploadImg} />
+            <Image source={uploadImg} style={Icons.normal} />
           )}
         </TouchableOpacity>
       </View>
-      <Text style={styles.heading}>Class name</Text>
-      <TextInput
-        value="Bella Salsabila"
-        style={{
-          paddingTop: 8,
-          fontSize: 15,
-          lineHeight: 19,
-          fontFamily: fontFamily.book,
-          color: '#334E68',
-        }}
+      <Text
+        style={[
+          Typography.p1d2,
+          {paddingTop: Spacing.base, paddingBottom: Spacing.smallest},
+        ]}>
+        Class name
+      </Text>
+      <TextInput placeholder="Morning Pilates" style={Typography.p1d2} />
+      <Divider
+        color={Colors.aries}
+        style={{marginVertical: Spacing.smallest}}
       />
-      <View style={{borderWidth: 1, marginTop: 4, borderColor: '#334E68'}} />
-      <Text style={styles.heading}>Description</Text>
+      <Text
+        style={[
+          Typography.p1d2,
+          {paddingTop: Spacing.base, paddingBottom: Spacing.smallest},
+        ]}>
+        Description
+      </Text>
       <TextInput
         multiline={true}
-        value="Pilates instructor Suzanne Deason leads a strengthening and sculpting
-        lower body workout using the balance ball."
-        style={{
-          paddingTop: 8,
-          fontSize: 15,
-          lineHeight: 22,
-          fontFamily: fontFamily.book,
-          color: '#334E68',
-          letterSpacing: -0.3,
-        }}
+        placeholder="Join me in a new Pilates class for strengthening and toning your lower body."
+        style={Typography.p1d2}
       />
-      <View
-        style={{
-          borderWidth: 1,
-          marginTop: 4,
-          borderColor: '#rgba(161, 174, 183, 0.3)',
-        }}
+      <Divider
+        color={Colors.aries}
+        style={{marginVertical: Spacing.smallest}}
       />
-      <Text style={styles.heading}>Workout Type</Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingTop: 11,
-        }}>
-        <Text
-          style={{
-            paddingTop: 8,
-            fontSize: 15,
-            lineHeight: 19,
-            fontFamily: fontFamily.book,
-            color: '#B0B7C4',
-          }}>
-          Choose workout categories
-        </Text>
-        <TouchableOpacity>
-          <Image source={arrowImg} />
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          borderWidth: 1,
-          marginTop: 4,
-          borderColor: '#rgba(161, 174, 183, 0.3)',
-        }}
+      <Dropdown
+        label="Select a workout type"
+        data={difficulty}
+        containerStyle={{paddingTop: 0, marginTop: 0}}
       />
-      <Text style={styles.heading}>Difficulty</Text>
+      <Text
+        style={[
+          Typography.p1d2,
+          {paddingTop: Spacing.base, paddingBottom: Spacing.smaller},
+        ]}>
+        Difficulty
+      </Text>
       <FilterChip data={difficulty} press={press} setPress={setPress} />
-      <Text style={styles.heading}>Estimated Duration</Text>
+      <Text
+        style={[
+          Typography.p1d2,
+          {paddingTop: Spacing.base, paddingBottom: Spacing.smaller},
+        ]}>
+        Estimated Duration
+      </Text>
       <FilterChip data={duration} press={press} setPress={setPress} />
-      <View style={{flexDirection: 'row', paddingTop: 24}}>
-        <Text style={[styles.heading, {paddingTop: 0}]}>Class Type</Text>
-        <Image source={helpImg} style={{marginLeft: 10}} />
+      <View style={styles.privacyContainer}>
+        <Text style={Typography.p1h2}>Class Type</Text>
+        <View style={styles.padding} />
+        <Image source={helpImg} style={Icons.smaller} />
       </View>
-      <View
-        style={{flexDirection: 'row', alignItems: 'center', paddingTop: 12}}>
+      <View style={styles.privacyButtonsContainer}>
         <TouchableOpacity style={styles.typeButton}>
-          <Image source={avatarCircleImg} />
-          <Text style={{paddingLeft: 7}}>General</Text>
+          <Image source={avatarCircleImg} style={Icons.normal} />
+          <Text style={Typography.p1h2}>General</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.typeButton}>
-          <Image source={privateImg} />
-          <Text style={{paddingLeft: 7}}>Private</Text>
+          <Image source={privateImg} style={Icons.normal} />
+          <Text style={Typography.p1h2}>Private</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
@@ -152,7 +138,7 @@ const CreateClassScreen = ({navigation}) => {
           navigation.navigate('PublishedClass');
         }}
         style={styles.registerButton}>
-        <Text style={styles.registerNowText}>Publish Class</Text>
+        <Text style={Typography.p1white}>Publish Class</Text>
       </TouchableOpacity>
     </ScrollView>
   );
