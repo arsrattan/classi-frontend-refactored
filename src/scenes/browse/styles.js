@@ -1,23 +1,38 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
+import {Typography, Spacing, Colors, Icons} from '_styles';
 
 const styles = StyleSheet.create({
-  findClassText: {
-    fontWeight: '500',
-    fontSize: 27,
-    lineHeight: 37,
-    letterSpacing: -0.3,
-    color: '#102A43',
-    fontFamily: fontFamily.book,
+  iconNormal: {
+    ...Icons.normal,
   },
-  searchContainer: {
-    width: 270,
-    height: 47,
-    backgroundColor: '#ffffff',
-    borderRadius: 10,
-    alignItems: 'center',
-    paddingHorizontal: 19,
+  iconSmall: {
+    ...Icons.small,
+  },
+  headerPadding: {
+    marginHorizontal: Spacing.base,
+  },
+  rightPadding: {
+    paddingRight: Spacing.base,
+  },
+  screenContainer: {
+    flex: 1,
+  },
+  browseContainer: {
+    flex: 1,
+    backgroundColor: Colors.grey,
+    paddingLeft: Spacing.base,
+  },
+  browseHeaderText: {
+    ...Typography.h1,
+    color: Colors.aries,
+  },
+  searchAndFilterContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 16,
+    justifyContent: 'space-between',
+    width: '84%',
   },
   filterBtn: {
     width: 48,
@@ -32,7 +47,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 36,
-    margin: 8,
+    marginBottom: Spacing.small,
+    marginRight: Spacing.small,
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 18,
@@ -44,14 +60,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     textTransform: 'capitalize',
   },
-  popularClassText: {
-    paddingTop: 32,
-    fontWeight: '500',
-    fontSize: 17,
-    lineHeight: 22,
-    color: '#102A43',
-    letterSpacing: -0.3,
-    fontFamily: fontFamily.book,
+  h3d2: {
+    ...Typography.h3,
+    color: Colors.aries,
   },
   allClassText: {
     paddingTop: 10,

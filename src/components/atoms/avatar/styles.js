@@ -1,15 +1,9 @@
 import {StyleSheet} from 'react-native';
+import {Icons} from '_styles';
 
 const styles = StyleSheet.create({
-  avatar: {
-    width: 30,
-    height: 30,
-    borderWidth: 1,
-    borderRadius: 15,
-    borderColor: '#bfbfbf',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#1E2432',
+  icon: {
+    ...Icons.normal,
   },
 });
 

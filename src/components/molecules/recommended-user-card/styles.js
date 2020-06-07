@@ -1,12 +1,21 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
+import {Spacing, Colors, Typography} from '_styles';
 
 const styles = StyleSheet.create({
+  followCardContainer: {
+    flex: 1,
+    height: 210,
+  },
+  followButtonContainer: {
+    marginTop: Spacing.base,
+  },
   feedCard: {
     width: 163,
-    backgroundColor: '#FFFFFF',
+    height: 180,
+    backgroundColor: Colors.white,
     borderRadius: 10,
-    marginHorizontal: 10,
+    marginRight: Spacing.small,
     alignItems: 'center',
     paddingTop: 44,
   },
@@ -16,44 +25,26 @@ const styles = StyleSheet.create({
     top: -25,
   },
   instructorName: {
-    fontSize: 17,
-    fontWeight: '500',
-    lineHeight: 22,
+    ...Typography.h3,
+    color: Colors.aquarius,
     textAlign: 'center',
-    letterSpacing: -0.3,
-    color: '#102A43',
-    fontFamily: fontFamily.book,
+    marginBottom: Spacing.tiny,
   },
   tagAndText: {
-    paddingTop: 4,
-    fontSize: 13,
-    lineHeight: 16,
+    ...Typography.p2,
+    color: Colors.aries,
     textAlign: 'center',
-    letterSpacing: 0.5,
-    color: '#334E68',
-    fontFamily: fontFamily.book,
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    marginTop: Spacing.tiny,
   },
   boldCount: {
+    ...Typography.p2,
     fontWeight: 'bold',
-    fontSize: 13,
-    lineHeight: 16,
     textAlign: 'center',
     letterSpacing: 0.5,
-    color: '#334E68',
-    fontFamily: fontFamily.book,
-  },
-  upcomingClassContainer: {
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#FAFAFC',
-    height: 32,
-    width: 164,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    marginTop: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
+    color: Colors.aries,
   },
 });
 

@@ -1,71 +1,63 @@
 import {StyleSheet} from 'react-native';
 import {fontFamily} from '_assets';
+import {Icons, Spacing} from '_styles';
+import {Typography, Colors} from '_styles';
 
 const Styles = StyleSheet.create({
-  container: {
+  icon: {
+    ...Icons.normal,
+  },
+  homeContainer: {},
+  lightSectionHeader: {
+    ...Typography.h3,
+    color: Colors.white,
+    paddingLeft: Spacing.base,
+  },
+  topSectionContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.aquarius,
   },
-  nextLiveText: {
-    fontWeight: '500',
-    lineHeight: 22,
-    letterSpacing: -0.3,
-    color: '#fff',
-    fontSize: 17,
-    paddingLeft: 16,
-    fontFamily: fontFamily.book,
+  headerContainer: {
+    paddingHorizontal: Spacing.base,
+    backgroundColor: Colors.aquarius,
   },
-  happingNowText: {
-    fontWeight: '500',
-    lineHeight: 22,
-    letterSpacing: -0.3,
-    color: '#102A43',
-    fontSize: 17,
-    paddingLeft: 8,
-    fontFamily: fontFamily.book,
-  },
-  recommandedText: {
-    fontWeight: '500',
-    lineHeight: 16,
-    letterSpacing: 1,
-    color: '#102A43',
-    fontSize: 13,
-    paddingLeft: 16,
-    textTransform: 'uppercase',
-    fontFamily: fontFamily.book,
-  },
-  intestedText: {
-    fontWeight: '500',
-    lineHeight: 24,
-    letterSpacing: -0.3,
-    color: '#102A43',
-    fontSize: 19,
-    paddingTop: 8,
-    fontFamily: fontFamily.book,
-  },
-  allClassesText: {
-    fontWeight: '500',
-    lineHeight: 24,
-    letterSpacing: -0.3,
-    color: '#F86A6A',
-    fontSize: 19,
-    paddingTop: 8,
-    paddingRight: 30,
-    fontFamily: fontFamily.book,
+  lightBackgroundContainer: {
+    flex: 1,
+    backgroundColor: Colors.grey,
   },
   classHappeningHeader: {
     flexDirection: 'row',
-    paddingLeft: 16,
-    paddingTop: 20,
+    alignItems: 'center',
+    paddingTop: Spacing.large,
+    paddingLeft: Spacing.base,
+  },
+  darkTextHeader: {
+    ...Typography.h3,
+    color: Colors.aquarius,
+    paddingLeft: Spacing.base,
+  },
+  classFilterContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: Spacing.base,
+  },
+  recommandedText: {
+    ...Typography.p1,
+    color: Colors.aquarius,
+    textTransform: 'uppercase',
+  },
+  h3d2: {
+    ...Typography.h3,
+    color: Colors.aries,
+  },
+  filterSelectContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  cameraIcon: {
-    height: 24,
-    width: 24,
-    borderRadius: 12,
-    backgroundColor: '#FFE2E8',
-    alignItems: 'center',
-    justifyContent: 'center',
+  h3a1: {
+    ...Typography.h3,
+    color: Colors.andromeda,
   },
 });
 

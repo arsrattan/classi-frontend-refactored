@@ -1,14 +1,41 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import {fontFamily} from '_assets';
+import {Spacing, Colors, Icons, Typography} from '_styles';
 
 const styles = StyleSheet.create({
   headerView: {
     flexDirection: 'row',
-    height: 90,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingTop: Platform.OS === 'ios' ? 50 : 0,
+    paddingBottom: Spacing.base,
+  },
+  smallIcon: {
+    ...Icons.small,
+  },
+  normalIcon: {
+    ...Icons.normal,
+  },
+  textContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  welcomeText: {
+    ...Typography.p1,
+    color: Colors.white,
+  },
+  accentText: {
+    ...Typography.p1,
+    color: Colors.andromeda,
+  },
+  rightIcons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  postIconStyle: {
+    paddingRight: Spacing.small,
   },
 });
 export default styles;
