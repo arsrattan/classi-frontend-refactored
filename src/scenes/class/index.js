@@ -38,6 +38,7 @@ const ClassScreen = ({navigation, route}) => {
   const date = new Date(parseInt(classDetails.scheduledTime));
   const month = date.toLocaleString('default', {month: 'short'});
   if (!loading) {
+    const comments = classDetails.comments == null ? [] : classDetails.comments;
     return (
       <ScrollView bounces={false} style={styles.container}>
         <KeyboardAvoidingView behavior="position">
@@ -150,19 +151,17 @@ const ClassScreen = ({navigation, route}) => {
             </View>
           </View>
           <View style={styles.sectionContainer}>
-            <Text style={Typography.h3d1}>
-              Comments (
-              {classDetails.registeredUsers == null
-                ? '0'
-                : classDetails.registeredUsers.length}
-              )
-            </Text>
+            <Text style={Typography.h3d1}>Comments ({comments.length})</Text>
             <View style={styles.replyCommentContainer}>
               <ProfileImg size="small" />
               <View style={styles.padding} />
               <InputBox placeholderText="Write a comment" />
             </View>
-            <View style={styles.commentsContainer}></View>
+            <View style={styles.commentsContainer}>
+              {comments.map((comment) => (
+                <PostCommentTile comment={comment} />
+              ))}
+            </View>
           </View>
         </KeyboardAvoidingView>
       </ScrollView>

@@ -9,7 +9,7 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 
 const authLink = setContext((_, {headers}) => {
   const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkZXJlayIsImVtYWlsIjoiZGVyZWtAZ21haWwuY29tIiwiaWF0IjoxNTkxNjcyNjA2LCJleHAiOjE1OTE2NzYyMDZ9.9VBSy89hEKQ4nF-gk63zIfeImnmbKR6EdkX_q1F0MVg';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkZXJlayIsImVtYWlsIjoiZGVyZWtAZ21haWwuY29tIiwiaWF0IjoxNTkxNzQxOTc2LCJleHAiOjE1OTE3NDU1NzZ9.BIrQD8svjjbBnN8ea45ugXibyQokq34GPHTZHELG6x0';
   return {
     headers: {
       ...headers,
