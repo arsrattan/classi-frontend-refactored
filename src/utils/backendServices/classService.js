@@ -23,13 +23,17 @@ export const GetAllClasses = () => {
   `;
   const {data, error, loading} = useQuery(ALL_CLASSES);
   useEffect(() => {
-    setState({data: null, loading: true});
+    setState({data: null, loading: true, error: null});
     if (!error && !loading) {
+      console.log(data);
       setState({
         data: data.getAllClasses,
         loading: false,
       });
     }
+    console.log(data);
+    console.log(error);
   }, [data, error, loading]);
+  console.log(state);
   return state;
 };
