@@ -10,3 +10,5 @@ export {default as CreateClassScreen} from './create-class';
 export {default as PublishedClassScreen} from './published-class';
 export {default as AllCommentsScreen} from './all-comments';
 export {default as NotificationsScreen} from './notifications';
+export {default as LoginScreen} from './login';
+export {default as EmailLoginScreen} from './email-login';

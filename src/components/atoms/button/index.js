@@ -4,13 +4,13 @@ import styles from './styles';
 import {Typography, Colors} from '_styles';
 import {Icons, Spacing} from '_styles';
 
-const Button = ({text, type, icon}) => {
+const Button = ({text, type, icon, color, style, navigation, screen}) => {
   let buttonStyle;
   let textStyle;
   if (type === 'PrimaryRound') {
     buttonStyle = {
       backgroundColor: Colors.andromeda,
-      borderRadius: 20,
+      borderRadius: 25,
       ...styles.postButtonPadding,
     };
     textStyle = {...Typography.p1white};
@@ -26,14 +26,25 @@ const Button = ({text, type, icon}) => {
       backgroundColor: Colors.white,
       borderColor: Colors.andromeda,
       borderWidth: 1,
-      borderRadius: 20,
+      borderRadius: 25,
       ...styles.postButtonPadding,
     };
     textStyle = {...Typography.p1, color: Colors.andromeda};
+  } else {
+    buttonStyle = {
+      backgroundColor: color,
+      borderRadius: 25,
+      ...styles.postButtonPadding,
+    };
+    textStyle = {...Typography.p1white};
   }
 
   return (
-    <TouchableOpacity style={buttonStyle}>
+    <TouchableOpacity
+      style={{...buttonStyle, ...style}}
+      onPress={() => {
+        navigation.navigate(screen);
+      }}>
       {icon !== undefined ? (
         <Image
           source={icon}

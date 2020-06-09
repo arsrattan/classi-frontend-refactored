@@ -45,3 +45,7 @@ export const sendCommentImg = require('./SendComment.png');
 export const searchImg = require('./SearchIcon.png');
 export const filterImg = require('./FilterIcon.png');
 export const unlovedImg = require('./Unloved.png');
+export const logoImg = require('./Logo.png');
+export const facebookImg = require('./facebook.png');
+export const instagramImg = require('./instagram.png');
+export const emailImg = require('./Email.png');
