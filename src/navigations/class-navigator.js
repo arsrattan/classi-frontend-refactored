@@ -4,11 +4,10 @@ import {Tile} from '_atoms';
 
 const Tab = createMaterialTopTabNavigator();
 
-const ClassNavigator = () => {
-  const AboutTile = () => <Tile text={'AboutTile'} />;
+const ClassNavigator = ({classDetails}) => {
+  const AboutTile = () => <Tile text={classDetails.description} />;
 
-  const EquipmentTile = () => <Tile text={'EquipmentTile'} />;
-
+  const EquipmentTile = () => <Tile text={classDetails.requiredEquipment} />;
   return (
     <Tab.Navigator
       tabBarOptions={{

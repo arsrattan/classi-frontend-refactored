@@ -6,6 +6,8 @@ import PopupMenu from '../popup-menu';
 import styles from './styles';
 
 const ClassCard = ({navigation, item, showLive, popular, style}) => {
+  const date = new Date(parseInt(item.scheduledTime));
+  const month = date.toLocaleString('default', {month: 'short'});
   return (
     <TouchableOpacity
       onPress={() => {
@@ -15,8 +17,7 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
       <View style={styles.cardHeader}>
         <ProfileImg size="small" />
         <View style={styles.instructorTextContainer}>
-          <Text style={styles.p1dark1}>{item.classBy}</Text>
-          <Text style={styles.p2dark2}>{item.post}</Text>
+          <Text style={styles.p1dark1}>{item.instructorUserId}</Text>
         </View>
         <PopupMenu />
       </View>
@@ -29,19 +30,22 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
           style={styles.image}
           resizeMode={'cover'}>
           <View style={styles.tagContainer}>
-            <Tag color={Colors.aquarius} text={item.duration} />
+            <Tag color={Colors.aquarius} text={item.expectedDuration} />
             {showLive && <Tag color={Colors.livePink} text="Live" />}
           </View>
           <View style={styles.dateTag}>
-            <Text style={styles.date}>26</Text>
-            <Text style={styles.month}>Apr</Text>
+            <Text style={styles.date}>{date.getDate()}</Text>
+            <Text style={styles.month}>{month}</Text>
           </View>
         </ImageBackground>
       </View>
       <View style={styles.classDetailContainer}>
         <Text style={styles.classNameText}>{item.className}</Text>
-        <Text style={styles.dateAndTime}>{item.dateAndTime}</Text>
-        <Text style={styles.dateAndTime}>{item.registered}</Text>
+        <Text style={styles.scheduledTime}>
+          {item.registeredUsers == null
+            ? '0 users registered'
+            : item.registeredUsers.length + 'users registered'}
+        </Text>
       </View>
     </TouchableOpacity>
   );
