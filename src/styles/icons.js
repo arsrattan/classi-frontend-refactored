@@ -23,6 +23,11 @@ export const larger = {
   width: 50,
 };
 
+export const largest = {
+  height: 100,
+  width: 100,
+};
+
 export const halfScreen = {
   height: 250,
   width: 250,

@@ -11,3 +11,4 @@ export {default as InputBox} from './input-box';
 export {default as SquareButton} from './square-button';
 export {default as Dot} from './dot';
 export {default as Button} from './button';
+export {default as InputField} from './input-field';

@@ -11,6 +11,7 @@
     "format": "prettier '*/**/*.js' --write"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^2.4.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.5.0",
     "@react-navigation/material-top-tabs": "^5.2.9",
