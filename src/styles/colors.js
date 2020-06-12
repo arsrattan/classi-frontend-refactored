@@ -6,6 +6,7 @@ export const white = '#FFFFFF';
 export const grey = '#F5F5F5';
 export const lightGrey = '#FAFAFC';
 export const lightBlue = '#35BCDF';
+export const danger = '#dc3545'
 
 export const dark1 = {
   color: aquarius,
@@ -25,4 +26,8 @@ export const light2 = {
 
 export const accent1 = {
   color: andromeda,
+};
+
+export const danger1 = {
+  color: danger,
 };

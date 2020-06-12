@@ -32,6 +32,5 @@ export const GetAllClasses = () => {
       });
     }
   }, [data, error, loading]);
-  console.log(state);
   return state;
 };

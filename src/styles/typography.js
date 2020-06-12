@@ -58,6 +58,11 @@ export const p2d2 = {
   color: Colors.aries,
 };
 
+export const p2danger = {
+  ...p2,
+  color: Colors.danger,
+};
+
 export const h3d1 = {
   ...h3,
   color: Colors.aquarius,

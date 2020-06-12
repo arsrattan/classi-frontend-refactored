@@ -3,27 +3,19 @@ import {NavigationContainer} from '@react-navigation/native';
 import Navigator from '_navigations';
 import {ApolloClient} from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks';
-import {createHttpLink} from 'apollo-link-http';
-import {setContext} from 'apollo-link-context';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 
-const authLink = setContext((_, {headers}) => {
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkZXJlayIsImVtYWlsIjoiZGVyZWtAZ21haWwuY29tIiwiaWF0IjoxNTkxNzQxOTc2LCJleHAiOjE1OTE3NDU1NzZ9.BIrQD8svjjbBnN8ea45ugXibyQokq34GPHTZHELG6x0';
-  return {
-    headers: {
-      ...headers,
-      authorization: `Bearer ${token}`,
-    },
-  };
-});
-const uri =
-  'https://un0aj2v41h.execute-api.us-east-1.amazonaws.com/dev/graphql';
-const httpLink = createHttpLink({uri, fetch});
-
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  uri: 'https://un0aj2v41h.execute-api.us-east-1.amazonaws.com/dev/graphql',
   cache: new InMemoryCache(),
+  request: (operation) => {
+    const token = localStorage.getItem('AUTH_TOKEN')
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    })
+  }
 });
 const App = () => (
   <ApolloProvider client={client}>
