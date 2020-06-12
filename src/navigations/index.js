@@ -10,6 +10,10 @@ import {
   PublishedClassScreen,
   AllCommentsScreen,
   NotificationsScreen,
+  LoginScreen,
+  EmailLoginScreen,
+  ProfileScreen,
+  EditProfileScreen,
 } from '_scenes';
 
 const Stack = createStackNavigator();
@@ -17,7 +21,7 @@ const Stack = createStackNavigator();
 const Navigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false, gestureEnabled: false}}
-    initialRouteName="Home">
+    initialRouteName="Login">
     <Stack.Screen name="Home" component={AppNavigator} />
     <Stack.Screen name="Class" component={ClassScreen} />
     <Stack.Screen name="Registered" component={RegisteredScreen} />
@@ -26,9 +30,14 @@ const Navigator = () => (
     <Stack.Screen name="PublishedClass" component={PublishedClassScreen} />
     <Stack.Screen name="AllComments" component={AllCommentsScreen} />
     <Stack.Screen name="Notifications" component={NotificationsScreen} />
+    <Stack.Screen name="Login" component={LoginScreen} />
+    <Stack.Screen name="EmailLogin" component={EmailLoginScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="EditProfile" component={EditProfileScreen} />
   </Stack.Navigator>
 );
 
 export default Navigator;
 export {default as AppNavigator} from './app-navigator';
 export {default as ClassNavigator} from './class-navigator';
+export {default as LoginNavigator} from './login-navigator';
