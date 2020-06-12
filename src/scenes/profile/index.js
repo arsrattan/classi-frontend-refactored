@@ -110,18 +110,18 @@ const ProfileScreen = ({navigation}) => {
           <Text style={[Typography.h3d1, {paddingBottom: Spacing.small}]}>
             Class History
           </Text>
-          {postData.map((post) => {
-            return (
-              <View>
-                <FeedPost
-                  allComments={false}
-                  post={post}
-                  navigation={navigation}
-                />
-              </View>
-            );
-          })}
         </View>
+        {postData.map((post) => {
+          return (
+            <View>
+              <FeedPost
+                allComments={false}
+                post={post}
+                navigation={navigation}
+              />
+            </View>
+          );
+        })}
       </ScrollView>
     </View>
   );
