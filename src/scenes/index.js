@@ -12,3 +12,4 @@ export {default as AllCommentsScreen} from './all-comments';
 export {default as NotificationsScreen} from './notifications';
 export {default as LoginScreen} from './login';
 export {default as EmailLoginScreen} from './email-login';
+export {default as ProfileScreen} from './profile';

@@ -3,6 +3,8 @@ import {ImageBackground, Text, TouchableOpacity, View} from 'react-native';
 import {ProfileImg, Tag} from '_atoms';
 import {Colors} from '_styles';
 import PopupMenu from '../popup-menu';
+import {menuImg, unregisterImg, shareImgDark} from '_assets';
+import MenuTile from '../menu-tile';
 import styles from './styles';
 
 const ClassCard = ({navigation, item, showLive, popular, style}) => {
@@ -13,12 +15,20 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
       }}
       style={[styles.cardContainer, {style}]}>
       <View style={styles.cardHeader}>
-        <ProfileImg size="small" />
-        <View style={styles.instructorTextContainer}>
-          <Text style={styles.p1dark1}>{item.classBy}</Text>
-          <Text style={styles.p2dark2}>{item.post}</Text>
+        <View style={{flexDirection: 'row'}}>
+          <ProfileImg size="small" />
+          <View style={styles.instructorTextContainer}>
+            <Text style={styles.p1dark1}>{item.classBy}</Text>
+            <Text style={styles.p2dark2}>{item.post}</Text>
+          </View>
         </View>
-        <PopupMenu />
+        <PopupMenu
+          icon={menuImg}
+          options={[
+            <MenuTile icon={shareImgDark} text="Share class" />,
+            <MenuTile icon={unregisterImg} text="Unregister class" />,
+          ]}
+        />
       </View>
 
       <View style={styles.imageContainer}>
