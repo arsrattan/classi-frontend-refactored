@@ -22,6 +22,7 @@ function Live(props) {
           <TouchableOpacity
             onPress={() => {
               setVisible(false);
+              props.navigation.navigate('LiveClass');
             }}
             style={styles.liveNow}>
             <Image style={{marginRight: 8}} source={liveImg} />
