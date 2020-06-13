@@ -14,6 +14,7 @@ import {
   EmailLoginScreen,
   ProfileScreen,
   EditProfileScreen,
+  LiveClassScreen,
 } from '_scenes';
 
 const Stack = createStackNavigator();
@@ -34,6 +35,7 @@ const Navigator = () => (
     <Stack.Screen name="EmailLogin" component={EmailLoginScreen} />
     <Stack.Screen name="Profile" component={ProfileScreen} />
     <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+    <Stack.Screen name="LiveClass" component={LiveClassScreen} />
   </Stack.Navigator>
 );
 
