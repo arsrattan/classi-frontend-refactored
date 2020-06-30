@@ -15,11 +15,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import {Tile, InputField, Button} from '_atoms';
 import styles from './styles';
 import {Colors, Typography, Spacing} from '_styles';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 const Tab = createMaterialTopTabNavigator();
 
 const SignupTab = ({navigation}) => {
-  const NumberContext = React.createContext();
 
   function validate(values) {
     let errors = {};
@@ -187,7 +188,8 @@ const LoginTab = ({navigation}) => {
     if (isSubmitting) {
       loginUser({variables: {email: values.email, password: values.password}}).then(({data}) => {
         if(data.login != null){
-          localStorage.setItem('AUTH_TOKEN', data.login.accessToken);
+          AsyncStorage.setItem('AUTH_TOKEN', data.login.accessToken);
+          AsyncStorage.setItem('USER_ID', data.login.userId);
           navigation.navigate('Home');
         }
       }).catch(e => {

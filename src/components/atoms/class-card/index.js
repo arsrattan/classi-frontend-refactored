@@ -15,7 +15,7 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
       }}
       style={[styles.cardContainer, {style}]}>
       <View style={styles.cardHeader}>
-        <ProfileImg size="small" />
+        <ProfileImg userProfileImg={item.users3url} size="small" />
         <View style={styles.instructorTextContainer}>
           <Text style={styles.p1dark1}>{item.instructorUserId}</Text>
         </View>
@@ -25,7 +25,7 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
       <View style={styles.imageContainer}>
         <ImageBackground
           source={{
-            uri: item.url,
+            uri: item.s3url,
           }}
           style={styles.image}
           resizeMode={'cover'}>

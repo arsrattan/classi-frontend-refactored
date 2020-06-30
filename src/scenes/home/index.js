@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StatusBar, ScrollView, Image, FlatList} from 'react-native';
 import styles from './styles';
 import {Header} from '_molecules';
@@ -6,9 +6,19 @@ import {ImageTile} from '_atoms';
 import {cameraImg, arrowImg} from '_assets';
 import {createClassCards} from '_utils';
 import {GetAllClasses} from '../../utils/backendServices/classService';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 const HomeScreen = ({navigation}) => {
   const {data, loading} = GetAllClasses();
+  const [state, setState] = useState({tokenData: null});
+  useEffect(() => {
+    const asyncFetchToken = async () => {
+      const res = await AsyncStorage.getItem('USER_ID');
+      setState(res);
+    }
+    asyncFetchToken();
+  }, [state]);
   return (
     <View style={styles.homeContainer}>
       {StatusBar.setBarStyle('light-content', true)}
@@ -16,8 +26,8 @@ const HomeScreen = ({navigation}) => {
         <Header
           navigation={navigation}
           headerStyle="dark"
-          text="Welcome back"
-          accentText="Derek"
+          text="Welcome back,"
+          accentText={state == null ? "" : state.tokenData}
           writePost={false}
         />
       </View>

@@ -30,14 +30,15 @@ import {
 } from '_assets';
 import {ClassNavigator} from '_navigations';
 import {Colors, Typography} from '_styles';
-import {GetUser} from '../../utils/backendServices/usersService';
+import {GetUser, GetUserFollowers} from '../../utils/backendServices/usersService';
 
 const ClassScreen = ({navigation, route}) => {
   const {classDetails, isWatching} = route.params;
   const {data, loading} = GetUser(classDetails.instructorUserId);
+  const {followersData, followersLoading} = GetUserFollowers(classDetails.instructorUserId);
   const date = new Date(parseInt(classDetails.scheduledTime));
   const month = date.toLocaleString('default', {month: 'short'});
-  if (!loading) {
+  if (!loading && !followersLoading) {
     const comments = classDetails.comments == null ? [] : classDetails.comments;
     return (
       <ScrollView bounces={false} style={styles.container}>
@@ -46,7 +47,7 @@ const ClassScreen = ({navigation, route}) => {
             resizeMode="cover"
             style={styles.classImage}
             source={{
-              uri: 'url',
+              uri: classDetails.s3url,
             }}>
             <View style={styles.onImageContainer}>
               <TouchableOpacity
@@ -135,7 +136,7 @@ const ClassScreen = ({navigation, route}) => {
             <Text style={Typography.h3d1}>Instructor</Text>
             <View style={styles.instructorViewContainer}>
               <View style={styles.containerFlexRow}>
-                <ProfileImg size="small" />
+                <ProfileImg userProfileImg={classDetails.users3url} size="small" />
                 <View style={styles.instructorNameContainer}>
                   <Text style={[Typography.p1d2]}>
                     {data[0].firstName} {data[0].lastName}
@@ -143,11 +144,11 @@ const ClassScreen = ({navigation, route}) => {
                   <View style={styles.containerFlexRow}>
                     <Text style={Typography.p2d2}>About me</Text>
                     <Dot color={Colors.aquarius} size="base" />
-                    <Text style={Typography.p2d2}>12K followers</Text>
+                    <Text style={Typography.p2d2}>{followersData.length} followers</Text>
                   </View>
                 </View>
               </View>
-              <FollowButton />
+              <FollowButton followedUser={classDetails.instructorUserId} isUnfollow={false} />
             </View>
           </View>
           <View style={styles.sectionContainer}>

@@ -1,6 +1,7 @@
 import {useQuery, useMutation} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 import {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export const GetUser = (userId) => {
   const [state, setState] = useState({data: null, loading: true});
@@ -10,6 +11,7 @@ export const GetUser = (userId) => {
         userId
         firstName
         lastName
+        s3url
       }
     }
   `;
@@ -25,5 +27,98 @@ export const GetUser = (userId) => {
       });
     }
   }, [data, error, loading]);
+  return state;
+};
+
+export const GetUserFollowers = (userId) => {
+  const [state, setState] = useState({followersData: [], loading: true});
+  const GET_USER_FOLLOWERS = gql`
+    query GetUserFollowers($userId: String!) {
+      getUserFollowers(userId: $userId) {
+        userId
+      }
+    }
+  `;
+  const {data, error, loading} = useQuery(GET_USER_FOLLOWERS, {
+    variables: {userId: userId},
+  });
+  useEffect(() => {
+    setState({followersData: [], loading: true});
+    if (!error && !loading) {
+      setState({
+        followersData: data.getUserFollowers,
+        loading: false,
+      });
+    }
+  }, [data, error, loading]);
+  return state;
+};
+
+
+export const GetUserFollowing = (userId) => {
+  const [state, setState] = useState({followingData: [], followingLoading: true});
+  const GET_USER_FOLLOWING = gql`
+    query GetUserFollowing($userId: String!) {
+      getUserFollowing(userId: $userId) {
+        userId
+      }
+    }
+  `;
+  const {data, error, loading} = useQuery(GET_USER_FOLLOWING, {
+    variables: {userId: userId},
+  });
+  useEffect(() => {
+    setState({followingData: [], followingLoading: true});
+    if (!error && !loading) {
+      setState({
+        followingData: data.getUserFollowing,
+        followingLoading: false,
+      });
+    }
+  }, [data, error, loading]);
+  return state;
+};
+
+
+export const GetUserNotifications = (userId) => {
+  const [state, setState] = useState({notificationData: [], notificationLoading: true});
+  const GET_USER_NOTIFICATIONS = gql`
+    query GetUserNotifications($userId: String!) {
+      getUserNotifications(userId: $userId) {
+        userId
+        triggeringUserId
+        triggeringClassId
+        notificationType
+        notificationId
+        createdAt
+        triggeringUserS3Url
+      }
+    }
+  `;
+  const {data, error, loading} = useQuery(GET_USER_NOTIFICATIONS, {
+    variables: {userId: userId},
+  });
+  useEffect(() => {
+    setState({notificationData: [], notificationLoading: true});
+    if (!error && !loading) {
+      setState({
+        notificationData: data.getUserNotifications,
+        notificationLoading: false,
+      });
+    }
+  }, [data, error, loading]);
+
+  return state;
+};
+
+export const GetCurrentUserId = () => {
+  const [state, setState] = useState({});
+  useEffect(() => {
+    const asyncFetchToken = async () => {
+      const res = await AsyncStorage.getItem('USER_ID');
+      setState(res);
+    }
+    asyncFetchToken();
+  }, [state]);
   return state;
 };

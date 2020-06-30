@@ -1,21 +1,36 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import Navigator from '_navigations';
-import {ApolloClient} from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks';
-import {InMemoryCache} from 'apollo-cache-inmemory';
+import AsyncStorage from '@react-native-community/async-storage';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
+import { setContext } from 'apollo-link-context';
+
+
+let token;
+const getToken = async () => {
+  if (token) {
+    return Promise.resolve(token);
+  }
+  token = await AsyncStorage.getItem('AUTH_TOKEN');
+  return token;
+};
+
+const httpLink = new HttpLink({ uri: 'https://un0aj2v41h.execute-api.us-east-1.amazonaws.com/dev/graphql' });
+const authLink = setContext(async (req, { headers }) => {
+  const token = await getToken();
+  return {
+    ...headers,
+    headers: {
+      authorization: token ? `Bearer ${token}` : null,
+    },
+  };
+});
+const link = authLink.concat(httpLink);
 
 const client = new ApolloClient({
-  uri: 'https://un0aj2v41h.execute-api.us-east-1.amazonaws.com/dev/graphql',
-  cache: new InMemoryCache(),
-  request: (operation) => {
-    const token = localStorage.getItem('AUTH_TOKEN')
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
-    })
-  }
+  link,
+  cache: new InMemoryCache()
 });
 const App = () => (
   <ApolloProvider client={client}>

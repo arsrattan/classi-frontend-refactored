@@ -10,6 +10,8 @@ export const GetAllClasses = () => {
         classId
         className
         classType
+        s3url
+        users3url
         difficulty
         expectedDuration
         instructorUserId
