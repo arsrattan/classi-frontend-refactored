@@ -17,15 +17,16 @@ const styles = StyleSheet.create({
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 12,
-    paddingVertical: 12,
+    justifyContent: 'space-between',
+    paddingHorizontal: Spacing.small,
+    paddingVertical: Spacing.small,
   },
   cardContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     width: 210,
     height: 250,
     borderRadius: 10,
-    marginRight: Spacing.small,
+    marginLeft: Spacing.small,
   },
   instructorTextContainer: {
     paddingLeft: 10,

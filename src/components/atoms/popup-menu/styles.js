@@ -17,13 +17,12 @@ const styles = StyleSheet.create({
     ...Icons.small,
   },
   popupContainer: {
-    flex: 1,
     alignItems: 'center',
   },
   tooltipStyle: {
     width: 180,
-    height: 90,
-    backgroundColor: '#fff',
+    height: 'auto',
+    backgroundColor: Colors.white,
     borderRadius: 10,
   },
   optionsContainer: {

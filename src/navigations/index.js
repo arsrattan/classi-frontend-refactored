@@ -12,6 +12,8 @@ import {
   NotificationsScreen,
   LoginScreen,
   EmailLoginScreen,
+  ProfileScreen,
+  EditProfileScreen,
 } from '_scenes';
 
 const Stack = createStackNavigator();
@@ -30,6 +32,8 @@ const Navigator = () => (
     <Stack.Screen name="Notifications" component={NotificationsScreen} />
     <Stack.Screen name="Login" component={LoginScreen} />
     <Stack.Screen name="EmailLogin" component={EmailLoginScreen} />
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="EditProfile" component={EditProfileScreen} />
   </Stack.Navigator>
 );
 

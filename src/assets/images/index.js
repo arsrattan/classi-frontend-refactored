@@ -49,3 +49,4 @@ export const logoImg = require('./Logo.png');
 export const facebookImg = require('./facebook.png');
 export const instagramImg = require('./instagram.png');
 export const emailImg = require('./Email.png');
+export const settingsImg = require('./Setting.png');
