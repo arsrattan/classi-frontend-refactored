@@ -12,9 +12,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  followingBtn: {
+    paddingVertical: Spacing.smallest,
+    paddingHorizontal: Spacing.base,
+    borderColor: Colors.andromeda,
+    backgroundColor: Colors.andromeda,
+    borderWidth: 1,
+    borderRadius: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   followTxt: {
     ...Typography.p1,
     color: Colors.andromeda,
+  },
+  followingTxt: {
+    ...Typography.p1,
+    color: Colors.white,
   },
 });
 

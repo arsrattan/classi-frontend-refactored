@@ -11,16 +11,21 @@ const FilterChip = ({data, press, setPress}) => {
           <TouchableOpacity
             key={index}
             onPress={() => {
-              setPress(!press);
+              setPress(index);
             }}
             style={[
               styles.buttonStyle,
               {
                 backgroundColor:
-                  press && !index ? Colors.andromeda : Colors.grey,
+                  press == index ? Colors.andromeda : Colors.grey,
               },
             ]}>
-            <Text style={styles.tagText}>{item}</Text>
+            <Text style={[
+                styles.filterChipText,
+                {
+                  color: press == index ? '#fff' : '#102A43',
+                },
+              ]}>{item}</Text>
           </TouchableOpacity>
         );
       })}

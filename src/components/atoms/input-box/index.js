@@ -3,7 +3,10 @@ import {Image, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
 import {searchImg} from '_assets';
 
-const InputBox = ({placeholderText, icon}) => {
+const InputBox = ({placeholderText, icon, value, onChange, name}) => {
+  function handleChange(text, e) {
+    onChange(text, e);
+  }
   let iconImage;
   if (icon !== undefined) {
     iconImage = <Image source={icon} style={styles.icon} />;
@@ -11,7 +14,11 @@ const InputBox = ({placeholderText, icon}) => {
   return (
     <View style={styles.writeCommentView}>
       {iconImage}
-      <TextInput placeholder={placeholderText} />
+      <TextInput 
+        value={value} 
+        onChange={(text) => handleChange(text, name)} 
+        placeholder={placeholderText}
+       />
     </View>
   );
 };

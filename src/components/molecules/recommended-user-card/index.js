@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, View, FlatList, TouchableOpacity, Image} from 'react-native';
 import styles from './styles';
 import {recommendedUsersData} from '_utils';
-import {fontFamily} from '_assets';
 import {FollowButton, ProfileImg} from '_atoms';
 
 const RecommendedUsers = () => {
@@ -28,7 +27,7 @@ const RecommendedUsers = () => {
                 <Text style={styles.tagAndText}>{` of Classes`}</Text>
               </View>
               <View style={styles.followButtonContainer}>
-                <FollowButton />
+                <FollowButton followedUser={item.instructor} isUnfollow={false} follow/>
               </View>
             </TouchableOpacity>
           );

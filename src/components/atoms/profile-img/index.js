@@ -1,7 +1,6 @@
 import React from 'react';
 import {Image} from 'react-native';
 
-// Eventually change the source to pull from user prop
 const ProfileImg = ({userProfileImg, size, styles}) => {
   let imgSize;
   if (size === 'small') {
@@ -14,7 +13,7 @@ const ProfileImg = ({userProfileImg, size, styles}) => {
 
   return (
     <Image
-      source={{uri: 'https://placebeard.it/640x360'}}
+      source={{uri: userProfileImg}}
       style={{...styles, ...imgSize}}
     />
   );

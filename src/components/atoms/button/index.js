@@ -4,7 +4,7 @@ import styles from './styles';
 import {Typography, Colors} from '_styles';
 import {Icons, Spacing} from '_styles';
 
-const Button = ({text, type, icon, color, style, navigation, screen}) => {
+const Button = ({text, type, icon, color, style, navigation, screen, onPress}) => {
   let buttonStyle;
   let textStyle;
   if (type === 'PrimaryRound') {
@@ -43,7 +43,12 @@ const Button = ({text, type, icon, color, style, navigation, screen}) => {
     <TouchableOpacity
       style={{...buttonStyle, ...style}}
       onPress={() => {
-        navigation.navigate(screen);
+        if(onPress !== undefined){
+          onPress();
+        }
+        else {
+          navigation.navigate(screen);
+        }
       }}>
       {icon !== undefined ? (
         <Image

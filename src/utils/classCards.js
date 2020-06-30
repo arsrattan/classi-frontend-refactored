@@ -13,7 +13,7 @@ const createClassCards = (classList, navigation) => (
         <ClassCard navigation={navigation} item={item} showLive={true} />
       )}
       keyExtractor={(item) => {
-        item.id;
+        item.classId;
       }}
     />
   </View>

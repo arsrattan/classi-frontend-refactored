@@ -24,30 +24,42 @@ import {
   searchImg,
   filterImg,
 } from '_assets';
-import {classesMockData, createClassCards} from '_utils';
+import {createClassCards} from '_utils';
+import {GetAllClasses} from '../../utils/backendServices/classService';
 import {Spacing} from '_styles';
 
 const BrowseScreen = ({navigation}) => {
-  const [pressFr, setPressFr] = useState(false);
-  const [pressSr, setPressSr] = useState(false);
+
+  var filterClassData = function(textFilter, classType, classData) {
+    return classData == null ? [] : classData.filter(function(c) { 
+      return c.classType.indexOf(classType) != -1 && c.classType.indexOf(textFilter) != -1; 
+    })
+  };
+
+  const {data, loading} = GetAllClasses();
+  const [pressFr, setPressFr] = useState(-1);
+  const [pressSr, setPressSr] = useState(-1);
+  const [filterVal, setFilterVal] = useState("");
   const [visible, setVisible] = useState(false);
+  const [values, setValues] = useState({className: ""});
+
+  const handleChange = (newValue, name) => {
+    console.log(newValue);
+    console.log(name);
+    setValues(values => ({ ...values, [name]: newValue }));
+  }
 
   const buttonFr = [
     {
       id: 0,
-      filter: 'Strength Training',
+      filter: 'Strength',
       icon: <Image source={strengthImg} style={styles.iconNormal} />,
     },
     {
       id: 1,
       filter: 'HIIT',
       icon: <Image source={girlImg} style={styles.iconNormal} />,
-    },
-    {
-      id: 2,
-      filter: 'Meditation',
-      icon: <Image source={mediatorImg} style={styles.iconNormal} />,
-    },
+    }
   ];
 
   const buttonSr = [
@@ -88,6 +100,9 @@ const BrowseScreen = ({navigation}) => {
           <InputBox
             placeholderText={'Search classes by name'}
             icon={searchImg}
+            value={values.className || ''}
+            onChange={handleChange}
+            name={'className'}
           />
           <TouchableOpacity
             onPress={() => {
@@ -107,12 +122,16 @@ const BrowseScreen = ({navigation}) => {
               <TouchableOpacity
                 key={index}
                 onPress={() => {
-                  setPressFr(!pressFr);
+                  if(pressSr !== -1){
+                    setPressSr(-1);
+                  }
+                  setPressFr(item.id);
+                  setFilterVal(item.filter);
                 }}
                 style={[
                   styles.filterChip,
                   {
-                    backgroundColor: pressFr && !index ? '#F86A6A' : '#fff',
+                    backgroundColor: pressFr == item.id ? '#F86A6A' : '#fff',
                   },
                 ]}>
                 <View style={{marginRight: 10}}>{item.icon}</View>
@@ -120,7 +139,7 @@ const BrowseScreen = ({navigation}) => {
                   style={[
                     styles.filterChipText,
                     {
-                      color: pressFr && !index ? '#fff' : '#102A43',
+                      color: pressFr == item.id ? '#fff' : '#102A43',
                     },
                   ]}>
                   {item.filter}
@@ -141,12 +160,16 @@ const BrowseScreen = ({navigation}) => {
               <TouchableOpacity
                 key={index}
                 onPress={() => {
-                  setPressSr(!pressSr);
+                  if(pressFr !== -1){
+                    setPressFr(-1);
+                  }
+                  setPressSr(item.id);
+                  setFilterVal(item.filter);
                 }}
                 style={[
                   styles.filterChip,
                   {
-                    backgroundColor: pressSr && !index ? '#F86A6A' : '#fff',
+                    backgroundColor: pressSr == item.id ? '#F86A6A' : '#fff',
                   },
                 ]}>
                 <View style={{marginRight: 10}}>{item.icon}</View>
@@ -154,7 +177,7 @@ const BrowseScreen = ({navigation}) => {
                   style={[
                     styles.filterChipText,
                     {
-                      color: pressSr && !index ? '#fff' : '#102A43',
+                      color: pressSr == item.id ? '#fff' : '#102A43',
                     },
                   ]}>
                   {item.filter}
@@ -169,9 +192,9 @@ const BrowseScreen = ({navigation}) => {
         <Text style={[styles.h3d2, {paddingTop: Spacing.small}]}>
           Popular Classes
         </Text>
-        {createClassCards(classesMockData, navigation)}
+        {createClassCards(filterClassData(values.className, filterVal, data), navigation)}
         <Text style={styles.h3d2}>All Classes</Text>
-        {createClassCards(classesMockData, navigation)}
+        {createClassCards(filterClassData(values.className, filterVal, data), navigation)}
       </ScrollView>
     </View>
   );
