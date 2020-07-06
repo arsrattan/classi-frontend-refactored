@@ -14,11 +14,11 @@ const InputBox = ({placeholderText, icon, value, onChange, name}) => {
   return (
     <View style={styles.writeCommentView}>
       {iconImage}
-      <TextInput 
-        value={value} 
-        onChange={(text) => handleChange(text, name)} 
+      <TextInput
+        value={value}
+        onChange={(text) => handleChange(text, name)}
         placeholder={placeholderText}
-       />
+      />
     </View>
   );
 };

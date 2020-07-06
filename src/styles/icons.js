@@ -1,6 +1,6 @@
 export const normal = {
-  height: 30,
-  width: 30,
+  height: 25,
+  width: 25,
 };
 
 export const small = {

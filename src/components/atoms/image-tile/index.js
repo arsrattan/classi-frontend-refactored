@@ -10,14 +10,14 @@ import {fontFamily, seeImg, loveImg} from '_assets';
 import {classesOverviewData} from '_utils';
 import styles from './styles';
 
-const ImageTile = (props) => {
+const ImageTile = ({navigation}) => {
   return (
     <View style={styles.tileContainer}>
       {classesOverviewData.map((item) => {
         return (
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate('Class', {
+              navigation.navigate('Class', {
                 classDetails: item,
                 isWatching: true,
               });

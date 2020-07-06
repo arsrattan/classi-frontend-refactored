@@ -6,9 +6,13 @@ import styles from './styles';
 import {Spacing} from '_styles';
 import {menuImg, shareImgDark, unregisterImg} from '_assets';
 
-export const SmallHortClassCard = ({navigation}) => {
+export const SmallHortClassCard = ({navigation, hasBackground}) => {
+  let cardBackground;
+  if (hasBackground) {
+    cardBackground = styles.cardBackground;
+  }
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity style={cardBackground} onPress={() => {}}>
       <View style={styles.flexRow}>
         <Image
           source={{uri: 'https://placebeard.it/640x360'}}
@@ -34,7 +38,14 @@ export const SmallHortClassCard = ({navigation}) => {
           ]}
         />
       </View>
-      <Divider color={Colors.grey} style={{marginVertical: Spacing.smaller}} />
+      {!hasBackground ? (
+        <Divider
+          color={Colors.grey}
+          style={{marginVertical: Spacing.smaller}}
+        />
+      ) : (
+        <View />
+      )}
     </TouchableOpacity>
   );
 };

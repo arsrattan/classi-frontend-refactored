@@ -5,6 +5,8 @@ const ProfileImg = ({userProfileImg, size, styles}) => {
   let imgSize;
   if (size === 'small') {
     imgSize = {height: 40, width: 40, borderRadius: 20};
+  } else if (size === 'multi-base') {
+    imgSize = {height: 45, width: 45, borderRadius: 45 / 2};
   } else if (size === 'medium') {
     imgSize = {height: 60, width: 60, borderRadius: 60 / 2};
   } else if (size === 'large') {
@@ -12,10 +14,7 @@ const ProfileImg = ({userProfileImg, size, styles}) => {
   }
 
   return (
-    <Image
-      source={{uri: userProfileImg}}
-      style={{...styles, ...imgSize}}
-    />
+    <Image source={{uri: userProfileImg}} style={{...styles, ...imgSize}} />
   );
 };
 
