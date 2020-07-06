@@ -21,9 +21,6 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
         <View style={styles.instructorTextContainer}>
           <Text style={styles.p1dark1}>{item.instructorUserId}</Text>
         </View>
-<<<<<<< HEAD
-        {/* <PopupMenu /> */}
-=======
         <PopupMenu
           icon={menuImg}
           options={[
@@ -31,7 +28,6 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
             <MenuTile icon={unregisterImg} text="Unregister class" />,
           ]}
         />
->>>>>>> master
       </View>
 
       <View style={styles.imageContainer}>

@@ -31,7 +31,6 @@ var postTypeText = function(type) {
 };
 
 const FeedPost = ({allComments, post, navigation}) => {
-  console.log(navigation);
   var checkIfLikedPost = function(userId, likes) {
     let res = false;
     for(let like of likes){

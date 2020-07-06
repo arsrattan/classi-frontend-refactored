@@ -10,10 +10,10 @@ const MedHortClassCard = ({navigation, classData}) => {
   console.log(classData);
   return (
     <TouchableOpacity style={styles.classContainer} onPress={() => {
-      navigation.navigate('Class', {classDetails: classData[0]});//fwefe
+      navigation.navigate('Class', {classDetails: classData[0]});
     }}>
       <Image
-        source={{uri: classData[0] != null ? classData[0].s3url : ''}}
+        source={{uri: classData[0] != null ? classData[0].class_image_url : ''}}
         style={styles.classPicture}
       />
       <View style={styles.textContainer}>

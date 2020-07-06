@@ -27,8 +27,8 @@ const FeedScreen = ({navigation}) => {
         <View style={styles.headerAndStatsContainer}>
           {/* Workout stats section
           
-          idk if we should include this in MVP
-          
+//left classes completed this week
+//right total classes completed          
           */}
 
           {/* <View style={styles.statsContainer}>

@@ -19,6 +19,7 @@ export const GetAllClasses = () => {
         requiredEquipment
         isPrivate
         comments
+        view_count
       }
     }
   `;
@@ -52,6 +53,7 @@ export const GetClass = (classId) => {
         requiredEquipment
         isPrivate
         comments
+        view_count
       }
     }
   `;

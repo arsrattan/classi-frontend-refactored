@@ -2,16 +2,11 @@ import React, {Component} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {gql} from 'apollo-boost';
-<<<<<<< HEAD
-import {FollowUser, GetCurrentUserId} from '../../../utils/backendServices/usersService';
-import {useMutation} from '@apollo/react-hooks';
-=======
 import {
   FollowUser,
   GetCurrentUserId,
 } from '../../../utils/backendServices/usersService';
 import {useMutation, useQuery, useLazyQuery} from '@apollo/react-hooks';
->>>>>>> master
 import {useEffect, useState} from 'react';
 
 const FollowButton = ({followedUser, isUnfollow, active}) => {
