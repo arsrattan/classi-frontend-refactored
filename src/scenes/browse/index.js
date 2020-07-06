@@ -29,25 +29,29 @@ import {GetAllClasses} from '../../utils/backendServices/classService';
 import {Spacing} from '_styles';
 
 const BrowseScreen = ({navigation}) => {
-
-  var filterClassData = function(textFilter, classType, classData) {
-    return classData == null ? [] : classData.filter(function(c) { 
-      return c.classType.indexOf(classType) != -1 && c.classType.indexOf(textFilter) != -1; 
-    })
+  var filterClassData = function (textFilter, classType, classData) {
+    return classData == null
+      ? []
+      : classData.filter(function (c) {
+          return (
+            c.classType.indexOf(classType) != -1 &&
+            c.classType.indexOf(textFilter) != -1
+          );
+        });
   };
 
   const {data, loading} = GetAllClasses();
   const [pressFr, setPressFr] = useState(-1);
   const [pressSr, setPressSr] = useState(-1);
-  const [filterVal, setFilterVal] = useState("");
+  const [filterVal, setFilterVal] = useState('');
   const [visible, setVisible] = useState(false);
-  const [values, setValues] = useState({className: ""});
+  const [values, setValues] = useState({className: ''});
 
   const handleChange = (newValue, name) => {
     console.log(newValue);
     console.log(name);
-    setValues(values => ({ ...values, [name]: newValue }));
-  }
+    setValues((values) => ({...values, [name]: newValue}));
+  };
 
   const buttonFr = [
     {
@@ -59,7 +63,7 @@ const BrowseScreen = ({navigation}) => {
       id: 1,
       filter: 'HIIT',
       icon: <Image source={girlImg} style={styles.iconNormal} />,
-    }
+    },
   ];
 
   const buttonSr = [
@@ -122,7 +126,7 @@ const BrowseScreen = ({navigation}) => {
               <TouchableOpacity
                 key={index}
                 onPress={() => {
-                  if(pressSr !== -1){
+                  if (pressSr !== -1) {
                     setPressSr(-1);
                   }
                   setPressFr(item.id);
@@ -160,7 +164,7 @@ const BrowseScreen = ({navigation}) => {
               <TouchableOpacity
                 key={index}
                 onPress={() => {
-                  if(pressFr !== -1){
+                  if (pressFr !== -1) {
                     setPressFr(-1);
                   }
                   setPressSr(item.id);
@@ -192,9 +196,15 @@ const BrowseScreen = ({navigation}) => {
         <Text style={[styles.h3d2, {paddingTop: Spacing.small}]}>
           Popular Classes
         </Text>
-        {createClassCards(filterClassData(values.className, filterVal, data), navigation)}
+        {createClassCards(
+          filterClassData(values.className, filterVal, data),
+          navigation,
+        )}
         <Text style={styles.h3d2}>All Classes</Text>
-        {createClassCards(filterClassData(values.className, filterVal, data), navigation)}
+        {createClassCards(
+          filterClassData(values.className, filterVal, data),
+          navigation,
+        )}
       </ScrollView>
     </View>
   );

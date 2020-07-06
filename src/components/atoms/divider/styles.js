@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   dividerView: {
     borderWidth: 1,
     borderColor: Colors.grey,
-    marginVertical: Spacing.base,
+    marginTop: Spacing.smaller,
   },
   dividerViewBase: {
     borderWidth: 1,

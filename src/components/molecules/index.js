@@ -4,3 +4,6 @@ export {default as MedHortClassCard} from './med-hort-class-card';
 export {default as PostCommentTile} from './post-comment-tile';
 export {default as RecommendedUsers} from './recommended-user-card';
 export {default as NotifTile} from './notif-tile';
+export {default as SmallHortClassCard} from './small-hort-class-card';
+export {default as InviteTile} from './invite-tile';
+export {default as MultiProfileImg} from './multi-profile-img';

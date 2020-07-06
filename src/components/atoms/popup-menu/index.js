@@ -3,8 +3,10 @@ import {View, Text, Alert, TouchableOpacity, Image} from 'react-native';
 import {Tooltip} from 'react-native-elements';
 import {menuImg, unregisterImg, shareImgDark} from '_assets';
 import styles from './styles';
+import {Icons} from '_styles';
+import MenuTile from '../menu-tile';
 
-const PopoverMenu = () => {
+const PopupMenu = ({icon, options}) => {
   return (
     <View style={styles.popupContainer}>
       <Tooltip
@@ -13,28 +15,11 @@ const PopoverMenu = () => {
         toggleOnPress={true}
         containerStyle={styles.tooltipStyle}
         popover={
-          <View style={styles.optionsContainer}>
-            <TouchableOpacity
-              onPress={() => {
-                Alert.alert('Shared');
-              }}
-              style={styles.optionTile}>
-              <Image source={shareImgDark} style={styles.icon} />
-              <Text style={styles.p1dark1}>Share Class</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                Alert.alert('Unregistered');
-              }}
-              style={styles.optionTile}>
-              <Image source={unregisterImg} style={styles.icon} />
-              <Text style={styles.p1accent1}>Unregister Class</Text>
-            </TouchableOpacity>
-          </View>
+          <View style={styles.optionsContainer}>{options.map((x) => x)}</View>
         }>
-        <Image source={menuImg} style={styles.icon} />
+        <Image source={icon} style={Icons.small} />
       </Tooltip>
     </View>
   );
 };
-export default PopoverMenu;
+export default PopupMenu;
