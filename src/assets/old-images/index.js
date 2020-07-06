@@ -23,6 +23,7 @@ export const createPostBttnImg = require('./CreatePost.png');
 export const celebrateEmojiImg = require('./CelebrateEmoji.png');
 export const recorderEmojiImg = require('./RecorderEmoji.png');
 export const likeBttnImg = require('./LikeButton.png');
+export const likedBttnImg = require('./LikedButton.png');
 export const commentBttnImg = require('./CommentButton.png');
 export const shareBttnImg = require('./ShareButton.png');
 

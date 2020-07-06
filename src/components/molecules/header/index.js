@@ -17,15 +17,15 @@ const Header = ({navigation, headerStyle, text, accentText, writePost}) => {
     notifIcon = notificationImg;
   }
   if (writePost === true) {
-    writePostIcon = (
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('WritePost');
-        }}
-        style={styles.postIconStyle}>
-        <Image source={createPostBttnImg} style={styles.normalIcon} />
-      </TouchableOpacity>
-    );
+    // writePostIcon = (
+    //   <TouchableOpacity
+    //     onPress={() => {
+    //       navigation.navigate('WritePost');
+    //     }}
+    //     style={styles.postIconStyle}>
+    //     <Image source={createPostBttnImg} style={styles.normalIcon} />
+    //   </TouchableOpacity>
+    // );
   }
 
   return (
