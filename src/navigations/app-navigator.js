@@ -32,7 +32,9 @@ const AppNavigator = () => (
       component={HomeScreen}
       options={{
         tabBarLabel: 'Home',
-        tabBarIcon: ({color}) => <Image source={homeImg} style={styles.iconNormal}/>,
+        tabBarIcon: ({color}) => (
+          <Image source={homeImg} style={styles.iconNormal} />
+        ),
       }}
     />
     <Tab.Screen
@@ -40,7 +42,9 @@ const AppNavigator = () => (
       component={BrowseScreen}
       options={{
         tabBarLabel: 'Browse',
-        tabBarIcon: ({color}) => <Image source={browseImg} style={styles.iconNormal}/>,
+        tabBarIcon: ({color}) => (
+          <Image source={browseImg} style={styles.iconNormal} />
+        ),
       }}
     />
     <Tab.Screen
@@ -57,7 +61,7 @@ const AppNavigator = () => (
               shadowOpacity: 0.2,
               shadowOffset: {height: 8, width: 0},
             }}>
-            <Image source={addImg} style={styles.iconNormal}/>
+            <Image source={addImg} style={styles.iconNormal} />
           </View>
         ),
       }}
@@ -67,7 +71,9 @@ const AppNavigator = () => (
       component={FeedScreen}
       options={{
         tabBarLabel: 'Feed',
-        tabBarIcon: ({color}) => <Image source={feedIconImg} style={styles.iconNormal}/>,
+        tabBarIcon: ({color}) => (
+          <Image source={feedIconImg} style={styles.iconNormal} />
+        ),
       }}
     />
     <Tab.Screen name="Messages" component={MessagesScreen} />

@@ -1,7 +1,14 @@
 import {StyleSheet} from 'react-native';
-import {Spacing} from '_styles';
+import {Spacing, Colors} from '_styles';
 
 const styles = StyleSheet.create({
+  cardBackground: {
+    backgroundColor: Colors.lightGrey,
+    borderWidth: 1,
+    borderColor: 'rgba(161, 174, 183, 0.1)',
+    borderRadius: 10,
+    padding: Spacing.smaller,
+  },
   flexRow: {
     flexDirection: 'row',
   },

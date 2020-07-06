@@ -17,11 +17,9 @@ import styles from './styles';
 import {Colors, Typography, Spacing} from '_styles';
 import AsyncStorage from '@react-native-community/async-storage';
 
-
 const Tab = createMaterialTopTabNavigator();
 
 const SignupTab = ({navigation}) => {
-
   function validate(values) {
     let errors = {};
     if (!values.email) {
@@ -31,8 +29,13 @@ const SignupTab = ({navigation}) => {
     }
     if (!values.password) {
       errors.password = 'Password is required!';
-    } else if (!/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(values.password)) {
-      errors.password = 'Password must be at least 8 letters, contain a symbol, upper and lower case letter, and a number!';
+    } else if (
+      !/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(
+        values.password,
+      )
+    ) {
+      errors.password =
+        'Password must be at least 8 letters, contain a symbol, upper and lower case letter, and a number!';
     }
     if (!values.firstName) {
       errors.firstName = 'First name is required!';
@@ -47,10 +50,11 @@ const SignupTab = ({navigation}) => {
     if (!values.userId) {
       errors.userId = 'Username is required!';
     } else if (!/^\w+$/.test(values.userId)) {
-      errors.userId = 'Username must contain only letters, numbers and underscores!';
+      errors.userId =
+        'Username must contain only letters, numbers and underscores!';
     }
     return errors;
-  };
+  }
 
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -59,9 +63,9 @@ const SignupTab = ({navigation}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (newValue, name) => {
-    setValues(values => ({ ...values, [name]: newValue }));
-  }
-  
+    setValues((values) => ({...values, [name]: newValue}));
+  };
+
   const showDatePicker = () => {
     const newStatus = !show;
     setShow(newStatus);
@@ -80,14 +84,16 @@ const SignupTab = ({navigation}) => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      registerUser().then(({data}) => {
-        if(data.registerUser == true){
-          navigation.navigate('Home');
-        }
-      }).catch(e => {
-        errors.register = e.message.split(': ')[1];
-        setIsSubmitting(false); 
-      });
+      registerUser()
+        .then(({data}) => {
+          if (data.registerUser == true) {
+            navigation.navigate('Home');
+          }
+        })
+        .catch((e) => {
+          errors.register = e.message.split(': ')[1];
+          setIsSubmitting(false);
+        });
     }
   }, [errors, data, error, loading]);
 
@@ -96,12 +102,14 @@ const SignupTab = ({navigation}) => {
       registerUser(data: $data)
     }
   `;
-  const [registerUser, {data, loading, error}] = useMutation(REGISTER_USER, {variables: {data: values}});
+  const [registerUser, {data, loading, error}] = useMutation(REGISTER_USER, {
+    variables: {data: values},
+  });
 
   const handleSubmit = () => {
-    const errs = validate(values)
+    const errs = validate(values);
     setErrors(errs);
-    setIsSubmitting(true); 
+    setIsSubmitting(true);
   };
 
   return (
@@ -111,41 +119,41 @@ const SignupTab = ({navigation}) => {
           Join Classi
         </Text>
         <Text style={[Typography.p2danger]}>{errors.register}</Text>
-        <InputField 
-          label="Email" 
+        <InputField
+          label="Email"
           placeholderText="user@email.com"
           value={values.email || ''}
           onChange={handleChange}
           name={'email'}
-          />
+        />
         <Text style={[Typography.p2danger]}>{errors.email}</Text>
-        <InputField 
-          label="First Name" 
+        <InputField
+          label="First Name"
           placeholderText="John"
           value={values.firstName || ''}
-          onChange={handleChange} 
+          onChange={handleChange}
           name={'firstName'}
-          />
+        />
         <Text style={[Typography.p2danger]}>{errors.firstName}</Text>
-        <InputField 
-          label="Last Name" 
+        <InputField
+          label="Last Name"
           placeholderText="Doe"
           value={values.lastName || ''}
           onChange={handleChange}
           name={'lastName'}
-           />
+        />
         <Text style={[Typography.p2danger]}>{errors.lastName}</Text>
-        <InputField 
-          label="Username" 
-          placeholderText="classi123" 
+        <InputField
+          label="Username"
+          placeholderText="classi123"
           value={values.userId || ''}
           onChange={handleChange}
           name={'userId'}
-          />
+        />
         <Text style={[Typography.p2danger]}>{errors.userId}</Text>
         <InputField
-          label="Password" 
-          placeholderText="********" 
+          label="Password"
+          placeholderText="********"
           value={values.password || ''}
           onChange={handleChange}
           name={'password'}
@@ -177,31 +185,33 @@ const LoginTab = ({navigation}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (newValue, name) => {
-    setValues(values => ({ ...values, [name]: newValue }));
-  }
+    setValues((values) => ({...values, [name]: newValue}));
+  };
 
   const handleSubmit = () => {
-    setIsSubmitting(true); 
+    setIsSubmitting(true);
   };
 
   useEffect(() => {
     if (isSubmitting) {
-      loginUser({variables: {email: values.email, password: values.password}}).then(({data}) => {
-        if(data.login != null){
-          AsyncStorage.setItem('AUTH_TOKEN', data.login.accessToken);
-          AsyncStorage.setItem('USER_ID', data.login.userId);
-          navigation.navigate('Home');
-        }
-      }).catch(e => {
-        errors.login = e.message.split(': ')[1];
-        setIsSubmitting(false); 
-      });
+      loginUser({variables: {email: values.email, password: values.password}})
+        .then(({data}) => {
+          if (data.login != null) {
+            AsyncStorage.setItem('AUTH_TOKEN', data.login.accessToken);
+            AsyncStorage.setItem('USER_ID', data.login.userId);
+            navigation.navigate('Home');
+          }
+        })
+        .catch((e) => {
+          errors.login = e.message.split(': ')[1];
+          setIsSubmitting(false);
+        });
     }
   }, [isSubmitting, errors, data, error, loading]);
 
   const LOGIN_USER = gql`
     mutation Login($email: String!, $password: String!) {
-      login(email: $email, password: $password){
+      login(email: $email, password: $password) {
         accessToken
         userId
       }
@@ -223,9 +233,9 @@ const LoginTab = ({navigation}) => {
           value={values.email || ''}
           name={'email'}
         />
-        <InputField 
-          label="Password" 
-          placeholderText="********" 
+        <InputField
+          label="Password"
+          placeholderText="********"
           onChange={handleChange}
           value={values.password || ''}
           name={'password'}

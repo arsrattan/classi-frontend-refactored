@@ -12,38 +12,36 @@ import styles from './styles';
 import {crossImg, menuImg} from '_assets';
 import {NotifTile} from '_molecules';
 import {Icons, Spacing, Typography} from '_styles';
-import {GetUserNotifications, GetCurrentUserId, GetUserFollowing} from '../../utils/backendServices/usersService';
+import {
+  GetUserNotifications,
+  GetCurrentUserId,
+  GetUserFollowing,
+} from '../../utils/backendServices/usersService';
 
 moment().format();
 
-var notificationText = function(type) {
+var notificationText = function (type) {
   let text = '';
-  if(type == 'New_Follower'){
+  if (type == 'New_Follower') {
     text = 'started following you';
-  }
-  else if(type == 'New_Class_Comment'){
+  } else if (type == 'New_Class_Comment') {
     text = 'commented on your class';
-  }
-  else if(type == 'New_Post_Comment'){
+  } else if (type == 'New_Post_Comment') {
     text = 'commented on your post';
-  }
-  else if(type == 'New_Class_Like'){
+  } else if (type == 'New_Class_Like') {
     text = 'liked your class';
-  }
-  else if(type == 'New_Post_Like'){
+  } else if (type == 'New_Post_Like') {
     text = 'liked your post';
-  }
-  else if(type == 'New_Class_Registration'){
+  } else if (type == 'New_Class_Registration') {
     text = 'signed up for you class';
   }
   return text;
 };
 
-
-var checkIfFollowingUser = function(userId, followingData) {
+var checkIfFollowingUser = function (userId, followingData) {
   let res = false;
-  for(let follower of followingData){
-    if(follower.userId == userId){
+  for (let follower of followingData) {
+    if (follower.userId == userId) {
       res = true;
     }
   }
@@ -69,21 +67,19 @@ const NotificationsScreen = ({navigation}) => {
           <Image source={menuImg} style={Icons.normal} />
         </TouchableOpacity>
       </View>
-      {
-        notificationData.map((item) => {
-          const timeAgo = moment(parseInt(item.createdAt)).fromNow();
-          return (
-            <NotifTile
-              user={item.triggeringUserId}
-              action={notificationText(item.notificationType)}
-              date={timeAgo}
-              isFollow={item.notificationType == 'New_Follower'}
-              imageUrl={item.triggeringUserS3Url}
-              active={checkIfFollowingUser(item.triggeringUserId, followingData)}
-            />
-          );
-        })
-      }
+      {notificationData.map((item) => {
+        const timeAgo = moment(parseInt(item.createdAt)).fromNow();
+        return (
+          <NotifTile
+            user={item.triggeringUserId}
+            action={notificationText(item.notificationType)}
+            date={timeAgo}
+            isFollow={item.notificationType == 'New_Follower'}
+            imageUrl={item.triggeringUserS3Url}
+            active={checkIfFollowingUser(item.triggeringUserId, followingData)}
+          />
+        );
+      })}
     </ScrollView>
   );
 };

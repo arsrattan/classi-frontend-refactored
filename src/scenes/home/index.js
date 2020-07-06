@@ -8,7 +8,6 @@ import {createClassCards} from '_utils';
 import {GetAllClasses} from '../../utils/backendServices/classService';
 import AsyncStorage from '@react-native-community/async-storage';
 
-
 const HomeScreen = ({navigation}) => {
   const {data, loading} = GetAllClasses();
   const [state, setState] = useState({tokenData: null});
@@ -16,7 +15,7 @@ const HomeScreen = ({navigation}) => {
     const asyncFetchToken = async () => {
       const res = await AsyncStorage.getItem('USER_ID');
       setState(res);
-    }
+    };
     asyncFetchToken();
   }, [state]);
   return (
@@ -27,7 +26,7 @@ const HomeScreen = ({navigation}) => {
           navigation={navigation}
           headerStyle="dark"
           text="Welcome back,"
-          accentText={state == null ? "" : state.tokenData}
+          accentText={state == null ? '' : state.tokenData}
           writePost={false}
         />
       </View>
@@ -50,7 +49,7 @@ const HomeScreen = ({navigation}) => {
               <Image style={styles.icon} source={arrowImg} />
             </View>
           </View>
-          <ImageTile props={navigation} />
+          <ImageTile navigation={navigation} />
         </View>
       </ScrollView>
     </View>

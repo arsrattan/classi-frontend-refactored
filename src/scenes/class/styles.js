@@ -42,6 +42,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.base,
     backgroundColor: Colors.white,
   },
+  schedulerTimeContainer: {
+    paddingTop: Spacing.base,
+    flexDirection: 'row',
+  },
+  scheduleTimeInput: {
+    width: '35%',
+    marginRight: Spacing.largest,
+  },
   classTimeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -77,7 +85,7 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.small,
   },
   registerButton: {
-    marginTop: Spacing.base,
+    marginTop: Spacing.small,
     paddingVertical: Spacing.smaller,
     backgroundColor: Colors.andromeda,
     borderRadius: 22,
@@ -140,6 +148,14 @@ const styles = StyleSheet.create({
     marginTop: Spacing.small,
     flexDirection: 'row',
     width: '85%',
+  },
+  invitedFriendsContainer: {
+    marginTop: Spacing.smallest,
+  },
+  invitedFriendName: {
+    ...Typography.p1,
+    color: Colors.aquarius,
+    marginLeft: Spacing.small,
   },
 });
 

@@ -4,7 +4,16 @@ import styles from './styles';
 import {Typography, Colors} from '_styles';
 import {Icons, Spacing} from '_styles';
 
-const Button = ({text, type, icon, color, style, navigation, screen, onPress}) => {
+const Button = ({
+  text,
+  type,
+  icon,
+  color,
+  style,
+  navigation,
+  screen,
+  onPress,
+}) => {
   let buttonStyle;
   let textStyle;
   if (type === 'PrimaryRound') {
@@ -30,6 +39,15 @@ const Button = ({text, type, icon, color, style, navigation, screen, onPress}) =
       ...styles.postButtonPadding,
     };
     textStyle = {...Typography.p1, color: Colors.andromeda};
+  } else if (type === 'TertiaryRound') {
+    buttonStyle = {
+      backgroundColor: Colors.lightGrey,
+      borderColor: 'rgba(161, 174, 183, 0.1)',
+      borderWidth: 1,
+      borderRadius: 25,
+      ...styles.postButtonPadding,
+    };
+    textStyle = {...Typography.p1, color: Colors.aries};
   } else {
     buttonStyle = {
       backgroundColor: color,
@@ -43,10 +61,9 @@ const Button = ({text, type, icon, color, style, navigation, screen, onPress}) =
     <TouchableOpacity
       style={{...buttonStyle, ...style}}
       onPress={() => {
-        if(onPress !== undefined){
+        if (onPress !== undefined) {
           onPress();
-        }
-        else {
+        } else {
           navigation.navigate(screen);
         }
       }}>
