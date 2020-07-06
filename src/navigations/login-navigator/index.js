@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import {useMutation, useQuery, useLazyQuery} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import DateTimePicker from '@react-native-community/datetimepicker';

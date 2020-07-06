@@ -47,7 +47,7 @@ const ClassScreen = ({navigation, route}) => {
             resizeMode="cover"
             style={styles.classImage}
             source={{
-              uri: classDetails.s3url,
+              uri: classDetails.class_image_url,
             }}>
             <View style={styles.onImageContainer}>
               <TouchableOpacity
@@ -70,8 +70,8 @@ const ClassScreen = ({navigation, route}) => {
               style={[
                 Typography.p1d2,
               ]}>{`by ${classDetails.instructorUserId}`}</Text>
-            <View style={styles.classTimeContainer}>
-              <View style={styles.classTime}>
+            <View style={styles.classTimeContainer}> 
+              {/* <View style={styles.classTime}>
                 <Image source={calendarImg} style={styles.iconSpace} />
                 <Text style={Typography.p1d2}>
                   {date.getDate()} {month} {date.getFullYear()}
@@ -85,11 +85,11 @@ const ClassScreen = ({navigation, route}) => {
                     minute: '2-digit',
                   })}
                 </Text>
-              </View>
-              <View style={styles.classTime}>
+              </View> */}
+              {/* <View style={styles.classTime}>
                 <Dot color={Colors.livePink} size="large" />
                 <Text style={styles.liveNowText}>Live Now</Text>
-              </View>
+              </View> */}
             </View>
             <View style={styles.registeredUserView}>
               <ProfileImg size="small" />
@@ -98,7 +98,7 @@ const ClassScreen = ({navigation, route}) => {
               <Text style={Typography.p1d2}>
                 {classDetails.registeredUsers == null
                   ? '0 users registered'
-                  : classDetails.registeredUsers.length + 'users registered'}
+                  : classDetails.registeredUsers.length + ' users registered'}
               </Text>
             </View>
             {isWatching ? (
@@ -136,19 +136,19 @@ const ClassScreen = ({navigation, route}) => {
             <Text style={Typography.h3d1}>Instructor</Text>
             <View style={styles.instructorViewContainer}>
               <View style={styles.containerFlexRow}>
-                <ProfileImg userProfileImg={classDetails.users3url} size="small" />
+                <ProfileImg userProfileImg={classDetails.channel_thumbnail_url} size="small" />
                 <View style={styles.instructorNameContainer}>
                   <Text style={[Typography.p1d2]}>
-                    {data[0].firstName} {data[0].lastName}
+                    {classDetails.instructorUserId}
                   </Text>
                   <View style={styles.containerFlexRow}>
-                    <Text style={Typography.p2d2}>About me</Text>
-                    <Dot color={Colors.aquarius} size="base" />
-                    <Text style={Typography.p2d2}>{followersData.length} followers</Text>
+                    {/* <Text style={Typography.p2d2}>About me</Text>
+                    <Dot color={Colors.aquarius} size="base" /> */}
+                    <Text style={Typography.p2d2}>{data[0] == null ? '' : followersData.length + 'followers'}</Text>
                   </View>
                 </View>
               </View>
-              <FollowButton followedUser={classDetails.instructorUserId} isUnfollow={false} />
+              {/* <FollowButton followedUser={classDetails.instructorUserId} isUnfollow={false} /> */}
             </View>
           </View>
           <View style={styles.sectionContainer}>

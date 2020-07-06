@@ -3,7 +3,7 @@ import {Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {gql} from 'apollo-boost';
 import {FollowUser, GetCurrentUserId} from '../../../utils/backendServices/usersService';
-import {useMutation, useQuery, useLazyQuery} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/react-hooks';
 import {useEffect, useState} from 'react';
 
 

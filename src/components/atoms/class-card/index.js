@@ -15,36 +15,36 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
       }}
       style={[styles.cardContainer, {style}]}>
       <View style={styles.cardHeader}>
-        <ProfileImg userProfileImg={item.users3url} size="small" />
+        <ProfileImg userProfileImg={item.channel_thumbnail_url} size="small" />
         <View style={styles.instructorTextContainer}>
           <Text style={styles.p1dark1}>{item.instructorUserId}</Text>
         </View>
-        <PopupMenu />
+        {/* <PopupMenu /> */}
       </View>
 
       <View style={styles.imageContainer}>
         <ImageBackground
           source={{
-            uri: item.s3url,
+            uri: item.class_image_url,
           }}
           style={styles.image}
           resizeMode={'cover'}>
-          <View style={styles.tagContainer}>
+          {/* <View style={styles.tagContainer}>
             <Tag color={Colors.aquarius} text={item.expectedDuration} />
             {showLive && <Tag color={Colors.livePink} text="Live" />}
-          </View>
-          <View style={styles.dateTag}>
+          </View> */}
+          {/* <View style={styles.dateTag}>
             <Text style={styles.date}>{date.getDate()}</Text>
             <Text style={styles.month}>{month}</Text>
-          </View>
+          </View> */}
         </ImageBackground>
       </View>
       <View style={styles.classDetailContainer}>
-        <Text style={styles.classNameText}>{item.className}</Text>
+        <Text style={styles.classNameText}>{item.className.replace(/(.{30})..+/, "$1...")}</Text>
         <Text style={styles.scheduledTime}>
           {item.registeredUsers == null
             ? '0 users registered'
-            : item.registeredUsers.length + 'users registered'}
+            : item.registeredUsers.length + ' users registered'}
         </Text>
       </View>
     </TouchableOpacity>
