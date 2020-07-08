@@ -7,7 +7,9 @@ const MenuTile = ({icon, text, navigation, screen}) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate(screen);
+        if(screen !=  null){
+          navigation.navigate(screen);
+        }
       }}
       style={styles.optionTile}>
       <Image
