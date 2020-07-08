@@ -10,6 +10,7 @@ import {
   HomeScreen,
   LiveScreen,
   MessagesScreen,
+  LoginScreen
 } from '_scenes';
 
 const Tab = createBottomTabNavigator();
@@ -47,7 +48,7 @@ const AppNavigator = () => (
         ),
       }}
     />
-    <Tab.Screen
+    {/* <Tab.Screen
       name="Live"
       component={LiveScreen}
       options={{
@@ -65,7 +66,7 @@ const AppNavigator = () => (
           </View>
         ),
       }}
-    />
+    /> */}
     <Tab.Screen
       name="Feed"
       component={FeedScreen}
@@ -76,7 +77,7 @@ const AppNavigator = () => (
         ),
       }}
     />
-    <Tab.Screen name="Messages" component={MessagesScreen} />
+    {/* <Tab.Screen name="Messages" component={MessagesScreen} /> */}
   </Tab.Navigator>
 );
 
