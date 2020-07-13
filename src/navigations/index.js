@@ -15,6 +15,10 @@ import {
   ProfileScreen,
   EditProfileScreen,
   InviteScreen,
+  GroupsHomeScreen,
+  GroupDetailsScreen,
+  CreateGroupScreen,
+  GroupMembersScreen,
 } from '_scenes';
 
 const Stack = createStackNavigator();
@@ -22,7 +26,7 @@ const Stack = createStackNavigator();
 const Navigator = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false, gestureEnabled: false}}
-    initialRouteName="Home">
+    initialRouteName="Login">
     <Stack.Screen name="Home" component={AppNavigator} />
     <Stack.Screen name="Class" component={ClassScreen} />
     <Stack.Screen name="Registered" component={RegisteredScreen} />
@@ -36,6 +40,10 @@ const Navigator = () => (
     <Stack.Screen name="Profile" component={ProfileScreen} />
     <Stack.Screen name="EditProfile" component={EditProfileScreen} />
     <Stack.Screen name="InviteScreen" component={InviteScreen} />
+    <Stack.Screen name="GroupsScreen" component={GroupsHomeScreen} />
+    <Stack.Screen name="GroupDetailsScreen" component={GroupDetailsScreen} />
+    <Stack.Screen name="CreateGroupScreen" component={CreateGroupScreen} />
+    <Stack.Screen name="GroupMembersScreen" component={GroupMembersScreen} />
   </Stack.Navigator>
 );
 

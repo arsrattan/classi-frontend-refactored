@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   KeyboardAvoidingView,
+  TextInput,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import CalendarPicker from 'react-native-calendar-picker';
@@ -40,7 +41,6 @@ import {
   GetUser,
   GetUserFollowers,
 } from '../../utils/backendServices/usersService';
-import {TextInput} from 'react-native-gesture-handler';
 
 const ClassScreen = ({navigation, route}) => {
   const {classDetails, isLive} = route.params;
@@ -80,6 +80,7 @@ const ClassScreen = ({navigation, route}) => {
     }, 0);
   };
 
+  /* These were used to keep track of who was added to a group, but that should just be a backend call
   const [inviteList, setInvitedList] = useState([]);
 
   const addToList = (name) => {
@@ -87,6 +88,7 @@ const ClassScreen = ({navigation, route}) => {
     newInviteList.push(name);
     setInvitedList(newInviteList);
   };
+  */
 
   if (!loading && !followersLoading) {
     const comments = classDetails.comments == null ? [] : classDetails.comments;
@@ -197,8 +199,9 @@ const ClassScreen = ({navigation, route}) => {
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('InviteScreen', {
+                  /*
                   invitedList: inviteList,
-                  addToList: addToList,
+                  addToList: addToList,*/
                 });
               }}
               style={{marginTop: Spacing.smallest}}>

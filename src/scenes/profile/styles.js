@@ -1,5 +1,4 @@
 import {StyleSheet, Platform} from 'react-native';
-import {fontFamily} from '_assets';
 import {Typography, Icons, Spacing, Colors} from '_styles';
 
 const styles = StyleSheet.create({
@@ -51,33 +50,6 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.small,
   },
 
-  userName: {
-    color: '#102A43',
-    fontSize: 19,
-    lineHeight: 24,
-    fontWeight: 'bold',
-    fontFamily: fontFamily.book,
-  },
-  bio: {
-    paddingTop: 6,
-    fontSize: 15,
-    lineHeight: 19,
-    color: '#334E68',
-    fontFamily: fontFamily.book,
-  },
-  boldNumber: {
-    fontSize: 17,
-    lineHeight: 22,
-    fontWeight: 'bold',
-    fontFamily: fontFamily.book,
-    color: '#334E68',
-  },
-  followerText: {
-    fontSize: 15,
-    lineHeight: 19,
-    fontFamily: fontFamily.book,
-    color: '#334E68',
-  },
   editProfileBtn: {
     marginTop: 16,
     height: 41,
@@ -87,13 +59,6 @@ const styles = StyleSheet.create({
     borderRadius: 48,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  editProfileText: {
-    fontFamily: fontFamily.book,
-    fontSize: 13,
-    lineHeight: 16,
-    textAlign: 'center',
-    color: '#F86A6A',
   },
 
   dividerView: {
@@ -107,15 +72,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  activityText: {
-    fontFamily: fontFamily.book,
-    fontSize: 15,
-    lineHeight: 22,
-    textAlign: 'center',
-    letterSpacing: -0.3,
-    color: '#334E68',
-    fontWeight: 'bold',
-  },
   dropDown: {
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -124,48 +80,6 @@ const styles = StyleSheet.create({
     width: 121,
     borderRadius: 5,
     flexDirection: 'row',
-  },
-  upcomingAndSaved: {
-    fontWeight: '500',
-    fontSize: 17,
-    lineHeight: 22,
-    letterSpacing: -0.3,
-    color: '#102A43',
-    fontFamily: fontFamily.book,
-    paddingLeft: 16,
-  },
-  yourPost: {
-    fontWeight: '500',
-    fontSize: 17,
-    lineHeight: 22,
-    letterSpacing: -0.3,
-    color: '#102A43',
-    fontFamily: fontFamily.book,
-    paddingTop: 16,
-    paddingLeft: 16,
-  },
-  showAll: {
-    fontSize: 15,
-    lineHeight: 19,
-    fontFamily: fontFamily.book,
-    letterSpacing: -0.3,
-    color: '#3A5CDB',
-    textDecorationLine: 'underline',
-  },
-  classTitle: {
-    fontWeight: 'bold',
-    color: '#102A43',
-    fontSize: 15,
-    lineHeight: 19,
-    fontFamily: fontFamily.book,
-  },
-  dateAndTime: {
-    color: 'rgba(51, 78, 104, 0.8)',
-    fontSize: 11,
-    lineHeight: 14,
-    fontFamily: fontFamily.book,
-    letterSpacing: 0.5,
-    textTransform: 'uppercase',
   },
   seprationLine: {
     borderWidth: 1,
@@ -180,14 +94,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 12,
     paddingTop: 2,
-  },
-  aboutMeText: {
-    fontWeight: 'bold',
-    color: '#334E68',
-    lineHeight: 19,
-    fontSize: 15,
-    letterSpacing: -0.3,
-    fontFamily: fontFamily.book,
   },
 });
 

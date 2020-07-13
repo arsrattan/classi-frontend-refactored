@@ -1,8 +1,9 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {Image, View} from 'react-native';
-import {addImg, browseImg, feedIconImg, homeImg} from '_assets';
+import {addImg, browseImg, feedIconImg, homeImg, groupsImg} from '_assets';
 import styles from './styles';
+import {Icons} from '_styles';
 
 import {
   BrowseScreen,
@@ -10,6 +11,7 @@ import {
   HomeScreen,
   LiveScreen,
   MessagesScreen,
+  GroupsHomeScreen,
 } from '_scenes';
 
 const Tab = createBottomTabNavigator();
@@ -43,7 +45,7 @@ const AppNavigator = () => (
       options={{
         tabBarLabel: 'Browse',
         tabBarIcon: ({color}) => (
-          <Image source={browseImg} style={styles.iconNormal} />
+          <Image source={browseImg} style={Icons.normal} />
         ),
       }}
     />
@@ -76,7 +78,16 @@ const AppNavigator = () => (
         ),
       }}
     />
-    <Tab.Screen name="Messages" component={MessagesScreen} />
+    <Tab.Screen
+      name="Groups"
+      component={GroupsHomeScreen}
+      options={{
+        tabBarLabel: 'Groups',
+        tabBarIcon: ({color}) => (
+          <Image source={groupsImg} style={styles.iconNormal} />
+        ),
+      }}
+    />
   </Tab.Navigator>
 );
 

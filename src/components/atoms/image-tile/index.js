@@ -6,7 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {fontFamily, seeImg, loveImg} from '_assets';
+import {seeImg, loveImg} from '_assets';
 import {classesOverviewData} from '_utils';
 import styles from './styles';
 

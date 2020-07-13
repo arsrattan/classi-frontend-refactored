@@ -3,10 +3,11 @@ import {View, Text, StatusBar, ScrollView, Image, FlatList} from 'react-native';
 import styles from './styles';
 import {Header} from '_molecules';
 import {ImageTile} from '_atoms';
-import {cameraImg, arrowImg} from '_assets';
+import {cameraImg, arrowImg, avatarImg, notificationImg} from '_assets';
 import {createClassCards} from '_utils';
 import {GetAllClasses} from '../../utils/backendServices/classService';
 import AsyncStorage from '@react-native-community/async-storage';
+import {Colors, Spacing, Typography} from '_styles';
 
 const HomeScreen = ({navigation}) => {
   const {data, loading} = GetAllClasses();
@@ -20,19 +21,40 @@ const HomeScreen = ({navigation}) => {
   }, [state]);
   return (
     <View style={styles.homeContainer}>
-      {StatusBar.setBarStyle('light-content', true)}
       <View style={styles.headerContainer}>
         <Header
           navigation={navigation}
-          headerStyle="dark"
-          text="Welcome back,"
-          accentText={state == null ? '' : state.tokenData}
+          backgroundColor={Colors.aquarius}
+          text={
+            <Text
+              style={{
+                ...Typography.p1,
+                ...Typography.bold,
+                color: Colors.white,
+              }}>
+              Welcome back
+              <Text style={{color: Colors.andromeda}}>
+                {state == null ? '' : state.tokenData}
+              </Text>
+            </Text>
+          }
           writePost={false}
+          leftIcon={avatarImg}
+          onPressLeftIcon={() => {
+            navigation.navigate('Profile');
+          }}
+          rightIcon={notificationImg}
+          onPressRightIcon={() => {
+            navigation.navigate('Notifications');
+          }}
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
         <View style={styles.topSectionContainer}>
-          <Text style={styles.lightSectionHeader}>Your Next Live Classes</Text>
+          <Text
+            style={{...styles.lightSectionHeader, paddingTop: Spacing.base}}>
+            Your Next Live Classes
+          </Text>
           {createClassCards(data, navigation)}
         </View>
         <View style={styles.lightBackgroundContainer}>

@@ -16,7 +16,7 @@ const MultiProfileImg = ({userList, propStyles}) => {
         <ProfileImg
           size="small"
           userProfileImg="https://classi-profile-pictures.s3.us-east-2.amazonaws.com/Screen+Shot+2020-06-17+at+00.16.41.png"
-          styles={{left: -15 * i, borderWidth: 3, borderColor: 'white'}}
+          style={{left: -15 * i, borderWidth: 3, borderColor: 'white'}}
         />,
       );
       if (i !== numUsers - 1) {
@@ -38,16 +38,19 @@ const MultiProfileImg = ({userList, propStyles}) => {
         <ProfileImg
           size="small"
           userProfileImg="https://classi-profile-pictures.s3.us-east-2.amazonaws.com/Screen+Shot+2020-06-17+at+00.16.41.png"
-          styles={{left: -15 * i, borderWidth: 3, borderColor: 'white'}}
+          style={{left: -15 * i, borderWidth: 3, borderColor: 'white'}}
         />,
       );
       userNamesList.push(userID + ', ');
     }
     profileImgList.push(
       <View style={styles.numProfilesCircle}>
-        <Text style={{...Typography.p2, color: Colors.white}}>
-          {numUsers - 3 + ' +'}
-        </Text>
+        <View style={styles.insideCircle}>
+          <Text
+            style={{...Typography.p2, color: Colors.white, ...Typography.bold}}>
+            {numUsers - 3 + ' +'}
+          </Text>
+        </View>
       </View>,
     );
     userNamesList.push('+' + (numUsers - 3) + ' more');

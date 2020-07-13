@@ -15,7 +15,7 @@ const RecommendedUsers = () => {
         renderItem={({item}) => {
           return (
             <TouchableOpacity style={[styles.feedCard]}>
-              <ProfileImg size="medium" styles={styles.feedCardImage} />
+              <ProfileImg size="medium" style={styles.feedCardImage} />
               <Text style={styles.instructorName}>{item.instructor}</Text>
               <Text style={styles.tagAndText}>{item.tag}</Text>
               <View style={styles.rowContainer}>
@@ -27,7 +27,11 @@ const RecommendedUsers = () => {
                 <Text style={styles.tagAndText}>{` of Classes`}</Text>
               </View>
               <View style={styles.followButtonContainer}>
-                <FollowButton followedUser={item.instructor} isUnfollow={false} follow/>
+                <FollowButton
+                  followedUser={item.instructor}
+                  isUnfollow={false}
+                  follow
+                />
               </View>
             </TouchableOpacity>
           );

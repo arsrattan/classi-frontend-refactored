@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {fontFamily} from '_assets';
 import {Typography, Colors, Spacing, Icons} from '_styles';
 
 const styles = StyleSheet.create({

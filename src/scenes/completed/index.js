@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from 'react-native';
 import styles from './styles';
-import {Card} from '_assets';
 import {crossImg, finishImg, loveImgOrange, shareImgDark} from '_assets';
 import {createClassCards} from '_utils';
 import {classesMockData} from '_utils';

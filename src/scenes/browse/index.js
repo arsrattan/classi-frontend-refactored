@@ -23,10 +23,12 @@ import {
   cardioImg,
   searchImg,
   filterImg,
+  avatarImg,
+  notifDarkBttnImg,
 } from '_assets';
 import {createClassCards} from '_utils';
 import {GetAllClasses} from '../../utils/backendServices/classService';
-import {Spacing} from '_styles';
+import {Spacing, Colors} from '_styles';
 
 const BrowseScreen = ({navigation}) => {
   var filterClassData = function (textFilter, classType, classData) {
@@ -89,17 +91,24 @@ const BrowseScreen = ({navigation}) => {
       <View style={styles.headerPadding}>
         <Header
           navigation={navigation}
-          headerStyle="light"
-          text=""
-          accentText=""
-          writePost={false}
+          backgroundColor={Colors.grey}
+          leftIcon={avatarImg}
+          onPressLeftIcon={() => {
+            navigation.navigate('Profile');
+          }}
+          rightIcon={notifDarkBttnImg}
+          onPressRightIcon={() => {
+            navigation.navigate('Notifications');
+          }}
         />
       </View>
       <ScrollView style={styles.browseContainer}>
         <Modal deviceWidth={Platform.OS === 'ios'} isVisible={visible}>
           <FilterModal setVisible={setVisible} navigation={navigation} />
         </Modal>
-        <Text style={styles.browseHeaderText}>Find a Class</Text>
+        <Text style={{...styles.browseHeaderText, paddingTop: Spacing.smaller}}>
+          Find a Class
+        </Text>
         <View style={[styles.searchAndFilterContainer, styles.rightPadding]}>
           <InputBox
             placeholderText={'Search classes by name'}
