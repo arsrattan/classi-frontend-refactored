@@ -81,22 +81,6 @@ const Styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 18,
   },
-  filterChipText: {
-    fontFamily: fontFamily.book,
-    fontSize: 13,
-    lineHeight: 16,
-    letterSpacing: 0.5,
-    textTransform: 'capitalize',
-  },
-  allClassText: {
-    paddingTop: 10,
-    fontWeight: '500',
-    fontSize: 17,
-    lineHeight: 22,
-    color: '#102A43',
-    letterSpacing: -0.3,
-    fontFamily: fontFamily.book,
-  },
 });
 
 export default Styles;

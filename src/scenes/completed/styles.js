@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import fontFamily from '../../assets/fonts/fontFamily';
+import {fontFamily} from '_assets';
 
 const styles = StyleSheet.create({
   mainContainer: {flex: 1, backgroundColor: '#fff'},

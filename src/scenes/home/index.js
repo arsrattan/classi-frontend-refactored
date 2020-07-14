@@ -142,34 +142,32 @@ const HomeScreen = ({navigation}) => {
             showsHorizontalScrollIndicator={false}
             horizontal={true}
             renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => {
-                    if (pressSr !== -1) {
-                      setPressSr(-1);
-                    }
-                    setPressFr(item.id);
-                    setFilterVal(item.filter);
-                  }}
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  if (pressSr !== -1) {
+                    setPressSr(-1);
+                  }
+                  setPressFr(item.id);
+                  setFilterVal(item.filter);
+                }}
+                style={[
+                  styles.filterChip,
+                  {
+                    backgroundColor: pressFr == item.id ? '#F86A6A' : '#fff',
+                  },
+                ]}>
+                <View style={{marginRight: 10}}>{item.icon}</View>
+                <Text
                   style={[
-                    styles.filterChip,
+                    styles.filterChipText,
                     {
-                      backgroundColor: pressFr == item.id ? '#F86A6A' : '#fff',
+                      color: pressFr == item.id ? '#fff' : '#102A43',
                     },
                   ]}>
-                  <View style={{marginRight: 10}}>{item.icon}</View>
-                  <Text
-                    style={[
-                      styles.filterChipText,
-                      {
-                        color: pressFr == item.id ? '#fff' : '#102A43',
-                      },
-                    ]}>
-                    {item.filter}
-                  </Text>
-                </TouchableOpacity>
-              );
+                  {item.filter}
+                </Text>
+              </TouchableOpacity>;
             }}
             keyExtractor={(item) => {
               item.id;
@@ -181,34 +179,33 @@ const HomeScreen = ({navigation}) => {
             showsHorizontalScrollIndicator={false}
             horizontal={true}
             renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => {
-                    if (pressFr !== -1) {
-                      setPressFr(-1);
-                    }
-                    setPressSr(item.id);
-                    setFilterVal(item.filter);
-                  }}
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  if (pressFr !== -1) {
+                    setPressFr(-1);
+                  }
+                  setPressSr(item.id);
+                  setFilterVal(item.filter);
+                }}
+                style={[
+                  styles.filterChip,
+                  {
+                    backgroundColor: pressSr == item.id ? '#F86A6A' : '#fff',
+                  },
+                ]}>
+                <View style={{marginRight: 10}}>{item.icon}</View>
+                <Text
                   style={[
-                    styles.filterChip,
+                    ...Typography.p2,
                     {
-                      backgroundColor: pressSr == item.id ? '#F86A6A' : '#fff',
+                      color: pressSr == item.id ? '#fff' : '#102A43',
+                      textTransform: 'capitalize',
                     },
                   ]}>
-                  <View style={{marginRight: 10}}>{item.icon}</View>
-                  <Text
-                    style={[
-                      styles.filterChipText,
-                      {
-                        color: pressSr == item.id ? '#fff' : '#102A43',
-                      },
-                    ]}>
-                    {item.filter}
-                  </Text>
-                </TouchableOpacity>
-              );
+                  {item.filter}
+                </Text>
+              </TouchableOpacity>;
             }}
             keyExtractor={(item) => {
               item.id;
