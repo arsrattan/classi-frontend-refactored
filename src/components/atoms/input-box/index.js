@@ -16,7 +16,7 @@ const InputBox = ({placeholderText, icon, value, onChange, name}) => {
       {iconImage}
       <TextInput
         value={value}
-        onChange={(text) => handleChange(text, name)}
+        onChangeText={onChange}
         placeholder={placeholderText}
       />
     </View>

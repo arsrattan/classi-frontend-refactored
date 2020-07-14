@@ -6,10 +6,10 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {fontFamily, seeImg, loveImg, menuImg, unregisterImg, shareImgDark} from '_assets';
+import {classesOverviewData} from '_utils';
+import {seeImg, loveImg, menuImg, unregisterImg, shareImgDark} from '_assets';
 import styles from './styles';
 import {ProfileImg, Tag} from '_atoms';
-
 
 const ImageTile = ({navigation, classData}) => {
   return (
@@ -25,21 +25,30 @@ const ImageTile = ({navigation, classData}) => {
               });
             }}>
             <View style={styles.cardHeader}>
-              <ProfileImg userProfileImg={item.channel_thumbnail_url} size="small" />
-              <Text style={styles.instructorTextContainer}>{item.instructorUserId}</Text>
+              <ProfileImg
+                userProfileImg={item.channel_thumbnail_url}
+                size="small"
+              />
+              <Text style={styles.instructorTextContainer}>
+                {item.instructorUserId}
+              </Text>
             </View>
             <View style={styles.cardHeader}>
-              <Text style={styles.classNameText}>{item.className.replace(/(.{80})..+/, "$1...")}</Text>
+              <Text style={styles.classNameText}>
+                {item.className.replace(/(.{80})..+/, '$1...')}
+              </Text>
               <Text style={styles.additionalClassDetailsText}></Text>
             </View>
             <ImageBackground
-              imageStyle={{borderBottomRightRadius: 10,borderBottomLeftRadius: 10 }}
+              imageStyle={{
+                borderBottomRightRadius: 10,
+                borderBottomLeftRadius: 10,
+              }}
               resizeMode="cover"
               source={{
                 uri: item.class_image_url,
               }}
-              style={styles.imageStyle}>
-            </ImageBackground>
+              style={styles.imageStyle}></ImageBackground>
             <View style={styles.textContainer}>
               <View style={styles.iconContainer}>
                 <View style={styles.iconGroup}>
@@ -51,7 +60,6 @@ const ImageTile = ({navigation, classData}) => {
               </View>
             </View>
           </TouchableOpacity>
-          
         );
       })}
     </View>

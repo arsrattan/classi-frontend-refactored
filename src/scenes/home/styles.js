@@ -1,7 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {fontFamily} from '_assets';
-import {Icons, Spacing} from '_styles';
-import {Typography, Colors} from '_styles';
+import {Icons, Spacing, Typography, Colors} from '_styles';
 
 const Styles = StyleSheet.create({
   icon: {

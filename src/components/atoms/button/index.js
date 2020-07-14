@@ -1,8 +1,7 @@
 import React from 'react';
 import {Text, Image, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
-import {Typography, Colors} from '_styles';
-import {Icons, Spacing} from '_styles';
+import {Typography, Colors, Icons, Spacing} from '_styles';
 
 const Button = ({
   text,

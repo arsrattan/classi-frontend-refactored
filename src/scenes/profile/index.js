@@ -15,7 +15,6 @@ import {
   settingsImg,
   unregisterImg,
 } from '_assets';
-import {fontFamily} from '_assets';
 import {Typography, Icons, Spacing, Colors} from '_styles';
 import {PopupMenu, MenuTile, ProfileImg, Dot, Button} from '_atoms';
 import {MedHortClassCard, SmallHortClassCard} from '_molecules';

@@ -1,6 +1,6 @@
 export const normal = {
-  height: 25,
-  width: 25,
+  height: 30,
+  width: 30,
 };
 
 export const small = {
@@ -11,6 +11,11 @@ export const small = {
 export const smaller = {
   height: 20,
   width: 20,
+};
+
+export const smallest = {
+  height: 10,
+  width: 10,
 };
 
 export const large = {

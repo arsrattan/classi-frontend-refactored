@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,10 @@ import {
   ScrollView,
   Image,
   KeyboardAvoidingView,
+  TextInput,
 } from 'react-native';
+import CalendarPicker from 'react-native-calendar-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
 import {
   Avatar,
@@ -17,8 +20,9 @@ import {
   Dot,
   InputBox,
   SquareButton,
+  Divider,
 } from '_atoms';
-import {PostCommentTile} from '_molecules';
+import {PostCommentTile, MultiProfileImg} from '_molecules';
 import {
   arrowBackImg,
   shareImgLight,
@@ -29,15 +33,60 @@ import {
   sendCommentImg,
 } from '_assets';
 import {ClassNavigator} from '_navigations';
-import {Colors, Typography} from '_styles';
-import {GetUser, GetUserFollowers} from '../../utils/backendServices/usersService';
+import {Colors, Typography, Spacing, Icons} from '_styles';
+import {
+  GetUser,
+  GetUserFollowers,
+} from '../../utils/backendServices/usersService';
 
 const ClassScreen = ({navigation, route}) => {
   const {classDetails, isWatching} = route.params;
   const {data, loading} = GetUser(classDetails.instructorUserId);
-  const {followersData, followersLoading} = GetUserFollowers(classDetails.instructorUserId);
+  const {followersData, followersLoading} = GetUserFollowers(
+    classDetails.instructorUserId,
+  );
   const date = new Date(parseInt(classDetails.scheduledTime));
   const month = date.toLocaleString('default', {month: 'short'});
+
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [scheduledDate, setScheduledDate] = useState('Select a date');
+
+  const onShowDatePicker = () => {
+    const newStatus = !showDatePicker;
+    setShowDatePicker(newStatus);
+  };
+
+  const onChangeDate = (selectedDate) => {
+    const currentDate = selectedDate;
+    setScheduledDate(currentDate.format('LL'));
+    setShowDatePicker(false);
+  };
+
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [scheduledTime, setScheduledTime] = useState(new Date());
+
+  const onShowTimePicker = () => {
+    const newStatus = !showTimePicker;
+    setShowTimePicker(newStatus);
+  };
+
+  const onChangeTime = (event, selectedTime) => {
+    setScheduledTime(selectedTime);
+    setTimeout(() => {
+      setShowTimePicker(false);
+    }, 0);
+  };
+
+  /* These were used to keep track of who was added to a group, but that should just be a backend call
+  const [inviteList, setInvitedList] = useState([]);
+
+  const addToList = (name) => {
+    const newInviteList = inviteList;
+    newInviteList.push(name);
+    setInvitedList(newInviteList);
+  };
+  */
+
   if (!loading && !followersLoading) {
     const comments = classDetails.comments == null ? [] : classDetails.comments;
     return (
@@ -70,7 +119,7 @@ const ClassScreen = ({navigation, route}) => {
               style={[
                 Typography.p1d2,
               ]}>{`by ${classDetails.instructorUserId}`}</Text>
-            <View style={styles.classTimeContainer}> 
+            <View style={styles.classTimeContainer}>
               {/* <View style={styles.classTime}>
                 <Image source={calendarImg} style={styles.iconSpace} />
                 <Text style={Typography.p1d2}>
@@ -101,6 +150,60 @@ const ClassScreen = ({navigation, route}) => {
                   : classDetails.registeredUsers.length + ' users registered'}
               </Text>
             </View>
+            <View style={styles.schedulerTimeContainer}>
+              <TouchableOpacity
+                onPress={onShowDatePicker}
+                style={styles.scheduleTimeInput}>
+                <Text style={Typography.p1d2}>{scheduledDate}</Text>
+                <Divider
+                  color={Colors.grey}
+                  style={{marginVertical: Spacing.smallest}}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={onShowTimePicker}
+                style={styles.scheduleTimeInput}>
+                <Text style={Typography.p1d2}>
+                  {scheduledTime.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </Text>
+                <Divider
+                  color={Colors.grey}
+                  style={{marginVertical: Spacing.smallest}}
+                />
+              </TouchableOpacity>
+            </View>
+            {showDatePicker && <CalendarPicker onDateChange={onChangeDate} />}
+            {showTimePicker && (
+              <DateTimePicker
+                value={scheduledTime}
+                mode="time"
+                onChange={onChangeTime}
+                minuteInterval={15}
+              />
+            )}
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('InviteScreen', {
+                  /*
+                  invitedList: inviteList,
+                  addToList: addToList,*/
+                });
+              }}
+              style={{marginTop: Spacing.smallest}}>
+              <Text style={Typography.p1d2}>Invite friends to join</Text>
+              <Divider
+                color={Colors.grey}
+                style={{marginVertical: Spacing.smallest}}
+              />
+            </TouchableOpacity>
+            <MultiProfileImg
+              userList={['Anmol', 'Malik', 'Arnim', 'Derek', 'Jake']}
+              propStyles={{marginTop: Spacing.smallest}}
+            />
             {isWatching ? (
               <TouchableOpacity
                 onPress={() => {
@@ -136,7 +239,10 @@ const ClassScreen = ({navigation, route}) => {
             <Text style={Typography.h3d1}>Instructor</Text>
             <View style={styles.instructorViewContainer}>
               <View style={styles.containerFlexRow}>
-                <ProfileImg userProfileImg={classDetails.channel_thumbnail_url} size="small" />
+                <ProfileImg
+                  userProfileImg={classDetails.channel_thumbnail_url}
+                  size="small"
+                />
                 <View style={styles.instructorNameContainer}>
                   <Text style={[Typography.p1d2]}>
                     {classDetails.instructorUserId}
@@ -144,7 +250,11 @@ const ClassScreen = ({navigation, route}) => {
                   <View style={styles.containerFlexRow}>
                     {/* <Text style={Typography.p2d2}>About me</Text>
                     <Dot color={Colors.aquarius} size="base" /> */}
-                    <Text style={Typography.p2d2}>{data[0] == null ? '' : followersData.length + 'followers'}</Text>
+                    <Text style={Typography.p2d2}>
+                      {data[0] == null
+                        ? ''
+                        : followersData.length + 'followers'}
+                    </Text>
                   </View>
                 </View>
               </View>

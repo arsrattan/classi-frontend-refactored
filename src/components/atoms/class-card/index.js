@@ -15,7 +15,7 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
       onPress={() => {
         navigation.navigate('Class', {classDetails: item});
       }}
-      style={[styles.cardContainer, {style}]}>
+      style={{...styles.cardContainer, ...style}}>
       <View style={styles.cardHeader}>
         <ProfileImg userProfileImg={item.channel_thumbnail_url} size="small" />
         <View style={styles.instructorTextContainer}>

@@ -7,3 +7,4 @@ export {default as NotifTile} from './notif-tile';
 export {default as SmallHortClassCard} from './small-hort-class-card';
 export {default as InviteTile} from './invite-tile';
 export {default as MultiProfileImg} from './multi-profile-img';
+export {default as SearchUsers} from './search-users';

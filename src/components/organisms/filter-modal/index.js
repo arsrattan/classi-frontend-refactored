@@ -17,12 +17,7 @@ const FilterModal = ({setVisible}) => {
   const [selected, setSelected] = useState(2);
   const difficulty = ['Beginner', 'Intermediate', 'Advanced'];
   const duration = ['<15 Min', '15-30 Min', '>30 Min'];
-  const day = [
-    'Today',
-    'Tommorrow',
-    'This Week',
-    'This Month'
-  ];
+  const day = ['Today', 'Tommorrow', 'This Week', 'This Month'];
   var radio_props = [
     {label: 'Newest: Lowest First', value: 0},
     {label: 'Newest: Highest First', value: 1},
@@ -44,10 +39,18 @@ const FilterModal = ({setVisible}) => {
         <FilterChip data={day} press={dayPress} setPress={setDayPress} />
         <Divider />
         <Text style={styles.sectionHeaderText}>Length</Text>
-        <FilterChip data={duration} press={durationPress} setPress={setDurationPress} />
+        <FilterChip
+          data={duration}
+          press={durationPress}
+          setPress={setDurationPress}
+        />
         <Divider />
         <Text style={styles.sectionHeaderText}>Difficulty</Text>
-        <FilterChip data={difficulty} press={difficultyPress} setPress={setDifficultyPress} />
+        <FilterChip
+          data={difficulty}
+          press={difficultyPress}
+          setPress={setDifficultyPress}
+        />
         <Divider />
         <Text style={styles.sectionHeaderText}>Sort By</Text>
         <RadioForm animation={true}>
@@ -87,11 +90,15 @@ const FilterModal = ({setVisible}) => {
         </RadioForm>
         <View style={styles.filterButtonContainer}>
           <TouchableOpacity>
-            <Text style={styles.p1d1} onPress={() => {
-              setDayPress(-1);
-              setDifficultyPress(-1);
-              setDurationPress(-1);
-            }}>Clear All</Text>
+            <Text
+              style={styles.p1d1}
+              onPress={() => {
+                setDayPress(-1);
+                setDifficultyPress(-1);
+                setDurationPress(-1);
+              }}>
+              Clear All
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {

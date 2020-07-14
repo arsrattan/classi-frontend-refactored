@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {fontFamily} from '_assets';
 import {Typography, Spacing, Colors, Icons} from '_styles';
 
 const styles = StyleSheet.create({
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
   },
   browseHeaderText: {
     ...Typography.h1,
-    color: Colors.aries,
+    color: Colors.aquarius,
   },
   searchAndFilterContainer: {
     flexDirection: 'row',
@@ -54,10 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
   },
   filterChipText: {
-    fontFamily: fontFamily.book,
-    fontSize: 13,
-    lineHeight: 16,
-    letterSpacing: 0.5,
+    ...Typography.p2,
     textTransform: 'capitalize',
   },
   h3d2: {
@@ -66,12 +62,9 @@ const styles = StyleSheet.create({
   },
   allClassText: {
     paddingTop: 10,
-    fontWeight: '500',
-    fontSize: 17,
-    lineHeight: 22,
-    color: '#102A43',
-    letterSpacing: -0.3,
-    fontFamily: fontFamily.book,
+    ...Typography.h3,
+    color: Colors.aries,
+    ...Typography.medium,
   },
 });
 
