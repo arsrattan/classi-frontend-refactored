@@ -10,6 +10,9 @@ export const andromeda = '#F86A6A';
 // tile section background
 export const white = '#FFFFFF';
 
+// placeholder color
+export const cancer = '#B0B7C4';
+
 // screen background
 export const grey = '#f4f4f6';
 

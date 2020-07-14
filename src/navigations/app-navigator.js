@@ -1,9 +1,18 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {Image, View} from 'react-native';
-import {addImg, browseImg, feedIconImg, homeImg, groupsImg} from '_assets';
+import {Image, View, Text} from 'react-native';
+import {
+  addImg,
+  browseImg,
+  feedIconImg,
+  homeImg,
+  groupsImg,
+  homeActiveImg,
+  browseActiveImg,
+  feedActiveImg,
+  groupsActiveImg,
+} from '_assets';
 import styles from './styles';
-import {Icons} from '_styles';
 
 import {
   BrowseScreen,
@@ -14,19 +23,33 @@ import {
   GroupsHomeScreen,
   LoginScreen,
 } from '_scenes';
+import {Colors, Typography, Spacing, Icons} from '_styles';
+
+const activeText = {
+  ...Typography.p2,
+  ...Typography.bold,
+  color: Colors.aries,
+  paddingTop: Spacing.smallest,
+};
+
+const inactiveText = {
+  ...Typography.p2,
+  color: Colors.cancer,
+  paddingTop: Spacing.smallest,
+};
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
   <Tab.Navigator
     tabBarOptions={{
-      activeTintColor: '#F86A6A',
+      activeTintColor: Colors.aries,
+      inactiveTintColor: Colors.cancer,
       style: {
-        borderRadius: 15,
-        shadowColor: '#bfbfbf',
-        shadowOpacity: 0.3,
+        borderRadius: 25,
+        paddingTop: Spacing.smaller,
       },
-      labelStyle: {fontSize: 12},
+      labelStyle: {...Typography.p2},
     }}
     shifting={false}
     initialRouteName="Home">
@@ -34,9 +57,14 @@ const AppNavigator = () => (
       name="Home"
       component={HomeScreen}
       options={{
-        tabBarLabel: 'Home',
-        tabBarIcon: ({color}) => (
-          <Image source={homeImg} style={styles.iconNormal} />
+        tabBarLabel: ({focused, tintColor}) => (
+          <Text style={focused ? activeText : inactiveText}>Home</Text>
+        ),
+        tabBarIcon: ({tintColor, focused}) => (
+          <Image
+            source={focused ? homeActiveImg : homeImg}
+            style={Icons.normal}
+          />
         ),
       }}
     />
@@ -44,9 +72,14 @@ const AppNavigator = () => (
       name="Browse"
       component={BrowseScreen}
       options={{
-        tabBarLabel: 'Browse',
-        tabBarIcon: ({color}) => (
-          <Image source={browseImg} style={Icons.normal} />
+        tabBarLabel: ({focused, tintColor}) => (
+          <Text style={focused ? activeText : inactiveText}>Browse</Text>
+        ),
+        tabBarIcon: ({tintColor, focused}) => (
+          <Image
+            source={focused ? browseActiveImg : browseImg}
+            style={Icons.normal}
+          />
         ),
       }}
     />
@@ -73,9 +106,14 @@ const AppNavigator = () => (
       name="Feed"
       component={FeedScreen}
       options={{
-        tabBarLabel: 'Feed',
-        tabBarIcon: ({color}) => (
-          <Image source={feedIconImg} style={styles.iconNormal} />
+        tabBarLabel: ({focused, tintColor}) => (
+          <Text style={focused ? activeText : inactiveText}>Social</Text>
+        ),
+        tabBarIcon: ({tintColor, focused}) => (
+          <Image
+            source={focused ? feedActiveImg : feedIconImg}
+            style={Icons.normal}
+          />
         ),
       }}
     />
@@ -83,9 +121,14 @@ const AppNavigator = () => (
       name="Groups"
       component={GroupsHomeScreen}
       options={{
-        tabBarLabel: 'Groups',
-        tabBarIcon: ({color}) => (
-          <Image source={groupsImg} style={styles.iconNormal} />
+        tabBarLabel: ({focused, tintColor}) => (
+          <Text style={focused ? activeText : inactiveText}>Groups</Text>
+        ),
+        tabBarIcon: ({tintColor, focused}) => (
+          <Image
+            source={focused ? groupsActiveImg : groupsImg}
+            style={Icons.normal}
+          />
         ),
       }}
     />

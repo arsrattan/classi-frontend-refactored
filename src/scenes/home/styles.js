@@ -35,7 +35,7 @@ const Styles = StyleSheet.create({
   },
   classFilterContainer: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: Spacing.base,
   },

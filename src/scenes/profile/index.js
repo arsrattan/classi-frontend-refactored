@@ -17,7 +17,7 @@ import {
 } from '_assets';
 import {Typography, Icons, Spacing, Colors} from '_styles';
 import {PopupMenu, MenuTile, ProfileImg, Dot, Button} from '_atoms';
-import {MedHortClassCard, SmallHortClassCard} from '_molecules';
+import {MedHortClassCard, SmallHortClassCard, Header} from '_molecules';
 import {FeedPost} from '_organisms';
 import {postData} from '_utils';
 
@@ -25,32 +25,43 @@ const ProfileScreen = ({navigation}) => {
   return (
     <View style={styles.screenContainer}>
       {StatusBar.setBarStyle('dark-content', true)}
-      <View style={styles.colorContainer} />
-      <View style={styles.flexRow}>
-        <TouchableOpacity
-          style={styles.backArrow}
-          onPress={() => {
+      <View
+        style={{
+          backgroundColor: Colors.white,
+          paddingHorizontal: Spacing.base,
+        }}>
+        <Header
+          navigation={navigation}
+          backgroundColor={Colors.white}
+          text={
+            <Text
+              style={{
+                ...Typography.p1,
+                ...Typography.bold,
+                color: Colors.aries,
+              }}>
+              Profile
+            </Text>
+          }
+          leftIcon={arrowBackDarkImg}
+          onPressLeftIcon={() => {
             navigation.goBack();
-          }}>
-          <Image source={arrowBackDarkImg} style={Icons.normal} />
-        </TouchableOpacity>
-        <Text style={Typography.p1d2}>About me</Text>
-        <View style={styles.logoutAndShare}>
-          <TouchableOpacity style={{marginRight: Spacing.small}}>
-            <Image source={shareImgDark} style={Icons.normal} />
-          </TouchableOpacity>
-          <PopupMenu
-            icon={settingsImg}
-            options={[
-              <MenuTile
-                icon={unregisterImg}
-                text="Logout"
-                navigation={navigation}
-                screen="Login"
-              />,
-            ]}
-          />
-        </View>
+          }}
+          rightIcon={settingsImg}
+          onPressRightIconAlt={
+            <PopupMenu
+              icon={settingsImg}
+              options={[
+                <MenuTile
+                  icon={unregisterImg}
+                  text="Logout"
+                  navigation={navigation}
+                  screen="Login"
+                />,
+              ]}
+            />
+          }
+        />
       </View>
 
       <ScrollView bounces={true}>

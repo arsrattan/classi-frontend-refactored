@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   profileView: {
-    paddingTop: Spacing.larger,
+    paddingTop: Spacing.smaller,
     paddingHorizontal: Spacing.base,
     flexDirection: 'row',
     backgroundColor: Colors.white,

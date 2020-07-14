@@ -56,3 +56,7 @@ export const plusImg = require('./Plus.png');
 export const editImg = require('./Edit.png');
 export const editDarkImg = require('./EditDark.png');
 export const forwardArrowImg = require('./ForwardArrow.png');
+export const groupsActiveImg = require('./GroupActive.png');
+export const homeActiveImg = require('./HomeActive.png');
+export const browseActiveImg = require('./BrowseActive.png');
+export const feedActiveImg = require('./FeedActive.png');

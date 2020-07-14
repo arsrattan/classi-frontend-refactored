@@ -62,7 +62,9 @@ const NotificationsScreen = ({navigation}) => {
           }}>
           <Image source={crossImg} style={Icons.normal} />
         </TouchableOpacity>
-        <Text style={Typography.h2d1}>Notifications</Text>
+        <Text style={{...Typography.p1d2, ...Typography.bold}}>
+          Notifications
+        </Text>
         <TouchableOpacity>
           <Image source={menuImg} style={Icons.normal} />
         </TouchableOpacity>
