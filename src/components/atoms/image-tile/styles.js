@@ -18,16 +18,32 @@ const styles = StyleSheet.create({
   textContainer: {
     position: 'absolute',
     bottom: 0,
-    width: '40%',
+    width: '100%',
     marginLeft: Spacing.base,
   },
   classNameText: {
     ...Typography.h3,
-    color: Colors.white,
+    color: Colors.black,
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // justifyContent: 'space-between',
+    paddingHorizontal: Spacing.small,
+    paddingTop: Spacing.small,
+  },
+  instructorTextContainer: {
+    paddingLeft: 10,
   },
   additionalClassDetailsText: {
     ...Typography.p1,
-    color: Colors.white,
+    color: Colors.black,
+  },
+  touchableOpacity: {
+    backgroundColor: Colors.white,
+    width: '100%',
+    borderRadius: 10,
+    marginBottom: Spacing.small,
   },
   iconContainer: {
     flexDirection: 'row',

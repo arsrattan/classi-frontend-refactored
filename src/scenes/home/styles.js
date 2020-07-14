@@ -5,7 +5,6 @@ const Styles = StyleSheet.create({
   icon: {
     ...Icons.normal,
   },
-  homeContainer: {},
   lightSectionHeader: {
     ...Typography.h3,
     color: Colors.white,
@@ -29,14 +28,14 @@ const Styles = StyleSheet.create({
     paddingTop: Spacing.large,
     paddingLeft: Spacing.base,
   },
-  darkTextHeader: {
+  lightTextHeader: {
     ...Typography.h3,
-    color: Colors.aquarius,
+    color: Colors.white,
     paddingLeft: Spacing.base,
   },
   classFilterContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: Spacing.base,
   },
@@ -47,7 +46,7 @@ const Styles = StyleSheet.create({
   },
   h3d2: {
     ...Typography.h3,
-    color: Colors.aries,
+    color: Colors.white,
   },
   filterSelectContainer: {
     flexDirection: 'row',
@@ -56,6 +55,47 @@ const Styles = StyleSheet.create({
   h3a1: {
     ...Typography.h3,
     color: Colors.andromeda,
+  },
+  iconNormal: {
+    ...Icons.normal,
+  },
+  iconSmall: {
+    ...Icons.small,
+  },
+  filterBtn: {
+    width: 48,
+    height: 47,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  filterChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 36,
+    marginBottom: Spacing.small,
+    marginRight: Spacing.small,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 18,
+  },
+  filterChipText: {
+    fontFamily: fontFamily.book,
+    fontSize: 13,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+    textTransform: 'capitalize',
+  },
+  allClassText: {
+    paddingTop: 10,
+    fontWeight: '500',
+    fontSize: 17,
+    lineHeight: 22,
+    color: '#102A43',
+    letterSpacing: -0.3,
+    fontFamily: fontFamily.book,
   },
 });
 

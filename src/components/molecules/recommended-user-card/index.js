@@ -1,34 +1,49 @@
 import React from 'react';
 import {Text, View, FlatList, TouchableOpacity, Image} from 'react-native';
 import styles from './styles';
-import {recommendedUsersData} from '_utils';
 import {FollowButton, ProfileImg} from '_atoms';
+import {
+  GetUser,
+  GetUserFollowers,
+} from '../../../utils/backendServices/usersService';
 
-const RecommendedUsers = () => {
+const RecommendedUsers = ({users}) => {
+  var generateFollowerCount = function (users) {
+    for (let user of users) {
+      const {followersData} = GetUserFollowers(user.userId);
+      user.followers = followersData.length;
+    }
+  };
+  generateFollowerCount(users);
   return (
     <View style={styles.followCardContainer}>
       <FlatList
         contentContainerStyle={{alignSelf: 'flex-end'}}
-        data={recommendedUsersData}
+        data={users}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         renderItem={({item}) => {
           return (
             <TouchableOpacity style={[styles.feedCard]}>
-              <ProfileImg size="medium" style={styles.feedCardImage} />
-              <Text style={styles.instructorName}>{item.instructor}</Text>
-              <Text style={styles.tagAndText}>{item.tag}</Text>
+              <ProfileImg
+                userProfileImg={item.s3url}
+                size="medium"
+                styles={styles.feedCardImage}
+              />
+              <Text style={styles.instructorName}>
+                {item.firstName + ' ' + item.lastName}
+              </Text>
               <View style={styles.rowContainer}>
                 <Text style={[styles.boldCount]}>{item.followers}</Text>
-                <Text style={styles.tagAndText}>{` of Followers`}</Text>
+                <Text style={styles.tagAndText}>{` followers`}</Text>
               </View>
-              <View style={styles.rowContainer}>
-                <Text style={[styles.boldCount]}>{item.numOfClass}</Text>
+              {/* <View style={styles.rowContainer}>
+                <Text style={[styles.boldCount]}>{'item.numOfClass'}</Text>
                 <Text style={styles.tagAndText}>{` of Classes`}</Text>
-              </View>
+              </View> */}
               <View style={styles.followButtonContainer}>
                 <FollowButton
-                  followedUser={item.instructor}
+                  followedUser={'item.instructor'}
                   isUnfollow={false}
                   follow
                 />
@@ -37,7 +52,7 @@ const RecommendedUsers = () => {
           );
         }}
         keyExtractor={(item) => {
-          return item.id;
+          return item.userId;
         }}
       />
     </View>

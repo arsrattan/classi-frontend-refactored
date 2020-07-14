@@ -50,8 +50,6 @@ const BrowseScreen = ({navigation}) => {
   const [values, setValues] = useState({className: ''});
 
   const handleChange = (newValue, name) => {
-    console.log(newValue);
-    console.log(name);
     setValues((values) => ({...values, [name]: newValue}));
   };
 

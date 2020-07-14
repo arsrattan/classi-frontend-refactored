@@ -35,15 +35,15 @@ const Header = ({
     StatusBar.setBarStyle('dark-content', true);
   }
   if (writePost === true) {
-    writePostIcon = (
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('WritePost');
-        }}
-        style={styles.postIconStyle}>
-        <Image source={createPostBttnImg} style={styles.normalIcon} />
-      </TouchableOpacity>
-    );
+    // writePostIcon = (
+    //   <TouchableOpacity
+    //     onPress={() => {
+    //       navigation.navigate('WritePost');
+    //     }}
+    //     style={styles.postIconStyle}>
+    //     <Image source={createPostBttnImg} style={styles.normalIcon} />
+    //   </TouchableOpacity>
+    // );
   }
 
   return (

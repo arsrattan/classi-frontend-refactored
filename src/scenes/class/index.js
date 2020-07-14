@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,9 +9,8 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import CalendarPicker from 'react-native-calendar-picker';
-import moment from 'moment';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
 import {
   Avatar,
@@ -21,9 +20,7 @@ import {
   Dot,
   InputBox,
   SquareButton,
-  InputField,
   Divider,
-  Button,
 } from '_atoms';
 import {PostCommentTile, MultiProfileImg} from '_molecules';
 import {
@@ -36,14 +33,14 @@ import {
   sendCommentImg,
 } from '_assets';
 import {ClassNavigator} from '_navigations';
-import {Icons, Colors, Typography, Spacing} from '_styles';
+import {Colors, Typography, Spacing, Icons} from '_styles';
 import {
   GetUser,
   GetUserFollowers,
 } from '../../utils/backendServices/usersService';
 
 const ClassScreen = ({navigation, route}) => {
-  const {classDetails, isLive} = route.params;
+  const {classDetails, isWatching} = route.params;
   const {data, loading} = GetUser(classDetails.instructorUserId);
   const {followersData, followersLoading} = GetUserFollowers(
     classDetails.instructorUserId,
@@ -99,12 +96,12 @@ const ClassScreen = ({navigation, route}) => {
             resizeMode="cover"
             style={styles.classImage}
             source={{
-              uri: classDetails.s3url,
+              uri: classDetails.class_image_url,
             }}>
             <View style={styles.onImageContainer}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.goBack();
+                  navigation.navigate('Home');
                 }}>
                 <Image source={arrowBackImg} style={styles.iconNormal} />
               </TouchableOpacity>
@@ -122,10 +119,8 @@ const ClassScreen = ({navigation, route}) => {
               style={[
                 Typography.p1d2,
               ]}>{`by ${classDetails.instructorUserId}`}</Text>
-
-            {/* show the time a class is scheduled for, only show after a user is registered  
             <View style={styles.classTimeContainer}>
-              <View style={styles.classTime}>
+              {/* <View style={styles.classTime}>
                 <Image source={calendarImg} style={styles.iconSpace} />
                 <Text style={Typography.p1d2}>
                   {date.getDate()} {month} {date.getFullYear()}
@@ -139,17 +134,12 @@ const ClassScreen = ({navigation, route}) => {
                     minute: '2-digit',
                   })}
                 </Text>
-              </View>
-              {/* code for incidicating a class is live. not relevant at MVP
-              <View style={styles.classTime}>
+              </View> */}
+              {/* <View style={styles.classTime}>
                 <Dot color={Colors.livePink} size="large" />
                 <Text style={styles.liveNowText}>Live Now</Text>
-              </View>
-              
+              </View> */}
             </View>
-              */}
-
-            {/* code for showing number of registered users, not relevant at MVP
             <View style={styles.registeredUserView}>
               <ProfileImg size="small" />
               <ProfileImg size="small" />
@@ -157,10 +147,9 @@ const ClassScreen = ({navigation, route}) => {
               <Text style={Typography.p1d2}>
                 {classDetails.registeredUsers == null
                   ? '0 users registered'
-                  : classDetails.registeredUsers.length + 'users registered'}
+                  : classDetails.registeredUsers.length + ' users registered'}
               </Text>
             </View>
-                */}
             <View style={styles.schedulerTimeContainer}>
               <TouchableOpacity
                 onPress={onShowDatePicker}
@@ -215,8 +204,7 @@ const ClassScreen = ({navigation, route}) => {
               userList={['Anmol', 'Malik', 'Arnim', 'Derek', 'Jake']}
               propStyles={{marginTop: Spacing.smallest}}
             />
-
-            {isLive ? (
+            {isWatching ? (
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('Completed', {
@@ -227,23 +215,15 @@ const ClassScreen = ({navigation, route}) => {
                 <Text style={styles.registerNowText}>Watch Now</Text>
               </TouchableOpacity>
             ) : (
-              <View>
-                <Button
-                  type="PrimaryRound"
-                  text="Schedule to Watch Later"
-                  navigation={navigation}
-                  screen="Registered"
-                  style={{marginVertical: Spacing.smaller}}
-                />
-                <Button
-                  type="TertiaryRound"
-                  text="Watch Now"
-                  style={{paddingVertical: Spacing.smallest}}
-                />
-              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Registered');
+                }}
+                style={styles.registerButton}>
+                <Text style={styles.p1white}>Register Now</Text>
+              </TouchableOpacity>
             )}
-            {/* link to watch video on desktop
-            {isLive && (
+            {isWatching && (
               <TouchableOpacity style={styles.copyLinkButton}>
                 <Text style={styles.copyLinkText}>
                   Copy link to watch in desktop
@@ -251,7 +231,6 @@ const ClassScreen = ({navigation, route}) => {
                 <Image source={copyImg} />
               </TouchableOpacity>
             )}
-            */}
           </View>
           <View style={styles.classDescriptionContainer}>
             <ClassNavigator classDetails={classDetails} />
@@ -261,26 +240,25 @@ const ClassScreen = ({navigation, route}) => {
             <View style={styles.instructorViewContainer}>
               <View style={styles.containerFlexRow}>
                 <ProfileImg
-                  userProfileImg={classDetails.users3url}
+                  userProfileImg={classDetails.channel_thumbnail_url}
                   size="small"
                 />
                 <View style={styles.instructorNameContainer}>
                   <Text style={[Typography.p1d2]}>
-                    {data[0].firstName} {data[0].lastName}
+                    {classDetails.instructorUserId}
                   </Text>
                   <View style={styles.containerFlexRow}>
-                    <Text style={Typography.p2d2}>About me</Text>
-                    <Dot color={Colors.aquarius} size="base" />
+                    {/* <Text style={Typography.p2d2}>About me</Text>
+                    <Dot color={Colors.aquarius} size="base" /> */}
                     <Text style={Typography.p2d2}>
-                      {followersData.length} followers
+                      {data[0] == null
+                        ? ''
+                        : followersData.length + 'followers'}
                     </Text>
                   </View>
                 </View>
               </View>
-              <FollowButton
-                followedUser={classDetails.instructorUserId}
-                isUnfollow={false}
-              />
+              {/* <FollowButton followedUser={classDetails.instructorUserId} isUnfollow={false} /> */}
             </View>
           </View>
           <View style={styles.sectionContainer}>

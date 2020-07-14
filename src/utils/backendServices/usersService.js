@@ -1,4 +1,4 @@
-import {useQuery, useMutation} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 import {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -24,6 +24,31 @@ export const GetUser = (userId) => {
       setState({
         data: data.getUserById,
         loading: false,
+      });
+    }
+  }, [data, error, loading]);
+  return state;
+};
+
+export const GetAllUsers = () => {
+  const [state, setState] = useState({allUsersData: [], allUsersLoading: true});
+  const GET_ALL_USERS = gql`
+  {
+    getAllUsers {
+      userId
+      s3url
+      firstName
+      lastName
+    }
+  }
+  `;
+  const {data, error, loading} = useQuery(GET_ALL_USERS);
+  useEffect(() => {
+    setState({allUsersData: [], allUsersLoading: true});
+    if (!error && !loading) {
+      setState({
+        allUsersData: data.getAllUsers,
+        allUsersLoading: false,
       });
     }
   }, [data, error, loading]);
