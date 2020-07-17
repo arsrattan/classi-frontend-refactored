@@ -37,10 +37,10 @@ const SearchUsers = ({navigation, title, searchValue, handleSearchValue}) => {
         renderItem={({item}) =>
           searchValue !== '' ? (
             searchValue === item.userID ? (
-              <InviteTile name={item.userID} />
+              <InviteTile name={item.userID} isInvite={true} />
             ) : null
           ) : (
-            <InviteTile name={item.userID} />
+            <InviteTile name={item.userID} isInvite={true} />
           )
         }
       />

@@ -10,6 +10,9 @@ export const andromeda = '#F86A6A';
 // tile section background
 export const white = '#FFFFFF';
 
+// dark background color
+export const sirius = '#1E2432';
+
 // placeholder color
 export const cancer = '#B0B7C4';
 

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView, Image} from 'react-native';
+import {View, Text, ScrollView, Image, StatusBar} from 'react-native';
 import styles from './styles';
 import {Header} from '_molecules';
 import {ImageTile} from '_atoms';
@@ -38,7 +38,7 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.headerContainer}>
         <Header
           navigation={navigation}
-          backgroundColor={Colors.aquarius}
+          backgroundColor={Colors.sirius}
           text={
             <Text
               style={{
@@ -65,10 +65,16 @@ const HomeScreen = ({navigation}) => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
-        <View style={styles.topSectionContainer}>
-          <Text style={styles.lightSectionHeader}>Your Upcoming Classes</Text>
-          {createClassCards(data, navigation)}
-        </View>
+        {
+          (data.length = 0 ? (
+            <View style={styles.topSectionContainer}>
+              <Text style={styles.lightSectionHeader}>
+                Your Upcoming Classes
+              </Text>
+              {createClassCards(data, navigation)}
+            </View>
+          ) : null)
+        }
 
         <View style={styles.lightBackgroundContainer}>
           <View style={styles.classHappeningHeader}>

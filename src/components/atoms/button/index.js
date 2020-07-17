@@ -1,7 +1,18 @@
 import React from 'react';
-import {Text, Image, TouchableOpacity, View} from 'react-native';
+import {
+  Text,
+  Image,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import styles from './styles';
 import {Typography, Colors, Icons, Spacing} from '_styles';
+
+/**
+ * Create the header at the top of each screen.
+ * @param {boolean} isSubmitting - state of the backend call after button is pressed
+ */
 
 const Button = ({
   text,
@@ -12,6 +23,7 @@ const Button = ({
   navigation,
   screen,
   onPress,
+  isSubmitting,
 }) => {
   let buttonStyle;
   let textStyle;
@@ -74,7 +86,11 @@ const Button = ({
       ) : (
         <Text />
       )}
-      <Text style={textStyle}>{text}</Text>
+      {isSubmitting ? (
+        <ActivityIndicator animating={true} color={Colors.white} />
+      ) : (
+        <Text style={textStyle}>{text}</Text>
+      )}
     </TouchableOpacity>
   );
 };

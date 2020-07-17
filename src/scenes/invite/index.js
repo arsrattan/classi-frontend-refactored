@@ -67,8 +67,8 @@ const Invite = ({navigation, route}) => {
         </View>
         <View style={styles.sectionContainer}>
           <Text style={Typography.h3d1}>Invite workout groups</Text>
-          <InviteTile name="Malik" />
-          <InviteTile name="Malik" />
+          <InviteTile name="Malik" isInvite={true} />
+          <InviteTile name="Malik" isInvite={true} />
         </View>
         <SearchUsers
           navigation={navigation}

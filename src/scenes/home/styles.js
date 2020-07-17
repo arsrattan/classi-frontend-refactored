@@ -12,11 +12,11 @@ const Styles = StyleSheet.create({
   },
   topSectionContainer: {
     flex: 1,
-    backgroundColor: Colors.aquarius,
+    backgroundColor: Colors.sirius,
   },
   headerContainer: {
     paddingHorizontal: Spacing.base,
-    backgroundColor: Colors.aquarius,
+    backgroundColor: Colors.sirius,
   },
   lightBackgroundContainer: {
     flex: 1,

@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  headerContainer: {
+    backgroundColor: Colors.white,
+    paddingHorizontal: Spacing.base,
+  },
   sectionContainer: {
     backgroundColor: Colors.white,
     paddingHorizontal: Spacing.base,

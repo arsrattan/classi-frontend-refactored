@@ -29,25 +29,29 @@ const Header = ({
   onPressRightIconAlt,
 }) => {
   let headerText, writePostIcon;
-  if (backgroundColor === Colors.aquarius) {
-    StatusBar.setBarStyle('light-content', true);
+  let statusBar;
+
+  // this doesn't really work because all 4 tabs are loaded at once, and the status bar is shared by all of them
+  if (backgroundColor != Colors.grey && backgroundColor != Colors.white) {
+    statusBar = <StatusBar barStyle="dark-content" />;
   } else {
-    StatusBar.setBarStyle('dark-content', true);
+    statusBar = <StatusBar barStyle="dark-content" />;
   }
   if (writePost === true) {
-    // writePostIcon = (
-    //   <TouchableOpacity
-    //     onPress={() => {
-    //       navigation.navigate('WritePost');
-    //     }}
-    //     style={styles.postIconStyle}>
-    //     <Image source={createPostBttnImg} style={styles.normalIcon} />
-    //   </TouchableOpacity>
-    // );
+    writePostIcon = (
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('WritePost');
+        }}
+        style={styles.postIconStyle}>
+        <Image source={createPostBttnImg} style={Icons.normal} />
+      </TouchableOpacity>
+    );
   }
 
   return (
     <View style={{...styles.headerView, backgroundColor: backgroundColor}}>
+      {statusBar}
       <TouchableOpacity onPress={onPressLeftIcon}>
         <Image source={leftIcon} style={Icons.normal} />
       </TouchableOpacity>

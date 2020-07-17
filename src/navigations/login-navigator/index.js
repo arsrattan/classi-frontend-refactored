@@ -2,7 +2,6 @@ import React, {useState, useEffect, createContext} from 'react';
 import {
   View,
   Text,
-  Button as ReactButton,
   TouchableOpacity,
   Platform,
   TouchableWithoutFeedback,
@@ -247,6 +246,7 @@ const LoginTab = ({navigation}) => {
           navigation={navigation}
           screen="Home"
           onPress={handleSubmit}
+          isSubmitting={isSubmitting}
         />
         <TouchableOpacity style={styles.backArrow}>
           <Text style={styles.forgotPassword}>Forgot password</Text>

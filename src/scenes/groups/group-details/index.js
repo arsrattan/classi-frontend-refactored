@@ -28,8 +28,8 @@ const GroupDetailsScreen = ({navigation}) => {
   const inputRef = React.useRef();
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.sectionContainer}>
+    <View style={styles.container}>
+      <View style={styles.headerContainer}>
         <Header
           navigation={navigation}
           backgroundColor={Colors.white}
@@ -57,73 +57,77 @@ const GroupDetailsScreen = ({navigation}) => {
             />
           }
         />
-        <View style={{marginBottom: Spacing.small, alignItems: 'center'}}>
-          <ProfileImg
-            size="large"
-            userProfileImg="https://classi-profile-pictures.s3.us-east-2.amazonaws.com/Screen+Shot+2020-06-17+at+00.16.41.png"
-            isChangeable={true}
-          />
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
-          {/* ref is used so that clicking edit icon will keyboard and edit group name*/}
-          <TextInput
+      </View>
+      <ScrollView bounces={false}>
+        <View style={styles.sectionContainer}>
+          <View style={{marginBottom: Spacing.small, alignItems: 'center'}}>
+            <ProfileImg
+              size="large"
+              userProfileImg="https://classi-profile-pictures.s3.us-east-2.amazonaws.com/Screen+Shot+2020-06-17+at+00.16.41.png"
+              isChangeable={true}
+            />
+          </View>
+          <View
             style={{
-              ...Typography.h1,
-              ...Typography.bold,
-              color: Colors.aquarius,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            {/* ref is used so that clicking edit icon will keyboard and edit group name*/}
+            <TextInput
+              style={{
+                ...Typography.h1,
+                ...Typography.bold,
+                color: Colors.aquarius,
+              }}
+              ref={inputRef}
+              value={groupName}
+              onChange={(text) => setGroupName(text)}
+            />
+            <TouchableOpacity onPress={() => inputRef.current.focus()}>
+              <Image source={editDarkImg} style={Icons.smaller} />
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('GroupMembersScreen');
             }}
-            ref={inputRef}
-            value={groupName}
-            onChange={(text) => setGroupName(text)}
-          />
-          <TouchableOpacity onPress={() => inputRef.current.focus()}>
-            <Image source={editDarkImg} style={Icons.smaller} />
+            style={{paddingVertical: Spacing.small, ...styles.flexRow}}>
+            <MultiProfileImg userList={['Derek', 'Malik', 'Anmol', 'Arnim']} />
+            <Image source={forwardArrowImg} style={Icons.smaller} />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('GroupMembersScreen');
-          }}
-          style={{paddingVertical: Spacing.small, ...styles.flexRow}}>
-          <MultiProfileImg userList={['Derek', 'Malik', 'Anmol', 'Arnim']} />
-          <Image source={forwardArrowImg} style={Icons.smaller} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.sectionContainerNoMargin}>
-        <Text
-          style={{
-            ...Typography.h3,
-            marginHorizontal: Spacing.base,
-            marginTop: Spacing.base,
-          }}>
-          Upcoming Classes
-        </Text>
-        {createClassCards(classData, navigation, {
-          borderWidth: 1,
-          borderColor: Colors.cassiopeia,
-          backgroundColor: Colors.lightGrey,
-        })}
-      </View>
-      <View style={styles.sectionContainer}>
-        <Text
-          style={{
-            ...Typography.h3,
-            marginVertical: Spacing.base,
-          }}>
-          Completed Classes
-        </Text>
-        <SmallHortClassCard
-          hasBackground={true}
-          style={{marginBottom: Spacing.smaller}}
-        />
-        <SmallHortClassCard hasBackground={true} />
-      </View>
-    </ScrollView>
+        <View style={styles.sectionContainerNoMargin}>
+          <Text
+            style={{
+              ...Typography.h3,
+              marginHorizontal: Spacing.base,
+              marginTop: Spacing.base,
+            }}>
+            Upcoming Classes
+          </Text>
+          {createClassCards(classData, navigation, {
+            borderWidth: 1,
+            borderColor: Colors.cassiopeia,
+            backgroundColor: Colors.lightGrey,
+          })}
+        </View>
+        <View style={styles.sectionContainer}>
+          <Text
+            style={{
+              ...Typography.h3,
+              marginVertical: Spacing.base,
+            }}>
+            Completed Classes
+          </Text>
+          <SmallHortClassCard
+            hasBackground={true}
+            style={{marginBottom: Spacing.smaller}}
+          />
+          <SmallHortClassCard hasBackground={true} />
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

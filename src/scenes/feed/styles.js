@@ -11,25 +11,36 @@ const styles = StyleSheet.create({
   },
   statsContainer: {
     height: 'auto',
-    backgroundColor: Colors.aquarius,
+    backgroundColor: Colors.sirius,
     borderRadius: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     padding: Spacing.small,
   },
-  statDetailContainer: {
+  backgroundStatContainer: {
+    top: -13,
+    zIndex: -1,
+    height: 20,
+    backgroundColor: Colors.aquarius,
     borderRadius: 10,
-    width: '45%',
-    backgroundColor: '#1E2432',
+    marginHorizontal: Spacing.base,
+  },
+  statDetailContainer: {
+    width: '40%',
+  },
+  statNumContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: Spacing.smaller,
   },
   iconContainer: {
     backgroundColor: '#fff',
     height: 40,
     width: 40,
-    borderRadius: 10,
+    borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
+    marginRight: Spacing.smaller,
   },
   statTextContainer: {
     width: '75%',

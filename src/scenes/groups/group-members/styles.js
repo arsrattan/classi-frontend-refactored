@@ -12,6 +12,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.base,
     marginBottom: Spacing.base,
   },
+  copyLinkContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: Spacing.smallest,
+  },
+  sectionContainerPadded: {
+    backgroundColor: Colors.white,
+    padding: Spacing.base,
+    marginBottom: Spacing.base,
+  },
 });
 
 export default styles;
