@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from './styles';
-import {crossImg, scheduledImg, unlovedImg} from '_assets';
-import {Button} from '_atoms';
-import {Icons, Spacing, Typography} from '_styles';
+import { crossImg, scheduledImg, unlovedImg } from '_assets';
+import { Button } from '_atoms';
+import { Icons, Spacing, Typography } from '_styles';
 
-const PublishedClassScreen = ({navigation}) => {
+const PublishedClassScreen = ({ navigation }) => {
   return (
     <View style={styles.mainContainer}>
       {StatusBar.setBarStyle('dark-content', true)}
@@ -31,10 +31,10 @@ const PublishedClassScreen = ({navigation}) => {
           <Text
             style={[
               Typography.p1d2,
-              {textAlign: 'center', paddingBottom: Spacing.large},
+              { textAlign: 'center', paddingBottom: Spacing.large },
             ]}>
             Your Class has been scheduled
-            <Text style={{fontWeight: 'bold'}}>‘ Cooking for Dummies ’</Text>.
+            <Text style={{ fontWeight: 'bold' }}>‘ Cooking for Dummies ’</Text>.
             We will add this class to your upcoming class.
           </Text>
           <View style={styles.centerButtonContainer}>

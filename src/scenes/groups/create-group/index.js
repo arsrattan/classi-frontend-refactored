@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   StatusBar,
@@ -8,13 +8,13 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import Clipboard from '@react-native-community/clipboard';
-import {arrowBackDarkImg, copyImg} from '_assets';
-import {ProfileImg, InputField} from '_atoms';
-import {Header, SearchUsers} from '_molecules';
-import {Icons, Typography, Spacing, Colors} from '_styles';
+import { arrowBackDarkImg, copyImg } from '_assets';
+import { ProfileImg, InputField } from '_atoms';
+import { Header, SearchUsers } from '_molecules';
+import { Icons, Typography, Spacing, Colors } from '_styles';
 import styles from './styles';
 
-const CreateGroup = ({navigation, route}) => {
+const CreateGroup = ({ navigation, route }) => {
   const [searchFriendName, setSearchName] = useState('');
   const searchNameAction = (name, misc) => {
     setSearchName(name);
@@ -34,7 +34,7 @@ const CreateGroup = ({navigation, route}) => {
             navigation={navigation}
             backgroundColor={Colors.white}
             text={
-              <Text style={{...Typography.p1d2, ...Typography.bold}}>
+              <Text style={{ ...Typography.p1d2, ...Typography.bold }}>
                 Create New Workout Group
               </Text>
             }
@@ -43,7 +43,7 @@ const CreateGroup = ({navigation, route}) => {
               navigation.goBack();
             }}
           />
-          <View style={{marginBottom: Spacing.small, alignItems: 'center'}}>
+          <View style={{ marginBottom: Spacing.small, alignItems: 'center' }}>
             <ProfileImg
               size="large"
               userProfileImg="https://classi-profile-pictures.s3.us-east-2.amazonaws.com/Screen+Shot+2020-06-17+at+00.16.41.png"

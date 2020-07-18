@@ -1,6 +1,6 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {Image, View, Text} from 'react-native';
+import { Image, View, Text } from 'react-native';
 import {
   addImg,
   browseImg,
@@ -23,7 +23,7 @@ import {
   GroupsHomeScreen,
   LoginScreen,
 } from '_scenes';
-import {Colors, Typography, Spacing, Icons} from '_styles';
+import { Colors, Typography, Spacing, Icons } from '_styles';
 
 const activeText = {
   ...Typography.p2,
@@ -49,7 +49,7 @@ const AppNavigator = () => (
         borderRadius: 25,
         paddingTop: Spacing.smaller,
       },
-      labelStyle: {...Typography.p2},
+      labelStyle: { ...Typography.p2 },
     }}
     shifting={false}
     initialRouteName="Home">
@@ -57,10 +57,10 @@ const AppNavigator = () => (
       name="Home"
       component={HomeScreen}
       options={{
-        tabBarLabel: ({focused, tintColor}) => (
+        tabBarLabel: ({ focused, tintColor }) => (
           <Text style={focused ? activeText : inactiveText}>Home</Text>
         ),
-        tabBarIcon: ({tintColor, focused}) => (
+        tabBarIcon: ({ tintColor, focused }) => (
           <Image
             source={focused ? homeActiveImg : homeImg}
             style={Icons.normal}
@@ -72,10 +72,10 @@ const AppNavigator = () => (
       name="Browse"
       component={BrowseScreen}
       options={{
-        tabBarLabel: ({focused, tintColor}) => (
+        tabBarLabel: ({ focused, tintColor }) => (
           <Text style={focused ? activeText : inactiveText}>Browse</Text>
         ),
-        tabBarIcon: ({tintColor, focused}) => (
+        tabBarIcon: ({ tintColor, focused }) => (
           <Image
             source={focused ? browseActiveImg : browseImg}
             style={Icons.normal}
@@ -106,10 +106,10 @@ const AppNavigator = () => (
       name="Feed"
       component={FeedScreen}
       options={{
-        tabBarLabel: ({focused, tintColor}) => (
+        tabBarLabel: ({ focused, tintColor }) => (
           <Text style={focused ? activeText : inactiveText}>Social</Text>
         ),
-        tabBarIcon: ({tintColor, focused}) => (
+        tabBarIcon: ({ tintColor, focused }) => (
           <Image
             source={focused ? feedActiveImg : feedIconImg}
             style={Icons.normal}
@@ -121,10 +121,10 @@ const AppNavigator = () => (
       name="Groups"
       component={GroupsHomeScreen}
       options={{
-        tabBarLabel: ({focused, tintColor}) => (
+        tabBarLabel: ({ focused, tintColor }) => (
           <Text style={focused ? activeText : inactiveText}>Groups</Text>
         ),
-        tabBarIcon: ({tintColor, focused}) => (
+        tabBarIcon: ({ tintColor, focused }) => (
           <Image
             source={focused ? groupsActiveImg : groupsImg}
             style={Icons.normal}

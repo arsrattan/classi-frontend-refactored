@@ -1,16 +1,16 @@
 import React from 'react';
-import {Text, View, FlatList, TouchableOpacity, Image} from 'react-native';
+import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
-import {FollowButton, ProfileImg} from '_atoms';
+import { FollowButton, ProfileImg } from '_atoms';
 import {
   GetUser,
   GetUserFollowers,
 } from '../../../utils/backendServices/usersService';
 
-const RecommendedUsers = ({users}) => {
+const RecommendedUsers = ({ users }) => {
   var generateFollowerCount = function (users) {
     for (let user of users) {
-      const {followersData} = GetUserFollowers(user.userId);
+      const { followersData } = GetUserFollowers(user.userId);
       user.followers = followersData.length;
     }
   };
@@ -18,11 +18,11 @@ const RecommendedUsers = ({users}) => {
   return (
     <View style={styles.followCardContainer}>
       <FlatList
-        contentContainerStyle={{alignSelf: 'flex-end'}}
+        contentContainerStyle={{ alignSelf: 'flex-end' }}
         data={users}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        renderItem={({item}) => {
+        renderItem={({ item }) => {
           return (
             <TouchableOpacity style={[styles.feedCard]}>
               <ProfileImg

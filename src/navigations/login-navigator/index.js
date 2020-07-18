@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext} from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import {
   View,
   Text,
@@ -7,18 +7,17 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import {useMutation} from '@apollo/react-hooks';
-import {gql} from 'apollo-boost';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import { useMutation, gql } from '@apollo/client';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {Tile, InputField, Button} from '_atoms';
+import { Tile, InputField, Button } from '_atoms';
 import styles from './styles';
-import {Colors, Typography, Spacing} from '_styles';
+import { Colors, Typography, Spacing } from '_styles';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Tab = createMaterialTopTabNavigator();
 
-const SignupTab = ({navigation}) => {
+const SignupTab = ({ navigation }) => {
   function validate(values) {
     let errors = {};
     if (!values.email) {
@@ -62,7 +61,7 @@ const SignupTab = ({navigation}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (newValue, name) => {
-    setValues((values) => ({...values, [name]: newValue}));
+    setValues((values) => ({ ...values, [name]: newValue }));
   };
 
   const showDatePicker = () => {
@@ -84,7 +83,7 @@ const SignupTab = ({navigation}) => {
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       registerUser()
-        .then(({data}) => {
+        .then(({ data }) => {
           if (data.registerUser == true) {
             navigation.navigate('Home');
           }
@@ -101,8 +100,8 @@ const SignupTab = ({navigation}) => {
       registerUser(data: $data)
     }
   `;
-  const [registerUser, {data, loading, error}] = useMutation(REGISTER_USER, {
-    variables: {data: values},
+  const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER, {
+    variables: { data: values },
   });
 
   const handleSubmit = () => {
@@ -114,7 +113,7 @@ const SignupTab = ({navigation}) => {
   return (
     <TouchableWithoutFeedback onPress={dismissDatePicker} accessible={false}>
       <View style={styles.formContainer}>
-        <Text style={[Typography.h1d1, {marginTop: Spacing.large}]}>
+        <Text style={[Typography.h1d1, { marginTop: Spacing.large }]}>
           Join Classi
         </Text>
         <Text style={[Typography.p2danger]}>{errors.register}</Text>
@@ -167,7 +166,7 @@ const SignupTab = ({navigation}) => {
         <Button
           text="Join now"
           type="PrimaryRound"
-          style={{marginTop: Spacing.largest}}
+          style={{ marginTop: Spacing.largest }}
           navigation={navigation}
           screen="Home"
           onPress={handleSubmit}
@@ -178,13 +177,13 @@ const SignupTab = ({navigation}) => {
   );
 };
 
-const LoginTab = ({navigation}) => {
+const LoginTab = ({ navigation }) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (newValue, name) => {
-    setValues((values) => ({...values, [name]: newValue}));
+    setValues((values) => ({ ...values, [name]: newValue }));
   };
 
   const handleSubmit = () => {
@@ -193,8 +192,10 @@ const LoginTab = ({navigation}) => {
 
   useEffect(() => {
     if (isSubmitting) {
-      loginUser({variables: {email: values.email, password: values.password}})
-        .then(({data}) => {
+      loginUser({
+        variables: { email: values.email, password: values.password },
+      })
+        .then(({ data }) => {
           if (data.login != null) {
             AsyncStorage.setItem('AUTH_TOKEN', data.login.accessToken);
             AsyncStorage.setItem('USER_ID', data.login.userId);
@@ -216,12 +217,12 @@ const LoginTab = ({navigation}) => {
       }
     }
   `;
-  const [loginUser, {data, loading, error}] = useMutation(LOGIN_USER);
+  const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.formContainer}>
-        <Text style={[Typography.h1d1, {marginTop: Spacing.large}]}>
+        <Text style={[Typography.h1d1, { marginTop: Spacing.large }]}>
           Login to continue
         </Text>
         <Text style={[Typography.p2danger]}>{errors.login}</Text>
@@ -242,7 +243,7 @@ const LoginTab = ({navigation}) => {
         <Button
           text="Login"
           type="PrimaryRound"
-          style={{marginTop: Spacing.largest}}
+          style={{ marginTop: Spacing.largest }}
           navigation={navigation}
           screen="Home"
           onPress={handleSubmit}
@@ -256,12 +257,12 @@ const LoginTab = ({navigation}) => {
   );
 };
 
-const LoginNavigator = ({navigation}) => {
+const LoginNavigator = ({ navigation }) => {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        indicatorStyle: {backgroundColor: Colors.andromeda},
-        labelStyle: {fontWeight: 'bold', textTransform: 'capitalize'},
+        indicatorStyle: { backgroundColor: Colors.andromeda },
+        labelStyle: { fontWeight: 'bold', textTransform: 'capitalize' },
       }}>
       <Tab.Screen name="Login" component={LoginTab} />
       <Tab.Screen name="Sign up" component={SignupTab} />

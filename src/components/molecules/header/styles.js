@@ -1,5 +1,5 @@
-import {StyleSheet, Platform} from 'react-native';
-import {Spacing, Colors, Icons, Typography} from '_styles';
+import { StyleSheet, Platform } from 'react-native';
+import { Spacing, Colors, Icons, Typography } from '_styles';
 
 const styles = StyleSheet.create({
   headerView: {

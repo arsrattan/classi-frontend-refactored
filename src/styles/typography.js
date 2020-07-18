@@ -1,4 +1,4 @@
-import {fontFamily} from '_assets';
+import { fontFamily } from '_assets';
 import * as Colors from './colors';
 
 export const p1 = {

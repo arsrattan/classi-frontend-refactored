@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Icons} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Icons } from '_styles';
 
 const styles = StyleSheet.create({
   icon: {

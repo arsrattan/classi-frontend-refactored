@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ScrollView,
@@ -9,8 +9,8 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import Clipboard from '@react-native-community/clipboard';
-import {arrowBackDarkImg, copyImg, searchImg} from '_assets';
-import {InputBox} from '_atoms';
+import { arrowBackDarkImg, copyImg, searchImg } from '_assets';
+import { InputBox } from '_atoms';
 import {
   Header,
   RecommendedUsers,
@@ -18,10 +18,10 @@ import {
   InviteTile,
   SearchUsers,
 } from '_molecules';
-import {Icons, Typography, Spacing, Colors} from '_styles';
+import { Icons, Typography, Spacing, Colors } from '_styles';
 import styles from './styles';
 
-const Invite = ({navigation, route}) => {
+const Invite = ({ navigation, route }) => {
   // might not need these if we get the invited list from the backend
   //const {invitedList} = route.params;
   //const {addToList} = route.params;

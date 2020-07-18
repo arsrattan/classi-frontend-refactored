@@ -8,12 +8,12 @@ import {
   FlatList,
 } from 'react-native';
 import styles from './styles';
-import {ProfileImg, Divider} from '_atoms';
-import {Typography, Icons, Spacing, Colors} from '_styles';
-import {menuImg} from '_assets';
-import {helperFunctions} from '_utils';
+import { ProfileImg, Divider } from '_atoms';
+import { Typography, Icons, Spacing, Colors } from '_styles';
+import { menuImg } from '_assets';
+import { helperFunctions } from '_utils';
 
-const WorkoutGroup = ({navigation, numClasses}) => {
+const WorkoutGroup = ({ navigation, numClasses }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -47,11 +47,15 @@ const WorkoutGroup = ({navigation, numClasses}) => {
       </TouchableOpacity>
       <View style={styles.upcomingClassesContainer}>
         <Text
-          style={{...Typography.p1, ...Typography.unbold, color: Colors.aries}}>
-          <Text style={{...Typography.bold}}>12 </Text>Upcoming classes
+          style={{
+            ...Typography.p1,
+            ...Typography.unbold,
+            color: Colors.aries,
+          }}>
+          <Text style={{ ...Typography.bold }}>12 </Text>Upcoming classes
         </Text>
         <FlatList
-          style={{marginTop: Spacing.small}}
+          style={{ marginTop: Spacing.small }}
           data={[
             {
               imageSource:
@@ -68,7 +72,7 @@ const WorkoutGroup = ({navigation, numClasses}) => {
           ]}
           horizontal={true}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <Image
               source={{
                 uri: item.imageSource,

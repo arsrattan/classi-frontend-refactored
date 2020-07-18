@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   Text,
@@ -8,10 +8,10 @@ import {
   Keyboard,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import {crossImg} from '_assets';
-import {Icons, Spacing, Typography, Colors} from '_styles';
+import { crossImg } from '_assets';
+import { Icons, Spacing, Typography, Colors } from '_styles';
 import styles from './styles';
-import {ProfileImg, InputField} from '_atoms';
+import { ProfileImg, InputField } from '_atoms';
 
 const EditProfileScreen = (props) => {
   const [uri, setUri] = useState('');
@@ -31,7 +31,7 @@ const EditProfileScreen = (props) => {
             onPress={() => {
               props.navigation.goBack();
             }}
-            style={{position: 'absolute', left: Spacing.base}}>
+            style={{ position: 'absolute', left: Spacing.base }}>
             <Image source={crossImg} style={Icons.normal} />
           </TouchableOpacity>
           <Text style={Typography.p1d2}>Edit Profile</Text>

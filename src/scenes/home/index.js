@@ -1,38 +1,39 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView, Image, StatusBar} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView } from 'react-native';
 import styles from './styles';
-import {Header} from '_molecules';
-import {ImageTile} from '_atoms';
-import {avatarImg, notificationImg, cameraImg, arrowImg} from '_assets';
-import {createClassCards, classData} from '_utils';
-import {GetAllClasses} from '../../utils/backendServices/classService';
+import { Header } from '_molecules';
+import { avatarImg, notificationImg } from '_assets';
+// import { GetAllClasses } from '../../utils/backendServices/classService';
 import AsyncStorage from '@react-native-community/async-storage';
-import {Colors, Spacing, Typography, Icons} from '_styles';
+import { Colors, Typography } from '_styles';
+import { GraphQLClient } from '_services';
+import {
+  UpcomingClasses,
+  FriendsClasses,
+  RecommendedClasses,
+} from '_molecules';
 
-const HomeScreen = ({navigation}) => {
-  const {data, loading} = GetAllClasses();
-  const [state, setState] = useState({tokenData: null});
-  var filterClassData = function (textFilter, classType, classData) {
-    return classData == null
-      ? []
-      : classData.filter(function (c) {
-          return (
-            c.classType.indexOf(classType) != -1 &&
-            c.classType.indexOf(textFilter) != -1
-          );
-        });
-  };
+const HomeScreen = ({ navigation }) => {
+  // const { data, loading } = GetAllClasses();
 
-  const [filterVal, setFilterVal] = useState('');
-  const [values, setValues] = useState({className: ''});
+  const [tokenData, setTokenData] = useState('');
+  const [classes, setClasses] = useState([]);
 
   useEffect(() => {
-    const asyncFetchToken = async () => {
+    const fetchToken = async () => {
       const res = await AsyncStorage.getItem('USER_ID');
-      setState(res);
+      setTokenData(res);
     };
-    asyncFetchToken();
-  }, [state]);
+
+    const fetchClasses = async () => {
+      const { data, error, loading } = await GraphQLClient.queryAllClasses();
+      setClasses(data);
+    };
+
+    fetchToken();
+    fetchClasses();
+  }, []);
+
   return (
     <View style={styles.homeContainer}>
       <View style={styles.headerContainer}>
@@ -47,9 +48,7 @@ const HomeScreen = ({navigation}) => {
                 color: Colors.white,
               }}>
               Welcome back
-              <Text style={{color: Colors.andromeda}}>
-                {state == null ? '' : state.tokenData}
-              </Text>
+              <Text style={{ color: Colors.andromeda }}>{tokenData || ''}</Text>
             </Text>
           }
           writePost={false}
@@ -65,51 +64,9 @@ const HomeScreen = ({navigation}) => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
-        {
-          (data.length = 0 ? (
-            <View style={styles.topSectionContainer}>
-              <Text style={styles.lightSectionHeader}>
-                Your Upcoming Classes
-              </Text>
-              {createClassCards(data, navigation)}
-            </View>
-          ) : null)
-        }
-
-        <View style={styles.lightBackgroundContainer}>
-          <View style={styles.classHappeningHeader}>
-            <Image
-              source={cameraImg}
-              style={{...Icons.normal, marginRight: Spacing.smaller}}
-            />
-            <Text style={{...Typography.h3, color: Colors.aquarius}}>
-              Your friend's recent classes
-            </Text>
-          </View>
-          {createClassCards(data, navigation)}
-          <Text
-            style={{
-              ...Typography.p3,
-              color: Colors.aries,
-              marginLeft: Spacing.base,
-              letterSpacing: 1,
-            }}>
-            {'Recommended Classes'.toUpperCase()}
-          </Text>
-          <View style={styles.classFilterContainer}>
-            <Text style={{...Typography.h3, color: Colors.aquarius}}>
-              I’m interested in...
-            </Text>
-            <View style={styles.filterSelectContainer}>
-              <Text style={styles.h3a1}>All Classes</Text>
-              <Image style={Icons.normal} source={arrowImg} />
-            </View>
-          </View>
-          <ImageTile
-            classData={filterClassData(values.className, filterVal, data)}
-            navigation={navigation}
-          />
-        </View>
+        <UpcomingClasses navigation={navigation} classes={classes} />
+        <FriendsClasses navigation={navigation} classes={classes} />
+        <RecommendedClasses navigation={navigation} classes={classes} />
       </ScrollView>
     </View>
   );

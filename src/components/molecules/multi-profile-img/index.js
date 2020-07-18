@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
-import {Typography, Colors, Spacing} from '_styles';
+import React, { useState } from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { Typography, Colors, Spacing } from '_styles';
 import styles from './styles';
-import {ProfileImg} from '_atoms';
+import { ProfileImg } from '_atoms';
 
-const MultiProfileImg = ({userList, propStyles}) => {
+const MultiProfileImg = ({ userList, propStyles }) => {
   const numUsers = userList.length;
   const profileImgList = [];
   const userNamesList = [];
@@ -16,7 +16,7 @@ const MultiProfileImg = ({userList, propStyles}) => {
         <ProfileImg
           size="small"
           userProfileImg="https://classi-profile-pictures.s3.us-east-2.amazonaws.com/Screen+Shot+2020-06-17+at+00.16.41.png"
-          style={{left: -15 * i, borderWidth: 3, borderColor: 'white'}}
+          style={{ left: -15 * i, borderWidth: 3, borderColor: 'white' }}
         />,
       );
       if (i !== numUsers - 1) {
@@ -26,7 +26,7 @@ const MultiProfileImg = ({userList, propStyles}) => {
       }
     }
     profileImgList.push(
-      <Text style={{...styles.userNameText, left: -15 * (i - 1)}}>
+      <Text style={{ ...styles.userNameText, left: -15 * (i - 1) }}>
         {userNamesList}
       </Text>,
     );
@@ -38,7 +38,7 @@ const MultiProfileImg = ({userList, propStyles}) => {
         <ProfileImg
           size="small"
           userProfileImg="https://classi-profile-pictures.s3.us-east-2.amazonaws.com/Screen+Shot+2020-06-17+at+00.16.41.png"
-          style={{left: -15 * i, borderWidth: 3, borderColor: 'white'}}
+          style={{ left: -15 * i, borderWidth: 3, borderColor: 'white' }}
         />,
       );
       userNamesList.push(userID + ', ');
@@ -47,7 +47,11 @@ const MultiProfileImg = ({userList, propStyles}) => {
       <View style={styles.numProfilesCircle}>
         <View style={styles.insideCircle}>
           <Text
-            style={{...Typography.p2, color: Colors.white, ...Typography.bold}}>
+            style={{
+              ...Typography.p2,
+              color: Colors.white,
+              ...Typography.bold,
+            }}>
             {numUsers - 3 + ' +'}
           </Text>
         </View>
@@ -55,13 +59,13 @@ const MultiProfileImg = ({userList, propStyles}) => {
     );
     userNamesList.push('+' + (numUsers - 3) + ' more');
     profileImgList.push(
-      <Text style={{...styles.userNameText, left: -15 * 3}}>
+      <Text style={{ ...styles.userNameText, left: -15 * 3 }}>
         {userNamesList}
       </Text>,
     );
   }
   return (
-    <View style={{...propStyles, ...styles.container}}>{profileImgList}</View>
+    <View style={{ ...propStyles, ...styles.container }}>{profileImgList}</View>
   );
 };
 

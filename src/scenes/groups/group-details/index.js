@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ScrollView,
@@ -9,9 +9,9 @@ import {
   FlatList,
 } from 'react-native';
 import styles from './styles';
-import {ProfileImg, Divider, PopupMenu, MenuTile} from '_atoms';
-import {Header, MultiProfileImg, SmallHortClassCard} from '_molecules';
-import {Typography, Icons, Spacing, Colors} from '_styles';
+import { ProfileImg, Divider, PopupMenu, MenuTile } from '_atoms';
+import { Header, MultiProfileImg, SmallHortClassCard } from '_molecules';
+import { Typography, Icons, Spacing, Colors } from '_styles';
 import {
   menuImg,
   arrowBackDarkImg,
@@ -20,9 +20,9 @@ import {
   editDarkImg,
   forwardArrowImg,
 } from '_assets';
-import {createClassCards, classData} from '_utils';
+import { createClassCards, classData } from '_utils';
 
-const GroupDetailsScreen = ({navigation}) => {
+const GroupDetailsScreen = ({ navigation }) => {
   /* state should be group name retrieved from backend */
   const [groupName, setGroupName] = useState('Group Name');
   const inputRef = React.useRef();
@@ -34,7 +34,7 @@ const GroupDetailsScreen = ({navigation}) => {
           navigation={navigation}
           backgroundColor={Colors.white}
           text={
-            <Text style={{...Typography.p1d2, ...Typography.bold}}>
+            <Text style={{ ...Typography.p1d2, ...Typography.bold }}>
               Workout Group
             </Text>
           }
@@ -60,7 +60,7 @@ const GroupDetailsScreen = ({navigation}) => {
       </View>
       <ScrollView bounces={false}>
         <View style={styles.sectionContainer}>
-          <View style={{marginBottom: Spacing.small, alignItems: 'center'}}>
+          <View style={{ marginBottom: Spacing.small, alignItems: 'center' }}>
             <ProfileImg
               size="large"
               userProfileImg="https://classi-profile-pictures.s3.us-east-2.amazonaws.com/Screen+Shot+2020-06-17+at+00.16.41.png"
@@ -92,7 +92,7 @@ const GroupDetailsScreen = ({navigation}) => {
             onPress={() => {
               navigation.navigate('GroupMembersScreen');
             }}
-            style={{paddingVertical: Spacing.small, ...styles.flexRow}}>
+            style={{ paddingVertical: Spacing.small, ...styles.flexRow }}>
             <MultiProfileImg userList={['Derek', 'Malik', 'Anmol', 'Arnim']} />
             <Image source={forwardArrowImg} style={Icons.smaller} />
           </TouchableOpacity>
@@ -122,7 +122,7 @@ const GroupDetailsScreen = ({navigation}) => {
           </Text>
           <SmallHortClassCard
             hasBackground={true}
-            style={{marginBottom: Spacing.smaller}}
+            style={{ marginBottom: Spacing.smaller }}
           />
           <SmallHortClassCard hasBackground={true} />
         </View>

@@ -1,21 +1,21 @@
 import React from 'react';
-import {ImageBackground, Text, TouchableOpacity, View} from 'react-native';
-import {ProfileImg, Tag} from '_atoms';
-import {Colors} from '_styles';
+import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import { ProfileImg, Tag } from '_atoms';
+import { Colors } from '_styles';
 import PopupMenu from '../popup-menu';
-import {menuImg, unregisterImg, shareImgDark} from '_assets';
+import { menuImg, unregisterImg, shareImgDark } from '_assets';
 import MenuTile from '../menu-tile';
 import styles from './styles';
 
-const ClassCard = ({navigation, item, showLive, popular, style}) => {
+const ClassCard = ({ navigation, item, showLive, popular, style }) => {
   const date = new Date(parseInt(item.scheduledTime));
-  const month = date.toLocaleString('default', {month: 'short'});
+  const month = date.toLocaleString('default', { month: 'short' });
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('Class', {classDetails: item});
+        navigation.navigate('Class', { classDetails: item });
       }}
-      style={{...styles.cardContainer, ...style}}>
+      style={{ ...styles.cardContainer, ...style }}>
       <View style={styles.cardHeader}>
         <ProfileImg userProfileImg={item.channel_thumbnail_url} size="small" />
         <View style={styles.instructorTextContainer}>
@@ -48,11 +48,13 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
         </ImageBackground>
       </View>
       <View style={styles.classDetailContainer}>
-        <Text style={styles.classNameText}>{item.className.replace(/(.{30})..+/, "$1...")}</Text>
+        <Text style={styles.classNameText}>
+          {item.className.replace(/(.{30})..+/, '$1...')}
+        </Text>
         <Text style={styles.scheduledTime}>
           {item.registeredUsers == null
             ? '0 users registered'
-            : item.registeredUsers.length + ' users registered'}
+            : item.registeredUsers + ' users registered'}
         </Text>
       </View>
     </TouchableOpacity>
