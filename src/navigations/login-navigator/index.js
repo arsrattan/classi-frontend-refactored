@@ -45,10 +45,10 @@ const SignupTab = ({ navigation }) => {
     } else if (!/^[a-zA-Z]+$/.test(values.lastName)) {
       errors.lastName = 'Please enter a valid last name!';
     }
-    if (!values.userId) {
-      errors.userId = 'Username is required!';
-    } else if (!/^\w+$/.test(values.userId)) {
-      errors.userId =
+    if (!values.username) {
+      errors.username = 'Username is required!';
+    } else if (!/^\w+$/.test(values.username)) {
+      errors.username =
         'Username must contain only letters, numbers and underscores!';
     }
     return errors;
@@ -61,7 +61,11 @@ const SignupTab = ({ navigation }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (newValue, name) => {
-    setValues((values) => ({ ...values, [name]: newValue }));
+    setValues((values) => ({
+      ...values,
+      [name]: newValue,
+      dateOfBirth: date.toISOString(),
+    }));
   };
 
   const showDatePicker = () => {
@@ -82,18 +86,22 @@ const SignupTab = ({ navigation }) => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      registerUser()
-        .then(({ data }) => {
-          if (data.registerUser == true) {
-            navigation.navigate('Home');
-          }
-        })
-        .catch((e) => {
-          errors.register = e.message.split(': ')[1];
-          setIsSubmitting(false);
-        });
+      console.log('Registering user!!!');
+      console.log(
+        `Sending with values: ${JSON.stringify(values, undefined, 2)}`,
+      );
+      registerUser();
+      setIsSubmitting(false);
     }
-  }, [errors, data, error, loading]);
+  }, [errors, error, values, isSubmitting, registerUser]);
+
+  useEffect(() => {
+    console.log(`data changed: ${JSON.stringify(data)}`);
+    console.log(`loading changed: ${loading}`);
+    if (data !== undefined) {
+      console.log(`Received data: ${JSON.stringify(data)}`);
+    }
+  }, [data, loading]);
 
   const REGISTER_USER = gql`
     mutation RegisterUser($data: CreateUserInput!) {
@@ -144,11 +152,11 @@ const SignupTab = ({ navigation }) => {
         <InputField
           label="Username"
           placeholderText="classi123"
-          value={values.userId || ''}
+          value={values.username || ''}
           onChange={handleChange}
-          name={'userId'}
+          name={'username'}
         />
-        <Text style={[Typography.p2danger]}>{errors.userId}</Text>
+        <Text style={[Typography.p2danger]}>{errors.username}</Text>
         <InputField
           label="Password"
           placeholderText="********"
@@ -161,6 +169,7 @@ const SignupTab = ({ navigation }) => {
           label="Date of birth"
           placeholderText="Must be at least 16"
           onPress={showDatePicker}
+          onChange={handleChange}
           value={date}
         />
         <Button

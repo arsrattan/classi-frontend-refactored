@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 const queries = {
   AllClasses: gql`
-    {
+    query {
       getAllClasses {
         classId
         className
