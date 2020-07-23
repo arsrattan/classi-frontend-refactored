@@ -1,8 +1,8 @@
-import React, {useRef, useState, useEffect} from 'react';
-import {Text, TextInput, View, TouchableOpacity} from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { Text, TextInput, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import {default as Divider} from '../divider';
-import {Colors, Spacing, Typography} from '_styles';
+import { default as Divider } from '../divider';
+import { Colors, Spacing, Typography } from '_styles';
 
 const InputField = ({
   label,
@@ -51,7 +51,7 @@ const InputField = ({
   } else {
     inputField = (
       <TouchableOpacity onPress={onPress}>
-        <Text style={{...Typography.p1, color: Colors.aries}}>
+        <Text style={{ ...Typography.p1, color: Colors.aries }}>
           {value.toLocaleDateString()}
         </Text>
       </TouchableOpacity>
@@ -63,7 +63,7 @@ const InputField = ({
         {inputField}
         <Divider
           color={Colors.grey}
-          style={{marginVertical: Spacing.smallest}}
+          style={{ marginVertical: Spacing.smallest }}
         />
       </View>
     );
@@ -73,12 +73,15 @@ const InputField = ({
       <Text
         style={[
           Typography.p1d2,
-          {paddingTop: Spacing.base, paddingBottom: Spacing.smallest},
+          { paddingTop: Spacing.base, paddingBottom: Spacing.smallest },
         ]}>
         {label}
       </Text>
       {inputField}
-      <Divider color={Colors.grey} style={{marginVertical: Spacing.smallest}} />
+      <Divider
+        color={Colors.grey}
+        style={{ marginVertical: Spacing.smallest }}
+      />
     </View>
   );
 };

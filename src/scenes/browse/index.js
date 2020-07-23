@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,9 +12,9 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './styles';
-import {InputBox} from '_atoms';
-import {Header, ClassList} from '_molecules';
-import {FilterModal} from '_organisms';
+import { InputBox } from '_atoms';
+import { Header, ClassList } from '_molecules';
+import { FilterModal } from '_organisms';
 import {
   strengthImg,
   girlImg,
@@ -26,12 +26,21 @@ import {
   avatarImg,
   notifDarkBttnImg,
 } from '_assets';
-import {createClassCards} from '_utils';
-import {GetAllClasses} from '../../utils/backendServices/classService';
-import {Spacing, Colors} from '_styles';
+import { createClassCards } from '_utils';
+// import { GetAllClasses } from '../../utils/backendServices/classService';
+import { Spacing, Colors } from '_styles';
+import { GraphQLClient } from '_services';
 
-const BrowseScreen = ({navigation}) => {
-  var filterClassData = function (textFilter, classType, classData) {
+const BrowseScreen = ({ navigation }) => {
+  // const { data, loading } = GetAllClasses();
+  const [pressFr, setPressFr] = useState(-1);
+  const [pressSr, setPressSr] = useState(-1);
+  const [filterVal, setFilterVal] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [values, setValues] = useState({ className: '' });
+  const [classes, setClasses] = useState([]);
+
+  const filterClassData = function (textFilter, classType, classData) {
     return classData == null
       ? []
       : classData.filter(function (c) {
@@ -42,15 +51,8 @@ const BrowseScreen = ({navigation}) => {
         });
   };
 
-  const {data, loading} = GetAllClasses();
-  const [pressFr, setPressFr] = useState(-1);
-  const [pressSr, setPressSr] = useState(-1);
-  const [filterVal, setFilterVal] = useState('');
-  const [visible, setVisible] = useState(false);
-  const [values, setValues] = useState({className: ''});
-
   const handleChange = (newValue, name) => {
-    setValues((values) => ({...values, [name]: newValue}));
+    setValues((values) => ({ ...values, [name]: newValue }));
   };
 
   const buttonFr = [
@@ -84,6 +86,15 @@ const BrowseScreen = ({navigation}) => {
     },
   ];
 
+  useEffect(() => {
+    const fetchClasses = async () => {
+      const { data, error, loading } = await GraphQLClient.queryAllClasses();
+      setClasses(data);
+    };
+
+    fetchClasses();
+  }, []);
+
   return (
     <View style={styles.screenContainer}>
       <View style={styles.headerPadding}>
@@ -100,11 +111,13 @@ const BrowseScreen = ({navigation}) => {
           }}
         />
       </View>
+
       <ScrollView style={styles.browseContainer}>
         <Modal deviceWidth={Platform.OS === 'ios'} isVisible={visible}>
           <FilterModal setVisible={setVisible} navigation={navigation} />
         </Modal>
-        <Text style={{...styles.browseHeaderText, paddingTop: Spacing.smaller}}>
+        <Text
+          style={{ ...styles.browseHeaderText, paddingTop: Spacing.smaller }}>
           Find a Class
         </Text>
         <View style={[styles.searchAndFilterContainer, styles.rightPadding]}>
@@ -124,11 +137,11 @@ const BrowseScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <FlatList
-          style={{marginTop: 18}}
+          style={{ marginTop: 18 }}
           data={buttonFr}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          renderItem={({item, index}) => {
+          renderItem={({ item, index }) => {
             return (
               <TouchableOpacity
                 key={index}
@@ -145,7 +158,7 @@ const BrowseScreen = ({navigation}) => {
                     backgroundColor: pressFr == item.id ? '#F86A6A' : '#fff',
                   },
                 ]}>
-                <View style={{marginRight: 10}}>{item.icon}</View>
+                <View style={{ marginRight: 10 }}>{item.icon}</View>
                 <Text
                   style={[
                     styles.filterChipText,
@@ -166,7 +179,7 @@ const BrowseScreen = ({navigation}) => {
           data={buttonSr}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          renderItem={({item, index}) => {
+          renderItem={({ item, index }) => {
             return (
               <TouchableOpacity
                 key={index}
@@ -183,7 +196,7 @@ const BrowseScreen = ({navigation}) => {
                     backgroundColor: pressSr == item.id ? '#F86A6A' : '#fff',
                   },
                 ]}>
-                <View style={{marginRight: 10}}>{item.icon}</View>
+                <View style={{ marginRight: 10 }}>{item.icon}</View>
                 <Text
                   style={[
                     styles.filterChipText,
@@ -200,16 +213,16 @@ const BrowseScreen = ({navigation}) => {
             item.id;
           }}
         />
-        <Text style={[styles.h3d2, {paddingTop: Spacing.small}]}>
+        <Text style={[styles.h3d2, { paddingTop: Spacing.small }]}>
           Popular Classes
         </Text>
         {createClassCards(
-          filterClassData(values.className, filterVal, data),
+          filterClassData(values.className, filterVal, classes),
           navigation,
         )}
         <Text style={styles.h3d2}>All Classes</Text>
         {createClassCards(
-          filterClassData(values.className, filterVal, data),
+          filterClassData(values.className, filterVal, classes),
           navigation,
         )}
       </ScrollView>

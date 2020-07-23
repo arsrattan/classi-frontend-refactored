@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Typography, Colors, Icons} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Typography, Colors, Icons } from '_styles';
 
 const styles = StyleSheet.create({
   p1dark1: {

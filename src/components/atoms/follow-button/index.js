@@ -1,15 +1,14 @@
-import React, {Component} from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import {gql} from 'apollo-boost';
 import {
   FollowUser,
   GetCurrentUserId,
 } from '../../../utils/backendServices/usersService';
-import {useMutation, useQuery, useLazyQuery} from '@apollo/react-hooks';
-import {useEffect, useState} from 'react';
+import { gql, useMutation, useQuery, useLazyQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
 
-const FollowButton = ({followedUser, isUnfollow, active}) => {
+const FollowButton = ({ followedUser, isUnfollow, active }) => {
   var checkIfFollowingUser = function (userId, followingData) {
     let res = false;
     for (let follower of followingData) {
@@ -45,7 +44,7 @@ const FollowButton = ({followedUser, isUnfollow, active}) => {
       }
     }
   `;
-  const [followUser, {data, loading, error}] = useMutation(FOLLOW_USER);
+  const [followUser, { data, loading, error }] = useMutation(FOLLOW_USER);
 
   const handleSubmit = () => {
     setIsActive(!isActive);
@@ -64,7 +63,7 @@ const FollowButton = ({followedUser, isUnfollow, active}) => {
           try {
             let following = cache.readQuery({
               query: GET_USER_FOLLOWING,
-              variables: {userId: userId},
+              variables: { userId: userId },
             });
             if (
               checkIfFollowingUser(followedUser, following.getUserFollowing)
@@ -91,7 +90,7 @@ const FollowButton = ({followedUser, isUnfollow, active}) => {
           }
         },
       })
-        .then(({data}) => {
+        .then(({ data }) => {
           setIsSubmitting(false);
         })
         .catch((e) => {

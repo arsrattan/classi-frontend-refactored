@@ -6,12 +6,12 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {classesOverviewData} from '_utils';
-import {seeImg, loveImg, menuImg, unregisterImg, shareImgDark} from '_assets';
+import { classesOverviewData } from '_utils';
+import { seeImg, loveImg, menuImg, unregisterImg, shareImgDark } from '_assets';
 import styles from './styles';
-import {ProfileImg, Tag} from '_atoms';
+import { ProfileImg, Tag } from '_atoms';
 
-const ImageTile = ({navigation, classData}) => {
+const ImageTile = ({ navigation, classData }) => {
   return (
     <View style={styles.tileContainer}>
       {classData.map((item) => {

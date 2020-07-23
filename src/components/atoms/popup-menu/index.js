@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {View, Text, Alert, TouchableOpacity, Image} from 'react-native';
-import {Tooltip} from 'react-native-elements';
-import {menuImg, unregisterImg, shareImgDark} from '_assets';
+import { View, Text, Alert, TouchableOpacity, Image } from 'react-native';
+import { Tooltip } from 'react-native-elements';
+import { menuImg, unregisterImg, shareImgDark } from '_assets';
 import styles from './styles';
-import {Icons} from '_styles';
+import { Icons } from '_styles';
 import MenuTile from '../menu-tile';
 
-const PopupMenu = ({icon, options}) => {
+const PopupMenu = ({ icon, options }) => {
   return (
     <View style={styles.popupContainer}>
       <Tooltip

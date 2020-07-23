@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Spacing, Colors} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Spacing, Colors } from '_styles';
 
 const styles = StyleSheet.create({
   dividerView: {

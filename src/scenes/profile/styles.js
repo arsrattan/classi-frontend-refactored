@@ -1,5 +1,5 @@
-import {StyleSheet, Platform} from 'react-native';
-import {Typography, Icons, Spacing, Colors} from '_styles';
+import { StyleSheet, Platform } from 'react-native';
+import { Typography, Icons, Spacing, Colors } from '_styles';
 
 const styles = StyleSheet.create({
   screenContainer: {

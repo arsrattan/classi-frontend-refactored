@@ -3,4 +3,4 @@ import * as Typography from './typography';
 import * as Colors from './colors';
 import * as Spacing from './spacing';
 
-export {Icons, Typography, Colors, Spacing};
+export { Icons, Typography, Colors, Spacing };

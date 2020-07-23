@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import {Colors} from '_styles';
+import { Colors } from '_styles';
 
-const FilterChip = ({data, press, setPress}) => {
+const FilterChip = ({ data, press, setPress }) => {
   return (
     <View style={styles.tagContainer}>
       {data.map((item, index) => {

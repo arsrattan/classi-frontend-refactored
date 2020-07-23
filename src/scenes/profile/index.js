@@ -15,13 +15,13 @@ import {
   settingsImg,
   unregisterImg,
 } from '_assets';
-import {Typography, Icons, Spacing, Colors} from '_styles';
-import {PopupMenu, MenuTile, ProfileImg, Dot, Button} from '_atoms';
-import {MedHortClassCard, SmallHortClassCard, Header} from '_molecules';
-import {FeedPost} from '_organisms';
-import {postData} from '_utils';
+import { Typography, Icons, Spacing, Colors } from '_styles';
+import { PopupMenu, MenuTile, ProfileImg, Dot, Button } from '_atoms';
+import { MedHortClassCard, SmallHortClassCard, Header } from '_molecules';
+import { FeedPost } from '_organisms';
+import { postData } from '_utils';
 
-const ProfileScreen = ({navigation}) => {
+const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.screenContainer}>
       {StatusBar.setBarStyle('dark-content', true)}
@@ -67,7 +67,7 @@ const ProfileScreen = ({navigation}) => {
       <ScrollView bounces={true}>
         <View style={styles.profileView}>
           <ProfileImg size="large" />
-          <View style={{paddingLeft: Spacing.base}}>
+          <View style={{ paddingLeft: Spacing.base }}>
             <Text style={Typography.h2d1}>Name</Text>
             <Text style={Typography.p1d2}>Bio text</Text>
             <View style={styles.followContainer}>
@@ -75,7 +75,7 @@ const ProfileScreen = ({navigation}) => {
               <Dot color={Colors.aries} size="base" />
               <Text style={Typography.p1d2}>87 following</Text>
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <Button
                 text="Edit profile"
                 type="SecondaryRound"
@@ -91,7 +91,7 @@ const ProfileScreen = ({navigation}) => {
         </View>
 
         <View style={styles.sectionContainer}>
-          <Text style={[Typography.h3d1, {paddingBottom: Spacing.small}]}>
+          <Text style={[Typography.h3d1, { paddingBottom: Spacing.small }]}>
             Upcoming Classes
           </Text>
           <SmallHortClassCard />
@@ -99,7 +99,7 @@ const ProfileScreen = ({navigation}) => {
         </View>
 
         <View style={styles.sectionContainer}>
-          <Text style={[Typography.h3d1, {paddingBottom: Spacing.small}]}>
+          <Text style={[Typography.h3d1, { paddingBottom: Spacing.small }]}>
             Saved Classes
           </Text>
           <SmallHortClassCard />
@@ -110,14 +110,14 @@ const ProfileScreen = ({navigation}) => {
               Alert.alert('Show All Pressed');
             }}
             style={styles.showMoreButton}>
-            <Text style={{...Typography.p1, color: Colors.andromeda}}>
+            <Text style={{ ...Typography.p1, color: Colors.andromeda }}>
               Show All
             </Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.sectionContainer}>
-          <Text style={[Typography.h3d1, {paddingBottom: Spacing.small}]}>
+          <Text style={[Typography.h3d1, { paddingBottom: Spacing.small }]}>
             Class History
           </Text>
         </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import AppNavigator from './app-navigator';
 import {
@@ -19,13 +19,14 @@ import {
   GroupDetailsScreen,
   CreateGroupScreen,
   GroupMembersScreen,
+  ClassPlayer,
 } from '_scenes';
 
 const Stack = createStackNavigator();
 
 const Navigator = () => (
   <Stack.Navigator
-    screenOptions={{headerShown: false, gestureEnabled: false}}
+    screenOptions={{ headerShown: false, gestureEnabled: false }}
     initialRouteName="Login">
     <Stack.Screen name="Home" component={AppNavigator} />
     <Stack.Screen name="Class" component={ClassScreen} />
@@ -44,10 +45,11 @@ const Navigator = () => (
     <Stack.Screen name="GroupDetailsScreen" component={GroupDetailsScreen} />
     <Stack.Screen name="CreateGroupScreen" component={CreateGroupScreen} />
     <Stack.Screen name="GroupMembersScreen" component={GroupMembersScreen} />
+    <Stack.Screen name="ClassPlayer" component={ClassPlayer} />
   </Stack.Navigator>
 );
 
 export default Navigator;
-export {default as AppNavigator} from './app-navigator';
-export {default as ClassNavigator} from './class-navigator';
-export {default as LoginNavigator} from './login-navigator';
+export { default as AppNavigator } from './app-navigator';
+export { default as ClassNavigator } from './class-navigator';
+export { default as LoginNavigator } from './login-navigator';
