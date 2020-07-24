@@ -19,6 +19,8 @@ import {
   GroupDetailsScreen,
   CreateGroupScreen,
   GroupMembersScreen,
+  WritePostScreen,
+  FeedScreen,
 } from '_scenes';
 
 const Stack = createStackNavigator();
@@ -44,6 +46,8 @@ const Navigator = () => (
     <Stack.Screen name="GroupDetailsScreen" component={GroupDetailsScreen} />
     <Stack.Screen name="CreateGroupScreen" component={CreateGroupScreen} />
     <Stack.Screen name="GroupMembersScreen" component={GroupMembersScreen} />
+    <Stack.Screen name="WritePostScreen" component={WritePostScreen} />
+    <Stack.Screen name="FeedScreen" component={FeedScreen} />
   </Stack.Navigator>
 );
 

@@ -8,15 +8,15 @@ import {
 } from '_assets';
 import {Header, RecommendedUsers} from '_molecules';
 import {FeedPost} from '_organisms';
-import {Icons, Typography, Colors} from '_styles';
 import styles from './styles';
-import {GetAllPosts} from '../../utils/backendServices/postsService';
-import {GetAllUsers} from '../../utils/backendServices/usersService';
-import {Spacing} from '_styles';
+import {UsersService, PostsService} from '_utils';
+//import {GetAllPosts} from '../../utils/backendServices/postsService';
+//import {GetAllUsers} from '../../utils/backendServices/usersService';
+import {Spacing, Icons, Typography, Colors} from '_styles';
 
 const FeedScreen = ({navigation}) => {
-  const {postsData, postsLoading} = GetAllPosts('userId');
-  const {allUsersData, allUsersLoading} = GetAllUsers();
+  const {postsData, postsLoading} = PostsService.GetAllPosts('userId');
+  const {allUsersData, allUsersLoading} = UsersService.GetAllUsers();
   return (
     <View style={{flex: 1}}>
       <View style={styles.headerAndStatsContainer}>

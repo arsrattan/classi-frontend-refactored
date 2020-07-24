@@ -1,6 +1,6 @@
 export {default as HomeScreen} from './home';
 export {default as BrowseScreen} from './browse';
-export {default as FeedScreen} from './feed';
+//export {default as FeedScreen} from './feed';
 export {default as LiveScreen} from './live';
 export {default as MessagesScreen} from './messages';
 export {default as ClassScreen} from './class';
@@ -16,6 +16,7 @@ export {default as ProfileScreen} from './profile';
 export {default as EditProfileScreen} from './edit-profile';
 export {default as InviteScreen} from './invite';
 export * from './groups';
+export * from './feed-tab';
 /*
 export {default as GroupsScreen} from './groups';
 export {default as GroupDetailsScreen} from './group-details';

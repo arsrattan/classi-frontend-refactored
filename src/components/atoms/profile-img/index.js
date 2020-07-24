@@ -25,7 +25,6 @@ const ProfileImg = ({userProfileImg, size, isChangeable, style}) => {
       if (response.uri) {
         setUri(response.uri);
       }
-      console.log(response);
     });
   };
 

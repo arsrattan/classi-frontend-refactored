@@ -13,6 +13,7 @@ import {Icons, Typography, Colors} from '_styles';
  * @param {Object} leftIcon - image for the left icon
  * @param {Function} onPressLeftIcon - anonymous function that executes when left icon is pressed
  * @param {Object} rightIcon - image for the right icon
+ * @param {String} rightText - text if the right icon is a text button instead
  * @param {Function} onPressRightIcon - anonymous function that executes when right icon is pressed
  * @param {Component} onPressRightIconAlt - display this component instead of the usual right icon
  */
@@ -25,6 +26,7 @@ const Header = ({
   leftIcon,
   onPressLeftIcon,
   rightIcon,
+  rightText,
   onPressRightIcon,
   onPressRightIconAlt,
 }) => {
@@ -41,7 +43,7 @@ const Header = ({
     writePostIcon = (
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('WritePost');
+          navigation.navigate('WritePostScreen');
         }}
         style={styles.postIconStyle}>
         <Image source={createPostBttnImg} style={Icons.normal} />
@@ -62,7 +64,18 @@ const Header = ({
           onPressRightIconAlt
         ) : (
           <TouchableOpacity onPress={onPressRightIcon}>
-            <Image source={rightIcon} style={Icons.normal} />
+            {rightText ? (
+              <Text
+                style={{
+                  ...Typography.h3,
+                  color: Colors.andromeda,
+                  ...Typography.bold,
+                }}>
+                {rightText}
+              </Text>
+            ) : (
+              <Image source={rightIcon} style={Icons.normal} />
+            )}
           </TouchableOpacity>
         )}
       </View>

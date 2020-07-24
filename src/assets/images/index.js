@@ -60,3 +60,4 @@ export const groupsActiveImg = require('./GroupActive.png');
 export const homeActiveImg = require('./HomeActive.png');
 export const browseActiveImg = require('./BrowseActive.png');
 export const feedActiveImg = require('./FeedActive.png');
+export const closeLightImg = require('./CloseWhite.png');

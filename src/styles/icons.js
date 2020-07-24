@@ -9,8 +9,8 @@ export const small = {
 };
 
 export const smaller = {
-  height: 20,
-  width: 20,
+  height: 15,
+  width: 15,
 };
 
 export const smallest = {

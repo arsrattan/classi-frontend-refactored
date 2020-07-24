@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {Icons, Spacing, Typography, Colors} from '_styles';
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   icon: {
     ...Icons.normal,
   },
@@ -34,10 +34,8 @@ const Styles = StyleSheet.create({
     paddingLeft: Spacing.base,
   },
   classFilterContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     paddingHorizontal: Spacing.base,
+    paddingTop: Spacing.hairline,
   },
   recommandedText: {
     ...Typography.p1,
@@ -83,4 +81,4 @@ const Styles = StyleSheet.create({
   },
 });
 
-export default Styles;
+export default styles;
