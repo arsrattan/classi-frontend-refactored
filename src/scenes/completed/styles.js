@@ -1,8 +1,8 @@
-import {StyleSheet} from 'react-native';
-import fontFamily from '../../assets/fonts/fontFamily';
+import { StyleSheet } from 'react-native';
+import { fontFamily } from '_assets';
 
 const styles = StyleSheet.create({
-  mainContainer: {flex: 1, backgroundColor: '#fff'},
+  mainContainer: { flex: 1, backgroundColor: '#fff' },
   congoContainer: {
     flex: 1,
     paddingTop: 100,
@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  crossButton: {position: 'absolute', left: 20, top: 64},
-  shareButton: {position: 'absolute', right: 20, top: 64},
+  crossButton: { position: 'absolute', left: 20, top: 64 },
+  shareButton: { position: 'absolute', right: 20, top: 64 },
   congoText: {
     paddingTop: 32,
     fontSize: 23,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     marginTop: 32,
   },
-  viewDivider: {height: 15, backgroundColor: '#f9f9f9', marginTop: 10},
+  viewDivider: { height: 15, backgroundColor: '#f9f9f9', marginTop: 10 },
   upcomingText: {
     fontSize: 17,
     lineHeight: 22,

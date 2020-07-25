@@ -1,50 +1,70 @@
-import React, {Component} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
 import styles from './styles';
-import {Avatar} from '_atoms';
-import {notifDarkBttnImg, notificationImg, createPostBttnImg} from '_assets';
+import { Avatar } from '_atoms';
+import { notifDarkBttnImg, notificationImg, createPostBttnImg } from '_assets';
+import { Icons, Typography, Colors } from '_styles';
 
-const Header = ({navigation, headerStyle, text, accentText, writePost}) => {
+/**
+ * Create the header at the top of each screen.
+ * @param {string} backgroundColor - background color for the header. Usually Colors.white
+ * @param {Component} text - centered text in the middle of the header
+ * @param {boolean} writePost - is there a second icon on the right?
+ * @param {Object} leftIcon - image for the left icon
+ * @param {Function} onPressLeftIcon - anonymous function that executes when left icon is pressed
+ * @param {Object} rightIcon - image for the right icon
+ * @param {Function} onPressRightIcon - anonymous function that executes when right icon is pressed
+ * @param {Component} onPressRightIconAlt - display this component instead of the usual right icon
+ */
+
+const Header = ({
+  navigation,
+  backgroundColor,
+  text,
+  writePost,
+  leftIcon,
+  onPressLeftIcon,
+  rightIcon,
+  onPressRightIcon,
+  onPressRightIconAlt,
+}) => {
   let headerText, writePostIcon;
-  let notifIcon = notifDarkBttnImg;
-  if (headerStyle === 'dark') {
-    headerText = (
-      <View style={styles.textContainer}>
-        <Text style={styles.welcomeText}>{text + ' '}</Text>
-        <Text style={styles.accentText}>{accentText}</Text>
-      </View>
-    );
-    notifIcon = notificationImg;
+  let statusBar;
+
+  // this doesn't really work because all 4 tabs are loaded at once, and the status bar is shared by all of them
+  if (backgroundColor != Colors.grey && backgroundColor != Colors.white) {
+    statusBar = <StatusBar barStyle="dark-content" />;
+  } else {
+    statusBar = <StatusBar barStyle="dark-content" />;
   }
   if (writePost === true) {
-    // writePostIcon = (
-    //   <TouchableOpacity
-    //     onPress={() => {
-    //       navigation.navigate('WritePost');
-    //     }}
-    //     style={styles.postIconStyle}>
-    //     <Image source={createPostBttnImg} style={styles.normalIcon} />
-    //   </TouchableOpacity>
-    // );
+    writePostIcon = (
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('WritePost');
+        }}
+        style={styles.postIconStyle}>
+        <Image source={createPostBttnImg} style={Icons.normal} />
+      </TouchableOpacity>
+    );
   }
 
   return (
-    <View style={styles.headerView}>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Profile');
-        }}>
-        <Avatar />
+    <View style={{ ...styles.headerView, backgroundColor: backgroundColor }}>
+      {statusBar}
+      <TouchableOpacity onPress={onPressLeftIcon}>
+        <Image source={leftIcon} style={Icons.normal} />
       </TouchableOpacity>
-      {headerText}
+      {text}
       <View style={styles.rightIcons}>
         {writePostIcon}
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Notifications');
-          }}>
-          <Image source={notifIcon} style={styles.smallIcon} />
-        </TouchableOpacity>
+        {onPressRightIconAlt !== undefined ? (
+          onPressRightIconAlt
+        ) : (
+          <TouchableOpacity onPress={onPressRightIcon}>
+            <Image source={rightIcon} style={Icons.normal} />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

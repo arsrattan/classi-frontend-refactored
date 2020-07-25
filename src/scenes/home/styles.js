@@ -1,7 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {fontFamily} from '_assets';
-import {Icons, Spacing} from '_styles';
-import {Typography, Colors} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Icons, Spacing, Typography, Colors } from '_styles';
 
 const Styles = StyleSheet.create({
   icon: {
@@ -14,11 +12,11 @@ const Styles = StyleSheet.create({
   },
   topSectionContainer: {
     flex: 1,
-    backgroundColor: Colors.aquarius,
+    backgroundColor: Colors.sirius,
   },
   headerContainer: {
     paddingHorizontal: Spacing.base,
-    backgroundColor: Colors.aquarius,
+    backgroundColor: Colors.sirius,
   },
   lightBackgroundContainer: {
     flex: 1,
@@ -37,7 +35,7 @@ const Styles = StyleSheet.create({
   },
   classFilterContainer: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: Spacing.base,
   },
@@ -82,22 +80,6 @@ const Styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 18,
-  },
-  filterChipText: {
-    fontFamily: fontFamily.book,
-    fontSize: 13,
-    lineHeight: 16,
-    letterSpacing: 0.5,
-    textTransform: 'capitalize',
-  },
-  allClassText: {
-    paddingTop: 10,
-    fontWeight: '500',
-    fontSize: 17,
-    lineHeight: 22,
-    color: '#102A43',
-    letterSpacing: -0.3,
-    fontFamily: fontFamily.book,
   },
 });
 

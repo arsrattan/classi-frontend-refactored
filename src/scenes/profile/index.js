@@ -15,49 +15,59 @@ import {
   settingsImg,
   unregisterImg,
 } from '_assets';
-import {fontFamily} from '_assets';
-import {Typography, Icons, Spacing, Colors} from '_styles';
-import {PopupMenu, MenuTile, ProfileImg, Dot, Button} from '_atoms';
-import {MedHortClassCard, SmallHortClassCard} from '_molecules';
-import {FeedPost} from '_organisms';
-import {postData} from '_utils';
+import { Typography, Icons, Spacing, Colors } from '_styles';
+import { PopupMenu, MenuTile, ProfileImg, Dot, Button } from '_atoms';
+import { MedHortClassCard, SmallHortClassCard, Header } from '_molecules';
+import { FeedPost } from '_organisms';
+import { postData } from '_utils';
 
-const ProfileScreen = ({navigation}) => {
+const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.screenContainer}>
       {StatusBar.setBarStyle('dark-content', true)}
-      <View style={styles.colorContainer} />
-      <View style={styles.flexRow}>
-        <TouchableOpacity
-          style={styles.backArrow}
-          onPress={() => {
+      <View
+        style={{
+          backgroundColor: Colors.white,
+          paddingHorizontal: Spacing.base,
+        }}>
+        <Header
+          navigation={navigation}
+          backgroundColor={Colors.white}
+          text={
+            <Text
+              style={{
+                ...Typography.p1,
+                ...Typography.bold,
+                color: Colors.aries,
+              }}>
+              Profile
+            </Text>
+          }
+          leftIcon={arrowBackDarkImg}
+          onPressLeftIcon={() => {
             navigation.goBack();
-          }}>
-          <Image source={arrowBackDarkImg} style={Icons.normal} />
-        </TouchableOpacity>
-        <Text style={Typography.p1d2}>About me</Text>
-        <View style={styles.logoutAndShare}>
-          <TouchableOpacity style={{marginRight: Spacing.small}}>
-            <Image source={shareImgDark} style={Icons.normal} />
-          </TouchableOpacity>
-          <PopupMenu
-            icon={settingsImg}
-            options={[
-              <MenuTile
-                icon={unregisterImg}
-                text="Logout"
-                navigation={navigation}
-                screen="Login"
-              />,
-            ]}
-          />
-        </View>
+          }}
+          rightIcon={settingsImg}
+          onPressRightIconAlt={
+            <PopupMenu
+              icon={settingsImg}
+              options={[
+                <MenuTile
+                  icon={unregisterImg}
+                  text="Logout"
+                  navigation={navigation}
+                  screen="Login"
+                />,
+              ]}
+            />
+          }
+        />
       </View>
 
       <ScrollView bounces={true}>
         <View style={styles.profileView}>
           <ProfileImg size="large" />
-          <View style={{paddingLeft: Spacing.base}}>
+          <View style={{ paddingLeft: Spacing.base }}>
             <Text style={Typography.h2d1}>Name</Text>
             <Text style={Typography.p1d2}>Bio text</Text>
             <View style={styles.followContainer}>
@@ -65,7 +75,7 @@ const ProfileScreen = ({navigation}) => {
               <Dot color={Colors.aries} size="base" />
               <Text style={Typography.p1d2}>87 following</Text>
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <Button
                 text="Edit profile"
                 type="SecondaryRound"
@@ -81,7 +91,7 @@ const ProfileScreen = ({navigation}) => {
         </View>
 
         <View style={styles.sectionContainer}>
-          <Text style={[Typography.h3d1, {paddingBottom: Spacing.small}]}>
+          <Text style={[Typography.h3d1, { paddingBottom: Spacing.small }]}>
             Upcoming Classes
           </Text>
           <SmallHortClassCard />
@@ -89,7 +99,7 @@ const ProfileScreen = ({navigation}) => {
         </View>
 
         <View style={styles.sectionContainer}>
-          <Text style={[Typography.h3d1, {paddingBottom: Spacing.small}]}>
+          <Text style={[Typography.h3d1, { paddingBottom: Spacing.small }]}>
             Saved Classes
           </Text>
           <SmallHortClassCard />
@@ -100,14 +110,14 @@ const ProfileScreen = ({navigation}) => {
               Alert.alert('Show All Pressed');
             }}
             style={styles.showMoreButton}>
-            <Text style={{...Typography.p1, color: Colors.andromeda}}>
+            <Text style={{ ...Typography.p1, color: Colors.andromeda }}>
               Show All
             </Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.sectionContainer}>
-          <Text style={[Typography.h3d1, {paddingBottom: Spacing.small}]}>
+          <Text style={[Typography.h3d1, { paddingBottom: Spacing.small }]}>
             Class History
           </Text>
         </View>

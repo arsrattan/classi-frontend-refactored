@@ -1,99 +1,70 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StatusBar, ScrollView, Image, FlatList, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView } from 'react-native';
 import styles from './styles';
-import {Header} from '_molecules';
-import {ImageTile} from '_atoms';
-import {cameraImg, arrowImg} from '_assets';
-import {PopupMenu} from '_atoms';
-import {MenuTile} from '_atoms';
-import {
-  settingsImg, 
-  unregisterImg, 
-  shareImgDark,
-  strengthImg,
-  girlImg,
-  mediatorImg,
-  yogaImg,
-  cardioImg,
-  searchImg,
-  filterImg,
-} from '_assets';
-import {createClassCards} from '_utils';
-import {GetAllClasses} from '../../utils/backendServices/classService';
+import { Header } from '_molecules';
+import { avatarImg, notificationImg } from '_assets';
+// import { GetAllClasses } from '../../utils/backendServices/classService';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Colors, Typography } from '_styles';
+import { GraphQLClient } from '_services';
+import {
+  UpcomingClasses,
+  FriendsClasses,
+  RecommendedClasses,
+} from '_molecules';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
+  // const { data, loading } = GetAllClasses();
 
-  const buttonFr = [
-    {
-      id: 0,
-      filter: 'Strength',
-      icon: <Image source={strengthImg} style={styles.iconNormal} />,
-    },
-    {
-      id: 1,
-      filter: 'HIIT',
-      icon: <Image source={girlImg} style={styles.iconNormal} />,
-    },
-  ];
-
-  const buttonSr = [
-    {
-      id: 3,
-      filter: 'Full Body',
-      icon: <Image source={yogaImg} style={styles.iconNormal} />,
-    },
-    {
-      id: 4,
-      filter: 'Cardio',
-      icon: <Image source={cardioImg} style={styles.iconNormal} />,
-    },
-    {
-      id: 5,
-      filter: 'Yoga',
-      icon: <Image source={yogaImg} style={styles.iconNormal} />,
-    },
-  ];
-
-
-  const {data, loading} = GetAllClasses();
-  const [state, setState] = useState({tokenData: null});
-  var filterClassData = function (textFilter, classType, classData) {
-    return classData == null
-      ? []
-      : classData.filter(function (c) {
-          return (
-            c.classType.indexOf(classType) != -1 &&
-            c.classType.indexOf(textFilter) != -1
-          );
-        });
-  };
-
-  const [pressFr, setPressFr] = useState(-1);
-  const [pressSr, setPressSr] = useState(-1);
-  const [filterVal, setFilterVal] = useState('');
-  const [values, setValues] = useState({className: ''});
+  const [tokenData, setTokenData] = useState('');
+  const [classes, setClasses] = useState([]);
 
   useEffect(() => {
-    const asyncFetchToken = async () => {
+    const fetchToken = async () => {
       const res = await AsyncStorage.getItem('USER_ID');
-      setState(res);
+      setTokenData(res);
     };
-    asyncFetchToken();
-  }, [state]);
+
+    const fetchClasses = async () => {
+      const { data, error, loading } = await GraphQLClient.queryAllClasses();
+      setClasses(data);
+    };
+
+    fetchToken();
+    fetchClasses();
+  }, []);
+
   return (
     <View style={styles.homeContainer}>
-      {StatusBar.setBarStyle('light-content', true)}
       <View style={styles.headerContainer}>
         <Header
           navigation={navigation}
-          headerStyle="dark"
-          text="Welcome back,"
-          accentText={state == null ? '' : state.tokenData}
+          backgroundColor={Colors.sirius}
+          text={
+            <Text
+              style={{
+                ...Typography.p1,
+                ...Typography.bold,
+                color: Colors.white,
+              }}>
+              Welcome back
+              <Text style={{ color: Colors.andromeda }}>{tokenData || ''}</Text>
+            </Text>
+          }
           writePost={false}
+          leftIcon={avatarImg}
+          onPressLeftIcon={() => {
+            navigation.navigate('Profile');
+          }}
+          rightIcon={notificationImg}
+          onPressRightIcon={() => {
+            navigation.navigate('Notifications');
+          }}
         />
       </View>
+
       <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
+<<<<<<< HEAD
         <View style={styles.topSectionContainer}>
           <Text style={styles.lightSectionHeader}>Your Upcoming Classes</Text>
           {createClassCards(data, navigation)}
@@ -189,6 +160,11 @@ const HomeScreen = ({navigation}) => {
           />
           <ImageTile classData={filterClassData(values.className, filterVal, data)} navigation={navigation} />
         </View>
+=======
+        <UpcomingClasses navigation={navigation} classes={classes} />
+        <FriendsClasses navigation={navigation} classes={classes} />
+        <RecommendedClasses navigation={navigation} classes={classes} />
+>>>>>>> master
       </ScrollView>
     </View>
   );

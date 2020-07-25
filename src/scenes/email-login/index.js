@@ -1,12 +1,12 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {arrowBackDarkImg} from '_assets';
-import {Icons, Spacing, Typography, Colors} from '_styles';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { arrowBackDarkImg } from '_assets';
+import { Icons, Spacing, Typography, Colors } from '_styles';
 import styles from './styles';
-import {Button} from '_atoms';
-import {LoginNavigator} from '_navigations';
+import { Button } from '_atoms';
+import { LoginNavigator } from '_navigations';
 
-const EmailLoginScreen = ({navigation}) => {
+const EmailLoginScreen = ({ navigation }) => {
   return (
     <View style={styles.screenContainer}>
       <View style={styles.flexRow}>

@@ -1,9 +1,24 @@
 import React from 'react';
-import {Text, Image, TouchableOpacity, View} from 'react-native';
+import {
+  Text,
+  Image,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import styles from './styles';
+<<<<<<< HEAD
 import {Typography, Colors} from '_styles';
 import {Icons, Spacing} from '_styles';
 import InstagramLogin from 'react-native-instagram-login'
+=======
+import { Typography, Colors, Icons, Spacing } from '_styles';
+
+/**
+ * Create the header at the top of each screen.
+ * @param {boolean} isSubmitting - state of the backend call after button is pressed
+ */
+>>>>>>> master
 
 const Button = ({
   text,
@@ -14,6 +29,7 @@ const Button = ({
   navigation,
   screen,
   onPress,
+  isSubmitting,
 }) => {
   let buttonStyle;
   let textStyle;
@@ -23,14 +39,14 @@ const Button = ({
       borderRadius: 25,
       ...styles.postButtonPadding,
     };
-    textStyle = {...Typography.p1white};
+    textStyle = { ...Typography.p1white };
   } else if (type === 'PrimarySquare') {
     buttonStyle = {
       backgroundColor: Colors.andromeda,
       borderRadius: 10,
       ...styles.postButtonPadding,
     };
-    textStyle = {...Typography.p1white};
+    textStyle = { ...Typography.p1white };
   } else if (type === 'SecondaryRound') {
     buttonStyle = {
       backgroundColor: Colors.white,
@@ -39,7 +55,7 @@ const Button = ({
       borderRadius: 25,
       ...styles.postButtonPadding,
     };
-    textStyle = {...Typography.p1, color: Colors.andromeda};
+    textStyle = { ...Typography.p1, color: Colors.andromeda };
   } else if (type === 'TertiaryRound') {
     buttonStyle = {
       backgroundColor: Colors.lightGrey,
@@ -48,19 +64,19 @@ const Button = ({
       borderRadius: 25,
       ...styles.postButtonPadding,
     };
-    textStyle = {...Typography.p1, color: Colors.aries};
+    textStyle = { ...Typography.p1, color: Colors.aries };
   } else {
     buttonStyle = {
       backgroundColor: color,
       borderRadius: 25,
       ...styles.postButtonPadding,
     };
-    textStyle = {...Typography.p1white};
+    textStyle = { ...Typography.p1white };
   }
 
   return (
     <TouchableOpacity
-      style={{...buttonStyle, ...style}}
+      style={{ ...buttonStyle, ...style }}
       onPress={() => {
         if (onPress !== undefined) {
           onPress();
@@ -71,12 +87,16 @@ const Button = ({
       {icon !== undefined ? (
         <Image
           source={icon}
-          style={[Icons.normal, {marginRight: Spacing.smallest}]}
+          style={[Icons.normal, { marginRight: Spacing.smallest }]}
         />
       ) : (
         <Text />
       )}
-      <Text style={textStyle}>{text}</Text>
+      {isSubmitting ? (
+        <ActivityIndicator animating={true} color={Colors.white} />
+      ) : (
+        <Text style={textStyle}>{text}</Text>
+      )}
     </TouchableOpacity>
   );
 };

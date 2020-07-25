@@ -1,6 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {fontFamily} from '_assets';
-import {Typography, Colors, Spacing, Icons} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Typography, Colors, Spacing, Icons } from '_styles';
 
 const styles = StyleSheet.create({
   iconNormal: {
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
   commentTileContainer: {
     paddingTop: Spacing.smaller,
   },
-  viewDivider: {height: 15, backgroundColor: '#f9f9f9', marginTop: 20},
+  viewDivider: { height: 15, backgroundColor: '#f9f9f9', marginTop: 20 },
 });
 
 export default styles;

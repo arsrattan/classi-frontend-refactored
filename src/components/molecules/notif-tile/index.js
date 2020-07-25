@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {FollowButton, ProfileImg, Divider} from '_atoms';
+import { Text, View } from 'react-native';
+import { FollowButton, ProfileImg, Divider } from '_atoms';
 import styles from './styles';
 
-const NotifTile = ({user, action, date, isFollow, imageUrl, active}) => {
+const NotifTile = ({ user, action, date, isFollow, imageUrl, active }) => {
   let followBttn;
   if (isFollow === true) {
     followBttn = (

@@ -1,12 +1,38 @@
+// heading/title
 export const aquarius = '#102A43';
+
+// body
 export const aries = '#334E68';
+
+// accent color
 export const andromeda = '#F86A6A';
-export const livePink = '#FF0E83';
+
+// tile section background
 export const white = '#FFFFFF';
-export const grey = '#F5F5F5';
+
+// dark background color
+export const sirius = '#1E2432';
+
+// placeholder color
+export const cancer = '#B0B7C4';
+
+// screen background
+export const grey = '#f4f4f6';
+
+// tile background
 export const lightGrey = '#FAFAFC';
+
+// Used in line
+export const cassiopeia = 'rgba(161, 174, 183, 0.1)';
+
+// Used in caption / small text
+export const leo = 'rgba(51, 78, 104, 0.8)';
+
+// live components
+export const livePink = '#FF0E83';
+
 export const lightBlue = '#35BCDF';
-export const danger = '#dc3545'
+export const danger = '#dc3545';
 
 export const dark1 = {
   color: aquarius,

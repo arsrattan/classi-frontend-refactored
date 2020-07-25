@@ -1,10 +1,10 @@
-import {StyleSheet} from 'react-native';
-import {Typography, Spacing, Colors} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Typography, Spacing, Colors } from '_styles';
 
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    paddingHorizontal: Spacing.largest,
+    paddingHorizontal: Spacing.base,
     paddingTop: 60,
     backgroundColor: Colors.white,
   },

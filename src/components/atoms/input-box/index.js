@@ -1,9 +1,9 @@
 import React from 'react';
-import {Image, TextInput, TouchableOpacity, View} from 'react-native';
+import { Image, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
-import {searchImg} from '_assets';
+import { searchImg } from '_assets';
 
-const InputBox = ({placeholderText, icon, value, onChange, name}) => {
+const InputBox = ({ placeholderText, icon, value, onChange, name }) => {
   function handleChange(text, e) {
     onChange(text, e);
   }
@@ -16,7 +16,7 @@ const InputBox = ({placeholderText, icon, value, onChange, name}) => {
       {iconImage}
       <TextInput
         value={value}
-        onChange={(text) => handleChange(text, name)}
+        onChangeText={onChange}
         placeholder={placeholderText}
       />
     </View>

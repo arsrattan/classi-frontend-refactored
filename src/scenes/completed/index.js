@@ -9,13 +9,11 @@ import {
   ScrollView,
 } from 'react-native';
 import styles from './styles';
-import {Card} from '_assets';
-import {crossImg, finishImg, loveImgOrange, shareImgDark} from '_assets';
-import {createClassCards} from '_utils';
-import {classesMockData} from '_utils';
+import { crossImg, finishImg, loveImgOrange, shareImgDark } from '_assets';
+import { createClassCards, classesMockData } from '_utils';
 
-const CompletedScreen = ({navigation, route}) => {
-  const {classBy} = route.params;
+const CompletedScreen = ({ navigation, route }) => {
+  const { classBy } = route.params;
   return (
     <ScrollView style={styles.mainContainer}>
       {StatusBar.setBarStyle('dark-content', true)}
@@ -53,19 +51,19 @@ const CompletedScreen = ({navigation, route}) => {
           Easy & Healthy Morning Omlettes
         </Text>
         <TouchableOpacity style={styles.saveVideoButton}>
-          <Image source={loveImgOrange} style={{marginRight: 5}} />
+          <Image source={loveImgOrange} style={{ marginRight: 5 }} />
           <Text style={styles.saveVideoText}>Saved Video Class</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.viewDivider} />
-      <View style={{backgroundColor: '#fff', padding: 16}}>
+      <View style={{ backgroundColor: '#fff', padding: 16 }}>
         <Text style={styles.shareFriendText}>
           Share this class with your followers!
         </Text>
         <View style={styles.optionalView}>
           <TextInput
             multiline={true}
-            style={{padding: 12, fontSize: 15}}
+            style={{ padding: 12, fontSize: 15 }}
             value="Great class! I love it"
           />
         </View>
@@ -74,7 +72,7 @@ const CompletedScreen = ({navigation, route}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.viewDivider} />
-      <View style={{padding: 16}}>
+      <View style={{ padding: 16 }}>
         <Text style={styles.upcomingText}>Upcoming Class from Tafia</Text>
         {createClassCards(classesMockData, navigation)}
       </View>

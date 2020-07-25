@@ -1,6 +1,5 @@
-import {StyleSheet} from 'react-native';
-import fontFamily from '../../assets/fonts/fontFamily';
-import {Spacing, Typography, Colors, Icons} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Spacing, Typography, Colors, Icons } from '_styles';
 
 const styles = StyleSheet.create({
   iconNormal: {
@@ -102,19 +101,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   registerNowText: {
-    lineHeight: 19,
-    fontSize: 15,
-    fontWeight: '500',
-    color: '#fff',
-    fontFamily: fontFamily.book,
+    ...Typography.p1,
+    color: Colors.white,
+    ...Typography.medium,
   },
   copyLinkText: {
-    lineHeight: 19,
-    fontSize: 15,
-    fontWeight: '500',
-    color: '#334E68',
     textAlign: 'center',
-    fontFamily: fontFamily.book,
+    ...Typography.p1,
+    color: Colors.aries,
+    ...Typography.medium,
   },
   classDescriptionContainer: {
     marginTop: Spacing.base,

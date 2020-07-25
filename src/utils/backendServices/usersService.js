@@ -1,10 +1,9 @@
-import {useQuery} from '@apollo/react-hooks';
-import {gql} from 'apollo-boost';
-import {useEffect, useState} from 'react';
+import { useQuery, gql } from '@apollo/client';
+import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const GetUser = (userId) => {
-  const [state, setState] = useState({data: null, loading: true});
+  const [state, setState] = useState({ data: null, loading: true });
   const GET_USER = gql`
     query GetUserById($userId: String!) {
       getUserById(userId: $userId) {
@@ -15,11 +14,11 @@ export const GetUser = (userId) => {
       }
     }
   `;
-  const {data, error, loading} = useQuery(GET_USER, {
-    variables: {userId: userId},
+  const { data, error, loading } = useQuery(GET_USER, {
+    variables: { userId: userId },
   });
   useEffect(() => {
-    setState({data: null, loading: true});
+    setState({ data: null, loading: true });
     if (!error && !loading) {
       setState({
         data: data.getUserById,
@@ -31,20 +30,23 @@ export const GetUser = (userId) => {
 };
 
 export const GetAllUsers = () => {
-  const [state, setState] = useState({allUsersData: [], allUsersLoading: true});
+  const [state, setState] = useState({
+    allUsersData: [],
+    allUsersLoading: true,
+  });
   const GET_ALL_USERS = gql`
-  {
-    getAllUsers {
-      userId
-      s3url
-      firstName
-      lastName
+    {
+      getAllUsers {
+        userId
+        s3url
+        firstName
+        lastName
+      }
     }
-  }
   `;
-  const {data, error, loading} = useQuery(GET_ALL_USERS);
+  const { data, error, loading } = useQuery(GET_ALL_USERS);
   useEffect(() => {
-    setState({allUsersData: [], allUsersLoading: true});
+    setState({ allUsersData: [], allUsersLoading: true });
     if (!error && !loading) {
       setState({
         allUsersData: data.getAllUsers,
@@ -56,7 +58,7 @@ export const GetAllUsers = () => {
 };
 
 export const GetUserFollowers = (userId) => {
-  const [state, setState] = useState({followersData: [], loading: true});
+  const [state, setState] = useState({ followersData: [], loading: true });
   const GET_USER_FOLLOWERS = gql`
     query GetUserFollowers($userId: String!) {
       getUserFollowers(userId: $userId) {
@@ -64,11 +66,11 @@ export const GetUserFollowers = (userId) => {
       }
     }
   `;
-  const {data, error, loading} = useQuery(GET_USER_FOLLOWERS, {
-    variables: {userId: userId},
+  const { data, error, loading } = useQuery(GET_USER_FOLLOWERS, {
+    variables: { userId: userId },
   });
   useEffect(() => {
-    setState({followersData: [], loading: true});
+    setState({ followersData: [], loading: true });
     if (!error && !loading) {
       setState({
         followersData: data.getUserFollowers,
@@ -79,9 +81,11 @@ export const GetUserFollowers = (userId) => {
   return state;
 };
 
-
 export const GetUserFollowing = (userId) => {
-  const [state, setState] = useState({followingData: [], followingLoading: true});
+  const [state, setState] = useState({
+    followingData: [],
+    followingLoading: true,
+  });
   const GET_USER_FOLLOWING = gql`
     query GetUserFollowing($userId: String!) {
       getUserFollowing(userId: $userId) {
@@ -89,11 +93,11 @@ export const GetUserFollowing = (userId) => {
       }
     }
   `;
-  const {data, error, loading} = useQuery(GET_USER_FOLLOWING, {
-    variables: {userId: userId},
+  const { data, error, loading } = useQuery(GET_USER_FOLLOWING, {
+    variables: { userId: userId },
   });
   useEffect(() => {
-    setState({followingData: [], followingLoading: true});
+    setState({ followingData: [], followingLoading: true });
     if (!error && !loading) {
       setState({
         followingData: data.getUserFollowing,
@@ -104,9 +108,11 @@ export const GetUserFollowing = (userId) => {
   return state;
 };
 
-
 export const GetUserNotifications = (userId) => {
-  const [state, setState] = useState({notificationData: [], notificationLoading: true});
+  const [state, setState] = useState({
+    notificationData: [],
+    notificationLoading: true,
+  });
   const GET_USER_NOTIFICATIONS = gql`
     query GetUserNotifications($userId: String!) {
       getUserNotifications(userId: $userId) {
@@ -120,11 +126,11 @@ export const GetUserNotifications = (userId) => {
       }
     }
   `;
-  const {data, error, loading} = useQuery(GET_USER_NOTIFICATIONS, {
-    variables: {userId: userId},
+  const { data, error, loading } = useQuery(GET_USER_NOTIFICATIONS, {
+    variables: { userId: userId },
   });
   useEffect(() => {
-    setState({notificationData: [], notificationLoading: true});
+    setState({ notificationData: [], notificationLoading: true });
     if (!error && !loading) {
       setState({
         notificationData: data.getUserNotifications,
@@ -142,7 +148,7 @@ export const GetCurrentUserId = () => {
     const asyncFetchToken = async () => {
       const res = await AsyncStorage.getItem('USER_ID');
       setState(res);
-    }
+    };
     asyncFetchToken();
   }, [state]);
   return state;

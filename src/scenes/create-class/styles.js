@@ -1,6 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {fontFamily} from '_assets';
-import {Spacing, Typography, Colors, Icons} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Spacing, Typography, Colors, Icons } from '_styles';
 
 const styles = StyleSheet.create({
   createClassContainer: {

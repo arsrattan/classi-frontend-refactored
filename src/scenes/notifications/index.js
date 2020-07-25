@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import {
   Text,
@@ -9,9 +9,9 @@ import {
   ScrollView,
 } from 'react-native';
 import styles from './styles';
-import {crossImg, menuImg} from '_assets';
-import {NotifTile} from '_molecules';
-import {Icons, Spacing, Typography} from '_styles';
+import { crossImg, menuImg } from '_assets';
+import { NotifTile } from '_molecules';
+import { Icons, Spacing, Typography } from '_styles';
 import {
   GetUserNotifications,
   GetCurrentUserId,
@@ -48,10 +48,12 @@ var checkIfFollowingUser = function (userId, followingData) {
   return res;
 };
 
-const NotificationsScreen = ({navigation}) => {
+const NotificationsScreen = ({ navigation }) => {
   const userId = GetCurrentUserId();
-  const {notificationData, notificationLoading} = GetUserNotifications(userId);
-  const {followingData, followingLoading} = GetUserFollowing(userId);
+  const { notificationData, notificationLoading } = GetUserNotifications(
+    userId,
+  );
+  const { followingData, followingLoading } = GetUserFollowing(userId);
   return (
     <ScrollView style={styles.container}>
       {StatusBar.setBarStyle('dark-content', true)}
@@ -62,7 +64,9 @@ const NotificationsScreen = ({navigation}) => {
           }}>
           <Image source={crossImg} style={Icons.normal} />
         </TouchableOpacity>
-        <Text style={Typography.h2d1}>Notifications</Text>
+        <Text style={{ ...Typography.p1d2, ...Typography.bold }}>
+          Notifications
+        </Text>
         <TouchableOpacity>
           <Image source={menuImg} style={Icons.normal} />
         </TouchableOpacity>

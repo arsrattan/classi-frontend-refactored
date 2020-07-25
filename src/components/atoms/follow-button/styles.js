@@ -1,6 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {fontFamily} from '_assets';
-import {Typography, Colors, Spacing} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Typography, Colors, Spacing } from '_styles';
 
 const styles = StyleSheet.create({
   followBtn: {
