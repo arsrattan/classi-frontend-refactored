@@ -79,12 +79,6 @@ target 'Classi' do
 
 
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> master
   target 'ClassiTests' do
     inherit! :complete
     # Pods for testing

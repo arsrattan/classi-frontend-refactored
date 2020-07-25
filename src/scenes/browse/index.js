@@ -27,12 +27,12 @@ import {
   notifDarkBttnImg,
 } from '_assets';
 import { createClassCards } from '_utils';
-// import { GetAllClasses } from '../../utils/backendServices/classService';
+import { GetAllClasses } from '../../utils/backendServices/classService';
 import { Spacing, Colors } from '_styles';
 import { GraphQLClient } from '_services';
 
 const BrowseScreen = ({ navigation }) => {
-  // const { data, loading } = GetAllClasses();
+  const { data, loading } = GetAllClasses();
   const [pressFr, setPressFr] = useState(-1);
   const [pressSr, setPressSr] = useState(-1);
   const [filterVal, setFilterVal] = useState('');
@@ -217,12 +217,12 @@ const BrowseScreen = ({ navigation }) => {
           Popular Classes
         </Text>
         {createClassCards(
-          filterClassData(values.className, filterVal, classes),
+          filterClassData(values.className, filterVal, data),
           navigation,
         )}
         <Text style={styles.h3d2}>All Classes</Text>
         {createClassCards(
-          filterClassData(values.className, filterVal, classes),
+          filterClassData(values.className, filterVal, data),
           navigation,
         )}
       </ScrollView>
