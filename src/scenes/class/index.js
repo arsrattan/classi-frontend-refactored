@@ -157,9 +157,7 @@ const ClassScreen = ({ navigation, route }) => {
               <ProfileImg size="small" />
               <ProfileImg size="small" />
               <Text style={Typography.p1d2}>
-                {classDetails.registeredUsers == null
-                  ? '0 users registered'
-                  : classDetails.registeredUsers.length + ' users registered'}
+                {'Duration: ' + classDetails.expectedDuration + ' minutes'}
               </Text>
             </View>
             <View style={styles.schedulerTimeContainer}>

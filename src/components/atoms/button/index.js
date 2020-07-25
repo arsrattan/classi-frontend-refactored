@@ -7,12 +7,18 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
+<<<<<<< HEAD
+import {Typography, Colors} from '_styles';
+import {Icons, Spacing} from '_styles';
+import InstagramLogin from 'react-native-instagram-login'
+=======
 import { Typography, Colors, Icons, Spacing } from '_styles';
 
 /**
  * Create the header at the top of each screen.
  * @param {boolean} isSubmitting - state of the backend call after button is pressed
  */
+>>>>>>> master
 
 const Button = ({
   text,
