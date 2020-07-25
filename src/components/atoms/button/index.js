@@ -3,6 +3,7 @@ import {Text, Image, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
 import {Typography, Colors} from '_styles';
 import {Icons, Spacing} from '_styles';
+import InstagramLogin from 'react-native-instagram-login'
 
 const Button = ({
   text,

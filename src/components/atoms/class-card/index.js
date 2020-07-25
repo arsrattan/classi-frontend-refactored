@@ -50,9 +50,7 @@ const ClassCard = ({navigation, item, showLive, popular, style}) => {
       <View style={styles.classDetailContainer}>
         <Text style={styles.classNameText}>{item.className.replace(/(.{30})..+/, "$1...")}</Text>
         <Text style={styles.scheduledTime}>
-          {item.registeredUsers == null
-            ? '0 users registered'
-            : item.registeredUsers.length + ' users registered'}
+          {item.expectedDuration + ' minutes'}
         </Text>
       </View>
     </TouchableOpacity>

@@ -99,10 +99,10 @@ const HomeScreen = ({navigation}) => {
           {createClassCards(data, navigation)}
         </View>
         
-        <View style={styles.topSectionContainer}>
+        <View style={styles.lightBackgroundContainer}>
           <View style={styles.classHappeningHeader}>
             <Image source={cameraImg} style={styles.icon} />
-            <Text style={styles.lightTextHeader}>Recommended Classes</Text>
+            <Text style={styles.darkTextHeader}>Recommended Classes</Text>
           </View>
           {/* {createClassCards(data, navigation)} */}
           {/* <Text style={styles.darkTextHeader}>Recommended Classes</Text> */}

@@ -30,9 +30,9 @@ const Styles = StyleSheet.create({
     paddingTop: Spacing.large,
     paddingLeft: Spacing.base,
   },
-  lightTextHeader: {
+  darkTextHeader: {
     ...Typography.h3,
-    color: Colors.white,
+    color: Colors.aquarius,
     paddingLeft: Spacing.base,
   },
   classFilterContainer: {
@@ -48,7 +48,7 @@ const Styles = StyleSheet.create({
   },
   h3d2: {
     ...Typography.h3,
-    color: Colors.white,
+    color: Colors.aries,
   },
   filterSelectContainer: {
     flexDirection: 'row',
