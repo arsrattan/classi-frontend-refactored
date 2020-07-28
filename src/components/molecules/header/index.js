@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
 import styles from './styles';
-import {Avatar} from '_atoms';
-import {notifDarkBttnImg, notificationImg, createPostBttnImg} from '_assets';
-import {Icons, Typography, Colors} from '_styles';
+import { Avatar } from '_atoms';
+import { notifDarkBttnImg, notificationImg, createPostBttnImg } from '_assets';
+import { Icons, Typography, Colors } from '_styles';
 
 /**
  * Create the header at the top of each screen.
@@ -52,7 +52,7 @@ const Header = ({
   }
 
   return (
-    <View style={{...styles.headerView, backgroundColor: backgroundColor}}>
+    <View style={{ ...styles.headerView, backgroundColor: backgroundColor }}>
       {statusBar}
       <TouchableOpacity onPress={onPressLeftIcon}>
         <Image source={leftIcon} style={Icons.normal} />

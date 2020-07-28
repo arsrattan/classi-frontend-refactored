@@ -1,9 +1,8 @@
-import {useQuery} from '@apollo/react-hooks';
-import {gql} from 'apollo-boost';
-import {useEffect, useState} from 'react';
+import { useQuery, gql } from '@apollo/client';
+import { useEffect, useState } from 'react';
 
 export const GetAllClasses = () => {
-  const [state, setState] = useState({data: [], loading: true});
+  const [state, setState] = useState({ data: [], loading: true });
   const ALL_CLASSES = gql`
     {
       getAllClasses {
@@ -23,9 +22,9 @@ export const GetAllClasses = () => {
       }
     }
   `;
-  const {data, error, loading} = useQuery(ALL_CLASSES);
+  const { data, error, loading } = useQuery(ALL_CLASSES);
   useEffect(() => {
-    setState({data: [], loading: true, error: null});
+    setState({ data: [], loading: true, error: null });
     if (!error && !loading) {
       setState({
         data: data.getAllClasses,
@@ -37,7 +36,7 @@ export const GetAllClasses = () => {
 };
 
 export const GetClass = (classId) => {
-  const [state, setState] = useState({classData: {}, classLoading: true});
+  const [state, setState] = useState({ classData: {}, classLoading: true });
   const GET_CLASS = gql`
     query GetClassById($classId: String!) {
       getClassById(classId: $classId) {
@@ -57,11 +56,11 @@ export const GetClass = (classId) => {
       }
     }
   `;
-  const {data, error, loading} = useQuery(GET_CLASS, {
-    variables: {classId: classId},
+  const { data, error, loading } = useQuery(GET_CLASS, {
+    variables: { classId: classId },
   });
   useEffect(() => {
-    setState({classData: {}, classLoading: true});
+    setState({ classData: {}, classLoading: true });
     if (!error && !loading) {
       setState({
         classData: data.getClassById,

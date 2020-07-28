@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Spacing, Colors, Typography} from '_styles';
+import { StyleSheet } from 'react-native';
+import { Spacing, Colors, Typography } from '_styles';
 
 const styles = StyleSheet.create({
   followCardContainer: {

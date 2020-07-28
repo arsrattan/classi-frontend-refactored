@@ -1,70 +1,89 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView, Image, StatusBar} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, Image } from 'react-native';
 import styles from './styles';
-import {Header} from '_molecules';
-import {ImageTile} from '_atoms';
-import {avatarImg, notificationImg, cameraImg, arrowImg} from '_assets';
-import {createClassCards, classData} from '_utils';
-import {GetAllClasses} from '../../utils/backendServices/classService';
+import { ImageTile } from '_atoms';
+import { Header } from '_molecules';
+import { avatarImg, notificationImg, cameraImg } from '_assets';
+// import { GetAllClasses } from '../../utils/backendServices/classService';
 import AsyncStorage from '@react-native-community/async-storage';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
-import {Colors, Spacing, Typography, Icons} from '_styles';
+import { Colors, Spacing, Typography, Icons } from '_styles';
+import { GraphQLClient } from '_services';
+import { createClassCards } from '_utils';
 
-const HomeScreen = ({navigation}) => {
-  const {data, loading} = GetAllClasses();
-  const [state, setState] = useState({tokenData: null});
-  var filterClassData = function (textFilter, classType, classData) {
-    return classData == null
-      ? []
-      : classData.filter(function (c) {
-          return (
-            c.classType.indexOf(classType) != -1 &&
-            c.classType.indexOf(textFilter) != -1
-          );
-        });
+const UpcomingClasses = ({ navigation, classes }) => {
+  if (classes !== undefined && classes.length > 0) {
+    return (
+      <View style={styles.sectionContainer}>
+        <Text style={styles.lightSectionHeader}>Your Upcoming Classes</Text>
+        {createClassCards(classes, navigation)}
+      </View>
+    );
+  }
+  return null;
+};
+
+const FriendsClasses = ({ navigation, classes }) => {
+  if (classes !== undefined && classes.length > 0) {
+    return (
+      <View style={styles.lightBackgroundContainer}>
+        <View style={styles.classHappeningHeader}>
+          <Image
+            source={cameraImg}
+            style={{ ...Icons.normal, marginRight: Spacing.smaller }}
+          />
+          <Text style={{ ...Typography.h3, color: Colors.aquarius }}>
+            Your friend's recent classes
+          </Text>
+        </View>
+        {createClassCards(classes, navigation)}
+      </View>
+    );
+  }
+  return null;
+};
+
+const RecommendedClasses = ({ navigation, classes }) => {
+  const [values, setValues] = useState({ className: '' });
+  const [filterVal, setFilterVal] = useState('');
+
+  const filterClassData = (textFilter, classType, classData) => {
+    return classData.filter(
+      (c) =>
+        c.classType.indexOf(classType) !== -1 &&
+        c.classType.indexOf(textFilter) !== -1,
+    );
   };
 
-  const [filterVal, setFilterVal] = useState('');
-  const [values, setValues] = useState({className: ''});
-
-  useEffect(() => {
-    const asyncFetchToken = async () => {
-      const res = await AsyncStorage.getItem('USER_ID');
-      setState(res);
-    };
-    asyncFetchToken();
-  }, [state]);
-
-  const items = [
-    // this is the parent or 'item'
+  const classTypesList = [
     {
-      id: 0,
       name: 'Class Types',
-      // these are the children or 'sub items'
+      id: 0,
+
       children: [
         {
-          name: 'HIIT',
+          name: 'Yoga',
           id: 10,
         },
         {
-          name: 'Yoga',
-          id: 17,
+          name: 'HIIT',
+          id: 11,
         },
         {
-          name: 'Cardio',
+          name: 'Pilates',
           id: 13,
         },
         {
-          name: 'Core',
+          name: 'Barre',
           id: 14,
         },
         {
           name: 'Strength',
-          id: 15,
+          id: 14,
         },
         {
-          name: 'Pilates',
-          id: 16,
+          name: 'Core',
+          id: 14,
         },
       ],
     },
@@ -100,29 +119,85 @@ const HomeScreen = ({navigation}) => {
       selectText = ` All Classes`;
     }
 
-    /*
-    const selectText = classTypes.length
-      ? ` ${classTypeObjects
-          .map((item, i) => {
-            let label = `${item.name}, `;
-            if (i === classTypeObjects.length - 2) label = `${item.name} and `;
-            if (i === classTypeObjects.length - 1)
-              label = `${item.name} Classes`;
-            return label;
-          })
-          .join('')}`
-      : 'Select a fruit';
-      */
-
     return (
-      <Text style={{color: Colors.aries, ...Typography.h3}}>
+      <Text style={{ color: Colors.aries, ...Typography.h3 }}>
         I'm interested in
-        <Text style={{color: Colors.andromeda, ...Typography.bold}}>
+        <Text style={{ color: Colors.andromeda, ...Typography.bold }}>
           {selectText}
         </Text>
       </Text>
     );
   };
+
+  if (classes !== undefined && classes.length > 0) {
+    return (
+      <View style={styles.lightBackgroundContainer}>
+        <Text
+          style={{
+            ...Typography.p3,
+            color: Colors.aries,
+            marginLeft: Spacing.base,
+            letterSpacing: 1,
+            marginBottom: Spacing.smallest,
+          }}>
+          {'Recommended Classes'.toUpperCase()}
+        </Text>
+        <View style={styles.classFilterContainer}>
+          <SectionedMultiSelect
+            onSelectedItemsChange={onSelectedItemsChange}
+            onSelectedItemObjectsChange={onSelectedItemObjectsChange}
+            selectedItems={classTypes}
+            renderSelectText={renderSelectText}
+            alwaysShowSelectText={false}
+            expandDropDowns={true}
+            items={classTypesList}
+            uniqueKey="id"
+            subKey="children"
+            readOnlyHeadings={true}
+            modalWithTouchable={true}
+            searchPlaceholderText="Search class types"
+            itemFontFamily={{ ...Typography.p1, ...Typography.bold }}
+            subItemFontFamily={{ ...Typography.p1, ...Typography.bold }}
+            searchTextFontFamily={{ ...Typography.p1, ...Typography.bold }}
+            confirmFontFamily={{ ...Typography.h3, ...Typography.bold }}
+            styles={{
+              container: { marginTop: 200, marginBottom: 150 },
+              selectToggle: { backgroundColor: Colors.grey },
+              chipContainer: { marginTop: Spacing.smaller },
+            }}
+            colors={{ primary: Colors.andromeda }}
+          />
+        </View>
+        <ImageTile
+          classData={filterClassData(values.className, filterVal, classes)}
+          navigation={navigation}
+        />
+      </View>
+    );
+  }
+  return null;
+};
+
+const HomeScreen = ({ navigation }) => {
+  // const { data, loading } = GetAllClasses();
+
+  const [tokenData, setTokenData] = useState('');
+  const [classes, setClasses] = useState([]);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      const res = await AsyncStorage.getItem('USER_ID');
+      setTokenData(res);
+    };
+
+    const fetchClasses = async () => {
+      const { data, error, loading } = await GraphQLClient.queryAllClasses();
+      setClasses(data);
+    };
+
+    fetchToken();
+    fetchClasses();
+  }, []);
 
   return (
     <View style={styles.homeContainer}>
@@ -138,9 +213,7 @@ const HomeScreen = ({navigation}) => {
                 color: Colors.white,
               }}>
               Welcome back
-              <Text style={{color: Colors.andromeda}}>
-                {state == null ? '' : state.tokenData}
-              </Text>
+              <Text style={{ color: Colors.andromeda }}>{tokenData || ''}</Text>
             </Text>
           }
           writePost={false}
@@ -156,69 +229,9 @@ const HomeScreen = ({navigation}) => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
-        {
-          (data.length = 0 ? (
-            <View style={styles.topSectionContainer}>
-              <Text style={styles.lightSectionHeader}>
-                Your Upcoming Classes
-              </Text>
-              {createClassCards(data, navigation)}
-            </View>
-          ) : null)
-        }
-
-        <View style={styles.lightBackgroundContainer}>
-          <View style={styles.classHappeningHeader}>
-            <Image
-              source={cameraImg}
-              style={{...Icons.normal, marginRight: Spacing.smaller}}
-            />
-            <Text style={{...Typography.h3, color: Colors.aquarius}}>
-              Your friend's recent classes
-            </Text>
-          </View>
-          {createClassCards(data, navigation)}
-          <Text
-            style={{
-              ...Typography.p3,
-              color: Colors.aries,
-              marginLeft: Spacing.base,
-              letterSpacing: 1,
-              marginBottom: Spacing.smallest,
-            }}>
-            {'Recommended Classes'.toUpperCase()}
-          </Text>
-          <View style={styles.classFilterContainer}>
-            <SectionedMultiSelect
-              onSelectedItemsChange={onSelectedItemsChange}
-              onSelectedItemObjectsChange={onSelectedItemObjectsChange}
-              selectedItems={classTypes}
-              renderSelectText={renderSelectText}
-              alwaysShowSelectText={false}
-              expandDropDowns={true}
-              items={items}
-              uniqueKey="id"
-              subKey="children"
-              readOnlyHeadings={true}
-              modalWithTouchable={true}
-              searchPlaceholderText="Search class types"
-              itemFontFamily={{...Typography.p1, ...Typography.bold}}
-              subItemFontFamily={{...Typography.p1, ...Typography.bold}}
-              searchTextFontFamily={{...Typography.p1, ...Typography.bold}}
-              confirmFontFamily={{...Typography.h3, ...Typography.bold}}
-              styles={{
-                container: {marginTop: 200, marginBottom: 150},
-                selectToggle: {backgroundColor: Colors.grey},
-                chipContainer: {marginTop: Spacing.smaller},
-              }}
-              colors={{primary: Colors.andromeda}}
-            />
-          </View>
-          <ImageTile
-            classData={filterClassData(values.className, filterVal, data)}
-            navigation={navigation}
-          />
-        </View>
+        <UpcomingClasses navigation={navigation} classes={classes} />
+        <FriendsClasses navigation={navigation} classes={classes} />
+        <RecommendedClasses navigation={navigation} classes={classes} />
       </ScrollView>
     </View>
   );

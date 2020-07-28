@@ -1,24 +1,24 @@
 import React from 'react';
-import {Image, ScrollView, StatusBar, Text, View} from 'react-native';
+import { Image, ScrollView, StatusBar, Text, View } from 'react-native';
 import {
   celebrateEmojiImg,
   recorderEmojiImg,
   avatarImg,
   notifDarkBttnImg,
 } from '_assets';
-import {Header, RecommendedUsers} from '_molecules';
-import {FeedPost} from '_organisms';
+import { Header, RecommendedUsers } from '_molecules';
+import { FeedPost } from '_organisms';
 import styles from './styles';
-import {UsersService, PostsService} from '_utils';
+import { UsersService, PostsService } from '_utils';
 //import {GetAllPosts} from '../../utils/backendServices/postsService';
 //import {GetAllUsers} from '../../utils/backendServices/usersService';
-import {Spacing, Icons, Typography, Colors} from '_styles';
+import { Spacing, Icons, Typography, Colors } from '_styles';
 
-const FeedScreen = ({navigation}) => {
-  const {postsData, postsLoading} = PostsService.GetAllPosts('userId');
-  const {allUsersData, allUsersLoading} = UsersService.GetAllUsers();
+const FeedScreen = ({ navigation }) => {
+  const { postsData, postsLoading } = PostsService.GetAllPosts('userId');
+  const { allUsersData, allUsersLoading } = UsersService.GetAllUsers();
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <View style={styles.headerAndStatsContainer}>
         <Header
           navigation={navigation}
@@ -48,9 +48,9 @@ const FeedScreen = ({navigation}) => {
                 <View style={styles.iconContainer}>
                   <Image source={celebrateEmojiImg} style={Icons.small} />
                 </View>
-                <Text style={{...Typography.h1, color: Colors.white}}>3</Text>
+                <Text style={{ ...Typography.h1, color: Colors.white }}>3</Text>
               </View>
-              <Text style={[Typography.p1white, {flexWrap: 'wrap'}]}>
+              <Text style={[Typography.p1white, { flexWrap: 'wrap' }]}>
                 Classes you completed this week
               </Text>
             </View>
@@ -59,7 +59,9 @@ const FeedScreen = ({navigation}) => {
                 <View style={styles.iconContainer}>
                   <Image source={recorderEmojiImg} style={Icons.small} />
                 </View>
-                <Text style={{...Typography.h1, color: Colors.white}}>32</Text>
+                <Text style={{ ...Typography.h1, color: Colors.white }}>
+                  32
+                </Text>
               </View>
               <Text
                 style={{

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ScrollView,
@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import {Dropdown} from 'react-native-material-dropdown';
+import { Dropdown } from 'react-native-material-dropdown';
 import {
   avatarCircleImg,
   crossImg,
@@ -16,12 +16,12 @@ import {
   privateImg,
   uploadImg,
 } from '_assets';
-import {Divider} from '_atoms';
-import {FilterChip} from '_molecules';
-import {Colors, Icons, Spacing, Typography} from '_styles';
+import { Divider } from '_atoms';
+import { FilterChip } from '_molecules';
+import { Colors, Icons, Spacing, Typography } from '_styles';
 import styles from './styles';
 
-const CreateClassScreen = ({navigation}) => {
+const CreateClassScreen = ({ navigation }) => {
   const [uri, setUri] = useState('');
   const [press, setPress] = useState(false);
   const difficulty = ['Beginner', 'Intermediate', 'Advanced'];
@@ -61,8 +61,8 @@ const CreateClassScreen = ({navigation}) => {
           {uri ? (
             <Image
               resizeMode="cover"
-              source={{uri: uri}}
-              style={{width: '100%', height: '100%'}}
+              source={{ uri: uri }}
+              style={{ width: '100%', height: '100%' }}
             />
           ) : (
             <Image source={uploadImg} style={Icons.normal} />
@@ -72,19 +72,19 @@ const CreateClassScreen = ({navigation}) => {
       <Text
         style={[
           Typography.p1d2,
-          {paddingTop: Spacing.base, paddingBottom: Spacing.smallest},
+          { paddingTop: Spacing.base, paddingBottom: Spacing.smallest },
         ]}>
         Class name
       </Text>
       <TextInput placeholder="Morning Pilates" style={Typography.p1d2} />
       <Divider
         color={Colors.aries}
-        style={{marginVertical: Spacing.smallest}}
+        style={{ marginVertical: Spacing.smallest }}
       />
       <Text
         style={[
           Typography.p1d2,
-          {paddingTop: Spacing.base, paddingBottom: Spacing.smallest},
+          { paddingTop: Spacing.base, paddingBottom: Spacing.smallest },
         ]}>
         Description
       </Text>
@@ -95,17 +95,17 @@ const CreateClassScreen = ({navigation}) => {
       />
       <Divider
         color={Colors.aries}
-        style={{marginVertical: Spacing.smallest}}
+        style={{ marginVertical: Spacing.smallest }}
       />
       <Dropdown
         label="Select a workout type"
         data={difficulty}
-        containerStyle={{paddingTop: 0, marginTop: 0}}
+        containerStyle={{ paddingTop: 0, marginTop: 0 }}
       />
       <Text
         style={[
           Typography.p1d2,
-          {paddingTop: Spacing.base, paddingBottom: Spacing.smaller},
+          { paddingTop: Spacing.base, paddingBottom: Spacing.smaller },
         ]}>
         Difficulty
       </Text>
@@ -113,7 +113,7 @@ const CreateClassScreen = ({navigation}) => {
       <Text
         style={[
           Typography.p1d2,
-          {paddingTop: Spacing.base, paddingBottom: Spacing.smaller},
+          { paddingTop: Spacing.base, paddingBottom: Spacing.smaller },
         ]}>
         Estimated Duration
       </Text>

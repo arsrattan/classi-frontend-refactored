@@ -79,9 +79,10 @@ target 'Classi' do
 
 
 
-  pod 'react-native-mixpanel', :path => '../node_modules/react-native-mixpanel'
 
-  pod 'RNCClipboard', :path => '../node_modules/@react-native-community/clipboard'
+
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'ClassiTests' do
     inherit! :complete

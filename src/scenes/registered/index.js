@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {crossImg, registeredImg, shareImgLight} from '_assets';
-import {Button} from '_atoms';
-import {Icons, Spacing, Typography} from '_styles';
+import { crossImg, registeredImg, shareImgLight } from '_assets';
+import { Button } from '_atoms';
+import { Icons, Spacing, Typography } from '_styles';
 import styles from './styles';
 
-const RegisteredScreen = ({navigation}) => {
+const RegisteredScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.mainContainer}>
       {StatusBar.setBarStyle('dark-content', true)}
@@ -32,11 +32,11 @@ const RegisteredScreen = ({navigation}) => {
           <Text
             style={[
               Typography.p1d2,
-              {textAlign: 'center', paddingBottom: Spacing.large},
+              { textAlign: 'center', paddingBottom: Spacing.large },
             ]}>
             You are registered for{' '}
-            <Text style={{fontWeight: 'bold'}}>‘Cooking for Dummies’</Text>. We
-            will add this class to your upcoming class.
+            <Text style={{ fontWeight: 'bold' }}>‘Cooking for Dummies’</Text>.
+            We will add this class to your upcoming class.
           </Text>
           <Button
             text="Invite your friends"

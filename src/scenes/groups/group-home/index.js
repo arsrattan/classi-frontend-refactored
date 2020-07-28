@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native';
-import {Header} from '_molecules';
-import {WorkoutGroup} from '_organisms';
-import {plusImg, avatarImg, notifDarkBttnImg} from '_assets';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { Header } from '_molecules';
+import { WorkoutGroup } from '_organisms';
+import { plusImg, avatarImg, notifDarkBttnImg } from '_assets';
 import styles from './styles';
-import {Spacing, Typography, Colors, Icons} from '_styles';
+import { Spacing, Typography, Colors, Icons } from '_styles';
 
-const GroupsHomeScreen = ({navigation}) => {
+const GroupsHomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.horizontalPadding}>
@@ -34,10 +34,10 @@ const GroupsHomeScreen = ({navigation}) => {
           onPress={() => {
             navigation.navigate('CreateGroupScreen');
           }}
-          style={{...styles.flexRowContainer, marginTop: Spacing.base}}>
+          style={{ ...styles.flexRowContainer, marginTop: Spacing.base }}>
           <Image
             source={plusImg}
-            style={{...Icons.smaller, marginRight: Spacing.small}}
+            style={{ ...Icons.smaller, marginRight: Spacing.small }}
           />
           <Text
             style={{

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,12 +10,12 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import {Header, SearchUsers, InviteTile} from '_molecules';
-import {arrowBackDarkImg, copyImg} from '_assets';
+import { Header, SearchUsers, InviteTile } from '_molecules';
+import { arrowBackDarkImg, copyImg } from '_assets';
 import styles from './styles';
-import {Spacing, Typography, Colors, Icons} from '_styles';
+import { Spacing, Typography, Colors, Icons } from '_styles';
 
-const GroupMembersScreen = ({navigation}) => {
+const GroupMembersScreen = ({ navigation }) => {
   const [searchFriendName, setSearchName] = useState('');
   const handleSearchValue = (text) => {
     setSearchName(text);
@@ -28,7 +28,7 @@ const GroupMembersScreen = ({navigation}) => {
           navigation={navigation}
           backgroundColor={Colors.white}
           text={
-            <Text style={{...Typography.p1d2, ...Typography.bold}}>
+            <Text style={{ ...Typography.p1d2, ...Typography.bold }}>
               Group Members
             </Text>
           }

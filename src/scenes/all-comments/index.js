@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,12 +10,12 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import styles from './styles';
-import {sendCommentImg, arrowBackDarkImg} from '_assets';
-import {InputBox, SquareButton} from '_atoms';
-import {FeedPost} from '_organisms';
+import { sendCommentImg, arrowBackDarkImg } from '_assets';
+import { InputBox, SquareButton } from '_atoms';
+import { FeedPost } from '_organisms';
 
-const AllCommentsScreen = ({navigation, route}) => {
-  const {post} = route.params;
+const AllCommentsScreen = ({ navigation, route }) => {
+  const { post } = route.params;
 
   const [input, setInput] = useState('');
 
