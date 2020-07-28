@@ -79,7 +79,7 @@ const NotificationsScreen = ({ navigation }) => {
             action={notificationText(item.notificationType)}
             date={timeAgo}
             isFollow={item.notificationType == 'New_Follower'}
-            imageUrl={item.triggeringUserS3Url}
+            imageUrl={item.channel_thumbnail_url}
             active={checkIfFollowingUser(item.triggeringUserId, followingData)}
           />
         );

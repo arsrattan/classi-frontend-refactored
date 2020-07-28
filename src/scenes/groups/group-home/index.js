@@ -5,8 +5,13 @@ import { WorkoutGroup } from '_organisms';
 import { plusImg, avatarImg, notifDarkBttnImg } from '_assets';
 import styles from './styles';
 import { Spacing, Typography, Colors, Icons } from '_styles';
+import { GetGroup } from '../../../utils/backendServices/groupsService';
+
 
 const GroupsHomeScreen = ({ navigation }) => {
+  const { groupData, groupLoading } = GetGroup('7pmdv8kd523n9b');
+  console.log(groupData);
+  console.log(groupLoading);
   return (
     <View style={styles.container}>
       <View style={styles.horizontalPadding}>
@@ -50,8 +55,8 @@ const GroupsHomeScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.groupsContainer}>
-        <WorkoutGroup navigation={navigation} />
-        <WorkoutGroup navigation={navigation} />
+        <WorkoutGroup groupData={groupData} navigation={navigation} />
+        <WorkoutGroup groupData={groupData} navigation={navigation} />
       </ScrollView>
     </View>
   );

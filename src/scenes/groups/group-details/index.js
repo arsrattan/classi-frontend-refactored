@@ -22,11 +22,11 @@ import {
 } from '_assets';
 import { createClassCards, classData } from '_utils';
 
-const GroupDetailsScreen = ({ navigation }) => {
+const GroupDetailsScreen = ({ navigation, route}) => {
   /* state should be group name retrieved from backend */
-  const [groupName, setGroupName] = useState('Group Name');
+  const { groupData } = route.params;
+  const [groupName, setGroupName] = useState(groupData[0].name);
   const inputRef = React.useRef();
-
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -35,7 +35,7 @@ const GroupDetailsScreen = ({ navigation }) => {
           backgroundColor={Colors.white}
           text={
             <Text style={{ ...Typography.p1d2, ...Typography.bold }}>
-              Workout Group
+              {groupData[0].name}
             </Text>
           }
           leftIcon={arrowBackDarkImg}
@@ -93,7 +93,7 @@ const GroupDetailsScreen = ({ navigation }) => {
               navigation.navigate('GroupMembersScreen');
             }}
             style={{ paddingVertical: Spacing.small, ...styles.flexRow }}>
-            <MultiProfileImg userList={['Derek', 'Malik', 'Anmol', 'Arnim']} />
+            <MultiProfileImg userList={groupData[0].members} />
             <Image source={forwardArrowImg} style={Icons.smaller} />
           </TouchableOpacity>
         </View>

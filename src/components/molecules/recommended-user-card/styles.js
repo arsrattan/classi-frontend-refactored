@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   feedCard: {
     width: 163,
-    height: 180,
+    height: 220,
     backgroundColor: Colors.white,
     borderRadius: 10,
     marginRight: Spacing.small,

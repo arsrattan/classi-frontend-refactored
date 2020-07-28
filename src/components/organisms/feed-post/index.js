@@ -13,8 +13,9 @@ import { MedHortClassCard, PostCommentTile } from '_molecules';
 import { Spacing } from '_styles';
 import { useEffect, useState } from 'react';
 import styles from './styles';
-import { useMutation, gql } from '@apollo/client';
-// import { GetClass } from '../../../utils/backendServices/classService';
+import { gql } from 'apollo-boost';
+import {useMutation} from '@apollo/react-hooks';
+import { GetClass } from '../../../utils/backendServices/classService';
 import { GetCurrentUserId } from '../../../utils/backendServices/usersService';
 import { GraphQLClient } from '_services';
 
@@ -43,14 +44,13 @@ const FeedPost = ({ allComments, post, navigation }) => {
     return res;
   };
 
-  // const { classData } = GetClass(post.classId);
   const { data, error, loading } = GraphQLClient.queryClassById(post.classId);
   console.log(`Received data: ${data}`);
   console.log(`Received error: ${error}`);
   console.log(`Received loading: ${loading}`);
 
   const userId = GetCurrentUserId();
-  const [isActive, setIsActive] = useState(false); //useState(!checkIfLikedPost(userId, post.likes));
+  const [isActive, setIsActive] = useState(!checkIfLikedPost(userId, post.likes));
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const LIKE_POST = gql`
@@ -92,27 +92,27 @@ const FeedPost = ({ allComments, post, navigation }) => {
           isUnlike: !isActive,
           postId: post.postId,
         },
-        // update: (cache) => {
-        //   try {
-        //     let likes = cache.readQuery({ query: GET_USER_FOLLOWING, variables: {userId: userId}});
-        //     if(checkIfFollowingUser(followedUser, following.getUserFollowing)){
-        //       following.getUserFollowing = following.getUserFollowing.filter(function(p) {
-        //         return p.userId != followedUser;
-        //       })
-        //     }
-        //     else {
-        //       following.getUserFollowing.push({userId: followedUser, __typename: "User"});
-        //     }
-        //     cache.writeQuery({
-        //       query: GET_USER_FOLLOWING,
-        //       data: {
-        //           'getUserFollowing': []
-        //       }
-        //     });
-        //   } catch (e) {
-        //       console.log(e);
-        //   }
-        // }
+        update: (cache) => {
+          try {
+            let likes = cache.readQuery({ query: GET_USER_FOLLOWING, variables: {userId: userId}});
+            if(checkIfFollowingUser(followedUser, following.getUserFollowing)){
+              following.getUserFollowing = following.getUserFollowing.filter(function(p) {
+                return p.userId != followedUser;
+              })
+            }
+            else {
+              following.getUserFollowing.push({userId: followedUser, __typename: "User"});
+            }
+            cache.writeQuery({
+              query: GET_USER_FOLLOWING,
+              data: {
+                  'getUserFollowing': []
+              }
+            });
+          } catch (e) {
+              console.log(e);
+          }
+        }
       })
         .then(({ data }) => {
           setIsSubmitting(false);
