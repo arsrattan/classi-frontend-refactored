@@ -12,8 +12,6 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: 216,
     width: '100%',
-    marginTop: 16,
-    borderRadius: 10,
   },
   textContainer: {
     position: 'absolute',

@@ -1,4 +1,5 @@
-import { useQuery, gql } from '@apollo/client';
+import { gql } from 'apollo-boost';
+import {useQuery} from '@apollo/react-hooks';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -8,6 +9,7 @@ export const GetUser = (userId) => {
     query GetUserById($userId: String!) {
       getUserById(userId: $userId) {
         userId
+        username
         firstName
         lastName
         s3url
@@ -38,6 +40,7 @@ export const GetAllUsers = () => {
     {
       getAllUsers {
         userId
+        username
         s3url
         firstName
         lastName
@@ -63,6 +66,7 @@ export const GetUserFollowers = (userId) => {
     query GetUserFollowers($userId: String!) {
       getUserFollowers(userId: $userId) {
         userId
+        username
       }
     }
   `;
@@ -90,6 +94,7 @@ export const GetUserFollowing = (userId) => {
     query GetUserFollowing($userId: String!) {
       getUserFollowing(userId: $userId) {
         userId
+        username
       }
     }
   `;

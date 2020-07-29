@@ -1,5 +1,12 @@
-import React from 'react';
-import { Image, ScrollView, StatusBar, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  Image,
+  ScrollView,
+  StatusBar,
+  Text,
+  View,
+  FlatList,
+} from 'react-native';
 import {
   celebrateEmojiImg,
   recorderEmojiImg,
@@ -10,13 +17,26 @@ import { Header, RecommendedUsers } from '_molecules';
 import { FeedPost } from '_organisms';
 import styles from './styles';
 import { UsersService, PostsService } from '_utils';
+import { GraphQLClient } from '_services';
+
 //import {GetAllPosts} from '../../utils/backendServices/postsService';
 //import {GetAllUsers} from '../../utils/backendServices/usersService';
 import { Spacing, Icons, Typography, Colors } from '_styles';
 
 const FeedScreen = ({ navigation }) => {
-  const { postsData, postsLoading } = PostsService.GetAllPosts('userId');
-  const { allUsersData, allUsersLoading } = UsersService.GetAllUsers();
+  const [postData, setPostData] = useState({});
+  //const { allUsersData, allUsersLoading } = UsersService.GetAllUsers();
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const { data, error, loading } = await GraphQLClient.queryPostsById();
+      //setPostData(data);
+      setPostData({ data: data, error: error, loading: loading });
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.headerAndStatsContainer}>
@@ -75,28 +95,27 @@ const FeedScreen = ({ navigation }) => {
           </View>
           <View style={styles.backgroundStatContainer} />
         </View>
-
         {/* Recommended people to follow */}
         <View style={styles.headerMargin}>
           <Text style={Typography.h3d1}>Recommended Users</Text>
         </View>
-        <RecommendedUsers users={allUsersData} />
-
+        {/*<RecommendedUsers users={allUsersData} />*/}
         {/* Posts on your feed */}
         <View style={styles.headerMargin}>
           <Text style={Typography.h2d1}>Your Feed</Text>
         </View>
-        {postsData.map((post) => {
-          return (
-            <View>
-              <FeedPost
-                allComments={false}
-                post={post}
-                navigation={navigation}
-              />
-            </View>
-          );
-        })}
+        <FlatList
+          contentContainerStyle={{}}
+          showsHorizontalScrollIndicator={false}
+          data={postData.data}
+          horizontal={false}
+          renderItem={({ item }) => (
+            <FeedPost allComments={false} post={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => {
+            item.postId;
+          }}
+        />
       </ScrollView>
     </View>
   );

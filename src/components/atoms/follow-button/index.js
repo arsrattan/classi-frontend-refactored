@@ -5,7 +5,8 @@ import {
   FollowUser,
   GetCurrentUserId,
 } from '../../../utils/backendServices/usersService';
-import { gql, useMutation, useQuery, useLazyQuery } from '@apollo/client';
+import { useMutation } from '@apollo/react-hooks';
+import { gql, } from 'apollo-boost';
 import { useEffect, useState } from 'react';
 
 const FollowButton = ({ followedUser, isUnfollow, active }) => {

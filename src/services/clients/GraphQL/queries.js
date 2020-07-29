@@ -56,6 +56,20 @@ const queries = {
       }
     }
   `,
+  UserPosts: gql`
+    query GetAllPostsForUser($userId: String!) {
+      getAllPostsForUser(userId: $userId) {
+        postId
+        postType
+        createdBy
+        createdAt
+        comments
+        likes
+        classId
+        users3url
+      }
+    }
+  `,
 };
 
 export default queries;

@@ -14,7 +14,7 @@ import { createClassCards } from '_utils';
 const UpcomingClasses = ({ navigation, classes }) => {
   if (classes !== undefined && classes.length > 0) {
     return (
-      <View style={styles.sectionContainer}>
+      <View style={styles.topSectionContainer}>
         <Text style={styles.lightSectionHeader}>Your Upcoming Classes</Text>
         {createClassCards(classes, navigation)}
       </View>
@@ -79,11 +79,11 @@ const RecommendedClasses = ({ navigation, classes }) => {
         },
         {
           name: 'Strength',
-          id: 14,
+          id: 15,
         },
         {
           name: 'Core',
-          id: 14,
+          id: 16,
         },
       ],
     },
@@ -179,7 +179,7 @@ const RecommendedClasses = ({ navigation, classes }) => {
 };
 
 const HomeScreen = ({ navigation }) => {
-  // const { data, loading } = GetAllClasses();
+  //const { data, loading } = GetAllClasses();
 
   const [tokenData, setTokenData] = useState('');
   const [classes, setClasses] = useState([]);
@@ -213,7 +213,9 @@ const HomeScreen = ({ navigation }) => {
                 color: Colors.white,
               }}>
               Welcome back
-              <Text style={{ color: Colors.andromeda }}>{tokenData || ''}</Text>
+              <Text style={{ color: Colors.andromeda }}>
+                {` ${tokenData[0].toUpperCase() + tokenData.slice(1)}` || ''}
+              </Text>
             </Text>
           }
           writePost={false}
@@ -228,7 +230,9 @@ const HomeScreen = ({ navigation }) => {
         />
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ backgroundColor: Colors.sirius }}>
         <UpcomingClasses navigation={navigation} classes={classes} />
         <FriendsClasses navigation={navigation} classes={classes} />
         <RecommendedClasses navigation={navigation} classes={classes} />

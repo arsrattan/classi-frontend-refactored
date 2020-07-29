@@ -11,6 +11,32 @@ import AsyncStorage from '@react-native-community/async-storage';
 import queries from './queries';
 import { MockData } from '_mocks';
 
+const abstractQuery = ({ queryParams }, gqlQuery, dataFunction, mockData) => {
+  if (['dev', 'development'].includes(process.env.NODE_ENV)) {
+    return { data: { mockData }, error: undefined, loading: false };
+  }
+
+  const [returnedData, setReturnedData] = useState({});
+  const [queryLoading, setQueryLoading] = useState(true);
+  const [errorReturned, setErrorReturned] = useState(undefined);
+
+  const { data, error, loading } = useQuery(gqlQuery, {
+    variables: { queryParams },
+  });
+
+  useEffect(() => {
+    if (!error && !loading) {
+      setReturnedData(data.dataFunction);
+      setQueryLoading(false);
+    } else {
+      setErrorReturned(error);
+      setQueryLoading(loading);
+    }
+  }, [data, error, loading]);
+
+  return { data: returnedData, error: errorReturned, loading: queryLoading };
+};
+
 class GraphQLClient {
   static getApolloClient() {
     const httpLink = new HttpLink({
@@ -119,6 +145,32 @@ class GraphQLClient {
     useEffect(() => {
       if (!error && !loading) {
         setReturnedData(data.getUserFollowers);
+        setQueryLoading(false);
+      } else {
+        setErrorReturned(error);
+        setQueryLoading(loading);
+      }
+    }, [data, error, loading]);
+
+    return { data: returnedData, error: errorReturned, loading: queryLoading };
+  }
+
+  static queryPostsById(userId) {
+    if (['dev', 'development'].includes(process.env.NODE_ENV)) {
+      return { data: MockData.postData, error: undefined, loading: false };
+    }
+
+    const [returnedData, setReturnedData] = useState({});
+    const [queryLoading, setQueryLoading] = useState(true);
+    const [errorReturned, setErrorReturned] = useState(undefined);
+
+    const { data, error, loading } = useQuery(queries.UserPosts, {
+      variables: { userId: userId },
+    });
+
+    useEffect(() => {
+      if (!error && !loading) {
+        setReturnedData(data.getAllPostsForUser);
         setQueryLoading(false);
       } else {
         setErrorReturned(error);

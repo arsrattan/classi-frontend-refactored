@@ -13,32 +13,27 @@ import { Typography, Icons, Spacing, Colors } from '_styles';
 import { menuImg } from '_assets';
 import { helperFunctions } from '_utils';
 
-const WorkoutGroup = ({ navigation, numClasses }) => {
+const WorkoutGroup = ({ navigation, groupData }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.flexRow}
         onPress={() => {
-          navigation.navigate('GroupDetailsScreen');
+          navigation.navigate('GroupDetailsScreen', { groupData: groupData });
         }}>
         <ProfileImg
           size="base"
           userProfileImg="https://classi-profile-pictures.s3.us-east-2.amazonaws.com/Screen+Shot+2020-06-17+at+00.16.41.png"
         />
         <View style={styles.groupHeaderText}>
-          <Text style={Typography.h3d1}>Group name</Text>
+          <Text style={Typography.h3d1}>{groupData[0] != null ? groupData[0].name : ''}</Text>
           <Text
             numberOfLines={1}
             style={{
               ...Typography.p2d2,
               marginTop: Spacing.smallest,
             }}>
-            {helperFunctions.formatNamesList([
-              'Derek',
-              'Malik',
-              'Anmol',
-              'Arnim',
-            ])}
+            {helperFunctions.formatNamesList(groupData[0] != null ? groupData[0].members : [])}
           </Text>
         </View>
         <TouchableOpacity>

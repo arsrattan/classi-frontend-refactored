@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
+import { Spacing } from '_styles';
 import { ClassCard } from '_atoms';
 
 const createClassCards = (classList, navigation, style) => {
   const styles = {
-    view: { flex: 1, paddingVertical: 20 },
+    view: { flex: 1, marginTop: Spacing.small, marginBottom: Spacing.base },
   };
 
   return (

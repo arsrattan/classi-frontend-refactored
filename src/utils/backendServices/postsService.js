@@ -1,4 +1,5 @@
-import { useQuery, gql } from '@apollo/client';
+import { gql } from 'apollo-boost';
+import {useQuery} from '@apollo/react-hooks';
 import { useEffect, useState } from 'react';
 
 export const GetAllPosts = (userId) => {

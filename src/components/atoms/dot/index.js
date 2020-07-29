@@ -7,6 +7,8 @@ const Dot = ({ color, size }) => {
   if (size === 'base') {
     dotSize = { height: 2, width: 2, borderRadius: 1 };
   } else if (size === 'large') {
+    dotSize = { height: 4, width: 4, borderRadius: 2 };
+  } else if (size === 'larger') {
     dotSize = { height: 6, width: 6, borderRadius: 3 };
   }
 

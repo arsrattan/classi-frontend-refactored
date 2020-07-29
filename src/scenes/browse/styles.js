@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   browseContainer: {
     flex: 1,
     backgroundColor: Colors.grey,
-    paddingLeft: Spacing.base,
   },
   browseHeaderText: {
     ...Typography.h1,

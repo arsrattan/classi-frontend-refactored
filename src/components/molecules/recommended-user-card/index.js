@@ -10,7 +10,7 @@ import {
 const RecommendedUsers = ({ users }) => {
   var generateFollowerCount = function (users) {
     for (let user of users) {
-      const { followersData } = GetUserFollowers(user.userId);
+      const { followersData } = GetUserFollowers(user.username);
       user.followers = followersData.length;
     }
   };

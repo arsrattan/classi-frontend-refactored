@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
+import InstagramLogin from 'react-native-instagram-login'
 import { Typography, Colors, Icons, Spacing } from '_styles';
 
 /**

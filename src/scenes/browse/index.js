@@ -27,47 +27,55 @@ import {
   notifDarkBttnImg,
 } from '_assets';
 import { createClassCards } from '_utils';
-// import { GetAllClasses } from '../../utils/backendServices/classService';
+//import { GetAllClasses } from '../../utils/backendServices/classService';
 import { Spacing, Colors } from '_styles';
 import { GraphQLClient } from '_services';
 
 const BrowseScreen = ({ navigation }) => {
-  // const { data, loading } = GetAllClasses();
-  const [pressFr, setPressFr] = useState(-1);
-  const [pressSr, setPressSr] = useState(-1);
-  const [filterVal, setFilterVal] = useState('');
+  //const { data, loading } = GetAllClasses();
+
+  const [filterChips, setFilterChips] = useState(new Map());
+
   const [visible, setVisible] = useState(false);
-  const [values, setValues] = useState({ className: '' });
+  const [searchText, setSearchText] = useState('');
   const [classes, setClasses] = useState([]);
 
-  const filterClassData = function (textFilter, classType, classData) {
-    return classData == null
-      ? []
-      : classData.filter(function (c) {
-          return (
-            c.classType.indexOf(classType) != -1 &&
-            c.classType.indexOf(textFilter) != -1
-          );
-        });
+  /* filters class data based off user inputs */
+  const filterClassData = function (textFilter, classTypes, classData) {
+    var filteredClassData = classData;
+    if (classTypes.size !== 0) {
+      var filteredClassData = classData.filter(function (c) {
+        return Array.from(classTypes.values()).includes(c.classType);
+      });
+    }
+    if (textFilter === '') {
+      return filteredClassData;
+    } else {
+      var regexPattern = new RegExp(textFilter, 'i');
+      return filteredClassData.filter(function (c) {
+        return regexPattern.test(c.className);
+      });
+    }
   };
 
-  const handleChange = (newValue, name) => {
-    setValues((values) => ({ ...values, [name]: newValue }));
+  const handleChange = (text) => {
+    setSearchText(text);
   };
 
   const buttonFr = [
     {
-      id: 0,
+      id: 1,
       filter: 'Strength',
       icon: <Image source={strengthImg} style={styles.iconNormal} />,
     },
     {
-      id: 1,
+      id: 2,
       filter: 'HIIT',
       icon: <Image source={girlImg} style={styles.iconNormal} />,
     },
   ];
 
+  /* ids of the 2nd row of filters has to be mutually exclusive from the ids in the first row */
   const buttonSr = [
     {
       id: 3,
@@ -113,116 +121,134 @@ const BrowseScreen = ({ navigation }) => {
       </View>
 
       <ScrollView style={styles.browseContainer}>
-        <Modal deviceWidth={Platform.OS === 'ios'} isVisible={visible}>
-          <FilterModal setVisible={setVisible} navigation={navigation} />
-        </Modal>
-        <Text
-          style={{ ...styles.browseHeaderText, paddingTop: Spacing.smaller }}>
-          Find a Class
-        </Text>
-        <View style={[styles.searchAndFilterContainer, styles.rightPadding]}>
-          <InputBox
-            placeholderText={'Search classes by name'}
-            icon={searchImg}
-            value={values.className || ''}
-            onChange={handleChange}
-            name={'className'}
-          />
-          <TouchableOpacity
-            onPress={() => {
-              setVisible(true);
+        <View style={{ paddingHorizontal: Spacing.base }}>
+          <Modal deviceWidth={Platform.OS === 'ios'} isVisible={visible}>
+            <FilterModal setVisible={setVisible} navigation={navigation} />
+          </Modal>
+          <Text
+            style={{ ...styles.browseHeaderText, paddingTop: Spacing.smaller }}>
+            Find a Class
+          </Text>
+          <View style={[styles.searchAndFilterContainer, styles.rightPadding]}>
+            <InputBox
+              placeholderText={'Search classes by name'}
+              icon={searchImg}
+              value={searchText}
+              onChange={handleChange}
+              name={'className'}
+            />
+            <TouchableOpacity
+              onPress={() => {
+                setVisible(true);
+              }}
+              style={styles.filterBtn}>
+              <Image source={filterImg} style={styles.iconNormal} />
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            style={{ marginTop: 18 }}
+            data={buttonFr}
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            renderItem={({ item, index }) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    if (!filterChips.has(item.id)) {
+                      setFilterChips(
+                        new Map(filterChips.set(item.id, item.filter)),
+                      );
+                    } else {
+                      filterChips.delete(item.id);
+                      setFilterChips(new Map(filterChips));
+                    }
+                  }}
+                  style={[
+                    styles.filterChip,
+                    {
+                      backgroundColor: filterChips.has(item.id)
+                        ? '#F86A6A'
+                        : '#fff',
+                    },
+                  ]}>
+                  <View style={{ marginRight: 10 }}>{item.icon}</View>
+                  <Text
+                    style={[
+                      styles.filterChipText,
+                      {
+                        color: filterChips.has(item.id) ? '#fff' : '#102A43',
+                      },
+                    ]}>
+                    {item.filter}
+                  </Text>
+                </TouchableOpacity>
+              );
             }}
-            style={styles.filterBtn}>
-            <Image source={filterImg} style={styles.iconNormal} />
-          </TouchableOpacity>
+            keyExtractor={(item) => {
+              item.id;
+            }}
+          />
+          <FlatList
+            data={buttonSr}
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            renderItem={({ item, index }) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    if (!filterChips.has(item.id)) {
+                      setFilterChips(
+                        new Map(filterChips.set(item.id, item.filter)),
+                      );
+                    } else {
+                      filterChips.delete(item.id);
+                      setFilterChips(new Map(filterChips));
+                    }
+                  }}
+                  style={[
+                    styles.filterChip,
+                    {
+                      backgroundColor: filterChips.has(item.id)
+                        ? '#F86A6A'
+                        : '#fff',
+                    },
+                  ]}>
+                  <View style={{ marginRight: 10 }}>{item.icon}</View>
+                  <Text
+                    style={[
+                      styles.filterChipText,
+                      {
+                        color: filterChips.has(item.id) ? '#fff' : '#102A43',
+                      },
+                    ]}>
+                    {item.filter}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={(item) => {
+              item.id;
+            }}
+          />
         </View>
-        <FlatList
-          style={{ marginTop: 18 }}
-          data={buttonFr}
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          renderItem={({ item, index }) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  if (pressSr !== -1) {
-                    setPressSr(-1);
-                  }
-                  setPressFr(item.id);
-                  setFilterVal(item.filter);
-                }}
-                style={[
-                  styles.filterChip,
-                  {
-                    backgroundColor: pressFr == item.id ? '#F86A6A' : '#fff',
-                  },
-                ]}>
-                <View style={{ marginRight: 10 }}>{item.icon}</View>
-                <Text
-                  style={[
-                    styles.filterChipText,
-                    {
-                      color: pressFr == item.id ? '#fff' : '#102A43',
-                    },
-                  ]}>
-                  {item.filter}
-                </Text>
-              </TouchableOpacity>
-            );
-          }}
-          keyExtractor={(item) => {
-            item.id;
-          }}
-        />
-        <FlatList
-          data={buttonSr}
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          renderItem={({ item, index }) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  if (pressFr !== -1) {
-                    setPressFr(-1);
-                  }
-                  setPressSr(item.id);
-                  setFilterVal(item.filter);
-                }}
-                style={[
-                  styles.filterChip,
-                  {
-                    backgroundColor: pressSr == item.id ? '#F86A6A' : '#fff',
-                  },
-                ]}>
-                <View style={{ marginRight: 10 }}>{item.icon}</View>
-                <Text
-                  style={[
-                    styles.filterChipText,
-                    {
-                      color: pressSr == item.id ? '#fff' : '#102A43',
-                    },
-                  ]}>
-                  {item.filter}
-                </Text>
-              </TouchableOpacity>
-            );
-          }}
-          keyExtractor={(item) => {
-            item.id;
-          }}
-        />
-        <Text style={[styles.h3d2, { paddingTop: Spacing.small }]}>
+        <Text
+          style={[
+            styles.h3d2,
+            { paddingTop: Spacing.small, paddingLeft: Spacing.base },
+          ]}>
           Popular Classes
         </Text>
         {createClassCards(
-          filterClassData(values.className, filterVal, classes),
+          filterClassData(searchText, filterChips, classes),
           navigation,
         )}
-        <Text style={styles.h3d2}>All Classes</Text>
+        <Text style={{ ...styles.h3d2, paddingLeft: Spacing.base }}>
+          All Classes
+        </Text>
         {createClassCards(
-          filterClassData(values.className, filterVal, classes),
+          filterClassData(searchText, filterChips, classes),
           navigation,
         )}
       </ScrollView>
