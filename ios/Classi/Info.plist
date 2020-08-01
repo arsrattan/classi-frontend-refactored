@@ -59,8 +59,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>camera is used for sharing video during workout sessions</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>microphone is used for sharing audio during workout sessions</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>adding profile pictures</string>
 	<key>UIAppFonts</key>

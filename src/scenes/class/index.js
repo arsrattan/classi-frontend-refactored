@@ -238,6 +238,9 @@ const ClassScreen = ({ navigation, route }) => {
               type="TertiaryRound"
               navigation={navigation}
               screen="ClassPlayer"
+              onPressParams={{
+                classVideoURL: 'www.youtube.com/watch?v=Iu62LxEFUlE',
+              }}
               style={{ marginTop: Spacing.smaller }}
             />
             {isWatching && (

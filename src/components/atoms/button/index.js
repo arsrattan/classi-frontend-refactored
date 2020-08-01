@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
-import InstagramLogin from 'react-native-instagram-login'
+import InstagramLogin from 'react-native-instagram-login';
 import { Typography, Colors, Icons, Spacing } from '_styles';
 
 /**
@@ -25,6 +25,7 @@ const Button = ({
   screen,
   onPress,
   isSubmitting,
+  onPressParams,
 }) => {
   let buttonStyle;
   let textStyle;
@@ -76,7 +77,7 @@ const Button = ({
         if (onPress !== undefined) {
           onPress();
         } else {
-          navigation.navigate(screen);
+          navigation.navigate(screen, onPressParams);
         }
       }}>
       {icon !== undefined ? (

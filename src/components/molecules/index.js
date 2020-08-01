@@ -11,3 +11,4 @@ export { default as SearchUsers } from './search-users';
 export { default as UpcomingClasses } from './upcoming-classes';
 export { default as FriendsClasses } from './friends-classes';
 export { default as RecommendedClasses } from './recommended-classes';
+export { default as VideoTile } from './video-tile';

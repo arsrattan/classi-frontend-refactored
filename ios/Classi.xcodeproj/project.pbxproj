@@ -16,6 +16,14 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* ClassiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ClassiTests.m */; };
+		477FACCF24D5D46300C2B675 /* AmazonChimeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477FACCD24D5D46300C2B675 /* AmazonChimeSDK.framework */; };
+		477FACD024D5D46300C2B675 /* AmazonChimeSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 477FACCD24D5D46300C2B675 /* AmazonChimeSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		477FACD124D5D46300C2B675 /* AmazonChimeSDKMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477FACCE24D5D46300C2B675 /* AmazonChimeSDKMedia.framework */; };
+		477FACD224D5D46300C2B675 /* AmazonChimeSDKMedia.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 477FACCE24D5D46300C2B675 /* AmazonChimeSDKMedia.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		477FACD524D5DBAC00C2B675 /* NativeMobileSDKBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 477FACD424D5DBAC00C2B675 /* NativeMobileSDKBridge.m */; };
+		477FACD824D5DC3200C2B675 /* MeetingObservers.m in Sources */ = {isa = PBXBuildFile; fileRef = 477FACD724D5DC3200C2B675 /* MeetingObservers.m */; };
+		477FACDD24D5DCD100C2B675 /* RNVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477FACDC24D5DCD100C2B675 /* RNVideoView.m */; };
+		477FACE024D5DD1500C2B675 /* RNVideoViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 477FACDF24D5DD1500C2B675 /* RNVideoViewManager.m */; };
 		A71F9A450249A881DBCB3C22 /* libPods-Classi-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 632AB77B3DBA7572F3408437 /* libPods-Classi-tvOS.a */; };
 		AB87021190088182801DD636 /* libPods-Classi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 746BE63EE388E1B737C5C6D3 /* libPods-Classi.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		BB2A754824C13D6A00F7147C /* CircularStd-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9F5165BCE2C4B2699C2D520 /* CircularStd-Black.ttf */; };
@@ -46,6 +54,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		477FACD324D5D46300C2B675 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				477FACD024D5D46300C2B675 /* AmazonChimeSDK.framework in Embed Frameworks */,
+				477FACD224D5D46300C2B675 /* AmazonChimeSDKMedia.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* ClassiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +96,16 @@
 		384CCE45FAC7AE4FB41673F9 /* Pods-Classi-ClassiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Classi-ClassiTests.debug.xcconfig"; path = "Target Support Files/Pods-Classi-ClassiTests/Pods-Classi-ClassiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		394AA71BDEDF43658DA6BC4A /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		3DDC44D61BC8494BB0F60F28 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		477FACCD24D5D46300C2B675 /* AmazonChimeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AmazonChimeSDK.framework; sourceTree = "<group>"; };
+		477FACCE24D5D46300C2B675 /* AmazonChimeSDKMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AmazonChimeSDKMedia.framework; sourceTree = "<group>"; };
+		477FACD424D5DBAC00C2B675 /* NativeMobileSDKBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NativeMobileSDKBridge.m; path = Classi/NativeMobileSDKBridge.m; sourceTree = "<group>"; };
+		477FACD624D5DBF400C2B675 /* NativeMobileSDKBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NativeMobileSDKBridge.h; path = Classi/NativeMobileSDKBridge.h; sourceTree = "<group>"; };
+		477FACD724D5DC3200C2B675 /* MeetingObservers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MeetingObservers.m; path = Classi/MeetingObservers.m; sourceTree = "<group>"; };
+		477FACDA24D5DC8500C2B675 /* MeetingObservers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MeetingObservers.h; path = Classi/MeetingObservers.h; sourceTree = "<group>"; };
+		477FACDB24D5DCB100C2B675 /* RNVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNVideoView.h; path = Classi/RNVideoView.h; sourceTree = "<group>"; };
+		477FACDC24D5DCD100C2B675 /* RNVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNVideoView.m; path = Classi/RNVideoView.m; sourceTree = "<group>"; };
+		477FACDE24D5DCFB00C2B675 /* RNVideoViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNVideoViewManager.h; path = Classi/RNVideoViewManager.h; sourceTree = "<group>"; };
+		477FACDF24D5DD1500C2B675 /* RNVideoViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNVideoViewManager.m; path = Classi/RNVideoViewManager.m; sourceTree = "<group>"; };
 		4CD37A13F7F044CAA8210475 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		5221F2543EFAADB0ECDB694C /* Pods-Classi-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Classi-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Classi-tvOSTests/Pods-Classi-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5946DD4EEF7B17E3793DFC74 /* Pods-Classi-ClassiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Classi-ClassiTests.release.xcconfig"; path = "Target Support Files/Pods-Classi-ClassiTests/Pods-Classi-ClassiTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +145,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				477FACD124D5D46300C2B675 /* AmazonChimeSDKMedia.framework in Frameworks */,
+				477FACCF24D5D46300C2B675 /* AmazonChimeSDK.framework in Frameworks */,
 				AB87021190088182801DD636 /* libPods-Classi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,6 +197,14 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				477FACD424D5DBAC00C2B675 /* NativeMobileSDKBridge.m */,
+				477FACD624D5DBF400C2B675 /* NativeMobileSDKBridge.h */,
+				477FACD724D5DC3200C2B675 /* MeetingObservers.m */,
+				477FACDA24D5DC8500C2B675 /* MeetingObservers.h */,
+				477FACDB24D5DCB100C2B675 /* RNVideoView.h */,
+				477FACDC24D5DCD100C2B675 /* RNVideoView.m */,
+				477FACDE24D5DCFB00C2B675 /* RNVideoViewManager.h */,
+				477FACDF24D5DD1500C2B675 /* RNVideoViewManager.m */,
 			);
 			name = Classi;
 			sourceTree = "<group>";
@@ -199,6 +242,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				477FACCD24D5D46300C2B675 /* AmazonChimeSDK.framework */,
+				477FACCE24D5D46300C2B675 /* AmazonChimeSDKMedia.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				746BE63EE388E1B737C5C6D3 /* libPods-Classi.a */,
@@ -292,6 +337,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				11B076B9C878483D5F0EFE83 /* [CP] Copy Pods Resources */,
+				477FACD324D5D46300C2B675 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -772,8 +818,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				477FACE024D5DD1500C2B675 /* RNVideoViewManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				477FACD824D5DC3200C2B675 /* MeetingObservers.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				477FACD524D5DBAC00C2B675 /* NativeMobileSDKBridge.m in Sources */,
+				477FACDD24D5DCD100C2B675 /* RNVideoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,6 +924,7 @@
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = XFND6PU6HV;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
@@ -902,6 +953,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = XFND6PU6HV;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = Classi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, PixelRatio, Dimensions } from 'react-native';
+import { VideoView } from '_organisms';
 import YouTube from 'react-native-youtube';
 import styles from './styles';
 
@@ -23,6 +24,7 @@ const ClassPlayer = ({ navigation, route }) => {
   return (
     <ScrollView>
       <Text>Youtube Player</Text>
+      <VideoView />
       <YouTube
         apiKey="AIzaSyCYW51rAwuXePU5TIQrVMxYXlHs291yPJ8"
         videoId={videoId}
