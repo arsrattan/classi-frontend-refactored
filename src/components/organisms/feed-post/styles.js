@@ -65,9 +65,6 @@ const styles = StyleSheet.create({
     marginRight: Spacing.base,
   },
   allCommentContainer: {
-    paddingTop: Spacing.small,
-  },
-  commentTileContainer: {
     paddingTop: Spacing.smaller,
   },
   viewDivider: { height: 15, backgroundColor: '#f9f9f9', marginTop: 20 },

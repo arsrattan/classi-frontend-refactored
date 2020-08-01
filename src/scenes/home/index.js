@@ -181,7 +181,7 @@ const RecommendedClasses = ({ navigation, classes }) => {
 const HomeScreen = ({ navigation }) => {
   //const { data, loading } = GetAllClasses();
 
-  const [tokenData, setTokenData] = useState('');
+  const [tokenData, setTokenData] = useState();
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
@@ -214,7 +214,9 @@ const HomeScreen = ({ navigation }) => {
               }}>
               Welcome back
               <Text style={{ color: Colors.andromeda }}>
-                {` ${tokenData[0].toUpperCase() + tokenData.slice(1)}` || ''}
+                {tokenData !== undefined
+                  ? ` ${tokenData[0].toUpperCase() + tokenData.slice(1)}`
+                  : ''}
               </Text>
             </Text>
           }

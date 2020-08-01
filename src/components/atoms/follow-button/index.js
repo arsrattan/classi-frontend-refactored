@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import {
+/*import {
   FollowUser,
   GetCurrentUserId,
-} from '../../../utils/backendServices/usersService';
-import { useMutation } from '@apollo/react-hooks';
-import { gql, } from 'apollo-boost';
+} from '../../../utils/backendServices/usersService';*/
+import { useMutation } from '@apollo/client';
+import { gql } from 'apollo-boost';
+import { GraphQLClient } from '_services';
 import { useEffect, useState } from 'react';
 
 const FollowButton = ({ followedUser, isUnfollow, active }) => {
@@ -20,7 +21,7 @@ const FollowButton = ({ followedUser, isUnfollow, active }) => {
     return res;
   };
 
-  const userId = GetCurrentUserId();
+  const userId = GraphQLClient.getCurrentUserId();
 
   const [isActive, setIsActive] = useState(active);
   const [isSubmitting, setIsSubmitting] = useState(false);

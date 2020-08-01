@@ -16,7 +16,7 @@ import {
 import { Header, RecommendedUsers } from '_molecules';
 import { FeedPost } from '_organisms';
 import styles from './styles';
-import { UsersService, PostsService } from '_utils';
+//import { UsersService, PostsService } from '_utils';
 import { GraphQLClient } from '_services';
 
 //import {GetAllPosts} from '../../utils/backendServices/postsService';
@@ -24,17 +24,27 @@ import { GraphQLClient } from '_services';
 import { Spacing, Icons, Typography, Colors } from '_styles';
 
 const FeedScreen = ({ navigation }) => {
-  const [postData, setPostData] = useState({});
-  //const { allUsersData, allUsersLoading } = UsersService.GetAllUsers();
+  const [postData, setPostData] = useState({ data: [] });
+  const [recommendedUsers, setRecommendedUsers] = useState();
+
+  const currentUserId = GraphQLClient.getCurrentUserId();
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const { data, error, loading } = await GraphQLClient.queryPostsById();
-      //setPostData(data);
+      // will have to change this request to getting posts from people the user follows
+      const { data, error, loading } = await GraphQLClient.queryPostsById(
+        currentUserId,
+      );
       setPostData({ data: data, error: error, loading: loading });
     };
 
+    const fetchRecommendedUsers = async () => {
+      const { data, error, loading } = await GraphQLClient.queryAllUsers();
+      setRecommendedUsers(data);
+    };
+
     fetchPosts();
+    fetchRecommendedUsers();
   }, []);
 
   return (
@@ -99,23 +109,16 @@ const FeedScreen = ({ navigation }) => {
         <View style={styles.headerMargin}>
           <Text style={Typography.h3d1}>Recommended Users</Text>
         </View>
-        {/*<RecommendedUsers users={allUsersData} />*/}
+        <RecommendedUsers users={recommendedUsers} />
         {/* Posts on your feed */}
         <View style={styles.headerMargin}>
           <Text style={Typography.h2d1}>Your Feed</Text>
         </View>
-        <FlatList
-          contentContainerStyle={{}}
-          showsHorizontalScrollIndicator={false}
-          data={postData.data}
-          horizontal={false}
-          renderItem={({ item }) => (
+        {postData.data.map((item) => {
+          return (
             <FeedPost allComments={false} post={item} navigation={navigation} />
-          )}
-          keyExtractor={(item) => {
-            item.postId;
-          }}
-        />
+          );
+        })}
       </ScrollView>
     </View>
   );

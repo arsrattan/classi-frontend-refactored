@@ -7,13 +7,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(161, 174, 183, 0.1)',
     borderRadius: 10,
-    height: 106,
     padding: Spacing.smaller,
     flexDirection: 'row',
   },
   classPicture: {
-    height: 'auto',
-    width: '30%',
+    width: 150,
+    height: (150 * 9) / 16,
     borderRadius: 5,
   },
   textContainer: {

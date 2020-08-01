@@ -3,6 +3,7 @@ import { Spacing, Typography, Colors } from '_styles';
 
 const styles = StyleSheet.create({
   commentContainer: {
+    marginTop: Spacing.smaller,
     flexDirection: 'row',
   },
   commentTile: {
@@ -12,7 +13,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.small,
     paddingVertical: Spacing.smaller,
     marginLeft: Spacing.smaller,
-    marginBottom: Spacing.small,
   },
   commentTextContainer: {
     flexDirection: 'row',

@@ -6,6 +6,7 @@ import {
   ApolloLink,
   concat,
   useQuery,
+  useMutation,
 } from '@apollo/client';
 import AsyncStorage from '@react-native-community/async-storage';
 import queries from './queries';
@@ -61,51 +62,37 @@ class GraphQLClient {
     return client;
   }
 
-  static queryAllClasses() {
+  /****************
+   User requests
+   ****************/
+
+  // Get userId
+  static getCurrentUserId() {
+    // use derekxiao77 for mock data
     if (['dev', 'development'].includes(process.env.NODE_ENV)) {
-      return {
-        data: MockData.upcomingClasses,
-        error: undefined,
-        loading: false,
-      };
+      return 'derekxiao77';
     }
-    const { data, error, loading } = useQuery(queries.AllClasses);
-    return { data, error, loading };
-  }
-
-  static queryClassById(classId) {
-    if (['dev', 'development'].includes(process.env.NODE_ENV)) {
-      return {
-        data: MockData.classesOverview,
-        error: undefined,
-        loading: false,
-      };
-    }
-
-    const [returnedData, setReturnedData] = useState({});
-    const [queryLoading, setQueryLoading] = useState(true);
-    const [errorReturned, setErrorReturned] = useState(undefined);
-
-    const { data, error, loading } = useQuery(queries.SpecificClass, {
-      variables: { classId: classId },
-    });
-
+    const [state, setState] = useState({});
     useEffect(() => {
-      if (!error && !loading) {
-        setReturnedData(data.getClassById);
-        setQueryLoading(false);
-      } else {
-        setErrorReturned(error);
-        setQueryLoading(loading);
-      }
-    }, [data, error, loading]);
-
-    return { data: returnedData, error: errorReturned, loading: queryLoading };
+      const asyncFetchToken = async () => {
+        const res = await AsyncStorage.getItem('USER_ID');
+        setState(res);
+      };
+      asyncFetchToken();
+    }, [state]);
+    return state;
   }
 
+  // Get user data from userId
   static queryUserById(userId) {
     if (['dev', 'development'].includes(process.env.NODE_ENV)) {
-      return { data: MockData.user, error: undefined, loading: false };
+      return {
+        data: MockData.users.filter(function (c) {
+          return c.userId === userId;
+        }),
+        error: undefined,
+        loading: false,
+      };
     }
 
     const [returnedData, setReturnedData] = useState({});
@@ -129,6 +116,20 @@ class GraphQLClient {
     return { data: returnedData, error: errorReturned, loading: queryLoading };
   }
 
+  // Get all users
+  static queryAllUsers() {
+    if (['dev', 'development'].includes(process.env.NODE_ENV)) {
+      return {
+        data: MockData.users,
+        error: undefined,
+        loading: false,
+      };
+    }
+    const { data, error, loading } = useQuery(queries.AllUsers);
+    return { data, error, loading };
+  }
+
+  // Get a user's followers
   static queryFollowersById(userId) {
     if (['dev', 'development'].includes(process.env.NODE_ENV)) {
       return { data: MockData.followers, error: undefined, loading: false };
@@ -155,9 +156,70 @@ class GraphQLClient {
     return { data: returnedData, error: errorReturned, loading: queryLoading };
   }
 
+  /****************
+   Class requests
+   ****************/
+
+  // Get all classes
+  static queryAllClasses() {
+    if (['dev', 'development'].includes(process.env.NODE_ENV)) {
+      return {
+        data: MockData.upcomingClasses,
+        error: undefined,
+        loading: false,
+      };
+    }
+    const { data, error, loading } = useQuery(queries.AllClasses);
+    return { data, error, loading };
+  }
+
+  // Get class data by id
+  static queryClassById(classId) {
+    if (['dev', 'development'].includes(process.env.NODE_ENV)) {
+      return {
+        data: MockData.classesOverview.filter(function (c) {
+          return c.classId === classId;
+        }),
+        error: undefined,
+        loading: false,
+      };
+    }
+
+    const [returnedData, setReturnedData] = useState({});
+    const [queryLoading, setQueryLoading] = useState(true);
+    const [errorReturned, setErrorReturned] = useState(undefined);
+
+    const { data, error, loading } = useQuery(queries.SpecificClass, {
+      variables: { classId: classId },
+    });
+
+    useEffect(() => {
+      if (!error && !loading) {
+        setReturnedData(data.getClassById);
+        setQueryLoading(false);
+      } else {
+        setErrorReturned(error);
+        setQueryLoading(loading);
+      }
+    }, [data, error, loading]);
+
+    return { data: returnedData, error: errorReturned, loading: queryLoading };
+  }
+
+  /****************
+   Post requests
+   ****************/
+
+  // Get a user's posts
   static queryPostsById(userId) {
     if (['dev', 'development'].includes(process.env.NODE_ENV)) {
-      return { data: MockData.postData, error: undefined, loading: false };
+      return {
+        data: MockData.postData.filter(function (c) {
+          return c.userId === userId;
+        }),
+        error: undefined,
+        loading: false,
+      };
     }
 
     const [returnedData, setReturnedData] = useState({});
