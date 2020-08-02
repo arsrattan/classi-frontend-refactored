@@ -26,7 +26,9 @@ const ClassPlayer = ({ navigation, route, isYoutubeVideo }) => {
     const createMeetingRequest = async () => {
       const createMeeting = async () => {
         try {
-          const res = await fetch('http://localhost:3000/meeting', {
+          const hostname = 'ec2-107-23-186-194.compute-1.amazonaws.com';
+
+          const res = await fetch(`http://${hostname}:3000/meeting`, {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -47,8 +49,10 @@ const ClassPlayer = ({ navigation, route, isYoutubeVideo }) => {
 
       const addHostToMeeting = async (meetingId, userName) => {
         try {
+          const hostname = 'ec2-107-23-186-194.compute-1.amazonaws.com';
+
           const res = await fetch(
-            `http://localhost:3000/attendee/${meetingId}?userId=${userName}`,
+            `http://${hostname}:3000/attendee/${meetingId}?userId=${userName}`,
             {
               method: 'POST',
               headers: {
