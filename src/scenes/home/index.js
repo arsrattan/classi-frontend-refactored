@@ -214,9 +214,9 @@ const HomeScreen = ({ navigation }) => {
               }}>
               Welcome back
               <Text style={{ color: Colors.andromeda }}>
-                {tokenData !== undefined
+                {/*tokenData !== undefined
                   ? ` ${tokenData[0].toUpperCase() + tokenData.slice(1)}`
-                  : ''}
+                : ''*/}
               </Text>
             </Text>
           }

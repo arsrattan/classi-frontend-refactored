@@ -1,20 +1,26 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { requireNativeComponent, findNodeHandle } from 'react-native';
 import { NativeModules } from '_utils';
 
-const VideoTile = () => {
-  useEffect(() => {
-    setTimeout(() => {
-      NativeFunction.bindVideoView(findNodeHandle(this), this.props.tileId);
-    });
-    return function cleanup() {
-      NativeFunction.unbindVideoView(this.props.tileId);
-    };
-  });
+const NativeVideoTile = requireNativeComponent('RNVideoView', VideoTile);
 
-  return <NativeVideoTile {...this.props} />;
-};
+class VideoTile {
+  componentDidMount() {
+    NativeModules.NativeFunction.bindVideoView(
+      findNodeHandle(this),
+      this.props.tileId,
+    );
+  }
+
+  componentDidUnmount() {
+    NativeModules.NativeFunction.unbindVideoView(this.props.tileId);
+  }
+
+  render() {
+    return <NativeVideoTile {...this.props} />;
+  }
+}
 
 VideoTile.propTypes = {
   /**
@@ -22,7 +28,5 @@ VideoTile.propTypes = {
    */
   tileId: PropTypes.number,
 };
-
-const NativeVideoTile = requireNativeComponent('RNVideoView', VideoTile);
 
 export default VideoTile;

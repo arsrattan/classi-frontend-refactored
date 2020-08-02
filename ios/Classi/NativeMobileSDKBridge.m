@@ -36,13 +36,17 @@ RCT_EXPORT_MODULE();
 # pragma mark: Native Function
 RCT_EXPORT_METHOD(startMeeting:(NSDictionary *)meetingInfoDict attendeeInfo:(NSDictionary *)attendeeInfoDict)
 {
+  logger = [[ConsoleLogger alloc] initWithName:@"NativeMobileSDKBridge" level:LogLevelDEFAULT];
+  
+  [logger infoWithMsg:@"Inside the startMeeting"];
+  
   if (meetingSession != nil)
   {
+    [logger errorWithMsg:@"Meeting session is null!"];
     [meetingSession.audioVideo stop];
     meetingSession = nil;
   }
 
-  logger = [[ConsoleLogger alloc] initWithName:@"NativeMobileSDKBridge" level:LogLevelDEFAULT];
   [logger infoWithMsg: [[NSString alloc] initWithFormat:@"Running Amazon Chime SDK (%@)", Versioning.sdkVersion]];
   // Parse meeting join data from payload
   NSDictionary *mediaPlacementDict = [meetingInfoDict objectForKey:kMediaPlacement];

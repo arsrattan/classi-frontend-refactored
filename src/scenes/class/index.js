@@ -239,7 +239,7 @@ const ClassScreen = ({ navigation, route }) => {
               navigation={navigation}
               screen="ClassPlayer"
               onPressParams={{
-                classVideoURL: 'www.youtube.com/watch?v=Iu62LxEFUlE',
+                classVideoURL: 'test',
               }}
               style={{ marginTop: Spacing.smaller }}
             />

@@ -108,11 +108,17 @@
 
 - (void)audioSessionDidStartConnectingWithReconnecting:(BOOL)reconnecting
 {
-  // Not implemented for demo purposes
+    [_logger infoWithMsg:@"Inside the audio session did start conencting with reconnecting!"];
+    if (!reconnecting)
+    {
+      [_logger infoWithMsg:@"Meeting Started!"];
+      [_bridge sendEventWithName:kEventOnMeetingStart body:nil];
+    }
 }
 
 - (void)audioSessionDidStartWithReconnecting:(BOOL)reconnecting
 {
+  [_logger infoWithMsg:@"Inside the audio session did start with reconnecting!"];
   if (!reconnecting)
   {
     [_logger infoWithMsg:@"Meeting Started!"];

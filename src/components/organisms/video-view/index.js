@@ -6,6 +6,8 @@
 //import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import {
+  View,
+  Text,
   requireNativeComponent,
   findNodeHandle,
   RecyclerViewBackedScrollView,
@@ -15,7 +17,7 @@ import { VideoTile } from '_molecules';
 import { NativeModules } from '_utils';
 import styles from './styles';
 
-const VideoView = ({ navigation }) => {
+const VideoView = ({ navigation, meetingObject, attendeeObject }) => {
   const [isInMeeting, setIsInMeeting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selfAttendeeId, setSelfAttendeeId] = useState('');
@@ -28,8 +30,9 @@ const VideoView = ({ navigation }) => {
 
   // listen for when user successfully joins the meeting and then set the inMeetingStatus to true
   useEffect(() => {
-    const meetingStartListener = getSDKEventEmitter().addListener(
-      MobileSDKEvent.OnMeetingStart,
+    console.log('Inside the meeting start listener hook');
+    const meetingStartListener = NativeModules.getSDKEventEmitter().addListener(
+      NativeModules.MobileSDKEvent.OnMeetingStart,
       () => {
         console.log('Joined Meeting');
         setIsInMeeting(true);
@@ -37,58 +40,43 @@ const VideoView = ({ navigation }) => {
       },
     );
     return function cleanup() {
-      this.meetingStartListener.remove();
+      meetingStartListener.remove();
     };
-  });
+  }, []);
 
   // Add video tile for the user
   useEffect(() => {
-    const addVideoTileListener = getSDKEventEmitter().addListener(
-      MobileSDKEvent.OnAddVideoTile,
+    const addVideoTileListener = NativeModules.getSDKEventEmitter().addListener(
+      NativeModules.MobileSDKEvent.OnAddVideoTile,
       (tileState) => {
         console.log('New video tile event');
-        if (tileState.isScreenShare) {
-          this.setState((oldState) => ({
-            ...oldState,
-            screenShareTile: tileState.tileId,
-          }));
-        } else {
-          setVideoTiles([...videoTiles, tileState.tileId]);
-        }
+        setVideoTiles([...videoTiles, tileState.tileId]);
       },
     );
     return function cleanup() {
       addVideoTileListener.remove();
     };
-  });
+  }, [videoTiles]);
 
-  // create a new meeting and join
-  initializeMeetingSession = (meetingName, userName) => {
-    setIsLoading(true);
+  useEffect(() => {
+    // create a new meeting and join
+    const initializeMeetingSession = () => {
+      setIsLoading(true);
+      setMeetingName(meetingName);
+      // setSelfAttendeeId(attendeeObject.Attendee.AttendeeId);
+      // call iOS native function for joining meeting
+      console.log(
+        `Calling startMeeting function with meeting: ${JSON.stringify(
+          meetingObject,
+        )} and attendee: ${JSON.stringify(attendeeObject)}`,
+      );
+      NativeModules.NativeFunction.startMeeting(meetingObject, attendeeObject);
+    };
 
-    // backend request
-    createMeetingRequest(meetingName, userName)
-      .then((meetingResponse) => {
-        setMeetingName(meetingName);
-        setSelfAttendeeId(
-          meetingResponse.JoinInfo.Attendee.Attendee.AttendeeId,
-        );
-        // call iOS native function for joining meeting
-        NativeModules.NativeFunction.startMeeting(
-          meetingResponse.JoinInfo.Meeting.Meeting,
-          meetingResponse.JoinInfo.Attendee.Attendee,
-        );
-      })
-      .catch((error) => {
-        Alert.alert(
-          'Unable to find meeting',
-          `There was an issue finding that meeting. The meeting may have already ended, or your authorization may have expired.\n ${error}`,
-        );
-        setIsLoading(false);
-      });
-  };
+    initializeMeetingSession('testMeeting');
+  }, [meetingName, meetingObject, attendeeObject]);
 
-  initializeMeetingSession('testMeeting', 'derek');
+  console.log('In Video Viewer!');
 
   return (
     <View style={styles.videoContainer}>
