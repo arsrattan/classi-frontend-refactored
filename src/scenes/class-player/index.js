@@ -105,7 +105,7 @@ const ClassPlayer = ({ navigation, route, isYoutubeVideo }) => {
     console.log('initializeMeetingSession called');
 
     amazonSDK
-      .createMeetingRequest('testMeeting2', 'derek')
+      .createMeetingRequest('testMeeting3', 'derek')
       .then((meetingResponse) => {
         setMeetingName('testMeeting');
         setSelfAttendeeId(
