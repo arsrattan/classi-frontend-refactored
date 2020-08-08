@@ -5,7 +5,7 @@ import { NativeModules } from '_utils';
 
 const NativeVideoTile = requireNativeComponent('RNVideoView', VideoTile);
 
-class VideoTile {
+class VideoTile extends React.Component {
   componentDidMount() {
     NativeModules.NativeFunction.bindVideoView(
       findNodeHandle(this),

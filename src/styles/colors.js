@@ -22,6 +22,9 @@ export const grey = '#f4f4f6';
 // tile background
 export const lightGrey = '#FAFAFC';
 
+// opaque background
+export const ariesAlpha = 'rgba(51, 78, 104, 0.5)';
+
 // Used in line
 export const cassiopeia = 'rgba(161, 174, 183, 0.1)';
 

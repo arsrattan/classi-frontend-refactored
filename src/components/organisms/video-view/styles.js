@@ -13,9 +13,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   video: {
-    width: '45%',
+    width: 80,
+    height: 100,
     margin: '1%',
-    aspectRatio: 16 / 9,
   },
 });
 

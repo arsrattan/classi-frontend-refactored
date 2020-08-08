@@ -108,12 +108,12 @@
 
 - (void)audioSessionDidStartConnectingWithReconnecting:(BOOL)reconnecting
 {
-    [_logger infoWithMsg:@"Inside the audio session did start conencting with reconnecting!"];
+   /* [_logger infoWithMsg:@"Inside the audio session did start conencting with reconnecting!"];
     if (!reconnecting)
     {
       [_logger infoWithMsg:@"Meeting Started!"];
       [_bridge sendEventWithName:kEventOnMeetingStart body:nil];
-    }
+    } */
 }
 
 - (void)audioSessionDidStartWithReconnecting:(BOOL)reconnecting

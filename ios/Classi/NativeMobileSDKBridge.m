@@ -191,6 +191,7 @@ RCT_EXPORT_METHOD(unbindVideoView:(NSNumber * _Nonnull)tileId)
     [logger errorWithMsg:@"meetingSession is not initialized"];
     return;
   }
+  [logger infoWithMsg:@"Inside startAudioClient"];
   MeetingObservers* observer = [[MeetingObservers alloc] initWithBridge:self logger:logger];
   [meetingSession.audioVideo addRealtimeObserverWithObserver:observer];
   [meetingSession.audioVideo addVideoTileObserverWithObserver:observer];
@@ -200,6 +201,8 @@ RCT_EXPORT_METHOD(unbindVideoView:(NSNumber * _Nonnull)tileId)
 
 -(void)startAudioVideo
 {
+  [logger infoWithMsg:@"Inside startAudioVideo"];
+
    NSError* error = nil;
    BOOL started = [meetingSession.audioVideo startAndReturnError:&error];
    if (started && error == nil)

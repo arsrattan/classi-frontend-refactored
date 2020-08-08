@@ -1,8 +1,13 @@
 import { StyleSheet } from 'react-native';
+import { Colors, Spacing, Typography, Icons } from '_styles';
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: 'white',
+  },
+  sectionContainer: {
+    paddingHorizontal: Spacing.base,
   },
   welcome: {
     fontSize: 20,

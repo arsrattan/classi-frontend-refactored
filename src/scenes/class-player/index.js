@@ -1,9 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text, PixelRatio, Dimensions } from 'react-native';
+import {
+  View,
+  ScrollView,
+  Text,
+  PixelRatio,
+  Dimensions,
+  Image,
+} from 'react-native';
+import { Header } from '_molecules';
 import { VideoView } from '_organisms';
 import YouTube from 'react-native-youtube';
 import styles from './styles';
-import { GraphQLClient } from '_services';
+import { GraphQLClient, amazonSDK } from '_services';
+import { Colors, Spacing, Typography, Icons } from '_styles';
+import {
+  arrowBackDarkImg,
+  audioOnImg,
+  audioOffImg,
+  videoOnImg,
+  videoOffImg,
+  inviteImg,
+} from '_assets';
+import { NativeModules } from '_utils';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ClassPlayer = ({ navigation, route, isYoutubeVideo }) => {
   const [isReady, setIsReady] = useState(false);
@@ -19,80 +38,118 @@ const ClassPlayer = ({ navigation, route, isYoutubeVideo }) => {
   const [containerWidth, setContainerWidth] = useState(null);
   const { classVideoURL } = route.params;
   const videoId = classVideoURL.split('watch?v=')[1];
+
   const [meeting, setMeeting] = useState({});
   const [attendee, setAttendee] = useState({});
 
+  const [isInMeeting, setIsInMeeting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selfAttendeeId, setSelfAttendeeId] = useState('');
+
+  // meeting name might need to be unique in order to identify the meeting for other people to join
+  const [meetingName, setMeetingName] = useState('');
+
+  // list of video tiles
+  const [videoTiles, setVideoTiles] = useState([]);
+
+  // listen for when user successfully joins the meeting and then set the inMeetingStatus to true
   useEffect(() => {
-    const createMeetingRequest = async () => {
-      const createMeeting = async () => {
-        try {
-          const hostname = 'ec2-107-23-186-194.compute-1.amazonaws.com';
-
-          const res = await fetch(`http://${hostname}:3000/meeting`, {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-          });
-          const json = await res.json();
-          console.log(
-            `Received meeting response: ${JSON.stringify(
-              json.meeting.Meeting,
-            )}`,
-          );
-          return json.meeting;
-        } catch (err) {
-          console.log(`Error!: ${err}`);
-        }
-      };
-
-      const addHostToMeeting = async (meetingId, userName) => {
-        try {
-          const hostname = 'ec2-107-23-186-194.compute-1.amazonaws.com';
-
-          const res = await fetch(
-            `http://${hostname}:3000/attendee/${meetingId}?userId=${userName}`,
-            {
-              method: 'POST',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-              },
-              query: {
-                userId: userName,
-              },
-            },
-          );
-          const json = await res.json();
-          console.log(
-            `Received attendee response: ${JSON.stringify(json.attendee)}`,
-          );
-          return json.attendee;
-        } catch (err) {
-          console.log(`Error!: ${err}`);
-        }
-      };
-
-      const meeting = await createMeeting();
-      const attendee = await addHostToMeeting(
-        meeting.Meeting.MeetingId,
-        JSON.stringify(GraphQLClient.getCurrentUserId()),
-      );
-
-      setMeeting(meeting);
-      setAttendee(attendee);
+    const meetingStartListener = NativeModules.getSDKEventEmitter().addListener(
+      NativeModules.MobileSDKEvent.OnMeetingStart,
+      () => {
+        console.log('Joined Meeting');
+        setIsInMeeting(true);
+        setIsLoading(false);
+      },
+    );
+    return function cleanup() {
+      meetingStartListener.remove();
     };
-    if (!isYoutubeVideo) {
-      createMeetingRequest();
-    }
-  }, [isYoutubeVideo]);
+  }, []);
+
+  useEffect(() => {
+    const meetingEndListener = NativeModules.getSDKEventEmitter().addListener(
+      NativeModules.MobileSDKEvent.OnMeetingEnd,
+      () => {
+        console.log('Ended Meeting');
+        setIsInMeeting(false);
+        setIsLoading(false);
+      },
+    );
+    return function cleanup() {
+      meetingEndListener.remove();
+    };
+  });
+
+  // Add video tile for the user
+  /*
+  useEffect(() => {
+    //console.log('In video tile hook');
+    const addVideoTileListener = NativeModules.getSDKEventEmitter().addListener(
+      NativeModules.MobileSDKEvent.OnAddVideoTile,
+      (tileState) => {
+        console.log('New video tile event');
+        setVideoTiles([...videoTiles, tileState.tileId]);
+      },
+    );
+    return function cleanup() {
+      addVideoTileListener.remove();
+    };
+  }, []);
+  */
+
+  // create a new meeting and join
+  const initializeMeetingSession = () => {
+    setIsLoading(true);
+
+    console.log('initializeMeetingSession called');
+
+    amazonSDK
+      .createMeetingRequest('testMeeting2', 'derek')
+      .then((meetingResponse) => {
+        setMeetingName('testMeeting');
+        setSelfAttendeeId(
+          meetingResponse.JoinInfo.Attendee.Attendee.AttendeeId,
+        );
+        // call iOS native function for joining meeting
+        console.log(
+          `Calling startMeeting function with meeting: ${JSON.stringify(
+            meetingResponse.meeting,
+          )} and attendee: ${JSON.stringify(meetingResponse.attendee)}`,
+        );
+        NativeModules.NativeFunction.startMeeting(
+          meetingResponse.JoinInfo.Meeting.Meeting,
+          meetingResponse.JoinInfo.Attendee.Attendee,
+        );
+      })
+      .catch((error) => {
+        console.log(
+          'Unable to find meeting',
+          `There was an issue finding that meeting. The meeting may have already ended, or your authorization may have expired.\n ${error}`,
+        );
+        setIsLoading(false);
+      });
+  };
 
   console.log('In class player!');
 
-  return isYoutubeVideo ? (
-    <ScrollView>
-      <Text>Youtube Player</Text>
+  return (
+    <View style={styles.container}>
+      <View style={styles.sectionContainer}>
+        <Header
+          navigation={navigation}
+          backgroundColor={Colors.white}
+          text={
+            <Text style={{ ...Typography.p1d2, ...Typography.bold }}>
+              Watch Class
+            </Text>
+          }
+          leftIcon={arrowBackDarkImg}
+          onPressLeftIcon={() => {
+            navigation.goBack();
+          }}
+        />
+      </View>
       <YouTube
         apiKey="AIzaSyCYW51rAwuXePU5TIQrVMxYXlHs291yPJ8"
         videoId={videoId}
@@ -115,12 +172,45 @@ const ClassPlayer = ({ navigation, route, isYoutubeVideo }) => {
           styles.player,
         ]}
       />
-    </ScrollView>
-  ) : (
-    <>
-      <Text>Live Stream Player</Text>
-      <VideoView meetingObject={meeting} attendeeObject={attendee} />
-    </>
+      {isInMeeting ? (
+        <VideoView
+          meetingTitle="Test Meeting"
+          selfAttendeeId={selfAttendeeId}
+        />
+      ) : (
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: Colors.ariesAlpha,
+              paddingHorizontal: Spacing.base,
+              paddingVertical: Spacing.smallest,
+              marginBottom: Spacing.larger,
+              borderRadius: 10,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              initializeMeetingSession();
+            }}>
+            <Text
+              style={{
+                ...Typography.h3,
+                color: Colors.white,
+                marginRight: Spacing.smaller,
+              }}>
+              Invite Friends
+            </Text>
+            <Image style={Icons.normal} source={inviteImg} />
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
   );
 };
 
