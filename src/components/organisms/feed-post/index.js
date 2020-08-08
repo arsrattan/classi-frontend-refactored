@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import {
@@ -10,14 +10,13 @@ import {
 } from '_assets';
 import { ProfileImg } from '_atoms';
 import { MedHortClassCard, PostCommentTile } from '_molecules';
-import { Spacing } from '_styles';
-import { useEffect, useState } from 'react';
 import styles from './styles';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
-import { GetClass } from '../../../utils/backendServices/classService';
+// import { GetClass } from '../../../utils/backendServices/classService';
 import { GetCurrentUserId } from '../../../utils/backendServices/usersService';
 import { GraphQLClient } from '_services';
+import { Typography, Spacing, Colors } from '_styles';
 
 moment().format();
 
@@ -45,9 +44,6 @@ const FeedPost = ({ allComments, post, navigation }) => {
   };
 
   const { data, error, loading } = GraphQLClient.queryClassById(post.classId);
-  console.log(`Received data: ${data}`);
-  console.log(`Received error: ${error}`);
-  console.log(`Received loading: ${loading}`);
 
   const userId = GetCurrentUserId();
   const [isActive, setIsActive] = useState(
@@ -90,7 +86,7 @@ const FeedPost = ({ allComments, post, navigation }) => {
       likePost({
         variables: {
           userId: userId,
-          postCreator: post.createdBy,
+          postCreator: post.userId,
           isUnlike: !isActive,
           postId: post.postId,
         },
@@ -121,7 +117,7 @@ const FeedPost = ({ allComments, post, navigation }) => {
               },
             });
           } catch (e) {
-            console.log(e);
+            //console.log(e);
           }
         },
       })
@@ -129,7 +125,7 @@ const FeedPost = ({ allComments, post, navigation }) => {
           setIsSubmitting(false);
         })
         .catch((e) => {
-          console.log(e);
+          //console.log(e);
           setIsSubmitting(false);
         });
     }
@@ -142,8 +138,11 @@ const FeedPost = ({ allComments, post, navigation }) => {
         <ProfileImg userProfileImg={post.users3url} size="small" />
         <View style={styles.feedPostHeaderTextContainer}>
           {/* Name of the User making post */}
-          <Text style={styles.h3d1}>
-            {post.createdBy + ' ' + postTypeText(post.postType, data[0])}
+          <Text style={{ ...Typography.h3, color: Colors.aries }}>
+            {post.userId}
+            <Text style={{ ...Typography.unbold }}>
+              {' ' + postTypeText(post.postType, data[0])}
+            </Text>
           </Text>
           <Text style={styles.p2d2}>{`${moment(
             parseInt(post.createdAt),
@@ -156,7 +155,9 @@ const FeedPost = ({ allComments, post, navigation }) => {
 
       {/* Post Content */}
       <View style={styles.postDetailsContainer}>
-        <Text style={styles.p1d1}>Caption</Text>
+        <Text style={{ ...Typography.p1, color: Colors.aries }}>
+          {post.caption}
+        </Text>
         {/* completed class details, this should pass a prop with the class details though */}
         <View style={styles.classDetailsContainer}>
           <MedHortClassCard navigation={navigation} classData={data} />
@@ -206,16 +207,14 @@ const FeedPost = ({ allComments, post, navigation }) => {
             });
           }}
           style={styles.allCommentContainer}>
-          <Text style={styles.p1d2}>View all comments</Text>
+          <Text style={{ ...Typography.p1, color: Colors.cancer }}>
+            View all comments
+          </Text>
         </TouchableOpacity>
       ) : (
         <View style={styles.allCommentContainer} />
       )}
-      {post.comments.length > 0 && (
-        <View style={styles.commentTileContainer}>
-          {/* <PostCommentTile /> */}
-        </View>
-      )}
+      {post.comments.length > 0 && <PostCommentTile comments={post.comments} />}
     </View>
   );
 };

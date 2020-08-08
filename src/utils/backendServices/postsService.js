@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import {useQuery} from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { useEffect, useState } from 'react';
 
 export const GetAllPosts = (userId) => {
@@ -9,6 +9,7 @@ export const GetAllPosts = (userId) => {
       getAllPostsForUser(userId: $userId) {
         postId
         postType
+        caption
         createdBy
         createdAt
         comments

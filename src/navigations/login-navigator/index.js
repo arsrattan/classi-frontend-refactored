@@ -6,6 +6,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { useMutation, gql } from '@apollo/client';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -14,6 +15,7 @@ import { Tile, InputField, Button } from '_atoms';
 import styles from './styles';
 import { Colors, Typography, Spacing } from '_styles';
 import AsyncStorage from '@react-native-community/async-storage';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -119,8 +121,11 @@ const SignupTab = ({ navigation }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={dismissDatePicker} accessible={false}>
-      <View style={styles.formContainer}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <KeyboardAvoidingView
+        style={styles.formContainer}
+        enabled
+        behavior="position">
         <Text style={[Typography.h1d1, { marginTop: Spacing.large }]}>
           Join Classi
         </Text>
@@ -181,7 +186,7 @@ const SignupTab = ({ navigation }) => {
           onPress={handleSubmit}
         />
         {show && <DateTimePicker value={date} onChange={onChange} />}
-      </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };
