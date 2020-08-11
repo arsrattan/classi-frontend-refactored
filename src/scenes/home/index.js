@@ -4,7 +4,7 @@ import styles from './styles';
 import { ImageTile } from '_atoms';
 import { Header } from '_molecules';
 import { avatarImg, notificationImg, cameraImg } from '_assets';
-// import { GetAllClasses } from '../../utils/backendServices/classService';
+import { GetAllClasses } from '../../utils/backendServices/classService';
 import AsyncStorage from '@react-native-community/async-storage';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { Colors, Spacing, Typography, Icons } from '_styles';
@@ -179,7 +179,7 @@ const RecommendedClasses = ({ navigation, classes }) => {
 };
 
 const HomeScreen = ({ navigation }) => {
-  //const { data, loading } = GetAllClasses();
+  const { data, loading } = GetAllClasses();
 
   const [tokenData, setTokenData] = useState();
   const [classes, setClasses] = useState([]);
@@ -235,9 +235,9 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ backgroundColor: Colors.sirius }}>
-        <UpcomingClasses navigation={navigation} classes={classes} />
-        <FriendsClasses navigation={navigation} classes={classes} />
-        <RecommendedClasses navigation={navigation} classes={classes} />
+        <UpcomingClasses navigation={navigation} classes={data} />
+        <FriendsClasses navigation={navigation} classes={data} />
+        <RecommendedClasses navigation={navigation} classes={data} />
       </ScrollView>
     </View>
   );

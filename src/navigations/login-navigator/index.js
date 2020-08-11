@@ -8,7 +8,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
 } from 'react-native';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Tile, InputField, Button } from '_atoms';
@@ -22,10 +23,10 @@ const Tab = createMaterialTopTabNavigator();
 const SignupTab = ({ navigation }) => {
   function validate(values) {
     let errors = {};
-    if (!values.email) {
-      errors.email = 'Email address is required!';
+    if (!values.username) {
+      errors.username = 'Username is required!';
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-      errors.email = 'Please enter a valid email!';
+      errors.username = 'Please enter a valid username!';
     }
     if (!values.password) {
       errors.password = 'Password is required!';
@@ -207,7 +208,7 @@ const LoginTab = ({ navigation }) => {
   useEffect(() => {
     if (isSubmitting) {
       loginUser({
-        variables: { email: values.email, password: values.password },
+        variables: { username: values.username, password: values.password },
       })
         .then(({ data }) => {
           if (data.login != null) {
@@ -224,10 +225,10 @@ const LoginTab = ({ navigation }) => {
   }, [isSubmitting, errors, data, error, loading]);
 
   const LOGIN_USER = gql`
-    mutation Login($email: String!, $password: String!) {
-      login(email: $email, password: $password) {
+    mutation Login($username: String!, $password: String!) {
+      login(username: $username, password: $password) {
         accessToken
-        userId
+        username
       }
     }
   `;
@@ -241,11 +242,11 @@ const LoginTab = ({ navigation }) => {
         </Text>
         <Text style={[Typography.p2danger]}>{errors.login}</Text>
         <InputField
-          label="Username or Email"
-          placeholderText="user@email.com"
+          label="Username"
+          placeholderText="your_username"
           onChange={handleChange}
-          value={values.email || ''}
-          name={'email'}
+          value={values.username || ''}
+          name={'username'}
         />
         <InputField
           label="Password"

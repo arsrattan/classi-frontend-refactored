@@ -17,12 +17,12 @@ import { arrowBackImg, shareImgLight, copyImg } from '_assets';
 import { ClassNavigator } from '_navigations';
 import { Colors, Typography, Spacing } from '_styles';
 import { GraphQLClient } from '_services';
-/*
 import {
   GetUser,
   GetUserFollowers,
 } from '../../utils/backendServices/usersService';
-*/
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 
 const ClassScreen = ({ navigation, route }) => {
   const { classDetails, isWatching } = route.params;
@@ -34,14 +34,31 @@ const ClassScreen = ({ navigation, route }) => {
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [scheduledTime, setScheduledTime] = useState(new Date());
   const [apiLoading, setApiLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  /*
   const { data, loading } = GetUser(classDetails.instructorUserId);
   const { followersData, followersLoading } = GetUserFollowers(
     classDetails.instructorUserId,
   );
-  */
+  
 
+ const REGISTER_CLASS = gql`
+  mutation RegisterForClass(
+    $userId: String!
+    $classId: String!
+    $scheduledTime: Float!
+  ) {
+    registerForClass(
+      userId: $userId
+      classId: $classId
+      scheduledTime: $scheduledTime
+    )
+  }
+  `;
+
+  const [registerClass, { registerData, registerLoading, registerError }] = useMutation(REGISTER_CLASS);
+
+  const userId = GraphQLClient.getCurrentUserId();
   const date = new Date(classDetails.scheduledTime);
   const month = date.toLocaleString('default', { month: 'short' });
 
@@ -78,7 +95,28 @@ const ClassScreen = ({ navigation, route }) => {
   };
   */
 
+  const handleSubmit = () => {
+    setIsSubmitting(true);
+    navigation.navigate('Registered')
+  };
+
   useEffect(() => {
+    if (isSubmitting) {
+      registerClass({
+        variables: {
+          userId: userId,
+          classId: classDetails.classId,
+          scheduledTime: 121342453,
+        },
+      })
+        .then(({ data }) => {
+          setIsSubmitting(false);
+        })
+        .catch((e) => {
+          console.log(e);
+          setIsSubmitting(false);
+        });
+    }
     const fetchInstructor = async () => {
       const { data, error, loading } = await GraphQLClient.queryUserById(
         instructorUserId,
@@ -226,9 +264,7 @@ const ClassScreen = ({ navigation, route }) => {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('Registered');
-                }}
+                onPress={handleSubmit}
                 style={styles.registerButton}>
                 <Text style={styles.p1white}>Register Now</Text>
               </TouchableOpacity>

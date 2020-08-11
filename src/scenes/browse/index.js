@@ -27,12 +27,12 @@ import {
   notifDarkBttnImg,
 } from '_assets';
 import { createClassCards } from '_utils';
-//import { GetAllClasses } from '../../utils/backendServices/classService';
+import { GetAllClasses } from '../../utils/backendServices/classService';
 import { Spacing, Colors } from '_styles';
 import { GraphQLClient } from '_services';
 
 const BrowseScreen = ({ navigation }) => {
-  //const { data, loading } = GetAllClasses();
+  const { data, loading } = GetAllClasses();
 
   const [filterChips, setFilterChips] = useState(new Map());
 

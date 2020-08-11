@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/react-hooks';
 import AsyncStorage from '@react-native-community/async-storage';
 import Mixpanel from 'react-native-mixpanel';
 import Navigator from '_navigations';
@@ -38,7 +38,6 @@ const authLink = setContext(async (req, { headers }) => {
   };
 });
 const link = authLink.concat(httpLink);
-
 const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),
