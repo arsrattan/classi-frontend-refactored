@@ -225,7 +225,7 @@ const LoginTab = ({ navigation }) => {
 
   const LOGIN_USER = gql`
     mutation Login($email: String!, $password: String!) {
-      login(email: $email, password: $password) {
+      login(username: $email, password: $password) {
         accessToken
         userId
       }

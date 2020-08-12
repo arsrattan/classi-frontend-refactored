@@ -13,13 +13,9 @@ const queries = {
         classType
         class_image_url
         channel_thumbnail_url
-        difficulty
         expectedDuration
         instructorUserId
         description
-        requiredEquipment
-        isPrivate
-        comments
         view_count
       }
     }
@@ -42,6 +38,20 @@ const queries = {
         comments
         view_count
       }
+    }
+  `,
+
+  RegisterForClass: gql`
+    mutation RegisterForClass(
+      $scheduledTime: Float!
+      $classId: String!
+      $userId: [String!]
+    ) {
+      registerForClass(
+        scheduledTime: $scheduledTime
+        classId: $classId
+        userId: $userId
+      )
     }
   `,
 

@@ -206,6 +206,41 @@ class GraphQLClient {
     return { data: returnedData, error: errorReturned, loading: queryLoading };
   }
 
+  // Register for class
+  static registerForClass(classId, userId, scheduledTime) {
+    const [returnedData, setReturnedData] = useState(false);
+    const [queryLoading, setQueryLoading] = useState(true);
+    const [errorReturned, setErrorReturned] = useState(undefined);
+
+    const [registerClass, { data, error, loading }] = useMutation(
+      queries.RegisterForClass,
+      {
+        variables: {
+          scheduledTime: scheduledTime,
+          classId: classId,
+          userId: userId,
+        },
+      },
+    );
+
+    useEffect(() => {
+      if (!error && !loading) {
+        setReturnedData(data.registerForClass);
+        setQueryLoading(false);
+      } else {
+        setErrorReturned(error);
+        setQueryLoading(loading);
+      }
+    }, [data, error, loading]);
+
+    return {
+      registerClass: registerClass,
+      data: returnedData,
+      error: errorReturned,
+      loading: queryLoading,
+    };
+  }
+
   /****************
    Post requests
    ****************/

@@ -11,6 +11,7 @@ import { GetGroup } from '../../../utils/backendServices/groupsService';
 const GroupsHomeScreen = ({ navigation }) => {
   const currentUserId = GraphQLClient.getCurrentUserId();
 
+  GetGroupByUserId();
   const { groupData, groupLoading } = GetGroup('7pmdv8kd523n9b');
   //console.log(groupData);
   return (

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 import styles from './styles';
 import { Tag, ProfileImg, InputBox, Divider, Button } from '_atoms';
 import { PostCommentTile, MultiProfileImg } from '_molecules';
@@ -42,17 +43,18 @@ const ClassScreen = ({ navigation, route }) => {
   );
   */
 
-  const date = new Date(classDetails.scheduledTime);
-  const month = date.toLocaleString('default', { month: 'short' });
+  //console.log(classDetails);
+  //const date = new Date(classDetails.scheduledTime);
+  //const month = date.toLocaleString('default', { month: 'short' });
 
   const onShowDatePicker = () => {
     const newStatus = !showDatePicker;
     setShowDatePicker(newStatus);
   };
 
+  // moment('05-17-2018 11:40 PM', 'MM-DD-YYYY hh:mm A')
   const onChangeDate = (selectedDate) => {
-    const currentDate = selectedDate;
-    setScheduledDate(currentDate.format('LL'));
+    setScheduledDate(selectedDate);
     setShowDatePicker(false);
   };
 
@@ -67,16 +69,6 @@ const ClassScreen = ({ navigation, route }) => {
       setShowTimePicker(false);
     }, 0);
   };
-
-  /* These were used to keep track of who was added to a group, but that should just be a backend call
-  const [inviteList, setInvitedList] = useState([]);
-
-  const addToList = (name) => {
-    const newInviteList = inviteList;
-    newInviteList.push(name);
-    setInvitedList(newInviteList);
-  };
-  */
 
   useEffect(() => {
     const fetchInstructor = async () => {
@@ -98,6 +90,16 @@ const ClassScreen = ({ navigation, route }) => {
     fetchFollowers();
     setApiLoading(false);
   }, [instructorUserId]);
+
+  const onRegisterClick = async (classId, userId, scheduledTime) => {
+    const { register, data } = await GraphQLClient.registerForClass(
+      classId,
+      userId,
+      scheduledTime,
+    );
+    console.log(`register: ${register}`);
+    console.log(`data: ${data}`);
+  };
 
   if (!apiLoading) {
     const comments = classDetails.comments == null ? [] : classDetails.comments;
@@ -131,8 +133,7 @@ const ClassScreen = ({ navigation, route }) => {
               style={[
                 Typography.p1d2,
               ]}>{`by ${classDetails.instructorUserId}`}</Text>
-            <View style={styles.classTimeContainer}>
-              {/* <View style={styles.classTime}>
+            {/*<View style={styles.classTimeContainer}> <View style={styles.classTime}>
                 <Image source={calendarImg} style={styles.iconSpace} />
                 <Text style={Typography.p1d2}>
                   {date.getDate()} {month} {date.getFullYear()}
@@ -147,24 +148,20 @@ const ClassScreen = ({ navigation, route }) => {
                   })}
                 </Text>
               </View> */}
-              {/* <View style={styles.classTime}>
+            {/* <View style={styles.classTime}>
                 <Dot color={Colors.livePink} size="large" />
                 <Text style={styles.liveNowText}>Live Now</Text>
-              </View> */}
-            </View>
-            <View style={styles.registeredUserView}>
-              <ProfileImg size="small" />
-              <ProfileImg size="small" />
-              <ProfileImg size="small" />
-              <Text style={Typography.p1d2}>
-                {'Duration: ' + classDetails.expectedDuration + ' minutes'}
-              </Text>
-            </View>
+              </View> 
+            </View>*/}
             <View style={styles.schedulerTimeContainer}>
               <TouchableOpacity
                 onPress={onShowDatePicker}
                 style={styles.scheduleTimeInput}>
-                <Text style={Typography.p1d2}>{scheduledDate}</Text>
+                <Text style={Typography.p1d2}>
+                  {scheduledDate !== 'Select a date'
+                    ? scheduledDate.format('LL')
+                    : scheduledDate}
+                </Text>
                 <Divider
                   color={Colors.grey}
                   style={{ marginVertical: Spacing.smallest }}
@@ -227,7 +224,20 @@ const ClassScreen = ({ navigation, route }) => {
             ) : (
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Registered');
+                  let combinedTimeString = `${
+                    scheduledDate.month() + 1
+                  }-${scheduledDate.date()}-${scheduledDate.year()} ${scheduledTime.getHours()}:${scheduledTime.getMinutes()}`;
+                  let combinedTime = moment(
+                    combinedTimeString,
+                    'MM-DD-YYYY HH:mm',
+                  );
+                  console.log(combinedTime.format('LLLL'));
+                  /*onRegisterClick(
+                    GraphQLClient.getCurrentUserId,
+                    classDetails.classId,
+                    combinedTime,
+                  );
+                  navigation.navigate('Registered');*/
                 }}
                 style={styles.registerButton}>
                 <Text style={styles.p1white}>Register Now</Text>
