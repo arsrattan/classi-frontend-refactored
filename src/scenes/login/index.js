@@ -3,7 +3,7 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { logoImg, facebookImg, instagramImg, emailImg } from '_assets';
 import { Icons, Spacing, Typography } from '_styles';
 import styles from './styles';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { gql } from 'apollo-boost';
 import { Button } from '_atoms';
 import InstagramLogin from 'react-native-instagram-login';

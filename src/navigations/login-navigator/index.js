@@ -8,8 +8,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
 } from 'react-native';
-import { useMutation } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost'
+import { useMutation } from '@apollo/client';
+import { gql } from 'apollo-boost';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Tile, InputField, Button } from '_atoms';
@@ -97,14 +97,6 @@ const SignupTab = ({ navigation }) => {
       setIsSubmitting(false);
     }
   }, [errors, error, values, isSubmitting, registerUser]);
-
-  useEffect(() => {
-    console.log(`data changed: ${JSON.stringify(data)}`);
-    console.log(`loading changed: ${loading}`);
-    if (data !== undefined) {
-      console.log(`Received data: ${JSON.stringify(data)}`);
-    }
-  }, [data, loading]);
 
   const REGISTER_USER = gql`
     mutation RegisterUser($data: CreateUserInput!) {
@@ -213,7 +205,7 @@ const LoginTab = ({ navigation }) => {
         .then(({ data }) => {
           if (data.login != null) {
             AsyncStorage.setItem('AUTH_TOKEN', data.login.accessToken);
-            AsyncStorage.setItem('USER_ID', data.login.userId);
+            AsyncStorage.setItem('USER_ID', data.login.username);
             navigation.navigate('Home');
           }
         })

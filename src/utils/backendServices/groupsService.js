@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost'
+import { useQuery } from '@apollo/client';
+import { gql } from 'apollo-boost';
 import { useEffect, useState } from 'react';
 
 export const GetGroup = (groupId) => {

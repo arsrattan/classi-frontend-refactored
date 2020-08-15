@@ -7,7 +7,7 @@ import styles from './styles';
 } from '../../../utils/backendServices/usersService';*/
 import { useMutation } from '@apollo/client';
 import { gql } from 'apollo-boost';
-import { GraphQLClient } from '_services';
+import { UsersService } from '_utils';
 import { useEffect, useState } from 'react';
 
 const FollowButton = ({ followedUser, isUnfollow, active }) => {
@@ -21,7 +21,7 @@ const FollowButton = ({ followedUser, isUnfollow, active }) => {
     return res;
   };
 
-  const userId = GraphQLClient.getCurrentUserId();
+  const userId = UsersService.GetCurrentUserId();
 
   const [isActive, setIsActive] = useState(active);
   const [isSubmitting, setIsSubmitting] = useState(false);

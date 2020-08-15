@@ -16,19 +16,16 @@ import { PostCommentTile, MultiProfileImg } from '_molecules';
 import { arrowBackImg, shareImgLight, copyImg } from '_assets';
 import { ClassNavigator } from '_navigations';
 import { Colors, Typography, Spacing } from '_styles';
-import { GraphQLClient } from '_services';
-import {
-  GetUser,
-  GetUserFollowers,
-} from '../../utils/backendServices/usersService';
-import { useMutation } from '@apollo/react-hooks';
+//import { GraphQLClient } from '_services';
+import { UsersService } from '_utils';
+import { useMutation } from '@apollo/client';
 import { gql } from 'apollo-boost';
 
 const ClassScreen = ({ navigation, route }) => {
   const { classDetails, isWatching } = route.params;
   const { instructorUserId } = classDetails;
-  const [instructor, setInstructor] = useState(null);
-  const [followers, setFollowers] = useState([]);
+  //const [instructor, setInstructor] = useState(null);
+  //const [followers, setFollowers] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [scheduledDate, setScheduledDate] = useState('Select a date');
   const [showTimePicker, setShowTimePicker] = useState(false);
@@ -36,29 +33,31 @@ const ClassScreen = ({ navigation, route }) => {
   const [apiLoading, setApiLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { data, loading } = GetUser(classDetails.instructorUserId);
-  const { followersData, followersLoading } = GetUserFollowers(
+  const { data, loading } = UsersService.GetUser(classDetails.instructorUserId);
+  const { followersData, followersLoading } = UsersService.GetUserFollowers(
     classDetails.instructorUserId,
   );
-  
 
- const REGISTER_CLASS = gql`
-  mutation RegisterForClass(
-    $userId: String!
-    $classId: String!
-    $scheduledTime: Float!
-  ) {
-    registerForClass(
-      userId: $userId
-      classId: $classId
-      scheduledTime: $scheduledTime
-    )
-  }
+  const REGISTER_CLASS = gql`
+    mutation RegisterForClass(
+      $userId: String!
+      $classId: String!
+      $scheduledTime: Float!
+    ) {
+      registerForClass(
+        userId: $userId
+        classId: $classId
+        scheduledTime: $scheduledTime
+      )
+    }
   `;
 
-  const [registerClass, { registerData, registerLoading, registerError }] = useMutation(REGISTER_CLASS);
+  const [
+    registerClass,
+    { registerData, registerLoading, registerError },
+  ] = useMutation(REGISTER_CLASS);
 
-  const userId = GraphQLClient.getCurrentUserId();
+  const userId = UsersService.GetCurrentUserId();
   const date = new Date(classDetails.scheduledTime);
   const month = date.toLocaleString('default', { month: 'short' });
 
@@ -97,9 +96,10 @@ const ClassScreen = ({ navigation, route }) => {
 
   const handleSubmit = () => {
     setIsSubmitting(true);
-    navigation.navigate('Registered')
+    navigation.navigate('Registered');
   };
 
+  /*
   useEffect(() => {
     if (isSubmitting) {
       registerClass({
@@ -136,6 +136,7 @@ const ClassScreen = ({ navigation, route }) => {
     fetchFollowers();
     setApiLoading(false);
   }, [instructorUserId]);
+  */
 
   if (!apiLoading) {
     const comments = classDetails.comments == null ? [] : classDetails.comments;

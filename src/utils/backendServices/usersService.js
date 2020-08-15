@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 

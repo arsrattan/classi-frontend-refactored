@@ -4,12 +4,12 @@ import styles from './styles';
 import { ImageTile } from '_atoms';
 import { Header } from '_molecules';
 import { avatarImg, notificationImg, cameraImg } from '_assets';
-import { GetAllClasses } from '../../utils/backendServices/classService';
+//import { GetAllClasses } from '../../utils/backendServices/classService';
 import AsyncStorage from '@react-native-community/async-storage';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { Colors, Spacing, Typography, Icons } from '_styles';
-import { GraphQLClient } from '_services';
-import { createClassCards } from '_utils';
+//import { GraphQLClient, Queries } from '_services';
+import { createClassCards, ClassService } from '_utils';
 
 const UpcomingClasses = ({ navigation, classes }) => {
   if (classes !== undefined && classes.length > 0) {
@@ -179,25 +179,11 @@ const RecommendedClasses = ({ navigation, classes }) => {
 };
 
 const HomeScreen = ({ navigation }) => {
-  const { data, loading } = GetAllClasses();
+  const { classData, classError, classLoading } = ClassService.GetAllClasses();
+  //console.log(`class data: ${classData}`);
+  //console.log(`class error: ${classError}`);
 
   const [tokenData, setTokenData] = useState();
-  const [classes, setClasses] = useState([]);
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      const res = await AsyncStorage.getItem('USER_ID');
-      setTokenData(res);
-    };
-
-    const fetchClasses = async () => {
-      const { data, error, loading } = await GraphQLClient.queryAllClasses();
-      setClasses(data);
-    };
-
-    fetchToken();
-    fetchClasses();
-  }, []);
 
   return (
     <View style={styles.homeContainer}>
@@ -235,9 +221,9 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ backgroundColor: Colors.sirius }}>
-        <UpcomingClasses navigation={navigation} classes={data} />
-        <FriendsClasses navigation={navigation} classes={data} />
-        <RecommendedClasses navigation={navigation} classes={data} />
+        <UpcomingClasses navigation={navigation} classes={classData} />
+        <FriendsClasses navigation={navigation} classes={classData} />
+        <RecommendedClasses navigation={navigation} classes={classData} />
       </ScrollView>
     </View>
   );

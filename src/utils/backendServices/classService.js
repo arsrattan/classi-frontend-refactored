@@ -1,9 +1,13 @@
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
+import queries from './queries';
 
 export const GetAllClasses = () => {
-  const [state, setState] = useState({ data: [], loading: true });
+  const [returnedData, setReturnedData] = useState([]);
+  const [queryLoading, setQueryLoading] = useState(true);
+  const [errorReturned, setErrorReturned] = useState(undefined);
+
   const ALL_CLASSES = gql`
     {
       getAllClasses {
@@ -24,16 +28,22 @@ export const GetAllClasses = () => {
     }
   `;
   const { data, error, loading } = useQuery(ALL_CLASSES);
+
   useEffect(() => {
-    setState({ data: [], loading: true, error: null });
+    setQueryLoading(true);
     if (!error && !loading) {
-      setState({
-        data: data.getAllClasses,
-        loading: false,
-      });
+      console.log(`inside if statement`);
+      setReturnedData(['hello'], () =>
+        console.log(`data value: ${JSON.stringify(returnedData)}`),
+      );
+      setQueryLoading(false);
+    } else if (error) {
+      setErrorReturned(error);
+      setQueryLoading(loading);
     }
   }, [data, error, loading]);
-  return state;
+
+  return { data: returnedData, error: errorReturned, loading: queryLoading };
 };
 
 export const GetClass = (classId) => {

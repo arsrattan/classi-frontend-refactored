@@ -11,7 +11,7 @@ import { Header } from '_molecules';
 import { VideoView } from '_organisms';
 import YouTube from 'react-native-youtube';
 import styles from './styles';
-import { GraphQLClient, amazonSDK } from '_services';
+import { amazonSDK } from '_services';
 import { Colors, Spacing, Typography, Icons } from '_styles';
 import {
   arrowBackDarkImg,
