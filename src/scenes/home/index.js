@@ -179,9 +179,7 @@ const RecommendedClasses = ({ navigation, classes }) => {
 };
 
 const HomeScreen = ({ navigation }) => {
-  const { classData, classError, classLoading } = ClassService.GetAllClasses();
-  //console.log(`class data: ${classData}`);
-  //console.log(`class error: ${classError}`);
+  const { classData, classLoading } = ClassService.GetAllClasses();
 
   const [tokenData, setTokenData] = useState();
 

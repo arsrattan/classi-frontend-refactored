@@ -16,10 +16,10 @@ import { PostCommentTile, MultiProfileImg } from '_molecules';
 import { arrowBackImg, shareImgLight, copyImg } from '_assets';
 import { ClassNavigator } from '_navigations';
 import { Colors, Typography, Spacing } from '_styles';
-//import { GraphQLClient } from '_services';
 import { UsersService } from '_utils';
 import { useMutation } from '@apollo/client';
 import { gql } from 'apollo-boost';
+import { followers } from '_mocks';
 
 const ClassScreen = ({ navigation, route }) => {
   const { classDetails, isWatching } = route.params;
@@ -33,10 +33,22 @@ const ClassScreen = ({ navigation, route }) => {
   const [apiLoading, setApiLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { data, loading } = UsersService.GetUser(classDetails.instructorUserId);
+  const { userData, userLoading } = UsersService.GetUser(
+    classDetails.instructorUserId,
+  );
+
+  /*
+  const getFollowers = async () => {
+    return await UsersService.GetUserFollowers(classDetails.instructorUserId);
+  };
+  const { followersData, followersLoading } = getFollowers();
+  */
+
   const { followersData, followersLoading } = UsersService.GetUserFollowers(
     classDetails.instructorUserId,
   );
+
+  //console.log(`followersData: ${followersData}`);
 
   const REGISTER_CLASS = gql`
     mutation RegisterForClass(
@@ -83,16 +95,6 @@ const ClassScreen = ({ navigation, route }) => {
       setShowTimePicker(false);
     }, 0);
   };
-
-  /* These were used to keep track of who was added to a group, but that should just be a backend call
-  const [inviteList, setInvitedList] = useState([]);
-
-  const addToList = (name) => {
-    const newInviteList = inviteList;
-    newInviteList.push(name);
-    setInvitedList(newInviteList);
-  };
-  */
 
   const handleSubmit = () => {
     setIsSubmitting(true);
@@ -190,14 +192,6 @@ const ClassScreen = ({ navigation, route }) => {
                 <Dot color={Colors.livePink} size="large" />
                 <Text style={styles.liveNowText}>Live Now</Text>
               </View> */}
-            </View>
-            <View style={styles.registeredUserView}>
-              <ProfileImg size="small" />
-              <ProfileImg size="small" />
-              <ProfileImg size="small" />
-              <Text style={Typography.p1d2}>
-                {'Duration: ' + classDetails.expectedDuration + ' minutes'}
-              </Text>
             </View>
             <View style={styles.schedulerTimeContainer}>
               <TouchableOpacity
@@ -308,9 +302,9 @@ const ClassScreen = ({ navigation, route }) => {
                     {/* <Text style={Typography.p2d2}>About me</Text>
                     <Dot color={Colors.aquarius} size="base" /> */}
                     <Text style={Typography.p2d2}>
-                      {followers[0] == null
-                        ? ''
-                        : followers.length + 'followers'}
+                      {followersData !== undefined
+                        ? followersData.length + ' followers'
+                        : ''}
                     </Text>
                   </View>
                 </View>

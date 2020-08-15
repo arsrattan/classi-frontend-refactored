@@ -28,7 +28,7 @@ export const GetUser = (userId) => {
       });
     }
   }, [data, error, loading]);
-  return state;
+  return { userData: data, userLoading: loading };
 };
 
 export const GetAllUsers = () => {
@@ -61,7 +61,7 @@ export const GetAllUsers = () => {
 };
 
 export const GetUserFollowers = (userId) => {
-  const [state, setState] = useState({ followersData: [], loading: true });
+  const [state, setState] = useState({ data: [], loading: true });
   const GET_USER_FOLLOWERS = gql`
     query GetUserFollowers($userId: String!) {
       getUserFollowers(userId: $userId) {
@@ -74,15 +74,16 @@ export const GetUserFollowers = (userId) => {
     variables: { userId: userId },
   });
   useEffect(() => {
-    setState({ followersData: [], loading: true });
+    setState({ data: [], loading: true });
     if (!error && !loading) {
       setState({
-        followersData: data.getUserFollowers,
+        data: data.getUserFollowers,
         loading: false,
       });
     }
   }, [data, error, loading]);
-  return state;
+  console.log(`followersData: ${JSON.stringify(state.data)}`);
+  return { followersData: state.data, followersLoading: state.loading };
 };
 
 export const GetUserFollowing = (userId) => {

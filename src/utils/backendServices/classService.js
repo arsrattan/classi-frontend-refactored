@@ -4,6 +4,41 @@ import { useEffect, useState } from 'react';
 import queries from './queries';
 
 export const GetAllClasses = () => {
+  const [state, setState] = useState({ data: [], loading: true });
+  const ALL_CLASSES = gql`
+    {
+      getAllClasses {
+        classId
+        className
+        classType
+        class_image_url
+        channel_thumbnail_url
+        difficulty
+        expectedDuration
+        instructorUserId
+        description
+        requiredEquipment
+        isPrivate
+        comments
+        view_count
+      }
+    }
+  `;
+  const { data, error, loading } = useQuery(ALL_CLASSES);
+  useEffect(() => {
+    setState({ data: [], loading: true, error: null });
+    if (!error && !loading) {
+      setState({
+        data: data.getAllClasses,
+        loading: false,
+      });
+    }
+  }, [data, error, loading]);
+  return { classData: state.data, classLoading: state.loading };
+};
+
+/*
+export const GetAllClasses = () => {
   const [returnedData, setReturnedData] = useState([]);
   const [queryLoading, setQueryLoading] = useState(true);
   const [errorReturned, setErrorReturned] = useState(undefined);
@@ -22,7 +57,7 @@ export const GetAllClasses = () => {
         description
         requiredEquipment
         isPrivate
-        comments
+        comments,
         view_count
       }
     }
@@ -45,6 +80,7 @@ export const GetAllClasses = () => {
 
   return { data: returnedData, error: errorReturned, loading: queryLoading };
 };
+*/
 
 export const GetClass = (classId) => {
   const [state, setState] = useState({ classData: {}, classLoading: true });
