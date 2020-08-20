@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, Image } from 'react-native';
 import styles from './styles';
 import { ImageTile } from '_atoms';
 import { Header } from '_molecules';
@@ -9,7 +9,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { Colors, Spacing, Typography, Icons } from '_styles';
 //import { GraphQLClient, Queries } from '_services';
-import { createClassCards, ClassService } from '_utils';
+import { createClassCards, ClassService, Queries } from '_utils';
+import { useQuery } from '@apollo/client';
 
 const UpcomingClasses = ({ navigation, classes }) => {
   if (classes !== undefined && classes.length > 0) {
@@ -179,11 +180,24 @@ const RecommendedClasses = ({ navigation, classes }) => {
 };
 
 const HomeScreen = ({ navigation }) => {
-  const { classData, classLoading } = ClassService.GetAllClasses();
+  //const { classData, classLoading } = ClassService.GetAllClasses();
 
-  const [tokenData, setTokenData] = useState();
+  console.log('home reload');
+  const classResponse = useQuery(Queries.GetAllClasses);
 
-  return (
+  useEffect(() => {
+    if (classResponse.error) console.log(`error: ${classResponse.error}`);
+  }, [classResponse]);
+
+  return classResponse.loading === true ? (
+    <SafeAreaView style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Loading</Text>
+    </SafeAreaView>
+  ) : classResponse.error !== undefined ? (
+    <SafeAreaView style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Error</Text>
+    </SafeAreaView>
+  ) : (
     <View style={styles.homeContainer}>
       <View style={styles.headerContainer}>
         <Header
@@ -219,9 +233,18 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ backgroundColor: Colors.sirius }}>
-        <UpcomingClasses navigation={navigation} classes={classData} />
-        <FriendsClasses navigation={navigation} classes={classData} />
-        <RecommendedClasses navigation={navigation} classes={classData} />
+        <UpcomingClasses
+          navigation={navigation}
+          classes={classResponse.data.getAllClasses}
+        />
+        <FriendsClasses
+          navigation={navigation}
+          classes={classResponse.data.getAllClasses}
+        />
+        <RecommendedClasses
+          navigation={navigation}
+          classes={classResponse.data.getAllClasses}
+        />
       </ScrollView>
     </View>
   );

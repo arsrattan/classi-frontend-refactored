@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const GetUser = (userId) => {
+  console.log(`GetUser called`);
   const [state, setState] = useState({ data: null, loading: true });
   const GET_USER = gql`
     query GetUserById($userId: String!) {
@@ -61,6 +62,7 @@ export const GetAllUsers = () => {
 };
 
 export const GetUserFollowers = (userId) => {
+  console.log(`GetFollowers called`);
   const [state, setState] = useState({ data: [], loading: true });
   const GET_USER_FOLLOWERS = gql`
     query GetUserFollowers($userId: String!) {
@@ -82,7 +84,6 @@ export const GetUserFollowers = (userId) => {
       });
     }
   }, [data, error, loading]);
-  console.log(`followersData: ${JSON.stringify(state.data)}`);
   return { followersData: state.data, followersLoading: state.loading };
 };
 
@@ -149,6 +150,7 @@ export const GetUserNotifications = (userId) => {
 };
 
 export const GetCurrentUserId = () => {
+  console.log(`GetCurrentId called`);
   const [state, setState] = useState({});
   useEffect(() => {
     const asyncFetchToken = async () => {

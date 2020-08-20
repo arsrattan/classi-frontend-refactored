@@ -1,11 +1,11 @@
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 
-const queries = {
+export const Queries = {
   /****************
    Class requests
    ****************/
 
-  AllClasses: gql`
+  GetAllClasses: gql`
     query {
       getAllClasses {
         classId
@@ -41,6 +41,19 @@ const queries = {
         isPrivate
         comments
         view_count
+      }
+    }
+  `,
+
+  GetRegistered: gql`
+    query GetRegistrationsForUser($userId: String!) {
+      getRegistrationsForUser(username: $userId) {
+        registrationId
+        username
+        groupId
+        classId
+        scheduledTime
+        createdAt
       }
     }
   `,
@@ -81,7 +94,7 @@ const queries = {
       }
     }
   `,
-  SpecificUser: gql`
+  GetSpecificUser: gql`
     query GetUserById($userId: String!) {
       getUserById(userId: $userId) {
         userId
@@ -93,7 +106,7 @@ const queries = {
       }
     }
   `,
-  UserFollowers: gql`
+  GetUserFollowers: gql`
     query GetUserFollowers($userId: String!) {
       getUserFollowers(userId: $userId) {
         userId
@@ -143,5 +156,3 @@ const queries = {
     }
   `,
 };
-
-export default queries;
