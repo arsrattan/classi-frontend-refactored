@@ -5,13 +5,13 @@ import { WorkoutGroup } from '_organisms';
 import { plusImg, avatarImg, notifDarkBttnImg } from '_assets';
 import styles from './styles';
 import { Spacing, Typography, Colors, Icons } from '_styles';
-import { GraphQLClient } from '_services';
-import { GetGroup } from '../../../utils/backendServices/groupsService';
+//import { GraphQLClient } from '_services';
+import { GroupsService } from 'utils';
 
 const GroupsHomeScreen = ({ navigation }) => {
-  const currentUserId = GraphQLClient.getCurrentUserId();
+  const currentUserId = UsersService.GetCurrentUserId();
 
-  const { groupData, groupLoading } = GetGroup('7pmdv8kd523n9b');
+  const { groupData, groupLoading } = GroupsService.GetGroup('7pmdv8kd523n9b');
   //console.log(groupData);
   return (
     <View style={styles.container}>

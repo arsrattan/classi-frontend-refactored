@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, Image } from 'react-native';
 import styles from './styles';
 import { ImageTile } from '_atoms';
 import { Header } from '_molecules';
 import { avatarImg, notificationImg, cameraImg } from '_assets';
-import { GetAllClasses } from '../../utils/backendServices/classService';
+//import { GetAllClasses } from '../../utils/backendServices/classService';
 import AsyncStorage from '@react-native-community/async-storage';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { Colors, Spacing, Typography, Icons } from '_styles';
-import { GraphQLClient } from '_services';
-import { createClassCards } from '_utils';
+//import { GraphQLClient, Queries } from '_services';
+import { createClassCards, ClassService, Queries } from '_utils';
+import { useQuery } from '@apollo/client';
 
 const UpcomingClasses = ({ navigation, classes }) => {
   if (classes !== undefined && classes.length > 0) {
@@ -179,27 +180,24 @@ const RecommendedClasses = ({ navigation, classes }) => {
 };
 
 const HomeScreen = ({ navigation }) => {
-  const { data, loading } = GetAllClasses();
+  //const { classData, classLoading } = ClassService.GetAllClasses();
 
-  const [tokenData, setTokenData] = useState();
-  const [classes, setClasses] = useState([]);
+  console.log('home reload');
+  const classResponse = useQuery(Queries.GetAllClasses);
 
   useEffect(() => {
-    const fetchToken = async () => {
-      const res = await AsyncStorage.getItem('USER_ID');
-      setTokenData(res);
-    };
+    if (classResponse.error) console.log(`error: ${classResponse.error}`);
+  }, [classResponse]);
 
-    const fetchClasses = async () => {
-      const { data, error, loading } = await GraphQLClient.queryAllClasses();
-      setClasses(data);
-    };
-
-    fetchToken();
-    fetchClasses();
-  }, []);
-
-  return (
+  return classResponse.loading === true ? (
+    <SafeAreaView style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Loading</Text>
+    </SafeAreaView>
+  ) : classResponse.error !== undefined ? (
+    <SafeAreaView style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Error</Text>
+    </SafeAreaView>
+  ) : (
     <View style={styles.homeContainer}>
       <View style={styles.headerContainer}>
         <Header
@@ -235,9 +233,18 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ backgroundColor: Colors.sirius }}>
-        <UpcomingClasses navigation={navigation} classes={data} />
-        <FriendsClasses navigation={navigation} classes={data} />
-        <RecommendedClasses navigation={navigation} classes={data} />
+        <UpcomingClasses
+          navigation={navigation}
+          classes={classResponse.data.getAllClasses}
+        />
+        <FriendsClasses
+          navigation={navigation}
+          classes={classResponse.data.getAllClasses}
+        />
+        <RecommendedClasses
+          navigation={navigation}
+          classes={classResponse.data.getAllClasses}
+        />
       </ScrollView>
     </View>
   );

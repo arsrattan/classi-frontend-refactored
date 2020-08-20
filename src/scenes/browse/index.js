@@ -26,10 +26,10 @@ import {
   avatarImg,
   notifDarkBttnImg,
 } from '_assets';
-import { createClassCards } from '_utils';
+import { createClassCards, ClassService } from '_utils';
 import { GetAllClasses } from '../../utils/backendServices/classService';
 import { Spacing, Colors } from '_styles';
-import { GraphQLClient } from '_services';
+//import { GraphQLClient } from '_services';
 
 const BrowseScreen = ({ navigation }) => {
   const { data, loading } = GetAllClasses();
@@ -38,7 +38,7 @@ const BrowseScreen = ({ navigation }) => {
 
   const [visible, setVisible] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const [classes, setClasses] = useState([]);
+  //const [classes, setClasses] = useState([]);
 
   /* filters class data based off user inputs */
   const filterClassData = function (textFilter, classTypes, classData) {
@@ -94,6 +94,7 @@ const BrowseScreen = ({ navigation }) => {
     },
   ];
 
+  /*
   useEffect(() => {
     const fetchClasses = async () => {
       const { data, error, loading } = await GraphQLClient.queryAllClasses();
@@ -102,6 +103,9 @@ const BrowseScreen = ({ navigation }) => {
 
     fetchClasses();
   }, []);
+  */
+
+  const { classData, classLoading } = ClassService.GetAllClasses();
 
   return (
     <View style={styles.screenContainer}>
@@ -241,14 +245,14 @@ const BrowseScreen = ({ navigation }) => {
           Popular Classes
         </Text>
         {createClassCards(
-          filterClassData(searchText, filterChips, classes),
+          filterClassData(searchText, filterChips, classData),
           navigation,
         )}
         <Text style={{ ...styles.h3d2, paddingLeft: Spacing.base }}>
           All Classes
         </Text>
         {createClassCards(
-          filterClassData(searchText, filterChips, classes),
+          filterClassData(searchText, filterChips, classData),
           navigation,
         )}
       </ScrollView>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraphQLClient } from '_services';
+//import { GraphQLClient } from '_services';
 
 const SERVER_URL =
   'https://4ke4pz5op1.execute-api.us-east-1.amazonaws.com/Prod/';

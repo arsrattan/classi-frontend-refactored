@@ -16,19 +16,20 @@ import {
 import { Header, RecommendedUsers } from '_molecules';
 import { FeedPost } from '_organisms';
 import styles from './styles';
-//import { UsersService, PostsService } from '_utils';
-import { GraphQLClient } from '_services';
+import { UsersService, PostsService } from '_utils';
+//import { GraphQLClient } from '_services';
 
 //import {GetAllPosts} from '../../utils/backendServices/postsService';
 //import {GetAllUsers} from '../../utils/backendServices/usersService';
 import { Spacing, Icons, Typography, Colors } from '_styles';
 
 const FeedScreen = ({ navigation }) => {
-  const [postData, setPostData] = useState({ data: [] });
+  //const [postData, setPostData] = useState({ data: [] });
   const [recommendedUsers, setRecommendedUsers] = useState();
 
-  const currentUserId = GraphQLClient.getCurrentUserId();
+  const currentUserId = UsersService.GetCurrentUserId();
 
+  /*
   useEffect(() => {
     const fetchPosts = async () => {
       // will have to change this request to getting posts from people the user follows
@@ -46,6 +47,13 @@ const FeedScreen = ({ navigation }) => {
     fetchPosts();
     fetchRecommendedUsers();
   }, []);
+  */
+
+  const { postData, postLoading } = PostsService.GetUserPosts(currentUserId);
+  const {
+    recommendedFollowersData,
+    recommendedFollowersLoading,
+  } = UsersService.GetAllUsers();
 
   return (
     <View style={{ flex: 1 }}>
@@ -109,7 +117,7 @@ const FeedScreen = ({ navigation }) => {
         <View style={styles.headerMargin}>
           <Text style={Typography.h3d1}>Recommended Users</Text>
         </View>
-        <RecommendedUsers users={recommendedUsers} />
+        <RecommendedUsers users={recommendedFollowersData} />
         {/* Posts on your feed */}
         <View style={styles.headerMargin}>
           <Text style={Typography.h2d1}>Your Feed</Text>

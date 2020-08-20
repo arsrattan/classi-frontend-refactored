@@ -1,9 +1,10 @@
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const GetUser = (userId) => {
+  console.log(`GetUser called`);
   const [state, setState] = useState({ data: null, loading: true });
   const GET_USER = gql`
     query GetUserById($userId: String!) {
@@ -28,7 +29,7 @@ export const GetUser = (userId) => {
       });
     }
   }, [data, error, loading]);
-  return state;
+  return { userData: data, userLoading: loading };
 };
 
 export const GetAllUsers = () => {
@@ -61,7 +62,8 @@ export const GetAllUsers = () => {
 };
 
 export const GetUserFollowers = (userId) => {
-  const [state, setState] = useState({ followersData: [], loading: true });
+  console.log(`GetFollowers called`);
+  const [state, setState] = useState({ data: [], loading: true });
   const GET_USER_FOLLOWERS = gql`
     query GetUserFollowers($userId: String!) {
       getUserFollowers(userId: $userId) {
@@ -74,15 +76,15 @@ export const GetUserFollowers = (userId) => {
     variables: { userId: userId },
   });
   useEffect(() => {
-    setState({ followersData: [], loading: true });
+    setState({ data: [], loading: true });
     if (!error && !loading) {
       setState({
-        followersData: data.getUserFollowers,
+        data: data.getUserFollowers,
         loading: false,
       });
     }
   }, [data, error, loading]);
-  return state;
+  return { followersData: state.data, followersLoading: state.loading };
 };
 
 export const GetUserFollowing = (userId) => {
@@ -148,6 +150,7 @@ export const GetUserNotifications = (userId) => {
 };
 
 export const GetCurrentUserId = () => {
+  console.log(`GetCurrentId called`);
   const [state, setState] = useState({});
   useEffect(() => {
     const asyncFetchToken = async () => {
